@@ -12,7 +12,7 @@ class CookieButton extends StatelessWidget {
   final Color? backgroundColor;
 
   ///Se o botão vai ter borda
-  final bool enableBorder;
+  final bool border;
 
   ///O que o botão ira fazer ao pressionar
   final void Function() onPressed;
@@ -25,14 +25,24 @@ class CookieButton extends StatelessWidget {
     required this.label,
     this.labelColor,
     this.backgroundColor,
-    this.enableBorder = false,
+    this.border = false,
+    required this.onPressed,
+    this.margin,
+  });
+
+  const CookieButton.outline({
+    super.key,
+    required this.label,
+    this.labelColor,
+    this.backgroundColor = Colors.transparent,
+    this.border = true,
     required this.onPressed,
     this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onPressed,
       child: Container(
         height: 50,
@@ -40,13 +50,22 @@ class CookieButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: backgroundColor ?? Colors.black,
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(width: enableBorder ? 0 : 2, color: Colors.black),
+          color: backgroundColor ?? const Color(0xFFE4C626),
+          borderRadius: BorderRadius.circular(14),
+          border: border
+              ? Border.all(
+                  width: 2,
+                  color:
+                      labelColor ?? Theme.of(context).colorScheme.onSecondary,
+                )
+              : const Border(),
         ),
         child: CookieText(
           text: label,
-          color: labelColor ?? Colors.white,
+          typography: CookieTypography.button,
+          color: border
+              ? Theme.of(context).colorScheme.onSecondary
+              : Theme.of(context).colorScheme.onPrimary,
         ),
       ),
     );

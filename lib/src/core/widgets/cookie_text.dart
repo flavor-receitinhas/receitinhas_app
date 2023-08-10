@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 enum CookieTypography {
   title(24, true),
+  button(16, true),
   body(14, false);
 
   final double size;
@@ -30,7 +31,7 @@ class CookieText extends StatelessWidget {
       style: TextStyle(
         fontSize: typography.size,
         fontWeight: typography.isBold ? FontWeight.bold : FontWeight.bold,
-        color: color,
+        color: color ?? Theme.of(context).textTheme.bodyLarge!.color,
       ),
     );
   }
