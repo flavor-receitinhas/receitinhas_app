@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
+import 'package:app_receitas/src/core/routes/generate_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,22 +20,9 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale('pt', ''),
+      locale: const Locale('pt', 'BR'),
       initialRoute: '/welcome',
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/welcome':
-            return MaterialPageRoute(
-              builder: (context) => const WelcomePage(),
-              settings: settings,
-            );
-          default:
-            return MaterialPageRoute(
-              builder: (context) => const Text('ERRO'),
-              settings: settings,
-            );
-        }
-      },
+      onGenerateRoute: GenerateRoute().onGenerate
     );
   }
 }
