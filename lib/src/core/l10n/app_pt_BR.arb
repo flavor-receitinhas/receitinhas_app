@@ -13,5 +13,10 @@
     "registerTerms2": "Termos de Uso ",
     "registerTerms3": "e ",
     "registerTerms4": "Política de Privacidade.",
-    "registerButton": "Criar conta"
+    "registerButton": "Criar conta",
+    "loginTitle": "Ora Ora... Se não é a grande lenda voltando...",
+    "loginBody": "Estavamos com saudades :)",
+    "loginEmail": "Inserir e-mail",
+    "loginPassword" : "Inserir senha",
+    "loginButton": "Entrar"
 }

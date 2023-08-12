@@ -43,6 +43,7 @@ class WelcomePage extends StatelessWidget {
               '/choose-auth',
             ),
           ),
+          const SizedBox(height: 5),
         ],
       ),
     );
