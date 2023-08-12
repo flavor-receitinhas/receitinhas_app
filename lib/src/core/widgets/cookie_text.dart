@@ -30,8 +30,8 @@ class CookieText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         fontSize: typography.size,
-        fontWeight: typography.isBold ? FontWeight.bold : FontWeight.bold,
-        color: color ?? Theme.of(context).textTheme.bodyLarge!.color,
+        fontWeight: typography.isBold ? FontWeight.bold : FontWeight.normal,
+        color: color ?? Theme.of(context).colorScheme.onPrimary,
       ),
     );
   }

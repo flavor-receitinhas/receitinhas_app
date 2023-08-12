@@ -50,13 +50,12 @@ class CookieButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: backgroundColor ?? const Color(0xFFE4C626),
+          color: backgroundColor ?? Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(14),
           border: border
               ? Border.all(
                   width: 2,
-                  color:
-                      labelColor ?? Theme.of(context).colorScheme.onSecondary,
+                  color: labelColor ?? Theme.of(context).colorScheme.primary,
                 )
               : const Border(),
         ),
@@ -64,8 +63,8 @@ class CookieButton extends StatelessWidget {
           text: label,
           typography: CookieTypography.button,
           color: border
-              ? Theme.of(context).colorScheme.onSecondary
-              : Theme.of(context).colorScheme.onPrimary,
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onSecondary,
         ),
       ),
     );
