@@ -31,19 +31,17 @@ class ChooseAuthPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomBar: Column(
-        children: [
-          CookieButton.outline(
-            label: AppLocalizations.of(context)!.chooseAuthRegisterButton,
-            onPressed: () => Navigator.pushNamed(context, '/register'),
-          ),
-          const SizedBox(height: 10),
-          CookieButton(
-            label: AppLocalizations.of(context)!.chooseAuthLoginButton,
-            onPressed: () {},
-          ),
-        ],
-      ),
+      bottomBar: [
+        CookieButton.outline(
+          label: AppLocalizations.of(context)!.chooseAuthRegisterButton,
+          onPressed: () => Navigator.pushNamed(context, '/register'),
+        ),
+        const SizedBox(height: 10),
+        CookieButton(
+          label: AppLocalizations.of(context)!.chooseAuthLoginButton,
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }

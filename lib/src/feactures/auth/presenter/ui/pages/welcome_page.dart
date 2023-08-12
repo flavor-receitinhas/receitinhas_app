@@ -35,13 +35,15 @@ class WelcomePage extends StatelessWidget {
             ),
           ],
         ),
-        bottomBar: CookieButton(
-          label: AppLocalizations.of(context)!.welcomeBottomAppBar,
-          onPressed: () => Navigator.pushNamed(
-            context,
-            '/choose-auth',
+        bottomBar: [
+          CookieButton(
+            label: AppLocalizations.of(context)!.welcomeBottomAppBar,
+            onPressed: () => Navigator.pushNamed(
+              context,
+              '/choose-auth',
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
