@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomScreen extends StatelessWidget {
@@ -7,7 +6,7 @@ class CustomScreen extends StatelessWidget {
   final String image;
   final String backgroundImage;
   final Widget body;
-  final CookieButton? bottomBar;
+  final Widget? bottomBar;
 
   const CustomScreen(
       {super.key,
@@ -21,42 +20,42 @@ class CustomScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Material(
-        color: Colors.transparent,
-        child: BottomAppBar(
-          color: Colors.transparent,
-          elevation: 0,
-          child: bottomBar,
-        ),
-      ),
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(backgroundImage),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: NetworkImage(backgroundImage),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: sideAppBar ?? MainAxisAlignment.end,
+                Column(
                   children: [
-                    iconAppBar,
+                    Row(
+                      mainAxisAlignment: sideAppBar ?? MainAxisAlignment.end,
+                      children: [
+                        iconAppBar,
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Image.network(
+                        image,
+                        height: 300,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    body,
                   ],
                 ),
-                const SizedBox(height: 20),
-                Center(
-                  child: Image.network(
-                    image,
-                    height: 300,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                body,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: bottomBar ?? const SizedBox.shrink(),
+                )
               ],
             ),
           ),
