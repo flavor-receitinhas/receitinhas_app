@@ -1,5 +1,17 @@
 {
-    "welcomeIntroduce1": "Delight yourself with our\namazing culinary masterpieces!",
-    "welcomeIntroduce2": "Ignite your passion for cooking and explore a world of unforgettable flavors with inspiring recipes.",
-    "welcomeBottomAppBar" : "Start cooking"
+    "welcomeTitle": "Delight yourself with our\namazing culinary masterpieces!",
+    "welcomeBody": "Ignite your passion for cooking and explore a world of unforgettable flavors with inspiring recipes.",
+    "welcomeBottomAppBar" : "Start cooking",
+    "chooseAuthTitle": "Antes de começar, queremos tirar uma dúvida.",
+    "chooseAuthBody": "Você é um novo amante da culinária ou já tem uma conta por aqui?",
+    "chooseAuthRegisterButton": "Sou novo(a) aqui",
+    "chooseAuthLoginButton": "Já tenho uma conta",
+    "registerTitle": "Nada melhor que se tornar um Mestre da Culinária!",
+    "registerEmail": "Inserir e-mail",
+    "registerPassword": "Inserir senha",
+    "registerTerms1": "Ao criar a conta, você concorda com os ",
+    "registerTerms2": "Termos de Uso ",
+    "registerTerms3": "e ",
+    "registerTerms4": "Política de Privacidade.",
+    "registerButton": "Criar conta"
 }

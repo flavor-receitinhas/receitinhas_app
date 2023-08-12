@@ -1,5 +1,17 @@
 {
-    "welcomeIntroduce1": "Encante-se com nossas\nobras culinárias incríveis!",
-    "welcomeIntroduce2": "Desperte sua paixão pela culinária e explore um mundo de sabores inesquecíveis com receitas inspiradoras.",
-    "welcomeBottomAppBar" : "Começar a Cozinhar"
+    "welcomeTitle": "Encante-se com nossas\nobras culinárias incríveis!",
+    "welcomeBody": "Desperte sua paixão pela culinária e explore um mundo de sabores inesquecíveis com receitas inspiradoras.",
+    "welcomeBottomAppBar" : "Começar a Cozinhar",
+    "chooseAuthTitle": "Antes de começar, queremos tirar uma dúvida.",
+    "chooseAuthBody": "Você é um novo amante da culinária ou já tem uma conta por aqui?",
+    "chooseAuthRegisterButton": "Sou novo(a) aqui",
+    "chooseAuthLoginButton": "Já tenho uma conta",
+    "registerTitle": "Nada melhor que se tornar um Mestre da Culinária!",
+    "registerEmail": "Inserir e-mail",
+    "registerPassword": "Inserir senha",
+    "registerTerms1": "Ao criar a conta, você concorda com os ",
+    "registerTerms2": "Termos de Uso ",
+    "registerTerms3": "e ",
+    "registerTerms4": "Política de Privacidade.",
+    "registerButton": "Criar conta"
 }
