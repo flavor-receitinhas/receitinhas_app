@@ -33,14 +33,17 @@ class ChooseAuthPage extends StatelessWidget {
       ),
       bottomBar: [
         CookieButton.outline(
+          margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.chooseAuthRegisterButton,
           onPressed: () => Navigator.pushNamed(context, '/register'),
         ),
         const SizedBox(height: 10),
         CookieButton(
+           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.chooseAuthLoginButton,
-          onPressed: () =>  Navigator.pushNamed(context, '/login'),
+          onPressed: () => Navigator.pushNamed(context, '/login'),
         ),
+        const SizedBox(height: 5)
       ],
     );
   }

@@ -32,7 +32,7 @@ class CustomScreen extends StatelessWidget {
           // ),
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -44,14 +44,14 @@ class CustomScreen extends StatelessWidget {
                           iconAppBar,
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 50),
                       Center(
                         child: Image.network(
                           image,
                           height: 300,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 50),
                       body,
                     ],
                   ),

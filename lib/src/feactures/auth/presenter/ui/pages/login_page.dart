@@ -43,12 +43,16 @@ class LoginPage extends StatelessWidget {
             prefixIcon: const Icon(Icons.lock_outline_rounded),
           ),
           const SizedBox(height: 20),
-          CookieButton(
-            label: AppLocalizations.of(context)!.loginButton,
-            onPressed: () {},
-          )
         ],
       ),
+      bottomBar: [
+        CookieButton(
+          margin: const EdgeInsets.symmetric(horizontal: 12),
+          label: AppLocalizations.of(context)!.loginButton,
+          onPressed: () {},
+        ),
+        const SizedBox(height: 5)
+      ],
     );
   }
 }

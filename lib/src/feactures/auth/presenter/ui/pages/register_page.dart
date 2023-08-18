@@ -63,12 +63,16 @@ class RegisterPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          CookieButton(
-            label: AppLocalizations.of(context)!.registerButton,
-            onPressed: () {},
-          )
         ],
       ),
+      bottomBar: [
+        CookieButton(
+          margin: const EdgeInsets.symmetric(horizontal: 12),
+          label: AppLocalizations.of(context)!.registerButton,
+          onPressed: () {},
+        ),
+        const SizedBox(height: 5)
+      ],
     );
   }
 }
