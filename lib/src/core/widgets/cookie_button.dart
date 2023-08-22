@@ -20,6 +20,9 @@ class CookieButton extends StatelessWidget {
   ///Margem do botão
   final EdgeInsets? margin;
 
+  ///Vem antes do label
+  final Widget? prefix;
+
   const CookieButton({
     super.key,
     required this.label,
@@ -28,6 +31,7 @@ class CookieButton extends StatelessWidget {
     this.border = false,
     required this.onPressed,
     this.margin,
+    this.prefix,
   });
 
   const CookieButton.outline({
@@ -38,6 +42,7 @@ class CookieButton extends StatelessWidget {
     this.border = true,
     required this.onPressed,
     this.margin,
+    this.prefix,
   });
 
   @override
@@ -47,6 +52,7 @@ class CookieButton extends StatelessWidget {
       child: Container(
         height: 50,
         margin: margin,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         width: MediaQuery.of(context).size.width,
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -59,12 +65,21 @@ class CookieButton extends StatelessWidget {
                 )
               : const Border(),
         ),
-        child: CookieText(
-          text: label,
-          typography: CookieTypography.button,
-          color: border
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.onSecondary,
+        child: Row(
+          mainAxisAlignment: prefix != null
+              ? MainAxisAlignment.start
+              : MainAxisAlignment.center,
+          children: [
+            prefix ?? const SizedBox.shrink(),
+            prefix != null ? const SizedBox(width: 10) : const SizedBox.shrink(),
+            CookieText(
+              text: label,
+              typography: CookieTypography.button,
+              color: border
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.onSecondary,
+            ),
+          ],
         ),
       ),
     );

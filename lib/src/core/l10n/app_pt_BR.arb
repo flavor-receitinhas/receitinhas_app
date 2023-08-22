@@ -18,5 +18,11 @@
     "loginBody": "Estavamos com saudades :)",
     "loginEmail": "Inserir e-mail",
     "loginPassword" : "Inserir senha",
-    "loginButton": "Entrar"
+    "loginButton": "Entrar",
+    "proteinPreferenceTitle": "Tem alguma Preferência de Proteína?",
+    "proteinPreferenceOption1": "Vegetariano",
+    "proteinPreferenceOption2": "Vegano",
+    "proteinPreferenceOption3": "Carne",
+    "proteinPreferenceOption4": "Peixe",
+    "proteinPreferenceConfirm": "Próxima etapa"
 }

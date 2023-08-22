@@ -49,7 +49,9 @@ class LoginPage extends StatelessWidget {
         CookieButton(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.loginButton,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/protein-preference');
+          },
         ),
         const SizedBox(height: 5)
       ],
