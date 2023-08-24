@@ -76,7 +76,9 @@ class ProteinPreferencePage extends StatelessWidget {
             const SizedBox(height: 20),
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceConfirm,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/dietary-restriction');
+              },
             ),
           ],
         ),

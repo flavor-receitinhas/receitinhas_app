@@ -24,5 +24,10 @@
     "proteinPreferenceOption2": "Vegano",
     "proteinPreferenceOption3": "Carne",
     "proteinPreferenceOption4": "Peixe",
-    "proteinPreferenceConfirm": "Próxima etapa"
+    "proteinPreferenceConfirm": "Próxima etapa",
+    "dietaryRestrictionTitle": "Possui alguma Restrição Alimentar?",
+    "dietaryRestrictionOption1": "Glúten",
+    "dietaryRestrictionOption2": "Lactose",
+    "dietaryRestrictionOption3": "Nenhuma restrição",
+    "dietaryRestrictionConfirm": "Próxima etapa"
 }
