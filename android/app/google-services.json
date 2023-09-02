@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "295547024535",
+    "project_id": "receitinhas-28d4a",
+    "storage_bucket": "receitinhas-28d4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295547024535:android:bc9c5e3d546f95ae8be5d2",
+        "android_client_info": {
+          "package_name": "com.example.app_receitas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295547024535-59iku44rsa2a8o3t17bos67fnr0q5o1p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm3f3kWxgSvwsk8cQL5B6xufbf8ByK97k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295547024535-59iku44rsa2a8o3t17bos67fnr0q5o1p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295547024535:android:8428a3e75b7ebb518be5d2",
+        "android_client_info": {
+          "package_name": "com.lcm.manga_easy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295547024535-59iku44rsa2a8o3t17bos67fnr0q5o1p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm3f3kWxgSvwsk8cQL5B6xufbf8ByK97k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295547024535-59iku44rsa2a8o3t17bos67fnr0q5o1p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
