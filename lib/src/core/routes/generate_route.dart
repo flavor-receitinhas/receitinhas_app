@@ -2,8 +2,9 @@ import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/choose_auth_p
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/login_page.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/register_page.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
-import 'package:app_receitas/src/feactures/customization/presenter/ui/pages/dietary_restriction_page.dart';
-import 'package:app_receitas/src/feactures/customization/presenter/ui/pages/protein_preference_page.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/dietary_restriction_page.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/protein_preference_page.dart';
 import 'package:flutter/material.dart';
 
 class GenerateRoute {
@@ -37,6 +38,11 @@ class GenerateRoute {
       case '/dietary-restriction':
         return MaterialPageRoute(
           builder: (context) => const DietaryRestricionPage(),
+          settings: settings,
+        );
+      case '/home':
+        return MaterialPageRoute(
+          builder: (context) => const HomePage(),
           settings: settings,
         );
 
