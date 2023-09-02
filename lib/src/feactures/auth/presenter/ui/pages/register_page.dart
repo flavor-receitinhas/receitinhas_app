@@ -2,12 +2,27 @@ import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_span.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  AuthController ct = GetIt.I();
+
+  @override
+  void dispose() {
+    ct.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +46,15 @@ class RegisterPage extends StatelessWidget {
           const SizedBox(height: 20),
           CookieTextField(
             hintText: AppLocalizations.of(context)!.registerEmail,
+            controller: ct.emailController,
             prefixIcon: const Icon(Icons.person),
           ),
           const SizedBox(height: 10),
           CookieTextField(
             hintText: AppLocalizations.of(context)!.registerPassword,
+            controller: ct.passwordController,
             prefixIcon: const Icon(Icons.lock_outline_rounded),
+            obscureText: true,
           ),
           const SizedBox(height: 10),
           RichText(
@@ -69,7 +87,16 @@ class RegisterPage extends StatelessWidget {
         CookieButton(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.registerButton,
-          onPressed: () {},
+          onPressed: () async {
+            var result = await ct.registerFirebase();
+            if (result && mounted) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/protein-preference',
+                (route) => false,
+              );
+            }
+          },
         ),
         const SizedBox(height: 5)
       ],
