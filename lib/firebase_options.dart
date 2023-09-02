@@ -57,6 +57,7 @@ class DefaultFirebaseOptions {
     appId: '1:295547024535:android:bc9c5e3d546f95ae8be5d2',
     messagingSenderId: '295547024535',
     projectId: 'receitinhas-28d4a',
+    databaseURL: 'https://receitinhas-28d4a-default-rtdb.firebaseio.com',
     storageBucket: 'receitinhas-28d4a.appspot.com',
   );
 }

@@ -36,7 +36,7 @@ class AuthController {
           email: emailController.text, password: passwordController.text);
       return true;
     } catch (e) {
-      print(e);
+      print(e.toString());
     }
     return false;
   }

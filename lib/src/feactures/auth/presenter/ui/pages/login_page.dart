@@ -1,12 +1,29 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  void dispose() {
+    dispose();
+    super.dispose();
+  }
+
+  AuthController ct = AuthController(
+    GetIt.I(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +58,7 @@ class LoginPage extends StatelessWidget {
           CookieTextField(
             hintText: AppLocalizations.of(context)!.loginPassword,
             prefixIcon: const Icon(Icons.lock_outline_rounded),
+            obscureText: true,
           ),
           const SizedBox(height: 20),
         ],
@@ -49,8 +67,15 @@ class LoginPage extends StatelessWidget {
         CookieButton(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.loginButton,
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/protein-preference');
+          onPressed: () async {
+            bool result = await ct.loginFirebase();
+            if (result && mounted) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/home',
+                (route) => false,
+              );
+            }
           },
         ),
         const SizedBox(height: 5)

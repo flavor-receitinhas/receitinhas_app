@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "295547024535",
+    "firebase_url": "https://receitinhas-28d4a-default-rtdb.firebaseio.com",
     "project_id": "receitinhas-28d4a",
     "storage_bucket": "receitinhas-28d4a.appspot.com"
   },
@@ -14,36 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "295547024535-59iku44rsa2a8o3t17bos67fnr0q5o1p.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDm3f3kWxgSvwsk8cQL5B6xufbf8ByK97k"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "295547024535-59iku44rsa2a8o3t17bos67fnr0q5o1p.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:295547024535:android:8428a3e75b7ebb518be5d2",
-        "android_client_info": {
-          "package_name": "com.lcm.manga_easy"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "295547024535-59iku44rsa2a8o3t17bos67fnr0q5o1p.apps.googleusercontent.com",
+          "client_id": "295547024535-dpusqkmc3s4ponhj1ucsl74657eamk21.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

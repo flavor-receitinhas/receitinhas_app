@@ -6,18 +6,21 @@ class CookieTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool obscureText;
+  final String? Function(String?)? validator;
   const CookieTextField(
       {super.key,
       this.hintText,
       this.controller,
       this.suffixIcon,
       this.prefixIcon,
-      this.obscureText = false});
+      this.obscureText = false,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
+      validator: validator,
       obscureText: obscureText,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,

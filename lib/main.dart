@@ -1,20 +1,15 @@
 import 'package:app_receitas/src/core/inject/inject.dart';
 import 'package:app_receitas/src/core/routes/generate_route.dart';
 import 'package:app_receitas/src/core/themes/custom_theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Inject.inicialize();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp();
 
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 8080);
   runApp(const MyApp());
 }
 

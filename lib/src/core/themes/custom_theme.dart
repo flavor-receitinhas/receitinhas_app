@@ -37,7 +37,7 @@ final lightTheme = ThemeData(
     ),
     textTheme: GoogleFonts.lexendDecaTextTheme(),
     useMaterial3: true,
-    dividerTheme: DividerThemeData(
+    dividerTheme: const DividerThemeData(
       color: Colors.transparent,
     ));
 
