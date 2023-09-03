@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
-    dispose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -52,12 +52,14 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20),
           CookieTextField(
             hintText: AppLocalizations.of(context)!.loginEmail,
+            controller: ct.emailController,
             prefixIcon: const Icon(Icons.person),
           ),
           const SizedBox(height: 10),
           CookieTextField(
             hintText: AppLocalizations.of(context)!.loginPassword,
             prefixIcon: const Icon(Icons.lock_outline_rounded),
+            controller: ct.passwordController,
             obscureText: true,
           ),
           const SizedBox(height: 20),
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.loginButton,
           onPressed: () async {
-            bool result = await ct.loginFirebase();
+            var result = await ct.loginFirebase();
             if (result && mounted) {
               Navigator.pushNamedAndRemoveUntil(
                 context,

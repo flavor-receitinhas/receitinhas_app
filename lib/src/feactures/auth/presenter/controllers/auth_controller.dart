@@ -33,7 +33,9 @@ class AuthController {
   Future<bool> loginFirebase() async {
     try {
       await _authService.singIn(
-          email: emailController.text, password: passwordController.text);
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
       return true;
     } catch (e) {
       print(e.toString());
