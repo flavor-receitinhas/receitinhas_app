@@ -1,10 +1,13 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DietaryRestricionPage extends StatelessWidget {
-  const DietaryRestricionPage({super.key});
+  final OnBoardingController ct;
+
+  const DietaryRestricionPage({super.key, required this.ct});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +81,13 @@ class DietaryRestricionPage extends StatelessWidget {
                 CookieButton(
                   label:
                       AppLocalizations.of(context)!.dietaryRestrictionConfirm,
-                  onPressed: () {},
+                  onPressed: () {
+                    ct.pageController.animateToPage(
+                      2,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.ease,
+                    );
+                  },
                 ),
               ],
             ),

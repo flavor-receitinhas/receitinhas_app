@@ -1,11 +1,18 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProteinPreferencePage extends StatelessWidget {
-  const ProteinPreferencePage({super.key});
+class ProteinPreferencePage extends StatefulWidget {
+  final OnBoardingController ct;
+  const ProteinPreferencePage({super.key, required this.ct});
 
+  @override
+  State<ProteinPreferencePage> createState() => _ProteinPreferencePageState();
+}
+
+class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +84,11 @@ class ProteinPreferencePage extends StatelessWidget {
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceConfirm,
               onPressed: () {
-                Navigator.pushNamed(context, '/dietary-restriction');
+                widget.ct.pageController.animateToPage(
+                  1,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.ease,
+                );
               },
             ),
           ],
