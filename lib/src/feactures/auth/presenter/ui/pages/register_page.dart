@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 
 class RegisterPage extends StatefulWidget {
+  static const route = '/register';
   const RegisterPage({super.key});
 
   @override

@@ -1,11 +1,24 @@
+import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/choose_auth_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
+  static const route = '/welcome';
   const WelcomePage({super.key});
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  AuthController ct = GetIt.I();
+  ThemeController theme = ThemeController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +26,11 @@ class WelcomePage extends StatelessWidget {
       onWillPop: () async => false,
       child: CustomScreen(
         iconAppBar: IconButton(
-          onPressed: () {},
+          onPressed: () async {
+            setState(() {
+              theme.saveThemePref();
+            });
+          },
           icon: const Icon(Icons.sunny),
           iconSize: 36,
         ),
@@ -40,7 +57,7 @@ class WelcomePage extends StatelessWidget {
             label: AppLocalizations.of(context)!.welcomeBottomAppBar,
             onPressed: () => Navigator.pushNamed(
               context,
-              '/choose-auth',
+              ChooseAuthPage.route,
             ),
           ),
           const SizedBox(height: 5),

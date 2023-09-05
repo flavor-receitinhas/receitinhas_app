@@ -10,22 +10,22 @@ import 'package:flutter/material.dart';
 class GenerateRoute {
   Route<dynamic>? onGenerate(RouteSettings settings) {
     switch (settings.name) {
-      case '/welcome':
+      case WelcomePage.route:
         return MaterialPageRoute(
           builder: (context) => const WelcomePage(),
           settings: settings,
         );
-      case '/choose-auth':
+      case ChooseAuthPage.route:
         return MaterialPageRoute(
           builder: (context) => const ChooseAuthPage(),
           settings: settings,
         );
-      case '/register':
+      case RegisterPage.route:
         return MaterialPageRoute(
           builder: (context) => const RegisterPage(),
           settings: settings,
         );
-      case '/login':
+      case LoginPage.route:
         return MaterialPageRoute(
           builder: (context) => const LoginPage(),
           settings: settings,

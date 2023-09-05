@@ -3,11 +3,13 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 
 class LoginPage extends StatefulWidget {
+  static const route = '/login';
   const LoginPage({super.key});
 
   @override
@@ -21,9 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  AuthController ct = AuthController(
-    GetIt.I(),
-  );
+  AuthController ct = GetIt.I();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
             if (result && mounted) {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                '/home',
+                HomePage.route,
                 (route) => false,
               );
             }
