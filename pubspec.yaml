@@ -27,6 +27,7 @@ dependencies:
   firebase_auth: ^4.9.0
   google_sign_in: ^6.1.5
   get_it: ^7.6.2
+  flutter_native_splash: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -38,3 +39,13 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+  assets:
+    - assets/images/
+
+flutter_native_splash:
+  image: "assets/images/logo.png"
+  android: true
+  color: "#FFFFFF"
+  android_12:
+    image: "assets/images/logo.png"
+    icon_background_color: "#101636"

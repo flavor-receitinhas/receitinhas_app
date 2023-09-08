@@ -1,5 +1,8 @@
 enum KeyPreferences {
-  chooseTheme(key: 'chooseTheme');
+  ///Se o usuario esta logado
+  isLogged(key: 'isLogged', defaultValue: false),
+  ///Escolher qual o tema
+  isThemeLight(key: 'isThemeLight', defaultValue: true);
 
   final String key;
   final dynamic defaultValue;
