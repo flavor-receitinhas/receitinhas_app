@@ -1,3 +1,5 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/services/preference/sembast/sembast_database.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
@@ -14,8 +16,7 @@ class SplashController extends ChangeNotifier {
   bool isLogged = false;
   String route = WelcomePage.route;
 
-  void init() async {
-    isLogged = await readLoadingUser();
+  Future<void> init() async {
     await loadDependences();
     notifyListeners();
   }
@@ -26,6 +27,8 @@ class SplashController extends ChangeNotifier {
 
   Future<void> loadDependences() async {
     try {
+      await di.get<PersistentDatabaseSembast>().starting();
+      isLogged = await readLoadingUser();
       if (isLogged) {
         route = HomePage.route;
       }
