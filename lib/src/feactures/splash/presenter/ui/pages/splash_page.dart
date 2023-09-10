@@ -15,16 +15,13 @@ class _SplashPageState extends State<SplashPage> {
   SplashController ct = di();
   @override
   void initState() {
-    if (mounted) {
-      ct.init();
-      WidgetsBinding.instance.addPostFrameCallback(
-        (_) => Navigator.pushNamedAndRemoveUntil(
-          context,
-          ct.route,
-          (route) => false,
-        ),
-      );
-    }
+    ct.init().then(
+          (value) => Navigator.pushNamedAndRemoveUntil(
+            context,
+            ct.route,
+            (route) => false,
+          ),
+        );
     super.initState();
   }
 

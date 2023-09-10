@@ -6,22 +6,15 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:uuid/uuid.dart';
 
-class PersistentDatabaseSembast
-    implements PersistentDatabase<StoreSembastEnum> {
-  Database? _db;
-  final String dbName = 'sembast_v1.db';
+class PersistentDatabaseSembast implements PersistentDatabase<StoreSembastEnum> {
+  late final Database _db;
 
-  Future<Database> get database => _starting();
-
-  Future<Database> _starting() async {
-    if (_db != null) {
-      return _db!;
-    }
+  @override
+  Future<void> starting() async {
     DatabaseFactory dbFactory = databaseFactoryIo;
     final dir = await getApplicationDocumentsDirectory();
     // We use the database factory to open the database
-    _db = await dbFactory.openDatabase(join(dir.path, dbName));
-    return _db!;
+    _db = await dbFactory.openDatabase(join(dir.path, 'sembast_v1.db'));
   }
 
   @override
@@ -30,7 +23,7 @@ class PersistentDatabaseSembast
     required StoreSembastEnum store,
   }) async {
     final storeref = StoreRef<String, dynamic>(store.name);
-    await storeref.record(id).delete(await database);
+    await storeref.record(id).delete(_db);
   }
 
   @override
@@ -39,13 +32,13 @@ class PersistentDatabaseSembast
     required StoreSembastEnum store,
   }) async {
     final storeref = StoreRef<String, dynamic>(store.name);
-    return await storeref.record(id).get(await database);
+    return await storeref.record(id).get(_db);
   }
 
   @override
   Future<void> deleteAll({required StoreSembastEnum store}) async {
     final storeref = StoreRef<String, dynamic>(store.name);
-    await storeref.drop(await database);
+    await storeref.drop(_db);
   }
 
   @override
@@ -57,7 +50,7 @@ class PersistentDatabaseSembast
     final storeref = StoreRef<String, dynamic>(store.name);
     id ??= const Uuid().v4();
     objeto['id'] = id;
-    await storeref.record(id).put(await database, objeto);
+    await storeref.record(id).put(_db, objeto);
     return id;
   }
 
@@ -71,7 +64,7 @@ class PersistentDatabaseSembast
     required String id,
   }) async {
     final storeref = StoreRef<String, dynamic>(store.name);
-    await storeref.record(id).put(await database, objeto);
+    await storeref.record(id).put(_db, objeto);
   }
 
   @override
@@ -80,7 +73,7 @@ class PersistentDatabaseSembast
     required StoreSembastEnum store,
   }) async {
     final storeref = StoreRef<String, dynamic>(store.name);
-    final result = await storeref.find(await database);
+    final result = await storeref.find(_db);
     return result.map((e) => Map<String, dynamic>.from(e.value)).toList();
   }
 }

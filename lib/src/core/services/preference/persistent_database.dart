@@ -1,6 +1,8 @@
 abstract class PersistentDatabase<T> {
   abstract final String version;
 
+  Future<void> starting();
+
   Future<List<Map<String, dynamic>>> list({where, required T store});
 
   Future<Map<String, dynamic>?> get({required String id, required T store});

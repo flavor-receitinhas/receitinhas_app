@@ -1,24 +1,22 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/services/preference/sembast/sembast_database.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/feactures/auth/auth_module.dart';
 import 'package:app_receitas/src/feactures/splash/splash_module.dart';
-import 'package:get_it/get_it.dart';
 
 class Inject {
   static void inicialize() {
-    GetIt getIt = GetIt.instance;
-
     //Persistente
-    getIt.registerLazySingleton(() => PersistentDatabaseSembast());
+    di.registerLazySingleton(() => PersistentDatabaseSembast());
     //Preference
-    getIt.registerFactory<Preference>(
+    di.registerFactory<Preference>(
       () => Preference(
-        getIt(),
+        di(),
       ),
     );
     //Themas
-    getIt.registerSingleton(() => ThemeController());
+    di.registerFactory(() => ThemeController());
 
     //Authentication
     AuthModule.inicialize();
