@@ -23,6 +23,9 @@ class CookieButton extends StatelessWidget {
   ///Vem antes do label
   final Widget? prefix;
 
+  ///Caso for selecionado
+  final bool isSelect;
+
   const CookieButton({
     super.key,
     required this.label,
@@ -32,6 +35,7 @@ class CookieButton extends StatelessWidget {
     required this.onPressed,
     this.margin,
     this.prefix,
+    this.isSelect = false,
   });
 
   const CookieButton.outline({
@@ -43,6 +47,7 @@ class CookieButton extends StatelessWidget {
     required this.onPressed,
     this.margin,
     this.prefix,
+    this.isSelect = false,
   });
 
   @override
@@ -70,8 +75,21 @@ class CookieButton extends StatelessWidget {
               ? MainAxisAlignment.start
               : MainAxisAlignment.center,
           children: [
+            isSelect
+                ? Container(
+                    height: 25,
+                    width: 25,
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  )
+                : const SizedBox.shrink(),
             prefix ?? const SizedBox.shrink(),
-            prefix != null ? const SizedBox(width: 10) : const SizedBox.shrink(),
+            prefix != null
+                ? const SizedBox(width: 10)
+                : const SizedBox.shrink(),
             CookieText(
               text: label,
               typography: CookieTypography.button,
