@@ -30,7 +30,11 @@ class DietaryRestricionPage extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                ct.pageController.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.ease,
+                );
               },
               icon: const Icon(Icons.arrow_back_ios_new),
             ),
