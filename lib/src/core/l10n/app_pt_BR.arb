@@ -29,5 +29,10 @@
     "dietaryRestrictionOption1": "Glúten",
     "dietaryRestrictionOption2": "Lactose",
     "dietaryRestrictionOption3": "Nenhuma restrição",
-    "dietaryRestrictionConfirm": "Próxima etapa"
+    "dietaryRestrictionConfirm": "Próxima etapa",
+    "difficultyRecipesTitle" : "Nivel de dificuldade desejado:",
+    "difficultyRecipesOption1" : "Fácil e rápido",
+    "difficultyRecipesOption2" : "Moderado, ou casual",
+    "difficultyRecipesOption3" : "Desafiador, um pesadelo",
+    "difficultyRecipesConfirm" : "Próxima etapa"
 }

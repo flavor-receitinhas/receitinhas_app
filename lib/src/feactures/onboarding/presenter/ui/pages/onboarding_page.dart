@@ -1,5 +1,7 @@
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/choose_name_page.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/dietary_restriction_page.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/difficulty_recipe_page.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/protein_preference_page.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +33,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       children: [
         ProteinPreferencePage(ct: ct),
         DietaryRestricionPage(ct: ct),
-        Container(),
+        DifficultRecipePage(ct: ct),
+        ChooseNamePage(ct: ct),
       ],
     );
   }
