@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/services/preference/sembast/sembast_databa
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/feactures/auth/auth_module.dart';
+import 'package:app_receitas/src/feactures/onboarding/onboarding_module.dart';
 import 'package:app_receitas/src/feactures/splash/splash_module.dart';
 
 class Inject {
@@ -23,5 +24,8 @@ class Inject {
 
     //Splash
     SplashModule.inicialize();
+
+    //OnBoarding
+    OnboardingModule.inicialize();
   }
 }

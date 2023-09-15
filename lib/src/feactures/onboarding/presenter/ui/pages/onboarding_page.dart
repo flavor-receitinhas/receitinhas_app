@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/choose_name_page.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/dietary_restriction_page.dart';
@@ -14,7 +15,7 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
-  final OnBoardingController ct = OnBoardingController();
+  final OnBoardingController ct = di();
 
   @override
   void initState() {

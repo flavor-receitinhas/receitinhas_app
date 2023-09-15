@@ -34,5 +34,9 @@
     "difficultyRecipesOption1" : "Fácil e rápido",
     "difficultyRecipesOption2" : "Moderado, ou casual",
     "difficultyRecipesOption3" : "Desafiador, um pesadelo",
-    "difficultyRecipesConfirm" : "Próxima etapa"
+    "difficultyRecipesConfirm" : "Próxima etapa",
+    "chooseNameTitle" : "Um chefe deve ter um nome memóravel!",
+    "chooseNameBody" : "Como podemos te chamar ?",
+    "chooseNameHintText" : "Escreva seu nome...",
+    "chooseNameConfirm" : "Próxima etapa"
 }
