@@ -4,10 +4,16 @@ import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboa
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DifficultRecipePage extends StatelessWidget {
+class DifficultRecipePage extends StatefulWidget {
   final OnBoardingController ct;
   const DifficultRecipePage({super.key, required this.ct});
 
+  @override
+  State<DifficultRecipePage> createState() => _DifficultRecipePageState();
+}
+
+class _DifficultRecipePageState extends State<DifficultRecipePage> {
+  OnBoardingController get ct => widget.ct;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +54,14 @@ class DifficultRecipePage extends StatelessWidget {
                 const SizedBox(height: 10),
                 CookieButton(
                   label: AppLocalizations.of(context)!.difficultyRecipesOption1,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      ct.onboardingPref.easyDifFiculty =
+                          !ct.onboardingPref.easyDifFiculty;
+                    });
+                    ct.saveOnboardingPrefs();
+                  },
+                  isSelect: widget.ct.onboardingPref.easyDifFiculty,
                   prefix: Icon(
                     Icons.ac_unit_rounded,
                     color: Theme.of(context).colorScheme.onSecondary,
@@ -59,7 +72,14 @@ class DifficultRecipePage extends StatelessWidget {
                 const SizedBox(height: 10),
                 CookieButton(
                   label: AppLocalizations.of(context)!.difficultyRecipesOption2,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      ct.onboardingPref.mediumDifficulty =
+                          !ct.onboardingPref.mediumDifficulty;
+                    });
+                    ct.saveOnboardingPrefs();
+                  },
+                  isSelect: widget.ct.onboardingPref.mediumDifficulty,
                   prefix: Icon(
                     Icons.ac_unit_rounded,
                     color: Theme.of(context).colorScheme.onSecondary,
@@ -70,7 +90,14 @@ class DifficultRecipePage extends StatelessWidget {
                 const SizedBox(height: 10),
                 CookieButton(
                   label: AppLocalizations.of(context)!.difficultyRecipesOption3,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      ct.onboardingPref.hardDifficulty =
+                          !ct.onboardingPref.hardDifficulty;
+                    });
+                    ct.saveOnboardingPrefs();
+                  },
+                  isSelect: widget.ct.onboardingPref.hardDifficulty,
                   prefix: Icon(
                     Icons.ac_unit_rounded,
                     color: Theme.of(context).colorScheme.onSecondary,
@@ -82,7 +109,7 @@ class DifficultRecipePage extends StatelessWidget {
                 CookieButton(
                   label: AppLocalizations.of(context)!.difficultyRecipesConfirm,
                   onPressed: () {
-                    ct.pageController.animateToPage(
+                    widget.ct.pageController.animateToPage(
                       3,
                       duration: const Duration(milliseconds: 400),
                       curve: Curves.ease,

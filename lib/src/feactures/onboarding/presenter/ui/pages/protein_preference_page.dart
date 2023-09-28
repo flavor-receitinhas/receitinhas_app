@@ -13,6 +13,8 @@ class ProteinPreferencePage extends StatefulWidget {
 }
 
 class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
+  OnBoardingController get ct => widget.ct;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,13 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             const SizedBox(height: 10),
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceOption1,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  ct.onboardingPref.vegetarian = !ct.onboardingPref.vegetarian;
+                });
+                ct.saveOnboardingPrefs();
+              },
+              isSelect: ct.onboardingPref.vegetarian,
               backgroundColor: Theme.of(context).colorScheme.onPrimary,
               prefix: Icon(
                 Icons.ac_unit_rounded,
@@ -50,7 +58,13 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             const SizedBox(height: 10),
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceOption2,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  ct.onboardingPref.vegan = !ct.onboardingPref.vegan;
+                });
+                ct.saveOnboardingPrefs();
+              },
+              isSelect: ct.onboardingPref.vegan,
               prefix: Icon(
                 Icons.ac_unit_rounded,
                 color: Theme.of(context).colorScheme.onSecondary,
@@ -61,7 +75,13 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             const SizedBox(height: 10),
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceOption3,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  ct.onboardingPref.meat = !ct.onboardingPref.meat;
+                });
+                ct.saveOnboardingPrefs();
+              },
+              isSelect: ct.onboardingPref.meat,
               prefix: Icon(
                 Icons.ac_unit_rounded,
                 color: Theme.of(context).colorScheme.onSecondary,
@@ -72,7 +92,13 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             const SizedBox(height: 10),
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceOption4,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  ct.onboardingPref.fish = !ct.onboardingPref.fish;
+                });
+                ct.saveOnboardingPrefs();
+              },
+              isSelect: ct.onboardingPref.fish,
               prefix: Icon(
                 Icons.ac_unit_rounded,
                 color: Theme.of(context).colorScheme.onSecondary,
@@ -84,7 +110,7 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceConfirm,
               onPressed: () {
-                widget.ct.pageController.animateToPage(
+                ct.pageController.animateToPage(
                   1,
                   duration: const Duration(milliseconds: 400),
                   curve: Curves.ease,

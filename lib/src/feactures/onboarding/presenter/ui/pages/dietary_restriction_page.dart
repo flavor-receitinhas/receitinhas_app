@@ -4,10 +4,17 @@ import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboa
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DietaryRestricionPage extends StatelessWidget {
+class DietaryRestricionPage extends StatefulWidget {
   final OnBoardingController ct;
 
   const DietaryRestricionPage({super.key, required this.ct});
+
+  @override
+  State<DietaryRestricionPage> createState() => _DietaryRestricionPageState();
+}
+
+class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
+  OnBoardingController get ct => widget.ct;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,17 @@ class DietaryRestricionPage extends StatelessWidget {
                 CookieButton(
                   label:
                       AppLocalizations.of(context)!.dietaryRestrictionOption1,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      ct.onboardingPref.gluten = !ct.onboardingPref.gluten;
+                      if (ct.onboardingPref.noRestriction &&
+                          ct.onboardingPref.gluten) {
+                        ct.onboardingPref.noRestriction = false;
+                      }
+                    });
+                    ct.saveOnboardingPrefs();
+                  },
+                  isSelect: widget.ct.onboardingPref.gluten,
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,
                   prefix: Icon(
                     Icons.ac_unit_rounded,
@@ -61,7 +78,17 @@ class DietaryRestricionPage extends StatelessWidget {
                 CookieButton(
                   label:
                       AppLocalizations.of(context)!.dietaryRestrictionOption2,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      ct.onboardingPref.lactose = !ct.onboardingPref.lactose;
+                      if (ct.onboardingPref.noRestriction &&
+                          ct.onboardingPref.lactose) {
+                        ct.onboardingPref.noRestriction = false;
+                      }
+                    });
+                    ct.saveOnboardingPrefs();
+                  },
+                  isSelect: widget.ct.onboardingPref.lactose,
                   prefix: Icon(
                     Icons.ac_unit_rounded,
                     color: Theme.of(context).colorScheme.onSecondary,
@@ -73,7 +100,18 @@ class DietaryRestricionPage extends StatelessWidget {
                 CookieButton(
                   label:
                       AppLocalizations.of(context)!.dietaryRestrictionOption3,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      ct.onboardingPref.noRestriction =
+                          !ct.onboardingPref.noRestriction;
+                      if (ct.onboardingPref.noRestriction) {
+                        ct.onboardingPref.gluten = false;
+                        ct.onboardingPref.lactose = false;
+                      }
+                    });
+                    ct.saveOnboardingPrefs();
+                  },
+                  isSelect: widget.ct.onboardingPref.noRestriction,
                   prefix: Icon(
                     Icons.ac_unit_rounded,
                     color: Theme.of(context).colorScheme.onSecondary,
@@ -86,7 +124,7 @@ class DietaryRestricionPage extends StatelessWidget {
                   label:
                       AppLocalizations.of(context)!.dietaryRestrictionConfirm,
                   onPressed: () {
-                    ct.pageController.animateToPage(
+                    widget.ct.pageController.animateToPage(
                       2,
                       duration: const Duration(milliseconds: 400),
                       curve: Curves.ease,
