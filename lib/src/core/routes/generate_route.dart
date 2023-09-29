@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/choose_auth_page.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/forget_password_page.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/login_page.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/register_page.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
@@ -35,6 +36,11 @@ class GenerateRoute {
           builder: (context) => const LoginPage(),
           settings: settings,
         );
+      case ForgetPasswordPage.route:
+        return MaterialPageRoute(
+          builder: (context) => const ForgetPasswordPage(),
+          settings: settings,
+        );
       case OnBoardingPage.route:
         return MaterialPageRoute(
           builder: (context) => const OnBoardingPage(),
@@ -42,7 +48,7 @@ class GenerateRoute {
         );
       case HomePage.route:
         return MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const WelcomePage(),
           settings: settings,
         );
       default:

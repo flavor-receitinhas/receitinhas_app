@@ -7,14 +7,16 @@ class CookieTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final bool obscureText;
   final String? Function(String?)? validator;
-  const CookieTextField(
-      {super.key,
-      this.hintText,
-      this.controller,
-      this.suffixIcon,
-      this.prefixIcon,
-      this.obscureText = false,
-      this.validator});
+
+  const CookieTextField({
+    super.key,
+    this.hintText,
+    this.controller,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.obscureText = false,
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,15 @@ class CookieTextField extends StatelessWidget {
           ),
       decoration: InputDecoration(
         hintText: hintText,
-        contentPadding: const EdgeInsets.all(20),
+        contentPadding: const EdgeInsets.all(16),
         hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),
             ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.onSurface, width: 1),
+          borderRadius: BorderRadius.circular(16),
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
         ),

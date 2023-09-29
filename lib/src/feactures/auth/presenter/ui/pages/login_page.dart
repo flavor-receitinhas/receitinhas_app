@@ -1,9 +1,11 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/forget_password_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -64,6 +66,17 @@ class _LoginPageState extends State<LoginPage> {
             validator: (value) {
               return 'asdfsdfsdfsd';
             },
+          ),
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerRight,
+            child: CookieTextButton(
+              text: AppLocalizations.of(context)!.loginForgetPassword,
+              onPressed: () {
+                Navigator.pushNamed(context, ForgetPasswordPage.route);
+              },
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
           const SizedBox(height: 20),
         ],

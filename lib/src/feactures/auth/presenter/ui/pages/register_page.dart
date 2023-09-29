@@ -19,6 +19,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   AuthController ct = di();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -38,65 +39,85 @@ class _RegisterPageState extends State<RegisterPage> {
       image:
           'https://media.discordapp.net/attachments/1071892919633576117/1139752601982873670/image.png?width=550&height=475',
       backgroundImage: '',
-      body: Column(
-        children: [
-          CookieText(
-            text: AppLocalizations.of(context)!.registerTitle,
-            typography: CookieTypography.title,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20),
-          CookieTextField(
-            hintText: AppLocalizations.of(context)!.registerEmail,
-            controller: ct.emailController,
-            prefixIcon: const Icon(Icons.person),
-          ),
-          const SizedBox(height: 10),
-          CookieTextField(
-            hintText: AppLocalizations.of(context)!.registerPassword,
-            controller: ct.passwordController,
-            prefixIcon: const Icon(Icons.lock_outline_rounded),
-            obscureText: true,
-          ),
-          const SizedBox(height: 10),
-          RichText(
-            textAlign: TextAlign.center,
-            text: CookieTextSpan(
-              children: [
-                CookieTextSpan(
-                  text: AppLocalizations.of(context)!.registerTerms1,
-                  color: color.onPrimary,
-                ),
-                CookieTextSpan(
-                  text: AppLocalizations.of(context)!.registerTerms2,
-                  color: color.primary,
-                ),
-                CookieTextSpan(
-                  text: AppLocalizations.of(context)!.registerTerms3,
-                  color: color.onPrimary,
-                ),
-                CookieTextSpan(
-                  text: AppLocalizations.of(context)!.registerTerms4,
-                  color: color.primary,
-                ),
-              ],
+      body: Form(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        key: formKey,
+        child: Column(
+          children: [
+            CookieText(
+              text: AppLocalizations.of(context)!.registerTitle,
+              typography: CookieTypography.title,
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 20),
-        ],
+            const SizedBox(height: 20),
+            CookieTextField(
+              hintText: AppLocalizations.of(context)!.registerEmail,
+              controller: ct.emailController,
+              prefixIcon: const Icon(Icons.person),
+              validator: (value) {
+                //TODO VALIDAR O EMAIL AINDA
+
+                // if (value != null) {
+                //   return 'Email invalido';
+                // }
+                return null;
+              },
+            ),
+            const SizedBox(height: 10),
+            CookieTextField(
+              hintText: AppLocalizations.of(context)!.registerPassword,
+              controller: ct.passwordController,
+              prefixIcon: const Icon(Icons.lock_outline_rounded),
+              obscureText: true,
+              validator: (value) {
+                if (value != null && value.length < 8) {
+                  return 'A senha nao pode ter menos do que 8 caracteres';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 10),
+            RichText(
+              textAlign: TextAlign.center,
+              text: CookieTextSpan(
+                children: [
+                  CookieTextSpan(
+                    text: AppLocalizations.of(context)!.registerTerms1,
+                    color: color.onPrimary,
+                  ),
+                  CookieTextSpan(
+                    text: AppLocalizations.of(context)!.registerTerms2,
+                    color: color.primary,
+                  ),
+                  CookieTextSpan(
+                    text: AppLocalizations.of(context)!.registerTerms3,
+                    color: color.onPrimary,
+                  ),
+                  CookieTextSpan(
+                    text: AppLocalizations.of(context)!.registerTerms4,
+                    color: color.primary,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
       bottomBar: [
         CookieButton(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.registerButton,
           onPressed: () async {
-            var result = await ct.registerFirebase();
-            if (result && mounted) {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                OnBoardingPage.route,
-                (route) => false,
-              );
+            if (formKey.currentState!.validate()) {
+              var result = await ct.registerFirebase();
+              if (result && mounted) {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  OnBoardingPage.route,
+                  (route) => false,
+                );
+              }
             }
           },
         ),

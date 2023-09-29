@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum CookieTypography {
-  title(20, true),
+  title(22, true),
   button(16, true),
   body(14, false);
 

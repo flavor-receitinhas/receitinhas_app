@@ -40,9 +40,9 @@ class AuthController extends ChangeNotifier {
       return true;
     } catch (e) {
       print(e);
-    }
 
     return false;
+    }
   }
 
   Future<bool> loginFirebase() async {
