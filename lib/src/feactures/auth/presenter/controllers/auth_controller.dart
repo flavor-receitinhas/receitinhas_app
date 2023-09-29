@@ -41,7 +41,7 @@ class AuthController extends ChangeNotifier {
     } catch (e) {
       print(e);
 
-    return false;
+      return false;
     }
   }
 
@@ -57,5 +57,15 @@ class AuthController extends ChangeNotifier {
       print(e.toString());
     }
     return false;
+  }
+
+  Future<void> forgetPassword() async {
+    try {
+      await _authService.forgetPassword(
+        email: emailController.text.trim(),
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 }

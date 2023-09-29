@@ -1,13 +1,28 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ForgetPasswordPage extends StatelessWidget {
+class ForgetPasswordPage extends StatefulWidget {
   static const route = '/forget-password';
   const ForgetPasswordPage({super.key});
+
+  @override
+  State<ForgetPasswordPage> createState() => _ForgetPasswordPageState();
+}
+
+class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
+  AuthController ct = di();
+
+  @override
+  void dispose() {
+    ct.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +41,15 @@ class ForgetPasswordPage extends StatelessWidget {
             text: AppLocalizations.of(context)!.forgetPasswordTitle,
             typography: CookieTypography.title,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           CookieText(
             text: AppLocalizations.of(context)!.forgetPasswordBody,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CookieTextField(
             hintText: AppLocalizations.of(context)!.forgetPasswordHintFild,
-            prefixIcon: Icon(Icons.person),
+            controller: ct.emailController,
+            prefixIcon: const Icon(Icons.person),
           ),
         ],
       ),
@@ -41,7 +57,10 @@ class ForgetPasswordPage extends StatelessWidget {
         CookieButton(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.forgetPasswordButton,
-          onPressed: () {},
+          onPressed: () async {
+            await ct.forgetPassword();
+            ct.emailController.clear();
+          },
         ),
         const SizedBox(height: 5)
       ],
