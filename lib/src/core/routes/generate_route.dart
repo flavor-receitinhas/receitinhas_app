@@ -40,13 +40,11 @@ class GenerateRoute {
           builder: (context) => const OnBoardingPage(),
           settings: settings,
         );
-
-      case '/home':
+      case HomePage.route:
         return MaterialPageRoute(
           builder: (context) => const HomePage(),
           settings: settings,
         );
-
       default:
         return MaterialPageRoute(
           builder: (context) => const Text('ERRO'),
