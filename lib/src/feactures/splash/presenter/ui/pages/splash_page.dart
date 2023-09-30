@@ -15,6 +15,9 @@ class _SplashPageState extends State<SplashPage> {
   SplashController ct = di();
   @override
   void initState() {
+    ct.addListener(() {
+      setState(() {});
+    });
     ct.init().then(
           (value) => Navigator.pushNamedAndRemoveUntil(
             context,

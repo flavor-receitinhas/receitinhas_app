@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/inject/inject.dart';
 import 'package:app_receitas/src/core/routes/generate_route.dart';
 import 'package:app_receitas/src/core/themes/custom_theme.dart';
@@ -21,15 +22,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeController theme = ThemeController();
+  final ThemeController _themeController = di();
+
   @override
   void initState() {
-    if (mounted) {
-      theme.init();
-      theme.addListener(() {
-        setState(() {});
-      });
-    }
+    _themeController.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -40,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: theme.chooseTheme,
+      themeMode: _themeController.chooseTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: const Locale('pt', 'BR'),

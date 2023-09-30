@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
@@ -18,7 +19,15 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   AuthController ct = GetIt.I();
-  ThemeController theme = ThemeController();
+  final ThemeController _themeController = di();
+
+  @override
+  void initState() {
+    _themeController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +35,9 @@ class _WelcomePageState extends State<WelcomePage> {
       onWillPop: () async => false,
       child: CustomScreen(
         iconAppBar: IconButton(
-          onPressed: () async {
+          onPressed: () {
             setState(() {
-              theme.saveThemePref();
+              _themeController.saveThemePref();
             });
           },
           icon: const Icon(Icons.sunny),
