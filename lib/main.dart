@@ -11,40 +11,32 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Inject.inicialize();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   final ThemeController _themeController = di();
 
-  @override
-  void initState() {
-    _themeController.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'App Receitas',
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: _themeController.chooseTheme,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale('pt', 'BR'),
-      initialRoute: '/splash',
-      onGenerateRoute: GenerateRoute().onGenerate,
+    return AnimatedBuilder(
+      animation: _themeController,
+      builder: (context, _) {
+        return MaterialApp(
+          title: 'App Receitas',
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: _themeController.chooseTheme,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('pt', 'BR'),
+          initialRoute: '/splash',
+          onGenerateRoute: GenerateRoute().onGenerate,
+        );
+      },
     );
   }
 }

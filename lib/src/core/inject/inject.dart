@@ -17,7 +17,7 @@ class Inject {
       ),
     );
     //Themas
-    di.registerLazySingleton(() => ThemeController());
+    di.registerLazySingleton(() => ThemeController(di()));
 
     //Authentication
     AuthModule.inicialize();

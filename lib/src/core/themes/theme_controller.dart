@@ -1,16 +1,17 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:flutter/material.dart';
 
 class ThemeController extends ChangeNotifier {
-  final Preference _preference = di();
+  final Preference _preference;
 
   bool isThemeLight = true;
 
+  ThemeController(this._preference);
+
   Future<void> init() async {
     isThemeLight = await readThemePref();
-    
+
     notifyListeners();
   }
 
