@@ -2,12 +2,10 @@ import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/choose_auth_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get_it/get_it.dart';
 
 class WelcomePage extends StatefulWidget {
   static const route = '/welcome';
@@ -18,7 +16,6 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  AuthController ct = GetIt.I();
   final ThemeController _themeController = di();
 
   @override
@@ -35,16 +32,12 @@ class _WelcomePageState extends State<WelcomePage> {
       onWillPop: () async => false,
       child: CustomScreen(
         iconAppBar: IconButton(
-          onPressed: () {
-            setState(() {
-              _themeController.saveThemePref();
-            });
-          },
-          icon: const Icon(Icons.sunny),
+          onPressed: _themeController.saveThemePref,
+          icon: Icon(
+            _themeController.isThemeLight ? Icons.light_mode : Icons.dark_mode,
+          ),
           iconSize: 36,
         ),
-        backgroundImage:
-            'https://th.bing.com/th/id/R.ded7c9955889b3c65d556eb77c034835?rik=KwZPTVaWsJNydw&pid=ImgRaw&r=0',
         image:
             'https://media.discordapp.net/attachments/1071892919633576117/1138544562135117974/image.png?width=615&height=539',
         body: Column(

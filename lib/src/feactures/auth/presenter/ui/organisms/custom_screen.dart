@@ -4,32 +4,25 @@ class CustomScreen extends StatelessWidget {
   final IconButton iconAppBar;
   final MainAxisAlignment? sideAppBar;
   final String image;
-  final String backgroundImage;
   final Widget body;
   final List<Widget>? bottomBar;
 
-  const CustomScreen(
-      {super.key,
-      required this.iconAppBar,
-      required this.image,
-      required this.backgroundImage,
-      this.sideAppBar,
-      required this.body,
-      this.bottomBar});
+  const CustomScreen({
+    super.key,
+    required this.iconAppBar,
+    required this.image,
+    this.sideAppBar,
+    required this.body,
+    this.bottomBar,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       persistentFooterButtons: bottomBar ?? [],
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     image: NetworkImage(backgroundImage),
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
