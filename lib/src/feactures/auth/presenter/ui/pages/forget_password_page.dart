@@ -58,8 +58,21 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.forgetPasswordButton,
           onPressed: () async {
+            //TODO FAZER O TRATAMENTO DE ERROR
             await ct.forgetPassword();
             ct.emailController.clear();
+
+            final snackBar = SnackBar(
+              content: CookieText(
+                  text: 'Enviado para o seu email',
+                  color: Theme.of(context).colorScheme.onSecondary),
+              action: SnackBarAction(
+                label: 'Voltar',
+                onPressed: () {},
+              ),
+            );
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
         ),
         const SizedBox(height: 5)
