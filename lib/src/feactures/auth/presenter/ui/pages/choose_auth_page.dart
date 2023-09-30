@@ -1,3 +1,5 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
@@ -6,17 +8,35 @@ import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/register_page
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ChooseAuthPage extends StatelessWidget {
+class ChooseAuthPage extends StatefulWidget {
   static const route = '/choose-auth';
 
   const ChooseAuthPage({super.key});
 
   @override
+  State<ChooseAuthPage> createState() => _ChooseAuthPageState();
+}
+
+class _ChooseAuthPageState extends State<ChooseAuthPage> {
+  final ThemeController _themeController = di();
+
+  @override
+  void initState() {
+    _themeController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomScreen(
       iconAppBar: IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.sunny),
+        onPressed: _themeController.saveThemePref,
+        icon: Icon(
+          _themeController.isThemeLight ? Icons.light_mode : Icons.dark_mode,
+        ),
+        iconSize: 36,
       ),
       image:
           'https://media.discordapp.net/attachments/1071892919633576117/1139340986322014208/image.png?width=518&height=518',
