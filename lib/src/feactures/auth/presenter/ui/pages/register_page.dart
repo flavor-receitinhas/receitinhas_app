@@ -31,6 +31,8 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     ColorScheme color = Theme.of(context).colorScheme;
+    final theme = Theme.of(context).colorScheme;
+    final snack = ScaffoldMessenger.of(context);
     return CustomScreen(
       iconAppBar: IconButton(
         onPressed: () => Navigator.pop(context),
@@ -56,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
               prefixIcon: const Icon(Icons.person),
               validator: (value) {
                 if (value != null && !EmailValidator.validate(value)) {
-                  return 'Digite um email válido';
+                  return AppLocalizations.of(context)!.registerValidatorEmail;
                 }
                 return null;
               },
@@ -69,21 +71,25 @@ class _RegisterPageState extends State<RegisterPage> {
               obscureText: true,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Senha é obrigatória';
+                  return AppLocalizations.of(context)!
+                      .registerValidatorPassword1;
                 }
                 if (value.length < 8) {
-                  return 'A senha deve conter pelo menos 8 caracteres';
+                  return AppLocalizations.of(context)!
+                      .registerValidatorPassword2;
                 }
                 if (!RegExp(r'[A-Z]').hasMatch(value)) {
-                  return 'A senha deve conter pelo menos uma letra maiúscula';
+                  return AppLocalizations.of(context)!
+                      .registerValidatorPassword3;
                 }
                 if (!RegExp(r'[a-z]').hasMatch(value)) {
-                  return 'A senha deve conter pelo menos uma letra minúscula';
+                  return AppLocalizations.of(context)!
+                      .registerValidatorPassword4;
                 }
                 if (!RegExp(r'[0-9]').hasMatch(value)) {
-                  return 'A senha deve conter pelo menos um número';
+                  return AppLocalizations.of(context)!
+                      .registerValidatorPassword5;
                 }
-                // Retorne null se a senha estiver válida
                 return null;
               },
             ),
@@ -122,6 +128,20 @@ class _RegisterPageState extends State<RegisterPage> {
           onPressed: () async {
             if (formKey.currentState!.validate()) {
               var result = await ct.registerFirebase();
+
+              if (!result && mounted) {
+                final snackBar = SnackBar(
+                  content: CookieText(
+                    text: AppLocalizations.of(context)!.registerTextSnack,
+                    color: theme.onSecondary,
+                  ),
+                  action: SnackBarAction(
+                    label: AppLocalizations.of(context)!.registerOptionSnack,
+                    onPressed: () {},
+                  ),
+                );
+                snack.showSnackBar(snackBar);
+              }
               if (result && mounted) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,

@@ -64,9 +64,6 @@ class _LoginPageState extends State<LoginPage> {
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             controller: ct.passwordController,
             obscureText: true,
-            validator: (value) {
-              return 'asdfsdfsdfsd';
-            },
           ),
           const SizedBox(height: 10),
           Align(
@@ -88,14 +85,14 @@ class _LoginPageState extends State<LoginPage> {
           label: AppLocalizations.of(context)!.loginButton,
           onPressed: () async {
             var result = await ct.loginFirebase();
-            if (!result) {
+            if (!result && mounted) {
               final snackBar = SnackBar(
                 content: CookieText(
-                  text: 'Email ou senha inválidos',
+                  text: AppLocalizations.of(context)!.loginTextSnack,
                   color: theme.onSecondary,
                 ),
                 action: SnackBarAction(
-                  label: 'Voltar',
+                  label: AppLocalizations.of(context)!.loginOptionSnack,
                   onPressed: () {},
                 ),
               );

@@ -58,7 +58,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
               prefixIcon: const Icon(Icons.person),
               validator: (value) {
                 if (value != null && !EmailValidator.validate(value)) {
-                  return 'Digite um email válido';
+                  return AppLocalizations.of(context)!
+                      .forgetPasswordValidatorEmail;
                 }
                 return null;
               },
@@ -74,12 +75,15 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             if (formKey.currentState!.validate()) {
               await ct.forgetPassword();
               ct.emailController.clear();
-              
+
               final snackBar = SnackBar(
                 content: CookieText(
-                    text: 'Enviado para o seu email', color: theme.onSecondary),
+                  text: AppLocalizations.of(context)!.forgetPasswordTextSnack,
+                  color: theme.onSecondary,
+                ),
                 action: SnackBarAction(
-                  label: 'Voltar',
+                  label:
+                      AppLocalizations.of(context)!.forgetPasswordOptionSnack,
                   onPressed: () {},
                 ),
               );
