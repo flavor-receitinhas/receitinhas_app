@@ -29,6 +29,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+    final snack = ScaffoldMessenger.of(context);
     return CustomScreen(
       iconAppBar: IconButton(
         onPressed: () => Navigator.pop(context),
@@ -90,15 +92,14 @@ class _LoginPageState extends State<LoginPage> {
               final snackBar = SnackBar(
                 content: CookieText(
                   text: 'Email ou senha inválidos',
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: theme.onSecondary,
                 ),
                 action: SnackBarAction(
                   label: 'Voltar',
                   onPressed: () {},
                 ),
               );
-
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              snack.showSnackBar(snackBar);
             }
             if (result && mounted) {
               Navigator.pushNamedAndRemoveUntil(

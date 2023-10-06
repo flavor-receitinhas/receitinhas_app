@@ -28,6 +28,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+    final snack = ScaffoldMessenger.of(context);
     return CustomScreen(
       iconAppBar: IconButton(
         onPressed: () => Navigator.pop(context),
@@ -72,18 +74,16 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             if (formKey.currentState!.validate()) {
               await ct.forgetPassword();
               ct.emailController.clear();
-
+              
               final snackBar = SnackBar(
                 content: CookieText(
-                    text: 'Enviado para o seu email',
-                    color: Theme.of(context).colorScheme.onSecondary),
+                    text: 'Enviado para o seu email', color: theme.onSecondary),
                 action: SnackBarAction(
                   label: 'Voltar',
                   onPressed: () {},
                 ),
               );
-
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              snack.showSnackBar(snackBar);
             }
           },
         ),
