@@ -6,6 +6,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text_span.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -54,11 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: ct.emailController,
               prefixIcon: const Icon(Icons.person),
               validator: (value) {
-                //TODO VALIDAR O EMAIL AINDA
-
-                // if (value != null) {
-                //   return 'Email invalido';
-                // }
+                if (value != null && !EmailValidator.validate(value)) {
+                  return 'Digite um email válido';
+                }
                 return null;
               },
             ),
@@ -69,9 +68,22 @@ class _RegisterPageState extends State<RegisterPage> {
               prefixIcon: const Icon(Icons.lock_outline_rounded),
               obscureText: true,
               validator: (value) {
-                if (value != null && value.length < 8) {
-                  return 'A senha nao pode ter menos do que 8 caracteres';
+                if (value == null || value.isEmpty) {
+                  return 'Senha é obrigatória';
                 }
+                if (value.length < 8) {
+                  return 'A senha deve conter pelo menos 8 caracteres';
+                }
+                if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                  return 'A senha deve conter pelo menos uma letra maiúscula';
+                }
+                if (!RegExp(r'[a-z]').hasMatch(value)) {
+                  return 'A senha deve conter pelo menos uma letra minúscula';
+                }
+                if (!RegExp(r'[0-9]').hasMatch(value)) {
+                  return 'A senha deve conter pelo menos um número';
+                }
+                // Retorne null se a senha estiver válida
                 return null;
               },
             ),

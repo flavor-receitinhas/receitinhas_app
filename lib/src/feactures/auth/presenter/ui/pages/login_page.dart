@@ -86,6 +86,20 @@ class _LoginPageState extends State<LoginPage> {
           label: AppLocalizations.of(context)!.loginButton,
           onPressed: () async {
             var result = await ct.loginFirebase();
+            if (!result) {
+              final snackBar = SnackBar(
+                content: CookieText(
+                  text: 'Email ou senha inválidos',
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                action: SnackBarAction(
+                  label: 'Voltar',
+                  onPressed: () {},
+                ),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
             if (result && mounted) {
               Navigator.pushNamedAndRemoveUntil(
                 context,

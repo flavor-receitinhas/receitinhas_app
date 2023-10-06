@@ -4,6 +4,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -17,6 +18,7 @@ class ForgetPasswordPage extends StatefulWidget {
 
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   AuthController ct = di();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -34,44 +36,55 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       sideAppBar: MainAxisAlignment.start,
       image:
           'https://media.discordapp.net/attachments/1071892919633576117/1139752601982873670/image.png?width=550&height=475',
-      body: Column(
-        children: [
-          CookieText(
-            text: AppLocalizations.of(context)!.forgetPasswordTitle,
-            typography: CookieTypography.title,
-          ),
-          const SizedBox(height: 10),
-          CookieText(
-            text: AppLocalizations.of(context)!.forgetPasswordBody,
-          ),
-          const SizedBox(height: 20),
-          CookieTextField(
-            hintText: AppLocalizations.of(context)!.forgetPasswordHintFild,
-            controller: ct.emailController,
-            prefixIcon: const Icon(Icons.person),
-          ),
-        ],
+      body: Form(
+        key: formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(
+          children: [
+            CookieText(
+              text: AppLocalizations.of(context)!.forgetPasswordTitle,
+              typography: CookieTypography.title,
+            ),
+            const SizedBox(height: 10),
+            CookieText(
+              text: AppLocalizations.of(context)!.forgetPasswordBody,
+            ),
+            const SizedBox(height: 20),
+            CookieTextField(
+              hintText: AppLocalizations.of(context)!.forgetPasswordHintFild,
+              controller: ct.emailController,
+              prefixIcon: const Icon(Icons.person),
+              validator: (value) {
+                if (value != null && !EmailValidator.validate(value)) {
+                  return 'Digite um email válido';
+                }
+                return null;
+              },
+            ),
+          ],
+        ),
       ),
       bottomBar: [
         CookieButton(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.forgetPasswordButton,
           onPressed: () async {
-            //TODO FAZER O TRATAMENTO DE ERROR
-            await ct.forgetPassword();
-            ct.emailController.clear();
+            if (formKey.currentState!.validate()) {
+              await ct.forgetPassword();
+              ct.emailController.clear();
 
-            final snackBar = SnackBar(
-              content: CookieText(
-                  text: 'Enviado para o seu email',
-                  color: Theme.of(context).colorScheme.onSecondary),
-              action: SnackBarAction(
-                label: 'Voltar',
-                onPressed: () {},
-              ),
-            );
+              final snackBar = SnackBar(
+                content: CookieText(
+                    text: 'Enviado para o seu email',
+                    color: Theme.of(context).colorScheme.onSecondary),
+                action: SnackBarAction(
+                  label: 'Voltar',
+                  onPressed: () {},
+                ),
+              );
 
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
           },
         ),
         const SizedBox(height: 5)
