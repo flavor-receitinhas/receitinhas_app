@@ -1,61 +1,37 @@
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/choose_auth_page.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/forget_password_page.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/login_page.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/register_page.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
-import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
-import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
-import 'package:app_receitas/src/feactures/splash/presenter/ui/pages/splash_page.dart';
+import 'package:app_receitas/src/core/global/register_module.dart';
+import 'package:app_receitas/src/feactures/auth/auth_module.dart';
+import 'package:app_receitas/src/feactures/home/home_module.dart';
+import 'package:app_receitas/src/feactures/onboarding/onboarding_module.dart';
+import 'package:app_receitas/src/feactures/splash/splash_module.dart';
 import 'package:flutter/material.dart';
 
 class GenerateRoute {
-  Route<dynamic>? onGenerate(RouteSettings settings) {
-    switch (settings.name) {
-      case SplashPage.route:
-        return MaterialPageRoute(
-          builder: (context) => const SplashPage(),
-          settings: settings,
-        );
-      case WelcomePage.route:
-        return MaterialPageRoute(
-          builder: (context) => const WelcomePage(),
-          settings: settings,
-        );
-      case ChooseAuthPage.route:
-        return MaterialPageRoute(
-          builder: (context) => const ChooseAuthPage(),
-          settings: settings,
-        );
-      case RegisterPage.route:
-        return MaterialPageRoute(
-          builder: (context) => const RegisterPage(),
-          settings: settings,
-        );
-      case LoginPage.route:
-        return MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-          settings: settings,
-        );
-      case ForgetPasswordPage.route:
-        return MaterialPageRoute(
-          builder: (context) => const ForgetPasswordPage(),
-          settings: settings,
-        );
-      case OnBoardingPage.route:
-        return MaterialPageRoute(
-          builder: (context) => const OnBoardingPage(),
-          settings: settings,
-        );
-      case HomePage.route:
-        return MaterialPageRoute(
-          builder: (context) => const WelcomePage(),
-          settings: settings,
-        );
-      default:
-        return MaterialPageRoute(
-          builder: (context) => const Text('ERRO'),
-          settings: settings,
-        );
+  List<RegisterModule> routes = [
+    SplashModule(),
+    AuthModule(),
+    OnboardingModule(),
+    HomeModule(),
+  ];
+
+  void registerRoutes() {
+    for (var modules in routes) {
+      modules.inicialize();
     }
+  }
+
+  Route<dynamic>? generateRoute(RouteSettings settings) {
+    for (var module in routes) {
+      if (module.routers.containsKey(settings.name)) {
+        var widgetModule = module.routers[settings.name];
+        return MaterialPageRoute(
+          builder: (context) => widgetModule!,
+          settings: settings,
+        );
+      }
+    }
+    return MaterialPageRoute(
+      builder: (context) => const Text('ERRO'),
+      settings: settings,
+    );
   }
 }

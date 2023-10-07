@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GenerateRoute().registerRoutes();
   Inject.inicialize();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale('pt', 'BR'),
           initialRoute: '/splash',
-          onGenerateRoute: GenerateRoute().onGenerate,
+          onGenerateRoute: GenerateRoute().generateRoute,
         );
       },
     );
