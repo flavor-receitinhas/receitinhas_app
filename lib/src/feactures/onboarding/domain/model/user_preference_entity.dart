@@ -23,12 +23,13 @@ class UserPreferenceEntity {
 
   factory UserPreferenceEntity.fromMap(Map<String, dynamic> map) {
     return UserPreferenceEntity(
-      protein: map['protein'].map((e) => Proteins.fromName(e)).toList(),
+      protein:
+          map['protein'].map<Proteins>((e) => Proteins.fromName(e)).toList(),
       dietaryRestriction: map['dietaryRestriction']
-          .map((e) => DietaryRestrictions.fromName(e))
+          .map<DietaryRestrictions>((e) => DietaryRestrictions.fromName(e))
           .toList(),
       difficultyRecipe: map['difficultyRecipe']
-          .map((e) => DifficultyRecipes.fromName(e))
+          .map<DifficultyRecipes>((e) => DifficultyRecipes.fromName(e))
           .toList(),
     );
   }

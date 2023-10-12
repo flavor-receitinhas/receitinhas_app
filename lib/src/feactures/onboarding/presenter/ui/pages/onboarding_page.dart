@@ -19,10 +19,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   void initState() {
-    ct.init();
-    ct.addListener(() {
-      setState(() {});
-    });
+    if (mounted) {
+      ct.init();
+      ct.addListener(() {
+        setState(() {});
+      });
+    }
     super.initState();
   }
 

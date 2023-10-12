@@ -18,13 +18,15 @@ class _SplashPageState extends State<SplashPage> {
     ct.addListener(() {
       setState(() {});
     });
-    ct.init().then(
-          (value) => Navigator.pushNamedAndRemoveUntil(
-            context,
-            ct.route,
-            (route) => false,
-          ),
-        );
+    if (mounted) {
+      ct.init().then(
+            (value) => Navigator.pushNamedAndRemoveUntil(
+              context,
+              ct.route,
+              (route) => false,
+            ),
+          );
+    }
     super.initState();
   }
 

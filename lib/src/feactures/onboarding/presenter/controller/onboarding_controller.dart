@@ -8,13 +8,13 @@ class OnBoardingController extends ChangeNotifier {
 
   OnBoardingController(this._preference);
 
-  late PageController pageController;
+   PageController pageController = PageController();
   int currentPage = 0;
-  late UserPreferenceEntity onboardingPref;
+   UserPreferenceEntity onboardingPref = UserPreferenceEntity();
 
-  void init() async {
+  Future<void> init() async {
     pageController = PageController(initialPage: 0);
-    await loadingOnboardingPrefs();
+    onboardingPref = await loadingOnboardingPrefs();
     notifyListeners();
   }
 
@@ -31,14 +31,14 @@ class OnBoardingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadingOnboardingPrefs() async {
+  Future<UserPreferenceEntity> loadingOnboardingPrefs() async {
     final pref = await _preference.get<Map<String, dynamic>?>(
       keyPreferences: KeyPreferences.onBoardingPref,
     );
     if (pref == null) {
-      onboardingPref = UserPreferenceEntity();
+      return UserPreferenceEntity();
     } else {
-      onboardingPref = UserPreferenceEntity.fromMap(pref);
+      return UserPreferenceEntity.fromMap(pref);
     }
   }
 

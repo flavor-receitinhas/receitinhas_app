@@ -5,6 +5,7 @@ import 'package:app_receitas/src/core/services/preference/user_preference/prefer
 import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 
 class SplashController extends ChangeNotifier {
@@ -31,6 +32,7 @@ class SplashController extends ChangeNotifier {
     try {
       await di.get<PersistentDatabaseSembast>().starting();
       await di.get<ThemeController>().init();
+      await di.get<OnBoardingController>().init();
       isLogged = await readLoadingUser();
       if (isLogged) {
         route = HomePage.route;
