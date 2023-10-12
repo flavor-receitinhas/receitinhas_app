@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/model/onboard_pref_model.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/model/user_preference_entity.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingController extends ChangeNotifier {
@@ -10,7 +10,7 @@ class OnBoardingController extends ChangeNotifier {
 
   late PageController pageController;
   int currentPage = 0;
-  late OnboardingPrefModel onboardingPref;
+  late UserPreferenceEntity onboardingPref;
 
   void init() async {
     pageController = PageController(initialPage: 0);
@@ -36,16 +36,16 @@ class OnBoardingController extends ChangeNotifier {
       keyPreferences: KeyPreferences.onBoardingPref,
     );
     if (pref == null) {
-      onboardingPref = OnboardingPrefModel();
+      onboardingPref = UserPreferenceEntity();
     } else {
-      onboardingPref = OnboardingPrefModel.fromJson(pref);
+      onboardingPref = UserPreferenceEntity.fromMap(pref);
     }
   }
 
   Future<void> saveOnboardingPrefs() async {
     await _preference.put(
       keyPreferences: KeyPreferences.onBoardingPref,
-      value: onboardingPref.toJson(),
+      value: onboardingPref.toMap(),
     );
     notifyListeners();
   }
