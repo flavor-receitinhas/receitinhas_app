@@ -78,11 +78,22 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceConfirm,
               onPressed: () {
-                ct.pageController.animateToPage(
-                  1,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.ease,
-                );
+                if (ct.onboardingPref.protein.isNotEmpty) {
+                  ct.pageController.animateToPage(
+                    1,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.ease,
+                  );
+                } else {
+                  final snackBar = SnackBar(
+                    content: CookieText(
+                      text: AppLocalizations.of(context)!
+                          .dietaryRestrictionSnackBar,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               },
             ),
           ],

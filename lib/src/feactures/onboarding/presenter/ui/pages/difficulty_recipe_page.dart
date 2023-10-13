@@ -87,11 +87,22 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
             CookieButton(
               label: AppLocalizations.of(context)!.difficultyRecipesConfirm,
               onPressed: () {
-                widget.ct.pageController.animateToPage(
-                  3,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.ease,
-                );
+                if (ct.onboardingPref.difficultyRecipe.isNotEmpty) {
+                  widget.ct.pageController.animateToPage(
+                    3,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.ease,
+                  );
+                } else {
+                  final snackBar = SnackBar(
+                    content: CookieText(
+                      text: AppLocalizations.of(context)!
+                          .dietaryRestrictionSnackBar,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               },
             ),
           ],
