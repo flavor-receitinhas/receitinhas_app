@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,7 +31,6 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             IconButton(
@@ -43,80 +43,51 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
               },
               icon: const Icon(Icons.arrow_back_ios_new),
             ),
+            const Spacer(),
+            CookieText(
+              text: AppLocalizations.of(context)!.difficultyRecipesTitle,
+              typography: CookieTypography.title,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
             Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CookieText(
-                  text: AppLocalizations.of(context)!.difficultyRecipesTitle,
-                  typography: CookieTypography.title,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                CookieButton(
-                  label: AppLocalizations.of(context)!.difficultyRecipesOption1,
-                  onPressed: () {
-                    setState(() {
-                      ct.onboardingPref.easyDifFiculty =
-                          !ct.onboardingPref.easyDifFiculty;
-                    });
-                    ct.saveOnboardingPrefs();
-                  },
-                  isSelect: widget.ct.onboardingPref.easyDifFiculty,
-                  prefix: Icon(
-                    Icons.ac_unit_rounded,
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ),
-                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                  labelColor: Theme.of(context).colorScheme.onSecondary,
-                ),
-                const SizedBox(height: 10),
-                CookieButton(
-                  label: AppLocalizations.of(context)!.difficultyRecipesOption2,
-                  onPressed: () {
-                    setState(() {
-                      ct.onboardingPref.mediumDifficulty =
-                          !ct.onboardingPref.mediumDifficulty;
-                    });
-                    ct.saveOnboardingPrefs();
-                  },
-                  isSelect: widget.ct.onboardingPref.mediumDifficulty,
-                  prefix: Icon(
-                    Icons.ac_unit_rounded,
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ),
-                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                  labelColor: Theme.of(context).colorScheme.onSecondary,
-                ),
-                const SizedBox(height: 10),
-                CookieButton(
-                  label: AppLocalizations.of(context)!.difficultyRecipesOption3,
-                  onPressed: () {
-                    setState(() {
-                      ct.onboardingPref.hardDifficulty =
-                          !ct.onboardingPref.hardDifficulty;
-                    });
-                    ct.saveOnboardingPrefs();
-                  },
-                  isSelect: widget.ct.onboardingPref.hardDifficulty,
-                  prefix: Icon(
-                    Icons.ac_unit_rounded,
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ),
-                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                  labelColor: Theme.of(context).colorScheme.onSecondary,
-                ),
-                const SizedBox(height: 20),
-                CookieButton(
-                  label: AppLocalizations.of(context)!.difficultyRecipesConfirm,
-                  onPressed: () {
-                    widget.ct.pageController.animateToPage(
-                      3,
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.ease,
-                    );
-                  },
-                ),
-              ],
+              children: DifficultyRecipes.values
+                  .map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: CookieButton(
+                        label: AppLocalizations.of(context)!
+                            .difficultyRecipesOptions(e.name),
+                        onPressed: () {
+                          ct.onboardingPref.difficultyRecipe.contains(e)
+                              ? ct.onboardingPref.difficultyRecipe.remove(e)
+                              : ct.onboardingPref.difficultyRecipe.add(e);
+                          ct.saveOnboardingPrefs();
+                        },
+                        isSelect: widget.ct.onboardingPref.difficultyRecipe
+                            .contains(e),
+                        prefix: Icon(
+                          Icons.ac_unit_rounded,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        labelColor: Theme.of(context).colorScheme.onSecondary,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(height: 20),
+            CookieButton(
+              label: AppLocalizations.of(context)!.difficultyRecipesConfirm,
+              onPressed: () {
+                widget.ct.pageController.animateToPage(
+                  3,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.ease,
+                );
+              },
             ),
           ],
         ),

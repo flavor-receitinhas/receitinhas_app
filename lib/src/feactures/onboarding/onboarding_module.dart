@@ -2,7 +2,7 @@ import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/register_module.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 
 class OnboardingModule extends RegisterModule {
   @override
