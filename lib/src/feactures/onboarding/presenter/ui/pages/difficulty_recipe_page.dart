@@ -2,8 +2,10 @@ import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 
 class DifficultRecipePage extends StatefulWidget {
   final OnBoardingController ct;
@@ -66,9 +68,12 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
                         },
                         isSelect: widget.ct.onboardingPref.difficultyRecipe
                             .contains(e),
-                        prefix: Icon(
-                          Icons.ac_unit_rounded,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                        prefix: SvgPicture.asset(
+                          ImageContext().svgIconDifficulty(e),
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.onSecondary,
+                            BlendMode.srcIn,
+                          ),
                         ),
                         backgroundColor:
                             Theme.of(context).colorScheme.onPrimary,

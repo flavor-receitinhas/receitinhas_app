@@ -2,8 +2,10 @@ import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/proteins_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ProteinPreferencePage extends StatefulWidget {
   final OnBoardingController ct;
@@ -59,9 +61,12 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
                         isSelect: ct.onboardingPref.protein.contains(e),
                         backgroundColor:
                             Theme.of(context).colorScheme.onPrimary,
-                        prefix: Icon(
-                          Icons.ac_unit_rounded,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                        prefix: SvgPicture.asset(
+                          ImageContext().svgIconProtein(e),
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.onSecondary,
+                            BlendMode.srcIn,
+                          ),
                         ),
                         labelColor: Theme.of(context).colorScheme.onSecondary,
                       ),
