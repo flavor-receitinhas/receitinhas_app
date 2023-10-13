@@ -5,11 +5,11 @@ enum DietaryRestrictions {
 
   static DietaryRestrictions fromName(String? name) {
     switch (name) {
-      case 'GLUTEN':
+      case 'gluten':
         return DietaryRestrictions.gluten;
-      case 'LACTOSE':
+      case 'lactose':
         return DietaryRestrictions.lactose;
-      case 'NORESTRICTION':
+      case 'noRestriction':
         return DietaryRestrictions.noRestriction;
       default:
         return DietaryRestrictions.noRestriction;

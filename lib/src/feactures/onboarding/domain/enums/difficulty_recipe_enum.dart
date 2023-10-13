@@ -5,11 +5,11 @@ enum DifficultyRecipes {
 
   static DifficultyRecipes fromName(String? name) {
     switch (name) {
-      case 'EASY':
+      case 'easy':
         return DifficultyRecipes.easy;
-      case 'HARD':
+      case 'medium':
         return DifficultyRecipes.hard;
-      case 'MEDIUM':
+      case 'hard':
         return DifficultyRecipes.medium;
       default:
         return DifficultyRecipes.easy;

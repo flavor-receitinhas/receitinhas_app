@@ -6,13 +6,13 @@ enum Proteins {
 
   static Proteins fromName(String? name) {
     switch (name) {
-      case 'VEGETARIAN':
+      case 'vegetarian':
         return Proteins.vegetarian;
-      case 'VEGAN':
+      case 'vegan':
         return Proteins.vegan;
-      case 'MEAT':
+      case 'meat':
         return Proteins.meat;
-      case 'FISH':
+      case 'fish':
         return Proteins.fish;
       default:
         return Proteins.meat;
