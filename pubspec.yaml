@@ -29,6 +29,7 @@ dependencies:
   flutter_native_splash: ^2.3.2
   mocktail: ^1.0.0
   email_validator: ^2.1.17
+  dio: ^5.3.3
 
 dev_dependencies:
   flutter_test:

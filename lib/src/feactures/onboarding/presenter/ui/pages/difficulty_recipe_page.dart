@@ -61,13 +61,13 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
                         label: AppLocalizations.of(context)!
                             .difficultyRecipesOptions(e.name),
                         onPressed: () {
-                          ct.onboardingPref.difficultyRecipe.contains(e)
-                              ? ct.onboardingPref.difficultyRecipe.remove(e)
-                              : ct.onboardingPref.difficultyRecipe.add(e);
-                          ct.saveOnboardingPrefs();
+                          setState(() {
+                            ct.difficultyRecipe.contains(e)
+                                ? ct.difficultyRecipe.remove(e)
+                                : ct.difficultyRecipe.add(e);
+                          });
                         },
-                        isSelect: widget.ct.onboardingPref.difficultyRecipe
-                            .contains(e),
+                        isSelect: ct.difficultyRecipe.contains(e),
                         prefix: SvgPicture.asset(
                           ImageContext().svgIconDifficulty(e),
                           colorFilter: ColorFilter.mode(
@@ -87,7 +87,7 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
             CookieButton(
               label: AppLocalizations.of(context)!.difficultyRecipesConfirm,
               onPressed: () {
-                if (ct.onboardingPref.difficultyRecipe.isNotEmpty) {
+                if (ct.difficultyRecipe.isNotEmpty) {
                   widget.ct.pageController.animateToPage(
                     3,
                     duration: const Duration(milliseconds: 400),

@@ -64,27 +64,26 @@ class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
                               .dietaryRestrictionOptions(e.name),
                           onPressed: () {
                             setState(() {
-                              ct.onboardingPref.dietaryRestriction.contains(e)
-                                  ? ct.onboardingPref.dietaryRestriction
+                              ct.dietaryRestriction.contains(e)
+                                  ? ct.dietaryRestriction
                                       .remove(e)
-                                  : ct.onboardingPref.dietaryRestriction.add(e);
-                              if (ct.onboardingPref.dietaryRestriction.contains(
+                                  : ct.dietaryRestriction.add(e);
+                              if (ct.dietaryRestriction.contains(
                                       DietaryRestrictions.noRestriction) &&
                                   e == DietaryRestrictions.noRestriction) {
-                                ct.onboardingPref.dietaryRestriction
+                                ct.dietaryRestriction
                                     .remove(DietaryRestrictions.gluten);
-                                ct.onboardingPref.dietaryRestriction
+                                ct.dietaryRestriction
                                     .remove(DietaryRestrictions.lactose);
                               }
                               if (e != DietaryRestrictions.noRestriction) {
-                                ct.onboardingPref.dietaryRestriction
+                                ct.dietaryRestriction
                                     .remove(DietaryRestrictions.noRestriction);
                               }
                             });
-                            ct.saveOnboardingPrefs();
                           },
                           isSelect:
-                              ct.onboardingPref.dietaryRestriction.contains(e),
+                              ct.dietaryRestriction.contains(e),
                           backgroundColor:
                               Theme.of(context).colorScheme.onPrimary,
                           prefix: SvgPicture.asset(
@@ -103,7 +102,7 @@ class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
             CookieButton(
               label: AppLocalizations.of(context)!.dietaryRestrictionConfirm,
               onPressed: () {
-                if (ct.onboardingPref.dietaryRestriction.isNotEmpty) {
+                if (ct.dietaryRestriction.isNotEmpty) {
                   widget.ct.pageController.animateToPage(
                     2,
                     duration: const Duration(milliseconds: 400),

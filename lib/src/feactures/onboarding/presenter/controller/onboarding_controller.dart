@@ -1,20 +1,26 @@
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/model/user_preference_entity.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/entities/user_food_pref_entity.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/enums/proteins_enum.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_food_pref_repository.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingController extends ChangeNotifier {
+  final UserFoodPrefRepository _repository;
   final Preference _preference;
 
-  OnBoardingController(this._preference);
+  OnBoardingController(this._preference, this._repository);
 
-   PageController pageController = PageController();
+  PageController pageController = PageController();
   int currentPage = 0;
-   UserPreferenceEntity onboardingPref = UserPreferenceEntity();
+  List<Proteins> protein = [];
+  List<DietaryRestrictions> dietaryRestriction = [];
+  List<DifficultyRecipes> difficultyRecipe = [];
 
   Future<void> init() async {
     pageController = PageController(initialPage: 0);
-    onboardingPref = await loadingOnboardingPrefs();
     notifyListeners();
   }
 
@@ -31,22 +37,14 @@ class OnBoardingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<UserPreferenceEntity> loadingOnboardingPrefs() async {
-    final pref = await _preference.get<Map<String, dynamic>?>(
-      keyPreferences: KeyPreferences.onBoardingPref,
+  void creatFoodPref() {
+    _repository.createUser(
+      user: UserFoodPrefEntity(
+        userId: '5',
+        protein: protein,
+        dietaryRestriction: dietaryRestriction,
+        difficultyRecipe: difficultyRecipe,
+      ),
     );
-    if (pref == null) {
-      return UserPreferenceEntity();
-    } else {
-      return UserPreferenceEntity.fromMap(pref);
-    }
-  }
-
-  Future<void> saveOnboardingPrefs() async {
-    await _preference.put(
-      keyPreferences: KeyPreferences.onBoardingPref,
-      value: onboardingPref.toMap(),
-    );
-    notifyListeners();
   }
 }

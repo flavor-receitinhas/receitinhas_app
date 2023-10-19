@@ -39,36 +39,39 @@ class ChooseNamePage extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_ios_new),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CookieText(
-                  text: AppLocalizations.of(context)!.chooseNameTitle,
-                  typography: CookieTypography.title,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                CookieText(
-                  text: AppLocalizations.of(context)!.chooseNameBody,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                CookieTextField(
-                  hintText: AppLocalizations.of(context)!.chooseNameHintText,
-                ),
-                const SizedBox(height: 20),
-                CookieButton(
-                  label: AppLocalizations.of(context)!.difficultyRecipesConfirm,
-                  onPressed: () {
-                    ct.saveIsLogin();
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      HomePage.route,
-                      (route) => false,
-                    );
-                  },
-                ),
-              ],
+            Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CookieText(
+                    text: AppLocalizations.of(context)!.chooseNameTitle,
+                    typography: CookieTypography.title,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  CookieText(
+                    text: AppLocalizations.of(context)!.chooseNameBody,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  CookieTextField(
+                    hintText: AppLocalizations.of(context)!.chooseNameHintText,
+                  ),
+                  const SizedBox(height: 20),
+                  CookieButton(
+                    label: AppLocalizations.of(context)!.difficultyRecipesConfirm,
+                    onPressed: () {
+                      ct.saveIsLogin();
+                      ct.creatFoodPref();
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        HomePage.route,
+                        (route) => false,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

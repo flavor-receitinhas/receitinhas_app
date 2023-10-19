@@ -52,13 +52,12 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
                             .proteinPreferenceOptions(e.name),
                         onPressed: () {
                           setState(() {
-                            ct.onboardingPref.protein.contains(e)
-                                ? ct.onboardingPref.protein.remove(e)
-                                : ct.onboardingPref.protein.add(e);
+                            ct.protein.contains(e)
+                                ? ct.protein.remove(e)
+                                : ct.protein.add(e);
                           });
-                          ct.saveOnboardingPrefs();
                         },
-                        isSelect: ct.onboardingPref.protein.contains(e),
+                        isSelect: ct.protein.contains(e),
                         backgroundColor:
                             Theme.of(context).colorScheme.onPrimary,
                         prefix: SvgPicture.asset(
@@ -78,7 +77,7 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             CookieButton(
               label: AppLocalizations.of(context)!.proteinPreferenceConfirm,
               onPressed: () {
-                if (ct.onboardingPref.protein.isNotEmpty) {
+                if (ct.protein.isNotEmpty) {
                   ct.pageController.animateToPage(
                     1,
                     duration: const Duration(milliseconds: 400),
