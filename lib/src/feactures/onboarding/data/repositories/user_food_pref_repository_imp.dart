@@ -17,10 +17,11 @@ class UserFoodPrefRepositoryImp implements UserFoodPrefRepository {
   Future<void> createUser({required UserFoodPrefEntity user}) async {
     await userData.createUserPref(
       user: UserFoodPrefDto(
-        userId: user.userId!,
-        protein: user.protein!,
-        dietaryRestriction: user.dietaryRestriction!,
-        difficultyRecipe: user.difficultyRecipe!,
+        userId: user.userId,
+        userName: user.userName,
+        protein: user.protein,
+        dietaryRestriction: user.dietaryRestriction,
+        difficultyRecipe: user.difficultyRecipe,
       ),
     );
   }

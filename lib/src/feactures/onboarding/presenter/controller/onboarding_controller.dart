@@ -18,6 +18,7 @@ class OnBoardingController extends ChangeNotifier {
   List<Proteins> protein = [];
   List<DietaryRestrictions> dietaryRestriction = [];
   List<DifficultyRecipes> difficultyRecipe = [];
+  TextEditingController userNameController = TextEditingController();
 
   Future<void> init() async {
     pageController = PageController(initialPage: 0);
@@ -44,6 +45,7 @@ class OnBoardingController extends ChangeNotifier {
         protein: protein,
         dietaryRestriction: dietaryRestriction,
         difficultyRecipe: difficultyRecipe,
+        userName: userNameController.text.trim(),
       ),
     );
   }
