@@ -30,6 +30,7 @@ dependencies:
   mocktail: ^1.0.0
   email_validator: ^2.1.17
   dio: ^5.3.3
+  flutter_carousel_widget: ^2.1.2
 
 dev_dependencies:
   flutter_test:
