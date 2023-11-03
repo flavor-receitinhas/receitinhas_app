@@ -16,18 +16,23 @@ class CookieText extends StatelessWidget {
   final TextAlign? textAlign;
   final CookieTypography typography;
   final Color? color;
+  final TextOverflow? overflow;
+  final int? maxLine;
   const CookieText(
       {super.key,
       required this.text,
       this.typography = CookieTypography.body,
       this.color,
-      this.textAlign});
+      this.textAlign,
+      this.overflow,  this.maxLine});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       textAlign: textAlign,
+      overflow: overflow,
+      maxLines: maxLine,
       style: TextStyle(
         fontSize: typography.size,
         fontWeight: typography.isBold ? FontWeight.bold : FontWeight.normal,
