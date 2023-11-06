@@ -31,24 +31,22 @@ class CookieButton extends StatelessWidget {
     required this.label,
     this.labelColor,
     this.backgroundColor,
-    this.border = false,
     required this.onPressed,
     this.margin,
     this.prefix,
     this.isSelect = false,
-  });
+  }) : border = false;
 
   const CookieButton.outline({
     super.key,
     required this.label,
     this.labelColor,
     this.backgroundColor = Colors.transparent,
-    this.border = true,
     required this.onPressed,
     this.margin,
     this.prefix,
     this.isSelect = false,
-  });
+  }) : border = true;
 
   @override
   Widget build(BuildContext context) {

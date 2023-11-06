@@ -60,7 +60,8 @@ final darkTheme = ThemeData(
     errorContainer: Color(0xFF93000A),
     onError: Color(0xFF690005),
     onErrorContainer: Color(0xFFFFDAD6),
-    background: Color(0xFF1C1B1E),
+    //Cor de fundo
+    background: Color(0xff0E0E0E),
     onBackground: Color(0xFFE6E1E6),
     surface: Color(0xFF1C1B1E),
     onSurface: Color.fromARGB(255, 255, 255, 255),

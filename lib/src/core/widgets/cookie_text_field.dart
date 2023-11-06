@@ -7,6 +7,8 @@ class CookieTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final bool obscureText;
   final String? Function(String?)? validator;
+  final bool border;
+  final double borderRadiusTopRight;
 
   const CookieTextField({
     super.key,
@@ -16,7 +18,19 @@ class CookieTextField extends StatelessWidget {
     this.prefixIcon,
     this.obscureText = false,
     this.validator,
-  });
+  })  : border = true,
+        borderRadiusTopRight = 16;
+
+  const CookieTextField.outline({
+    super.key,
+    this.hintText,
+    this.controller,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.obscureText = false,
+    this.validator,
+  })  : border = false,
+        borderRadiusTopRight = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +47,38 @@ class CookieTextField extends StatelessWidget {
         hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),
             ),
+        filled: true,
+        fillColor: Theme.of(context).colorScheme.secondary,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.onSurface, width: 1),
-          borderRadius: BorderRadius.circular(16),
+          borderSide: border
+              ? BorderSide(
+                  color: Theme.of(context).colorScheme.onSurface, width: 1)
+              : const BorderSide(),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(borderRadiusTopRight),
+            bottomLeft: const Radius.circular(16),
+            bottomRight: const Radius.circular(16),
+            topLeft: const Radius.circular(16),
+          ),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(borderRadiusTopRight),
+            bottomLeft: const Radius.circular(16),
+            bottomRight: const Radius.circular(16),
+            topLeft: const Radius.circular(16),
+          ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: Theme.of(context).colorScheme.onSurface),
-          borderRadius: BorderRadius.circular(16),
+          borderSide: border
+              ? BorderSide(color: Theme.of(context).colorScheme.onSurface)
+              : const BorderSide(),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(borderRadiusTopRight),
+            bottomLeft: const Radius.circular(16),
+            bottomRight: const Radius.circular(16),
+            topLeft: const Radius.circular(16),
+          ),
         ),
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
