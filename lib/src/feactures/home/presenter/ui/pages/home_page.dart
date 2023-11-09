@@ -115,6 +115,33 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CookieText(
+                      text: 'Ingredientes mais procurados',
+                      typography: CookieTypography.title,
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.only(
+                        right: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Image.network(
+                        'https://th.bing.com/th/id/R.e0fc37fb962b12449228c61b1966c305?rik=XRVOAwQCZME0%2fw&pid=ImgRaw&r=0',
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
