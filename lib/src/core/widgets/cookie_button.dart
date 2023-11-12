@@ -26,6 +26,8 @@ class CookieButton extends StatelessWidget {
   ///Caso for selecionado
   final bool isSelect;
 
+  final Color? bordeColor;
+
   const CookieButton({
     super.key,
     required this.label,
@@ -35,7 +37,7 @@ class CookieButton extends StatelessWidget {
     this.margin,
     this.prefix,
     this.isSelect = false,
-  }) : border = false;
+  }) : border = false, bordeColor = Colors.transparent;
 
   const CookieButton.outline({
     super.key,
@@ -46,6 +48,7 @@ class CookieButton extends StatelessWidget {
     this.margin,
     this.prefix,
     this.isSelect = false,
+    this.bordeColor 
   }) : border = true;
 
   @override
@@ -64,7 +67,7 @@ class CookieButton extends StatelessWidget {
           border: border
               ? Border.all(
                   width: 2,
-                  color: labelColor ?? Theme.of(context).colorScheme.primary,
+                  color: bordeColor ?? Theme.of(context).colorScheme.primary,
                 )
               : const Border(),
         ),
@@ -91,9 +94,7 @@ class CookieButton extends StatelessWidget {
             CookieText(
               text: label,
               typography: CookieTypography.button,
-              color: border
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.onSecondary,
+              color: labelColor,
             ),
           ],
         ),

@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
-class RecipeController {
+class RecipeController extends ChangeNotifier {
   var listMultiMedia = [];
   final Dio dio;
 
@@ -17,6 +18,12 @@ class RecipeController {
     for (var image in listImage) {
       listMultiMedia.add(File(image.path));
     }
+    notifyListeners();
+  }
+
+  void removeImage(File image) {
+    listMultiMedia.removeWhere((e) => e == image);
+    notifyListeners();
   }
 
   void sendImage() async {

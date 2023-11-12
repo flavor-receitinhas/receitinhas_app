@@ -1,12 +1,32 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/controller/recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/create_alert_dialog.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/create_details_recipe.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
-class CreateRecipePage extends StatelessWidget {
+class CreateRecipePage extends StatefulWidget {
   static const route = '/create-recipe';
   const CreateRecipePage({super.key});
+
+  @override
+  State<CreateRecipePage> createState() => _CreateRecipePageState();
+}
+
+class _CreateRecipePageState extends State<CreateRecipePage> {
+  final RecipeController ct = di();
+
+  @override
+  void initState() {
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +36,63 @@ class CreateRecipePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
             const SizedBox(height: 10),
-            const Row(
+            Row(
               children: [
-                Icon(Icons.arrow_back_rounded),
-                SizedBox(width: 10),
-                CookieText(text: 'Voltar'),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return const CreateAlertDialog();
+                        });
+                  },
+                  icon: const Icon(Icons.arrow_back_rounded),
+                ),
+                const SizedBox(width: 5),
+                const CookieText(text: 'Voltar'),
               ],
             ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () async {},
-              child: Container(
-                color: Colors.amber,
-                height: 100,
-                child: const Icon(Icons.image_sharp),
-              ),
+              onTap: () async {
+                setState(() {
+                  ct.pickMultiMedia();
+                });
+              },
+              child: ct.listMultiMedia.isEmpty
+                  ? Container(
+                      color: Colors.amber,
+                      height: 200,
+                      child: const Icon(Icons.image_sharp),
+                    )
+                  : FlutterCarousel(
+                      options: CarouselOptions(
+                        height: 250,
+                        showIndicator: true,
+                        autoPlay: false,
+                        viewportFraction: 1,
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 500),
+                        padEnds: false,
+                      ),
+                      items: ct.listMultiMedia
+                          .map(
+                            (e) => Stack(
+                              alignment: Alignment.topRight,
+                              children: [
+                                Image.file(e),
+                                IconButton(
+                                  onPressed: () {
+                                    ct.removeImage(e);
+                                  },
+                                  icon: const Icon(Icons.delete),
+                                )
+                              ],
+                            ),
+                          )
+                          .toList(),
+                    ),
             ),
             const SizedBox(height: 20),
             const CookieTextField.outline(
