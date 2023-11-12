@@ -1,10 +1,12 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/controller/recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/container_create_info.dart';
 import 'package:flutter/material.dart';
 
 class CreateDetailsRecipe extends StatelessWidget {
-  const CreateDetailsRecipe({super.key});
+  final RecipeController ct;
+  const CreateDetailsRecipe({super.key, required this.ct});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,9 @@ class CreateDetailsRecipe extends StatelessWidget {
           typography: CookieTypography.title,
         ),
         const SizedBox(height: 20),
-        const CookieTextField.outline(
+        CookieTextField.outline(
           hintText: 'Adicione aqui os detalhes da sua receita...',
+          controller: ct.detailsController,
         ),
         const SizedBox(height: 10),
         ContainerCreateInfo(

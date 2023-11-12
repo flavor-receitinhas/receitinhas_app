@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RecipeController extends ChangeNotifier {
@@ -11,6 +12,11 @@ class RecipeController extends ChangeNotifier {
 
   String url = 'http://192.168.1.6:8080';
   String path = '';
+  TextEditingController titleController = TextEditingController();
+  TextEditingController subTitleController = TextEditingController();
+  TextEditingController detailsController = TextEditingController();
+  TextEditingController instructionController = TextEditingController();
+  TextEditingController serveFoodController = TextEditingController();
 
   void pickMultiMedia() async {
     List<XFile> listImage =
