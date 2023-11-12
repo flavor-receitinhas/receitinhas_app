@@ -6,7 +6,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/forget_password_page.dart';
-import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
             if (result && mounted) {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                HomePage.route,
+                CustomBottomBar.route,
                 (route) => false,
               );
             }

@@ -3,7 +3,6 @@ import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  static const route = '/home';
   const HomePage({super.key});
 
   @override

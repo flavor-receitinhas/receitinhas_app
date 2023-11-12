@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
-import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -81,7 +81,7 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                       widget.ct.creatFoodPref();
                       Navigator.pushNamedAndRemoveUntil(
                         context,
-                        HomePage.route,
+                        CustomBottomBar.route,
                         (route) => false,
                       );
                     },

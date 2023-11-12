@@ -32,7 +32,6 @@ dependencies:
   dio: ^5.3.3
   flutter_carousel_widget: ^2.1.2
   image_picker: ^1.0.4
-  flutter_floating_bottom_bar: ^1.2.0
 
 dev_dependencies:
   flutter_test:
