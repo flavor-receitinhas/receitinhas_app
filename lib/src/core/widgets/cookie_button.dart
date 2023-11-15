@@ -37,19 +37,20 @@ class CookieButton extends StatelessWidget {
     this.margin,
     this.prefix,
     this.isSelect = false,
-  }) : border = false, bordeColor = Colors.transparent;
+  })  : border = false,
+        bordeColor = Colors.transparent;
 
-  const CookieButton.outline({
-    super.key,
-    required this.label,
-    this.labelColor,
-    this.backgroundColor = Colors.transparent,
-    required this.onPressed,
-    this.margin,
-    this.prefix,
-    this.isSelect = false,
-    this.bordeColor 
-  }) : border = true;
+  const CookieButton.outline(
+      {super.key,
+      required this.label,
+      this.labelColor,
+      this.backgroundColor = Colors.transparent,
+      required this.onPressed,
+      this.margin,
+      this.prefix,
+      this.isSelect = false,
+      this.bordeColor})
+      : border = true;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class CookieButton extends StatelessWidget {
             CookieText(
               text: label,
               typography: CookieTypography.button,
-              color: labelColor,
+              color: labelColor ?? Theme.of(context).colorScheme.onSecondary,
             ),
           ],
         ),

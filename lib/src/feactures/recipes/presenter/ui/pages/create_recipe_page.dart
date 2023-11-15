@@ -1,10 +1,8 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/create_additional_info.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/create_back_end_safe_button.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/create_details_recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -40,50 +38,10 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
               const SizedBox(height: 10),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      CookieSheetBottom(
-                        title: CookieText(
-                          text: 'Deseja descartar sua receita ?',
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          typography: CookieTypography.title,
-                        ),
-                        body: Column(children: [
-                          CookieText(
-                            text:
-                                'Ao descartar, não podemos recuperar o que foi escrito na sua receita.',
-                            color: Theme.of(context).colorScheme.onSecondary,
-                          ),
-                          const SizedBox(height: 10),
-                          CookieButton.outline(
-                            label: 'Continuar escrevendo',
-                            labelColor:
-                                Theme.of(context).colorScheme.onSecondary,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CookieButton(
-                            label: 'Descartar receita',
-                            labelColor: Theme.of(context).colorScheme.onPrimary,
-                            backgroundColor: Colors.red,
-                            onPressed: () {},
-                          )
-                        ]),
-                      ).show(context);
-                    },
-                    icon: const Icon(Icons.arrow_back_rounded),
-                  ),
-                  const SizedBox(width: 5),
-                  const CookieText(text: 'Voltar'),
-                ],
-              ),
+              const CreateBackAndSafeButton(),
               const SizedBox(height: 10),
               GestureDetector(
-                onTap: () async {
+                onTap: () {
                   setState(() {
                     ct.pickMultiMedia();
                   });
