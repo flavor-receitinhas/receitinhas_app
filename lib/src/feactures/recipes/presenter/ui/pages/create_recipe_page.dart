@@ -48,8 +48,11 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
                 },
                 child: ct.listMultiMedia.isEmpty
                     ? Container(
-                        color: Colors.amber,
                         height: 200,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: const Icon(Icons.image_sharp),
                       )
                     : FlutterCarousel(
