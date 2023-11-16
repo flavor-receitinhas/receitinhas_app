@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/container_create_info.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients.dart';
 import 'package:flutter/material.dart';
 
 class CreateDetailsRecipe extends StatelessWidget {
@@ -28,7 +29,14 @@ class CreateDetailsRecipe extends StatelessWidget {
           iconSvg: 'assets/icons/carrot.svg',
           child: Center(
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SelectIngredients(),
+                  ),
+                );
+              },
               icon: const Icon(
                 Icons.add_circle_outline_rounded,
                 size: 34,
@@ -37,16 +45,24 @@ class CreateDetailsRecipe extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        const ContainerCreateInfo(
+        ContainerCreateInfo(
           title: 'Instruções de preparo',
           iconSvg: 'assets/icons/knife.svg',
-          child: CookieTextField(),
+          child: CookieTextField(
+            controller: ct.instructionController,
+            validator: (value) {
+              if (value != null && value.length < 30) {
+                return "Escreva mais algumas instruções";
+              }
+              return null;
+            },
+          ),
         ),
         const SizedBox(height: 20),
-        const ContainerCreateInfo(
+        ContainerCreateInfo(
           title: 'Hora de se servir!',
           iconSvg: 'assets/icons/pan.svg',
-          child: CookieTextField(),
+          child: CookieTextField(controller: ct.serveFoodController),
         ),
       ],
     );

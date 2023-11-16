@@ -5,7 +5,6 @@ class CookieTextFieldSearch extends StatelessWidget {
   final TextEditingController? controller;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
-  final bool obscureText;
   final String? Function(String?)? validator;
 
   const CookieTextFieldSearch({
@@ -14,7 +13,6 @@ class CookieTextFieldSearch extends StatelessWidget {
     this.controller,
     this.suffixIcon,
     this.prefixIcon,
-    this.obscureText = false,
     this.validator,
   });
 
@@ -23,13 +21,12 @@ class CookieTextFieldSearch extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
-      obscureText: obscureText,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSecondary,
           ),
       decoration: InputDecoration(
         hintText: hintText,
-        fillColor: Theme.of(context).colorScheme.onPrimary,
+        fillColor: Theme.of(context).colorScheme.onPrimary.withOpacity(0.85),
         filled: true,
         contentPadding: const EdgeInsets.all(16),
         hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
