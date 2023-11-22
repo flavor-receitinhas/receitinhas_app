@@ -1,4 +1,6 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/register_module.dart';
+import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,5 +11,8 @@ class FavoriteModule implements RegisterModule {
   };
 
   @override
-  void inicialize() {}
+  void inicialize() {
+    //Controller
+    di.registerFactory<FavoriteController>(() => FavoriteController());
+  }
 }

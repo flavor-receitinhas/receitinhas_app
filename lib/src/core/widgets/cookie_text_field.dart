@@ -9,6 +9,7 @@ class CookieTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool border;
   final double borderRadiusTopRight;
+  final int? maxLines;
 
   const CookieTextField({
     super.key,
@@ -18,6 +19,7 @@ class CookieTextField extends StatelessWidget {
     this.prefixIcon,
     this.obscureText = false,
     this.validator,
+    this.maxLines,
   })  : border = true,
         borderRadiusTopRight = 16;
 
@@ -29,6 +31,7 @@ class CookieTextField extends StatelessWidget {
     this.prefixIcon,
     this.obscureText = false,
     this.validator,
+    this.maxLines,
   })  : border = false,
         borderRadiusTopRight = 30;
 
@@ -38,6 +41,7 @@ class CookieTextField extends StatelessWidget {
       controller: controller,
       validator: validator,
       obscureText: obscureText,
+      maxLines: maxLines,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
           ),
