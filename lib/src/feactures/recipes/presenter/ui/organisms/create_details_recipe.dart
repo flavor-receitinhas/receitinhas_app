@@ -50,6 +50,7 @@ class CreateDetailsRecipe extends StatelessWidget {
           iconSvg: 'assets/icons/knife.svg',
           child: CookieTextField(
             controller: ct.instructionController,
+            maxLines: 4,
             validator: (value) {
               if (value != null && value.length < 30) {
                 return "Escreva mais algumas instruções";
@@ -62,7 +63,7 @@ class CreateDetailsRecipe extends StatelessWidget {
         ContainerCreateInfo(
           title: 'Hora de se servir!',
           iconSvg: 'assets/icons/pan.svg',
-          child: CookieTextField(controller: ct.serveFoodController),
+          child: CookieTextField(controller: ct.serveFoodController, maxLines: 4),
         ),
       ],
     );
