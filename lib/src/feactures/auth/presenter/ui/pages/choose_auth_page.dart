@@ -58,6 +58,7 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
         CookieButton.outline(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.chooseAuthRegisterButton,
+          labelColor: Theme.of(context).colorScheme.primary,
           onPressed: () => Navigator.pushNamed(context, RegisterPage.route),
         ),
         const SizedBox(height: 10),
