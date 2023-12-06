@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/global/register_module.dart';
 import 'package:app_receitas/src/feactures/auth/auth_module.dart';
+import 'package:app_receitas/src/feactures/config/config_module.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/favorite_module.dart';
 import 'package:app_receitas/src/feactures/home/home_module.dart';
 import 'package:app_receitas/src/feactures/onboarding/onboarding_module.dart';
@@ -15,6 +16,7 @@ class GenerateRoute {
     HomeModule(),
     RecipeModule(),
     FavoriteModule(),
+    ConfigModule(),
   ];
 
   void registerRoutes() {

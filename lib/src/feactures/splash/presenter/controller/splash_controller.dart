@@ -4,8 +4,12 @@ import 'package:app_receitas/src/core/services/preference/user_preference/key_pr
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:app_receitas/src/core/themes/theme_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
+import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashController extends ChangeNotifier {
@@ -35,7 +39,7 @@ class SplashController extends ChangeNotifier {
       await di.get<OnBoardingController>().init();
       isLogged = await readLoadingUser();
       if (isLogged) {
-        route = HomePage.route;
+        route = CustomBottomBar.route;
       }
     } catch (e) {
       print(e);

@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
@@ -15,7 +16,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   List<Widget> pages = [
     const HomePage(),
     const FavoritePage(),
-    const CreateRecipePage()
+    const CreateRecipePage(),
+    const ConfigPage(),
   ];
 
   int _index = 0;
@@ -58,7 +60,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   label: ''),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.engineering),
+                  icon: const Icon(Icons.settings),
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   label: ''),
 
