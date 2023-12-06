@@ -1,9 +1,12 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
+import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:flutter/material.dart';
 
 class LeaveAlertDialog extends StatelessWidget {
-  const LeaveAlertDialog({super.key});
+  final ConfigController ct;
+  const LeaveAlertDialog({super.key, required this.ct});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,12 @@ class LeaveAlertDialog extends StatelessWidget {
             label: 'Sair da conta',
             labelColor: Theme.of(context).colorScheme.onPrimary,
             backgroundColor: Colors.red,
-            onPressed: () {},
+            onPressed: () {
+              ct.logout().then(
+                    (value) => Navigator.pushNamedAndRemoveUntil(
+                        context, WelcomePage.route, (route) => false),
+                  );
+            },
           )
         ],
       ),
