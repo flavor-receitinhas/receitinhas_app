@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CreateAdditionalInfo extends StatelessWidget {
   const CreateAdditionalInfo({super.key});
@@ -11,27 +12,48 @@ class CreateAdditionalInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const CustomContainer(
+        CustomContainer(
           child: Row(
             children: [
               Column(
                 children: [
-                  Icon(Icons.lock_clock),
-                  CookieText(text: '5 min'),
+                  SvgPicture.asset(
+                    'assets/icons/clock.svg',
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.onPrimary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  const CookieText(text: '5 min')
                 ],
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Column(
                 children: [
-                  Icon(Icons.lock_clock),
-                  CookieText(text: 'Dificil'),
+                  SvgPicture.asset(
+                    'assets/icons/fire.svg',
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.onPrimary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  const CookieText(text: 'Dificil')
                 ],
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Column(
                 children: [
-                  Icon(Icons.lock_clock),
-                  CookieText(text: '5 porções')
+                  SvgPicture.asset(
+                    'assets/icons/pot.svg',
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.onPrimary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  const CookieText(text: '5 porções')
                 ],
               ),
             ],

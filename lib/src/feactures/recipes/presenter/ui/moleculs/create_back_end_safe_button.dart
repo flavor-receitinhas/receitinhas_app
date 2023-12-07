@@ -10,8 +10,8 @@ class CreateBackAndSafeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: () {
+        GestureDetector(
+          onTap: () {
             CookieSheetBottom(
               title: CookieText(
                 text: 'Deseja descartar sua receita ?',
@@ -42,9 +42,11 @@ class CreateBackAndSafeButton extends StatelessWidget {
               ]),
             ).show(context);
           },
-          icon: const Icon(Icons.arrow_back_rounded),
+          child: const Icon(
+            Icons.arrow_back_rounded,
+          ),
         ),
-        const SizedBox(width: 5),
+        const SizedBox(width: 10),
         const CookieText(text: 'Voltar'),
         const Spacer(),
         const CookieText(text: 'Salvar'),

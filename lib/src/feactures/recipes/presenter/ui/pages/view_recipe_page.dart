@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
@@ -12,26 +11,22 @@ class ViewRecipesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10),
-        child: CookieButton(
-          label: 'Preparar esta receita',
-          onPressed: () {},
-        ),
+      appBar: AppBar(
+        surfaceTintColor: Theme.of(context).colorScheme.background,
+        title: const CookieText(text: 'Voltar'),
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.all(10),
+      //   child: CookieButton(
+      //     label: 'Preparar esta receita',
+      //     onPressed: () {},
+      //   ),
+      // ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
-            const SizedBox(height: 10),
-            const Row(
-              children: [
-                Icon(Icons.arrow_back_rounded),
-                SizedBox(width: 10),
-                CookieText(text: 'Voltar'),
-              ],
-            ),
-            const SizedBox(height: 10),
             FlutterCarousel(
               options: CarouselOptions(
                 height: 250,

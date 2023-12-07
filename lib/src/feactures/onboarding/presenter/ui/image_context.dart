@@ -22,9 +22,9 @@ class ImageContext {
 
   String svgIconDifficulty(DifficultyRecipes name) {
     return switch (name) {
-      DifficultyRecipes.easy => 'assets/icons/clock.svg',
+      DifficultyRecipes.easy => 'assets/icons/clock_express.svg',
       DifficultyRecipes.medium => 'assets/icons/coffes.svg',
-      DifficultyRecipes.hard => 'assets/icons/fire.svg',
+      DifficultyRecipes.hard => 'assets/icons/fire_rounded.svg',
     };
   }
 }
