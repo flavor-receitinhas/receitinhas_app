@@ -61,8 +61,8 @@ class CreateAdditionalInfo extends StatelessWidget {
         ),
         Column(
           children: [
-            IconButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 CookieSheetBottom(
                   title: CookieText(
                     text: 'Ajuste informações básicas',
@@ -74,7 +74,13 @@ class CreateAdditionalInfo extends StatelessWidget {
                   ),
                 ).show(context);
               },
-              icon: const Icon(Icons.edit),
+              child: SvgPicture.asset(
+                'assets/icons/edit.svg',
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.onPrimary,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
             const CookieText(text: 'Editar seção')
           ],
