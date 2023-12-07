@@ -1,10 +1,10 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/container_recipe.dart';
+import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/organize_recipes.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -19,7 +19,6 @@ class _FavoritePageState extends State<FavoritePage> {
   final FavoriteController ct = di();
   @override
   Widget build(BuildContext context) {
-    final colorTheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -54,71 +53,23 @@ class _FavoritePageState extends State<FavoritePage> {
                 hintText: 'Pesquise sua receita favorita',
               ),
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const CookieText(text: 'Organizar por'),
-                  IconButton(
-                    onPressed: () {
-                      CookieSheetBottom(
-                        title: CookieText(
-                          text: 'Organizar por',
-                          typography: CookieTypography.title,
-                          color: colorTheme.onSecondary,
-                        ),
-                        body: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CookieTextButton(
-                              text: 'Mais recente primeiro',
-                              color: colorTheme.onSecondary,
-                              typography: CookieTypography.button,
-                              onPressed: () {
-                                setState(() {
-                                  ct.recentFirst;
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            CookieTextButton(
-                              text: 'Mais antigo primeiro',
-                              color: colorTheme.onSecondary,
-                              typography: CookieTypography.button,
-                              onPressed: () {
-                                ct.recentOlder;
-                                Navigator.pop(context);
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            CookieTextButton(
-                              text: 'Nome de A a Z',
-                              color: colorTheme.onSecondary,
-                              typography: CookieTypography.button,
-                              onPressed: () {
-                                ct.organizeAZ;
-                                Navigator.pop(context);
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            CookieTextButton(
-                              text: 'Nome de Z a A',
-                              color: colorTheme.onSecondary,
-                              typography: CookieTypography.button,
-                              onPressed: () {
-                                ct.organizeZA;
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
-                        ),
-                      ).show(context);
-                    },
-                    icon: const Icon(Icons.menu),
-                  )
-                ],
+              OrganizeRecipes(ct: ct),
+              ListView.builder(
+                itemCount: 5,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, ViewRecipesPage.route);
+                      },
+                      child: const ContainerRecipe(),
+                    ),
+                  );
+                },
               ),
-              const ContainerRecipe(),
             ],
           ),
         ),
