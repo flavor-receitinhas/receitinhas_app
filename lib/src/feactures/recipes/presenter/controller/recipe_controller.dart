@@ -1,6 +1,7 @@
 import 'dart:io';
+import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_entity.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,13 +11,14 @@ class RecipeController extends ChangeNotifier {
 
   RecipeController(this.dio);
 
-  String url = 'http://192.168.1.6:8080';
+  String url = apiUrl;
   String path = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   TextEditingController instructionController = TextEditingController();
   TextEditingController serveFoodController = TextEditingController();
+  List<IngredientsEntity> listIngredient = [];
 
   void pickMultiMedia() async {
     List<XFile> listImage =
@@ -39,5 +41,14 @@ class RecipeController extends ChangeNotifier {
           await MultipartFile.fromFile(listMultiMedia[i], filename: '$i.jpg')));
     }
     dio.post('$url/$path', data: imageData);
+  }
+
+  void addIngredient(IngredientsEntity ingredient) {
+    listIngredient.add(ingredient);
+  }
+
+  void deleteIngredient(IngredientsEntity ingredient) {
+    listIngredient.remove(ingredient);
+    notifyListeners();
   }
 }

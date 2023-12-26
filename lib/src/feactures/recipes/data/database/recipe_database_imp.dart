@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/recipes/data/database/recipe_database.dart';
 import 'package:app_receitas/src/feactures/recipes/data/mappers/recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
@@ -12,7 +13,7 @@ class RecipeDatabaseImp implements RecipeDatabase {
     this._mapper,
   );
 
-  String url = 'http://192.168.1.6:8080';
+  String url = apiUrl;
   String path = '/recipe';
 
   @override
