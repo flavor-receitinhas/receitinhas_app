@@ -22,6 +22,7 @@ class CreateDetailsRecipe extends StatelessWidget {
         CookieTextField.outline(
           hintText: 'Adicione aqui os detalhes da sua receita...',
           controller: ct.detailsController,
+          maxLines: 4,
         ),
         const SizedBox(height: 10),
         ContainerCreateInfo(
@@ -63,7 +64,8 @@ class CreateDetailsRecipe extends StatelessWidget {
         ContainerCreateInfo(
           title: 'Hora de se servir!',
           iconSvg: 'assets/icons/pan.svg',
-          child: CookieTextField(controller: ct.serveFoodController, maxLines: 4),
+          child:
+              CookieTextField(controller: ct.serveFoodController, maxLines: 4),
         ),
       ],
     );

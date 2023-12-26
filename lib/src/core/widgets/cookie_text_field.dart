@@ -42,6 +42,7 @@ class CookieTextField extends StatelessWidget {
       validator: validator,
       obscureText: obscureText,
       maxLines: maxLines ?? 1,
+      minLines: 1,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
           ),
