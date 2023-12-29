@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 class CreateBackAndSafeButton extends StatelessWidget {
@@ -37,7 +38,13 @@ class CreateBackAndSafeButton extends StatelessWidget {
                   label: 'Descartar receita',
                   labelColor: Theme.of(context).colorScheme.onPrimary,
                   backgroundColor: Colors.red,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      CustomBottomBar.route,
+                      (route) => false,
+                    );
+                  },
                 )
               ]),
             ).show(context);

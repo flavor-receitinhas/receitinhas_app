@@ -1,7 +1,6 @@
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomBar extends StatefulWidget {
@@ -16,7 +15,6 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   List<Widget> pages = [
     const HomePage(),
     const FavoritePage(),
-    const CreateRecipePage(),
     const ConfigPage(),
   ];
 
@@ -25,9 +23,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: BottomNavigationBar(
@@ -52,13 +49,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 backgroundColor: Theme.of(context).colorScheme.primary,
               ),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.favorite),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: const Icon(Icons.add_circle_outlined),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  label: ''),
+                icon: const Icon(Icons.favorite),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                label: '',
+              ),
               BottomNavigationBarItem(
                   icon: const Icon(Icons.settings),
                   backgroundColor: Theme.of(context).colorScheme.primary,

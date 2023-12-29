@@ -1,8 +1,10 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,6 +12,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        
+        onPressed: () {
+          Navigator.pushNamed(context, CreateRecipePage.route);
+        },
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: SvgPicture.asset('assets/icons/edit.svg'),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
