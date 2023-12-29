@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
+import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -40,26 +41,11 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
-                children: [
-                  const Expanded(
-                    child: CookieTextFieldSearch(
-                      hintText: 'Procure algo para cozinhar',
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: const Icon(Icons.menu),
-                  ),
-                ],
+              CookieTextFieldSearch(
+                hintText: 'Procure algo para cozinhar',
+                onTap: () {
+                  Navigator.pushNamed(context, SearchPage.route);
+                },
               ),
               const SizedBox(height: 20),
               const CookieText(

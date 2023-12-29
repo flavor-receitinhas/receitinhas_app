@@ -17,7 +17,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final ThemeController _themeController = di();
-
   MyApp({super.key});
 
   @override
