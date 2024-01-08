@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/config/presenter/controllers/config_c
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/leave_alert_dialog.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/edit_account_page.dart';
 import 'package:flutter/material.dart';
 
 class ConfigPage extends StatefulWidget {
@@ -33,10 +34,18 @@ class _ConfigPageState extends State<ConfigPage> {
                 color: theme.onPrimary.withOpacity(0.5),
               ),
               const SizedBox(height: 10),
-              const ContainerConfig(
+              ContainerConfig(
                 icon: 'assets/icons/person.svg',
                 text: 'Editar Conta',
-                action: Icon(Icons.chevron_right),
+                action: const Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditAccountPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               const ContainerConfig(
@@ -60,7 +69,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     scale: 0.8,
                     child: Switch(
                       value: true,
-                      onChanged: (value) {}, 
+                      onChanged: (value) {},
                     ),
                   ),
                 ),
