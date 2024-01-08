@@ -11,17 +11,26 @@ class LeaveAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      insetPadding: const EdgeInsets.all(20),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       title: CookieText(
-        text: 'Deseja sair da conta?',
+        text: 'Deseja realmente sair da sua conta?',
         color: Theme.of(context).colorScheme.onSecondary,
         typography: CookieTypography.button,
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          CookieText(
+            text:
+                'Lembrando que ao sair da sua conta, podera acessar ela novamente usando suas credenciais.',
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
+          const SizedBox(height: 20),
           CookieButton.outline(
-            label: 'Continuar',
+            label: 'Não desejo sair da conta',
             labelColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               Navigator.pop(context);

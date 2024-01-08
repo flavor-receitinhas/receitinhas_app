@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/leave_alert_dialog.dart';
 import 'package:flutter/material.dart';
@@ -24,32 +25,7 @@ class _ConfigPageState extends State<ConfigPage> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: ListView(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CookieText(
-                        text: 'Configurações',
-                        typography: CookieTypography.title,
-                        color: theme.primary,
-                      ),
-                      const CookieText(
-                        text: 'Personalize conforme sua preferência',
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                ],
-              ),
+              const IntroduceConfig(),
               const SizedBox(height: 20),
               CookieText(
                 text: 'Conta',
@@ -84,7 +60,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     scale: 0.8,
                     child: Switch(
                       value: true,
-                      onChanged: (value) {},
+                      onChanged: (value) {}, 
                     ),
                   ),
                 ),
