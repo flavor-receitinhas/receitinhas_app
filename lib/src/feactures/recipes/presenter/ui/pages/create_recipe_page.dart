@@ -86,6 +86,12 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
               const SizedBox(height: 20),
               CookieTextField.outline(
                 hintText: 'Titulo da receita',
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                  topLeft: Radius.circular(16),
+                ),
                 controller: ct.titleController,
                 validator: (value) {
                   if (value!.isEmpty && value.length < 3) {
@@ -98,6 +104,12 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
               CookieTextField.outline(
                 hintText: 'Subtitulo da receita',
                 controller: ct.subTitleController,
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                  topLeft: Radius.circular(16),
+                ),
               ),
               const SizedBox(height: 20),
               const CreateAdditionalInfo(),
