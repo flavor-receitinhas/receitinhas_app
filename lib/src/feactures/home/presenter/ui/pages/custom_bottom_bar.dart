@@ -41,7 +41,6 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 },
               );
             },
-
             items: [
               BottomNavigationBarItem(
                 icon: const Icon(Icons.home),
@@ -54,9 +53,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 label: '',
               ),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.settings),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  label: ''),
+                icon: const Icon(Icons.settings),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                label: '',
+              ),
 
               /// Profile
             ],

@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        
         onPressed: () {
           Navigator.pushNamed(context, CreateRecipePage.route);
         },
@@ -22,7 +21,7 @@ class HomePage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: [
               Row(
