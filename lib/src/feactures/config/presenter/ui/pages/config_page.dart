@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/config/presenter/controllers/config_c
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/leave_alert_dialog.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/changed_password_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/edit_account_page.dart';
 import 'package:flutter/material.dart';
 
@@ -48,10 +49,18 @@ class _ConfigPageState extends State<ConfigPage> {
                 },
               ),
               const SizedBox(height: 10),
-              const ContainerConfig(
+              ContainerConfig(
                 icon: 'assets/icons/key.svg',
                 text: 'Alterar senha',
-                action: Icon(Icons.chevron_right),
+                action: const Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChangedPasswordPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               CookieText(

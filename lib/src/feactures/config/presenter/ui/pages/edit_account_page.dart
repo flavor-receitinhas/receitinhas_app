@@ -1,8 +1,10 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_container_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/select_container_preference.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class EditAccountPage extends StatefulWidget {
   const EditAccountPage({super.key});
@@ -24,6 +26,16 @@ class _EditAccountPageState extends State<EditAccountPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: theme.primary,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(50),
+          ), // Bordas arredondadas
+        ),
+        child: SvgPicture.asset('assets/icons/save.svg'),
+        onPressed: () {},
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,32 +44,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: IntroduceConfig(),
             ),
-            Container(
-              padding: const EdgeInsets.only(right: 16),
-              decoration: BoxDecoration(
-                color: theme.secondary,
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.chevron_left, size: 28),
-                  ),
-                  const SizedBox(width: 10),
-                  const CookieText(
-                    text: 'Editar conta',
-                    typography: CookieTypography.button,
-                  ),
-                ],
-              ),
-            ),
+            const BackContainerConfig(title: 'Editar conta'),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -69,7 +56,8 @@ class _EditAccountPageState extends State<EditAccountPage> {
                     typography: CookieTypography.button,
                   ),
                   const SizedBox(height: 10),
-                  const CookieTextField.outline(hintText: 'Escreva seu nome...'),
+                  const CookieTextField.outline(
+                      hintText: 'Escreva seu nome...'),
                   const SizedBox(height: 20),
                   const CookieText(
                     text: 'Preferência alimentar',
