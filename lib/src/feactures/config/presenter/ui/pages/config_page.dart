@@ -6,6 +6,7 @@ import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/containe
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/leave_alert_dialog.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/changed_password_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/edit_account_page.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/privacy_policy_page.dart';
 import 'package:flutter/material.dart';
 
 class ConfigPage extends StatefulWidget {
@@ -90,10 +91,18 @@ class _ConfigPageState extends State<ConfigPage> {
                 color: theme.onPrimary.withOpacity(0.5),
               ),
               const SizedBox(height: 10),
-              const ContainerConfig(
+              ContainerConfig(
                 icon: 'assets/icons/eye.svg',
                 text: 'Politicas de privacidade',
-                action: Icon(Icons.chevron_right),
+                action: const Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PrivacyPolicyPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               const ContainerConfig(
