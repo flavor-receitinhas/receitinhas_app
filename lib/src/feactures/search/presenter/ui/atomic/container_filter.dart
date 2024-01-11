@@ -10,7 +10,7 @@ class ContainerFilter extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
     return Container(
       height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         color: true ? theme.primary : Colors.transparent,
         border: Border.all(color: theme.onPrimary, width: true ? 0 : 1),
