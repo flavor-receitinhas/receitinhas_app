@@ -5,6 +5,7 @@ import 'package:app_receitas/src/feactures/config/config_module.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/favorite_module.dart';
 import 'package:app_receitas/src/feactures/home/home_module.dart';
 import 'package:app_receitas/src/feactures/onboarding/onboarding_module.dart';
+import 'package:app_receitas/src/feactures/perfil/perfil_module.dart';
 import 'package:app_receitas/src/feactures/recipes/recipe_module.dart';
 import 'package:app_receitas/src/feactures/search/search_module.dart';
 import 'package:app_receitas/src/feactures/splash/splash_module.dart';
@@ -20,6 +21,7 @@ class GenerateRoute {
     FavoriteModule(),
     ConfigModule(),
     SearchModule(),
+    PerfilModule(),
   ];
 
   void registerRoutes() {
