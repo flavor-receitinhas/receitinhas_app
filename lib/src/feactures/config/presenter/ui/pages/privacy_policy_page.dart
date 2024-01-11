@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_container_config.dart';
+import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class PrivacyPolicyPage extends StatelessWidget {
             ),
             Row(
               children: [
-                BackContainerConfig(title: 'Políticas de Privacidade'),
+                CookieLeftButton(title: 'Políticas de Privacidade'),
               ],
             ),
             Padding(

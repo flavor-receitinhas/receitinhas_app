@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
-import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_container_config.dart';
+import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,7 +30,7 @@ class ChangedPasswordPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: IntroduceConfig(),
             ),
-            const BackContainerConfig(title: 'Alterar senha'),
+            const CookieLeftButton(title: 'Alterar senha'),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(

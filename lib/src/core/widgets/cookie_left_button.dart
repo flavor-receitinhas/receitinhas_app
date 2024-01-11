@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:flutter/material.dart';
 
-class BackContainerConfig extends StatelessWidget {
+class CookieLeftButton extends StatelessWidget {
   final String title;
-  const BackContainerConfig({super.key, required this.title});
+  const CookieLeftButton({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class BackContainerConfig extends StatelessWidget {
             icon: const Icon(Icons.chevron_left, size: 28),
           ),
           const SizedBox(width: 10),
-           CookieText(
+          CookieText(
             text: title,
             typography: CookieTypography.button,
           ),

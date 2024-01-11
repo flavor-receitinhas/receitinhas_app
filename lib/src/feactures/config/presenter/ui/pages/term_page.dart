@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_container_config.dart';
+import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class TermPage extends StatelessWidget {
           ),
           Row(
             children: [
-              BackContainerConfig(title: 'Termos e condições'),
+              CookieLeftButton(title: 'Termos e condições'),
             ],
           ),
           Padding(
