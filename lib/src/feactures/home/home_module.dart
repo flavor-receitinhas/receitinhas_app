@@ -13,3 +13,4 @@ class HomeModule extends RegisterModule {
     // TODO: implement inicialize
   }
 }
+ 

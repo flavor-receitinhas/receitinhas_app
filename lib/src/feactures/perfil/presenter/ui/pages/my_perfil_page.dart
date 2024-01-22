@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
@@ -65,6 +66,50 @@ class MyPerfilPage extends StatelessWidget {
                     text:
                         'A parada é cozinhar meu parceiro, senão a pessoa passa é fome...',
                     textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          CookieText(text: '8'),
+                          CookieText(text: 'Receitas'),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          CookieText(text: '315'),
+                          CookieText(text: 'Likes'),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          CookieText(text: '20'),
+                          CookieText(text: 'Seguidores'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CookieButton(
+                          label: 'Gerenciar',
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          backgroundColor: theme.onPrimary,
+                          onPressed: () {},
+                        ),
+                      ),
+                      Expanded(
+                        child: CookieButton(
+                          label: 'Editar perfil',
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          onPressed: () {},
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 20),
                   const CookieTextFieldSearch(
