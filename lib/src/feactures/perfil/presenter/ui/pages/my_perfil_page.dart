@@ -2,6 +2,8 @@ import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
+import 'package:app_receitas/src/feactures/perfil/presenter/ui/atomic/appbar_perfil.dart';
+import 'package:app_receitas/src/feactures/perfil/presenter/ui/pages/edit_perfil_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -16,20 +18,7 @@ class MyPerfilPage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CookieText(
-                    text: 'Seu perfil',
-                    typography: CookieTypography.title,
-                    color: theme.primary,
-                  ),
-                  const CookieText(text: 'Aqui fica suas receitas publicadas'),
-                ],
-              ),
-            ),
+            const AppBarPerfil(),
             const Stack(
               children: [
                 Padding(
@@ -106,7 +95,14 @@ class MyPerfilPage extends StatelessWidget {
                         child: CookieButton(
                           label: 'Editar perfil',
                           margin: const EdgeInsets.symmetric(horizontal: 10),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const EditPerfilPage(),
+                              ),
+                            );
+                          },
                         ),
                       )
                     ],
