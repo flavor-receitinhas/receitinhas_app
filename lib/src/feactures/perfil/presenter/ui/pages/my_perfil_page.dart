@@ -19,16 +19,8 @@ class MyPerfilPage extends StatelessWidget {
         child: ListView(
           children: [
             const AppBarPerfil(),
-            const Stack(
+            const Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Center(
-                    child: CircleAvatar(
-                      radius: 65,
-                    ),
-                  ),
-                ),
                 CookieLeftButton(
                   title: 'Home',
                 ),
@@ -38,23 +30,35 @@ class MyPerfilPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
                 children: [
-                  const SizedBox(height: 10),
-                  const Center(
-                    child: CookieText(
-                      text: 'Nietzche',
-                      typography: CookieTypography.title,
-                    ),
-                  ),
-                  const Center(
-                    child: CookieText(
-                      text: 'mestre-cuca',
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const CookieText(
-                    text:
-                        'A parada é cozinhar meu parceiro, senão a pessoa passa é fome...',
-                    textAlign: TextAlign.center,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10),
+                            const CookieText(
+                              text: 'Nietzche',
+                              typography: CookieTypography.title,
+                            ),
+                            CookieText(
+                              text: 'mestre-cuca',
+                              color: theme.primary,
+                              typography: CookieTypography.button,
+                            ),
+                            const SizedBox(height: 10),
+                            const CookieText(
+                              text:
+                                  'Em uma noite estrelada, um sábio explorador refletia sobre suas viagens. Percebeu que, mais do que tesouros, as verdadeiras riquezas eram as memórias e aprendizados de cada jornada vivida.',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const CircleAvatar(
+                        radius: 45,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 20),
                   const Row(
