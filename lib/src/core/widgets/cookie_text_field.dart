@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CookieTextField extends StatelessWidget {
   final String? hintText;
@@ -47,6 +48,7 @@ class CookieTextField extends StatelessWidget {
       maxLines: maxLines ?? 1,
       minLines: maxLines ?? 1,
       maxLength: maxLength,
+      maxLengthEnforcement: MaxLengthEnforcement.enforced,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
           ),

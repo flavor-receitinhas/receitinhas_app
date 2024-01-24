@@ -74,11 +74,58 @@ class EditPerfilPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const CookieText(
-                  text: 'Nome',
+                  text: 'Título',
                 ),
                 const SizedBox(height: 10),
-                const CookieTextField.outline(
-                  hintText: 'Escreva seu nome...',
+                DropdownButtonFormField(
+                  isExpanded: true,
+                  dropdownColor: theme.secondary,
+                  borderRadius: BorderRadius.circular(10),
+                  decoration: InputDecoration(
+                    hintText: 'Selecione um título',
+                    hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onPrimary
+                              .withOpacity(0.4),
+                        ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.secondary,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide.none),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  items: const [
+                    DropdownMenuItem(
+                      value: 0,
+                      child: CookieText(text: 'data'),
+                    ),
+                    DropdownMenuItem(
+                      value: 1,
+                      child: CookieText(text: 'data'),
+                    ),
+                    DropdownMenuItem(
+                      value: 2,
+                      child: CookieText(text: 'data'),
+                    ),
+                  ],
+                  onChanged: (value) {},
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: CookieText(
+                    text:
+                        'Selecione um título na qual você mais se indentifica',
+                    textAlign: TextAlign.center,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onPrimary
+                        .withOpacity(0.5),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 const CookieText(
