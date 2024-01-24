@@ -2,6 +2,7 @@ import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomBar extends StatefulWidget {
   static const route = '/home';
@@ -33,7 +34,6 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             currentIndex: _index,
             unselectedItemColor: Colors.grey[300],
             selectedFontSize: 0,
-            // enableFloatingNavBar: false,
             onTap: (value) {
               setState(
                 () {
@@ -43,19 +43,34 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             },
             items: [
               BottomNavigationBarItem(
-                icon: const Icon(Icons.home),
+                icon: SvgPicture.asset('assets/icons/home.svg'),
                 label: '',
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/home.svg',
+                  colorFilter: const ColorFilter.mode(
+                      Color(0xff222222), BlendMode.srcIn),
+                ),
                 backgroundColor: Theme.of(context).colorScheme.primary,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.favorite),
+                icon: SvgPicture.asset('assets/icons/favorite.svg'),
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 label: '',
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/favorite.svg',
+                  colorFilter: const ColorFilter.mode(
+                      Color(0xff222222), BlendMode.srcIn),
+                ),
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.settings),
+                icon: SvgPicture.asset('assets/icons/settings.svg'),
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 label: '',
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/settings.svg',
+                  colorFilter: const ColorFilter.mode(
+                      Color(0xff222222), BlendMode.srcIn),
+                ),
               ),
 
               /// Profile
