@@ -1,7 +1,10 @@
+import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomBar extends StatefulWidget {
@@ -85,7 +88,37 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
       //   child: Icon(Icons.add),
       // ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: pages[_index],
+      body: PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) {
+          if (didPop) {
+            return;
+          }
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    title: const CookieText(text: 'Deseja sair do app?'),
+                    actions: [
+                      CookieTextButton(
+                        text: 'Cancelar',
+                        color: Theme.of(context).colorScheme.primary,
+                        onPressed: () {
+                          Navigator.of(context).pop(context);
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      CookieTextButton(
+                        text: 'Sair',
+                        color: Theme.of(context).colorScheme.primary,
+                        onPressed: () {
+                          SystemNavigator.pop();
+                        },
+                      ),
+                    ],
+                  ));
+        },
+        child: pages[_index],
+      ),
     );
   }
 }
