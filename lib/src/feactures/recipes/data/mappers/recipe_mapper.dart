@@ -4,16 +4,15 @@ import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity
 class RecipeMapper {
   Map<String, dynamic> toMap(RecipeEntity entity) {
     return <String, dynamic>{
-      'id': entity.id,
       'title': entity.title,
       'subTitle': entity.subTitle,
-      'image': entity.image,
+      'images': entity.images,
       'details': entity.details,
       'timePrepared': entity.timePrepared,
-      'difficultyRecipes': entity.difficultyRecipes.name,
+      'difficultyRecipe': entity.difficultyRecipe.name,
       'portion': entity.portion,
-      'ingredient': entity.ingredient,
-      'prepare': entity.prepare,
+      'ingredients': entity.ingredients,
+      'instruction': entity.instruction,
       'serveFood': entity.serveFood,
     };
   }
@@ -23,15 +22,15 @@ class RecipeMapper {
       id: map['id'] as int,
       title: map['title'] as String,
       subTitle: map['subTitle'] as String?,
-      image: (map['image'] as List).map<String>((e) => e.toString()).toList(),
+      images: map['images'] as List<String>,
       details: map['details'] as String?,
       timePrepared: map['timePrepared'] as int,
-      difficultyRecipes: DifficultyRecipes.fromName(
-        map['difficultyRecipes'] as String,
+      difficultyRecipe: DifficultyRecipe.values.firstWhere(
+        (e) => e.toString().split('.').last == map['difficultyRecipe'],
       ),
       portion: map['portion'] as int,
-      ingredient: map['ingredient'],
-      prepare: map['prepare'],
+      ingredients: map['ingredients'],
+      instruction: map['instruction'],
       serveFood: map['serveFood'] as String?,
     );
   }

@@ -8,7 +8,7 @@ class UserFoodPrefDto {
   String userName;
   List<Proteins> protein;
   List<DietaryRestrictions> dietaryRestriction;
-  List<DifficultyRecipes> difficultyRecipe;
+  List<DifficultyRecipe> difficultyRecipe;
   UserFoodPrefDto({
     required this.userId,
     required this.userName,

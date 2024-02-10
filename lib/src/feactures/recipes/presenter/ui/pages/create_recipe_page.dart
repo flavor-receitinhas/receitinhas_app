@@ -38,7 +38,7 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
               const SizedBox(height: 10),
-              const CreateBackAndSafeButton(),
+              CreateBackAndSafeButton(ct: ct),
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () {

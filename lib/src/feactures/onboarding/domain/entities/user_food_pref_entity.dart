@@ -8,7 +8,7 @@ class UserFoodPrefEntity {
   String userName;
   List<Proteins> protein;
   List<DietaryRestrictions> dietaryRestriction;
-  List<DifficultyRecipes> difficultyRecipe;
+  List<DifficultyRecipe> difficultyRecipe;
 
   UserFoodPrefEntity({
     required this.userId,

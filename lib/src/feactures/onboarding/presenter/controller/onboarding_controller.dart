@@ -17,7 +17,7 @@ class OnBoardingController extends ChangeNotifier {
   int currentPage = 0;
   List<Proteins> protein = [];
   List<DietaryRestrictions> dietaryRestriction = [];
-  List<DifficultyRecipes> difficultyRecipe = [];
+  List<DifficultyRecipe> difficultyRecipe = [];
   TextEditingController userNameController = TextEditingController();
 
   Future<void> init() async {

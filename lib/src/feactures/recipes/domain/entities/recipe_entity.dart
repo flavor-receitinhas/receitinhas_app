@@ -1,28 +1,28 @@
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 
 class RecipeEntity {
-  final int id;
+  final int? id;
   final String title;
   final String? subTitle;
-  final List<String> image;
+  final List<String> images;
   final String? details;
   final int timePrepared;
-  final DifficultyRecipes difficultyRecipes;
+  final DifficultyRecipe difficultyRecipe;
   final int portion;
-  final List<String> ingredient;
-  final List<String> prepare;
+  final List<String> ingredients;
+  final String instruction;
   final String? serveFood;
 
   RecipeEntity(
-      {required this.id,
+      {this.id,
       required this.title,
       this.subTitle,
-      required this.image,
+      required this.images,
       this.details,
       required this.timePrepared,
-      required this.difficultyRecipes,
+      required this.difficultyRecipe,
       required this.portion,
-      required this.ingredient,
-      required this.prepare,
+      required this.ingredients,
+      required this.instruction,
       this.serveFood});
 }

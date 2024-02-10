@@ -20,11 +20,11 @@ class ImageContext {
     };
   }
 
-  String svgIconDifficulty(DifficultyRecipes name) {
+  String svgIconDifficulty(DifficultyRecipe name) {
     return switch (name) {
-      DifficultyRecipes.easy => 'assets/icons/clock_express.svg',
-      DifficultyRecipes.medium => 'assets/icons/coffes.svg',
-      DifficultyRecipes.hard => 'assets/icons/fire_rounded.svg',
+      DifficultyRecipe.easy => 'assets/icons/clock_express.svg',
+      DifficultyRecipe.medium => 'assets/icons/coffes.svg',
+      DifficultyRecipe.hard => 'assets/icons/fire_rounded.svg',
     };
   }
 }

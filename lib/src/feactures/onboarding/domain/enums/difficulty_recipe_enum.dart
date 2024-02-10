@@ -1,18 +1,18 @@
-enum DifficultyRecipes {
+enum DifficultyRecipe {
   easy,
   medium,
   hard;
 
-  static DifficultyRecipes fromName(String? name) {
+  static DifficultyRecipe fromName(String? name) {
     switch (name) {
       case 'easy':
-        return DifficultyRecipes.easy;
+        return DifficultyRecipe.easy;
       case 'medium':
-        return DifficultyRecipes.hard;
+        return DifficultyRecipe.hard;
       case 'hard':
-        return DifficultyRecipes.medium;
+        return DifficultyRecipe.medium;
       default:
-        return DifficultyRecipes.easy;
+        return DifficultyRecipe.easy;
     }
   }
 }

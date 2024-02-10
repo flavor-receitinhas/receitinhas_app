@@ -34,7 +34,7 @@ class UserFoodPrefMapper {
           .map<DietaryRestrictions>((e) => DietaryRestrictions.fromName(e))
           .toList(),
       difficultyRecipe: map['difficultyRecipe']
-          .map<DifficultyRecipes>((e) => DifficultyRecipes.fromName(e))
+          .map<DifficultyRecipe>((e) => DifficultyRecipe.fromName(e))
           .toList(),
     );
   }

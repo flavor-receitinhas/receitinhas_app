@@ -14,11 +14,11 @@ class RecipeDatabaseImp implements RecipeDatabase {
   );
 
   String url = apiUrl;
-  String path = '/recipe';
+  String path = 'recipe';
 
   @override
   Future<void> createRecipe(RecipeEntity recipe) async {
-    await dio.put('$url/$path', data: _mapper.toMap(recipe));
+    await dio.post('$url/$path', data: _mapper.toMap(recipe));
   }
 
   @override

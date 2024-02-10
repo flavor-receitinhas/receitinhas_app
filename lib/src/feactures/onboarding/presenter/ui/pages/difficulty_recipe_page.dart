@@ -53,7 +53,7 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
             ),
             const SizedBox(height: 10),
             Column(
-              children: DifficultyRecipes.values
+              children: DifficultyRecipe.values
                   .map(
                     (e) => Padding(
                       padding: const EdgeInsets.only(top: 10),
