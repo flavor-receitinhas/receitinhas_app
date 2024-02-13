@@ -13,7 +13,12 @@ class RecipeRepositoryImp implements RecipeRepository {
   }
 
   @override
-  Future<RecipeEntity> getRecipe() {
-    return getRecipe();
+  Future<RecipeEntity> getRecipe(String id) async {
+    return await data.getRecipe(id);
+  }
+
+  @override
+  Future<List<RecipeEntity>> listRecipe() async {
+    return await data.listRecipe();
   }
 }

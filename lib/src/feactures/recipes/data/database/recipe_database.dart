@@ -2,5 +2,6 @@ import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity
 
 abstract class RecipeDatabase {
   Future<void> createRecipe(RecipeEntity recipe);
-  Future<RecipeEntity> getRecipe();
+  Future<RecipeEntity> getRecipe(String id);
+  Future<List<RecipeEntity>> listRecipe();
 }

@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 
 class RecipeEntity {
-  final int? id;
+  final String? id;
   final String title;
   final String? subTitle;
   final List<String> images;

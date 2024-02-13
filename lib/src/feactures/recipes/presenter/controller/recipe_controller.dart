@@ -57,27 +57,15 @@ class RecipeController extends ChangeNotifier {
   }
 
   Future<void> createRecipe() async {
-    // RecipeEntity recipe = RecipeEntity(
-    //   title: titleController.text,
-    //   subTitle: subTitleController.text,
-    //   details: detailsController.text,
-    //   serveFood: serveFoodController.text,
-    //   difficultyRecipes: DifficultyRecipes.easy,
-    //   image: [],
-    //   ingredient: [],
-    //   instruction: instructionController.text,
-    //   portion: 1,
-    //   timePrepared: 1,
-    // );
     RecipeEntity recipe = RecipeEntity(
-      title: 'titleController.text',
-      subTitle: 'subTitleController.text',
-      details: 'detailsController.text',
-      serveFood:' serveFoodController.text',
+      title: titleController.text,
+      subTitle: subTitleController.text,
+      details: detailsController.text,
+      serveFood: serveFoodController.text,
       difficultyRecipe: DifficultyRecipe.easy,
-      images: ['sadfs', 'asddf'],
+      images: [],
       ingredients: [],
-      instruction: 'instructionController.text',
+      instruction: instructionController.text,
       portion: 1,
       timePrepared: 1,
     );

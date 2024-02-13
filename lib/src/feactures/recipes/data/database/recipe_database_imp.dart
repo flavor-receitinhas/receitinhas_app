@@ -22,9 +22,17 @@ class RecipeDatabaseImp implements RecipeDatabase {
   }
 
   @override
-  Future<RecipeEntity> getRecipe() async {
-    final response = await dio.get('$url/$path');
+  Future<RecipeEntity> getRecipe(String id) async {
+    final response = await dio.get('$url/$path/$id');
     final result = _mapper.fromMap(response.data);
+    return result;
+  }
+
+  @override
+  Future<List<RecipeEntity>> listRecipe() async {
+    final response = await dio.get('$url/$path');
+    final result =
+        response.data.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
     return result;
   }
 }

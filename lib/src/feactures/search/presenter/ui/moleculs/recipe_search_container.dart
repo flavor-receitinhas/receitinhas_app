@@ -2,7 +2,14 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:flutter/material.dart';
 
 class RecipeSearchContainer extends StatelessWidget {
-  const RecipeSearchContainer({super.key});
+  final String image;
+  final String title;
+  final int timePrepared;
+  const RecipeSearchContainer(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.timePrepared});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,9 @@ class RecipeSearchContainer extends StatelessWidget {
       child: Row(
         children: [
           Image.network(
-            'https://th.bing.com/th/id/R.7e56e5b04d0f210b3adcdee96586e6ba?rik=4jbCMSTYD9Dexw&pid=ImgRaw&r=0',
+            image,
+            height: 90,
+            fit: BoxFit.cover,
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -26,13 +35,13 @@ class RecipeSearchContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CookieText(
-                  text: 'Salada de Legume  asdasda  asd',
+                  text: title,
                   maxLine: 2,
                   overflow: TextOverflow.ellipsis,
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
                 CookieText(
-                  text: '5 min',
+                  text: '$timePrepared min',
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
               ],

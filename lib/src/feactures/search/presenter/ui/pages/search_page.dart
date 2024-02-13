@@ -1,6 +1,8 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
+import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/recipe_search_container.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/filter_page.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,17 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  ResearchController ct = di();
+
+  @override
+  void initState() {
+    ct.init();
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,20 +105,24 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ],
             ),
-            const Visibility(
-              visible: true,
+            Visibility(
+              visible: ct.recipes.isNotEmpty,
               child: CookieText(
-                text: 'Resultados da pesquisa (3)',
+                text: 'Resultados da pesquisa (${ct.recipes.length})',
               ),
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: 3,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
+              itemCount: ct.recipes.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, idx) {
+                final recipe = ct.recipes[idx];
                 return Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: const RecipeSearchContainer(),
+                  child: RecipeSearchContainer(
+                      image: recipe.images.first,
+                      title: recipe.title,
+                      timePrepared: recipe.timePrepared),
                 );
               },
             )
