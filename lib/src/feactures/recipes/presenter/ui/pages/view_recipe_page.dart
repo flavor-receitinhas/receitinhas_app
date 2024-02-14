@@ -56,20 +56,9 @@ class _ViewRecipesPageState extends State<ViewRecipesPage> {
                 autoPlayAnimationDuration: const Duration(milliseconds: 500),
                 padEnds: false,
               ),
-              items: [
-                Image.network(
-                  'https://th.bing.com/th/id/OIP.ZZsn6lD6PCjocBzx1tuu1QHaEo?pid=ImgDet&rs=1',
-                ),
-                Image.network(
-                  'https://th.bing.com/th/id/OIP.ZZsn6lD6PCjocBzx1tuu1QHaEo?pid=ImgDet&rs=1',
-                ),
-                Image.network(
-                  'https://th.bing.com/th/id/OIP.ZZsn6lD6PCjocBzx1tuu1QHaEo?pid=ImgDet&rs=1',
-                ),
-                Image.network(
-                  'https://th.bing.com/th/id/OIP.ZZsn6lD6PCjocBzx1tuu1QHaEo?pid=ImgDet&rs=1',
-                ),
-              ],
+              items: ct.recipe?.images
+                  .map((e) => Image.network(e, fit: BoxFit.cover))
+                  .toList(),
             ),
             const SizedBox(height: 10),
             ViewIntroduceRecipe(recipe: ct.recipe!),
