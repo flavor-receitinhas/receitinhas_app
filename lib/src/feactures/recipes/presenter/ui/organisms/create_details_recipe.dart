@@ -1,12 +1,12 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/controller/recipe_controller.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/container_create_info.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients.dart';
 import 'package:flutter/material.dart';
 
 class CreateDetailsRecipe extends StatelessWidget {
-  final RecipeController ct;
+  final CreateRecipeController ct;
   const CreateDetailsRecipe({super.key, required this.ct});
 
   @override

@@ -1,12 +1,32 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
-class ViewRecipesPage extends StatelessWidget {
+class ViewRecipesPage extends StatefulWidget {
   static const route = '/view-recipe';
   const ViewRecipesPage({super.key});
+
+  @override
+  State<ViewRecipesPage> createState() => _ViewRecipesPageState();
+}
+
+class _ViewRecipesPageState extends State<ViewRecipesPage> {
+  final ViewRecipeController ct = di();
+
+  @override
+  void initState() {
+    if (mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+      ct.addListener(() {
+        setState(() {});
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +72,9 @@ class ViewRecipesPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            const ViewIntroduceRecipe(),
+            ViewIntroduceRecipe(recipe: ct.recipe!),
             const SizedBox(height: 20),
-            const ViewDetailsRecipe(),
+            ViewDetailsRecipe(recipe: ct.recipe!),
             const SizedBox(height: 10),
           ],
         ),

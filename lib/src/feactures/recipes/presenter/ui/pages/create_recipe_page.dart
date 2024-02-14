@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/controller/recipe_controller.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/create_additional_info.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/create_back_end_safe_button.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/create_details_recipe.dart';
@@ -16,7 +16,7 @@ class CreateRecipePage extends StatefulWidget {
 }
 
 class _CreateRecipePageState extends State<CreateRecipePage> {
-  final RecipeController ct = di();
+  final CreateRecipeController ct = di();
   final formKey = GlobalKey<FormState>();
 
   @override

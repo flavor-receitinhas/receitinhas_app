@@ -1,10 +1,12 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ViewDetailsRecipe extends StatelessWidget {
-  const ViewDetailsRecipe({super.key});
+  final RecipeEntity recipe;
+  const ViewDetailsRecipe({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,8 @@ class ViewDetailsRecipe extends StatelessWidget {
           typography: CookieTypography.title,
         ),
         const SizedBox(height: 20),
-        const CookieText(
-          text:
-              'Lorem ipsum dolor sit amet consectetur. Sodales donec non tortor augue eros massa feugiat. Odio vitae montes in pharetra ac. Pulvinar dignissim accumsan bibendum enim id enim eu vitae viverra. In massa erat tristique mauris consequat habitant aenean orci lacus.',
+        CookieText(
+          text: recipe.details!,
         ),
         const SizedBox(height: 20),
         CustomContainer(
@@ -36,15 +37,21 @@ class ViewDetailsRecipe extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              const CookieText(text: '● banana 300ml'),
-              const CookieText(text: '● banana 300ml'),
-              const CookieText(text: '● banana 300ml'),
+              ListView.builder(
+                itemCount: recipe.ingredients.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return CookieText(text: recipe.ingredients[index]);
+                },
+              )
             ],
           ),
         ),
         const SizedBox(height: 20),
         CustomContainer(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,29 +64,18 @@ class ViewDetailsRecipe extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              const Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CookieText(
-                    text: '1.',
-                  ),
-                  SizedBox(width: 5),
-                  Expanded(
-                    child: CookieText(
-                      text:
-                          'Enxágue o arroz basmati até que a água fique clara.',
-                    ),
-                  ),
-                ],
+              CookieText(
+                text: recipe.instruction,
               ),
             ],
           ),
         ),
         const SizedBox(height: 20),
         Visibility(
-          visible: true,
+          visible: recipe.serveFood!.isNotEmpty,
           child: CustomContainer(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,20 +88,8 @@ class ViewDetailsRecipe extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CookieText(
-                      text: '1.',
-                    ),
-                    SizedBox(width: 5),
-                    Expanded(
-                      child: CookieText(
-                        text:
-                            'Enxágue o arroz basmati até que a água fique clara.',
-                      ),
-                    ),
-                  ],
+                CookieText(
+                  text: recipe.serveFood!,
                 ),
               ],
             ),

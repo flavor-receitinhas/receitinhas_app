@@ -1,23 +1,25 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ViewIntroduceRecipe extends StatelessWidget {
-  const ViewIntroduceRecipe({super.key});
+  final RecipeEntity recipe;
+  const ViewIntroduceRecipe({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CookieText(
-          text: 'Frango ao Curry com Arroz Basmati',
+        CookieText(
+          text: recipe.title,
           typography: CookieTypography.title,
         ),
         const SizedBox(height: 20),
-        const CookieText(
-          text:
-              'Prepare-se para uma viagem de sabores com nossa receita de Frango ao Curry com Arroz Basmati.',
+        CookieText(
+          text: recipe.subTitle!,
         ),
         const SizedBox(height: 20),
         Row(
@@ -36,7 +38,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const CookieText(text: '5 min')
+                      CookieText(text: '${recipe.timePrepared} min'),
                     ],
                   ),
                   const SizedBox(width: 16),
@@ -50,7 +52,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const CookieText(text: 'Dificil')
+                      CookieText(text: recipe.difficultyRecipe.name)
                     ],
                   ),
                   const SizedBox(width: 16),
@@ -64,7 +66,11 @@ class ViewIntroduceRecipe extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const CookieText(text: '5 porções')
+                      CookieText(
+                        text: recipe.portion != 1
+                            ? '${recipe.portion} porções'
+                            : '${recipe.portion} porção',
+                      )
                     ],
                   ),
                 ],

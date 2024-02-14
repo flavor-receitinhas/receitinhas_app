@@ -8,12 +8,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class RecipeController extends ChangeNotifier {
+class CreateRecipeController extends ChangeNotifier {
   var listMultiMedia = [];
   final Dio dio;
   final RecipeRepository _repository;
 
-  RecipeController(this.dio, this._repository);
+  CreateRecipeController(this.dio, this._repository);
 
   String url = apiUrl;
   String path = '';

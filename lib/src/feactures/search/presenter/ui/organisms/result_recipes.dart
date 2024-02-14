@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/recipe_search_container.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +29,19 @@ class ResultRecipes extends StatelessWidget {
               final recipe = ct.recipes[idx];
               return Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: RecipeSearchContainer(
-                    image: recipe.images.first,
-                    title: recipe.title,
-                    timePrepared: recipe.timePrepared),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      ViewRecipesPage.route,
+                      arguments: recipe.id,
+                    );
+                  },
+                  child: RecipeSearchContainer(
+                      image: recipe.images.first,
+                      title: recipe.title,
+                      timePrepared: recipe.timePrepared),
+                ),
               );
             },
           )
