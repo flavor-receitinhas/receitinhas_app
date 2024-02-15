@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum PageState { loading, done, error }
 
 class CookiePage extends StatelessWidget {
-  final Widget done;
+  final Widget Function(BuildContext) done;
   final PageState state;
   final Widget? loading;
   final Widget? error;
@@ -22,7 +22,7 @@ class CookiePage extends StatelessWidget {
         builder: (context) {
           return switch (state) {
             PageState.loading => loading ?? const CircularProgressIndicator(),
-            PageState.done => done,
+            PageState.done => done(context),
             PageState.error =>
               error ?? const Text('Error') // TODO: Criar tela padrão de erro
           };
