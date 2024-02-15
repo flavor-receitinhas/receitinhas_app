@@ -28,7 +28,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: BottomNavigationBar(
@@ -95,27 +95,28 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             return;
           }
           showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                    title: const CookieText(text: 'Deseja sair do app?'),
-                    actions: [
-                      CookieTextButton(
-                        text: 'Cancelar',
-                        color: Theme.of(context).colorScheme.primary,
-                        onPressed: () {
-                          Navigator.of(context).pop(context);
-                        },
-                      ),
-                      const SizedBox(width: 10),
-                      CookieTextButton(
-                        text: 'Sair',
-                        color: Theme.of(context).colorScheme.primary,
-                        onPressed: () {
-                          SystemNavigator.pop();
-                        },
-                      ),
-                    ],
-                  ));
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const CookieText(text: 'Deseja sair do app?'),
+              actions: [
+                CookieTextButton(
+                  text: 'Cancelar',
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: () {
+                    Navigator.of(context).pop(context);
+                  },
+                ),
+                const SizedBox(width: 10),
+                CookieTextButton(
+                  text: 'Sair',
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: () {
+                    SystemNavigator.pop();
+                  },
+                ),
+              ],
+            ),
+          );
         },
         child: pages[_index],
       ),
