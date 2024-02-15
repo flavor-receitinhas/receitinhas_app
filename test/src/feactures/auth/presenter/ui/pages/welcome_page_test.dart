@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
-import 'package:app_receitas/src/core/themes/theme_controller.dart';
+import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/choose_auth_page.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
 import 'package:flutter/material.dart';

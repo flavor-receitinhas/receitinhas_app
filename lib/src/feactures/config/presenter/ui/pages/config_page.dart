@@ -20,6 +20,12 @@ class ConfigPage extends StatefulWidget {
 
 class _ConfigPageState extends State<ConfigPage> {
   final ConfigController ct = di();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
@@ -79,8 +85,10 @@ class _ConfigPageState extends State<ConfigPage> {
                   child: Transform.scale(
                     scale: 0.8,
                     child: Switch(
-                      value: true,
-                      onChanged: (value) {},
+                      value: ct.darkTheme,
+                      onChanged: (value) {
+                        ct.changeTheme();
+                      },
                     ),
                   ),
                 ),
