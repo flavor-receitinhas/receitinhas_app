@@ -5,8 +5,8 @@ enum PageState { loading, done, error }
 class CookiePage extends StatelessWidget {
   final Widget Function(BuildContext) done;
   final PageState state;
-  final Widget? loading;
-  final Widget? error;
+  final Widget Function(BuildContext)? loading;
+  final Widget Function(BuildContext)? error;
   final PreferredSizeWidget? appBar;
   const CookiePage({
     super.key,
@@ -24,12 +24,13 @@ class CookiePage extends StatelessWidget {
       body: Builder(
         builder: (context) {
           return switch (state) {
-            PageState.loading => Center(
-                child: loading ?? const CircularProgressIndicator(),
-              ),
+            PageState.loading => loading != null
+                ? loading!(context)
+                : const CircularProgressIndicator(),
             PageState.done => done(context),
-            PageState.error =>
-              error ?? const Text('Error') // TODO: Criar tela padrão de erro
+            PageState.error => error != null
+                ? error!(context)
+                : const Text('Error') // TODO: Criar tela padrão de erro
           };
         },
       ),
