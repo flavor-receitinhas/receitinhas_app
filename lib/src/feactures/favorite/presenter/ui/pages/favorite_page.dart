@@ -4,6 +4,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/container_recipe.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/organize_recipes.dart';
+import 'package:app_receitas/src/feactures/perfil/presenter/ui/pages/my_perfil_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 
@@ -38,12 +39,17 @@ class _FavoritePageState extends State<FavoritePage> {
                       CookieText(text: 'Gerencie suas receitas favoritas'),
                     ],
                   ),
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(15),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, MyPerfilPage.route);
+                    },
+                    child: Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                     ),
                   ),
                 ],

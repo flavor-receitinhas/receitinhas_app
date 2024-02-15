@@ -1,6 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
-import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
@@ -12,10 +11,7 @@ class PrivacyPolicyPage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: IntroduceConfig(),
-            ),
+            SizedBox(height: 10),
             Row(
               children: [
                 CookieLeftButton(title: 'Políticas de Privacidade'),

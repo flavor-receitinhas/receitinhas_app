@@ -1,6 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
-import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:flutter/material.dart';
 
 class TermPage extends StatelessWidget {
@@ -10,11 +9,8 @@ class TermPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: IntroduceConfig(),
-          ),
+        children: const [
+          SizedBox(height: 10),
           Row(
             children: [
               CookieLeftButton(title: 'Termos e condições'),

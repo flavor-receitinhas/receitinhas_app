@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/perfil/presenter/ui/pages/my_perfil_page.dart';
 import 'package:flutter/material.dart';
 
 class IntroduceConfig extends StatelessWidget {
@@ -22,12 +23,17 @@ class IntroduceConfig extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(15),
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, MyPerfilPage.route);
+          },
+          child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(15),
+            ),
           ),
         ),
       ],

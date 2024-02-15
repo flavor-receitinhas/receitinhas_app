@@ -22,7 +22,7 @@ class MyPerfilPage extends StatelessWidget {
             const Row(
               children: [
                 CookieLeftButton(
-                  title: 'Home',
+                  title: 'Perfil',
                 ),
               ],
             ),
