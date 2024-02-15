@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
@@ -19,18 +20,18 @@ class _ViewRecipesPageState extends State<ViewRecipesPage> {
 
   @override
   void initState() {
-    if (mounted) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
-      ct.addListener(() {
-        setState(() {});
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.addListener(() {
+      setState(() {});
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CookiePage(
+      state: ct.state,
       appBar: AppBar(
         surfaceTintColor: Theme.of(context).colorScheme.background,
         title: const CookieText(text: 'Voltar'),
@@ -43,27 +44,26 @@ class _ViewRecipesPageState extends State<ViewRecipesPage> {
       //     onPressed: () {},
       //   ),
       // ),
-      body: SafeArea(
+      done: (_) => SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
             FlutterCarousel(
-              options: CarouselOptions(
-                height: 250,
-                showIndicator: true,
-                autoPlay: true,
-                viewportFraction: 1,
-                autoPlayAnimationDuration: const Duration(milliseconds: 500),
-                padEnds: false,
-              ),
-              items: ct.recipe?.images
-                  .map((e) => Image.network(e, fit: BoxFit.cover))
-                  .toList(),
-            ),
+                options: CarouselOptions(
+                  height: 250,
+                  showIndicator: true,
+                  autoPlay: true,
+                  viewportFraction: 1,
+                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
+                  padEnds: false,
+                ),
+                items: ct.recipe.images
+                    .map((e) => Image.network(e, fit: BoxFit.cover))
+                    .toList()),
             const SizedBox(height: 10),
-            ViewIntroduceRecipe(recipe: ct.recipe!),
+            ViewIntroduceRecipe(recipe: ct.recipe),
             const SizedBox(height: 20),
-            ViewDetailsRecipe(recipe: ct.recipe!),
+            ViewDetailsRecipe(recipe: ct.recipe),
             const SizedBox(height: 10),
           ],
         ),
