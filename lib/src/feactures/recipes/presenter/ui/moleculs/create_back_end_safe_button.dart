@@ -58,8 +58,8 @@ class CreateBackAndSafeButton extends StatelessWidget {
         const SizedBox(width: 10),
         const CookieText(text: 'Voltar'),
         const Spacer(),
-        const CookieText(text: 'Salvar'),
-        IconButton(
+        TextButton.icon(
+          label: const Icon(Icons.save),
           onPressed: () {
             CookieSheetBottom(
               title: CookieText(
@@ -92,7 +92,7 @@ class CreateBackAndSafeButton extends StatelessWidget {
               ),
             ).show(context);
           },
-          icon: const Icon(Icons.save),
+          icon: const CookieText(text: 'Salvar'),
         ),
       ],
     );
