@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/register_module.dart';
+import 'package:app_receitas/src/core/library/dio_client.dart';
 import 'package:app_receitas/src/feactures/splash/presenter/controller/splash_controller.dart';
 import 'package:app_receitas/src/feactures/splash/presenter/ui/pages/splash_page.dart';
 import 'package:flutter/widgets.dart';
@@ -13,6 +14,7 @@ class SplashModule extends RegisterModule {
   @override
   void inicialize() {
     //controller
+    di.registerFactory(() => DioClient());
     di.registerFactory<SplashController>(
       () => SplashController(
         di(),
