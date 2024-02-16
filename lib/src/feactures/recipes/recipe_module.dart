@@ -42,7 +42,6 @@ class RecipeModule extends RegisterModule {
     di.registerFactory<CreateRecipeController>(
       () => CreateRecipeController(
         di(),
-        di(),
       ),
     );
     di.registerFactory<ViewRecipeController>(
