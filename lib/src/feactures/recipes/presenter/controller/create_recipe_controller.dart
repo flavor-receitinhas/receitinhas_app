@@ -1,22 +1,18 @@
 import 'dart:io';
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateRecipeController extends ChangeNotifier {
   var listMultiMedia = [];
-  final Dio dio;
+ 
   final RecipeRepository _repository;
 
-  CreateRecipeController(this.dio, this._repository);
+  CreateRecipeController( this._repository);
 
-  String url = apiUrl;
-  String path = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
@@ -38,14 +34,14 @@ class CreateRecipeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void sendImage() async {
-    FormData imageData = FormData();
-    for (var i = 0; i < listMultiMedia.length; i++) {
-      imageData.files.add(MapEntry('images',
-          await MultipartFile.fromFile(listMultiMedia[i], filename: '$i.jpg')));
-    }
-    dio.post('$url/$path', data: imageData);
-  }
+  // void sendImage() async {
+  //   FormData imageData = FormData();
+  //   for (var i = 0; i < listMultiMedia.length; i++) {
+  //     imageData.files.add(MapEntry('images',
+  //         await MultipartFile.fromFile(listMultiMedia[i], filename: '$i.jpg')));
+  //   }
+  //   dio.post('$url/$path', data: imageData);
+  // }
 
   void addIngredient(IngredientsEntity ingredient) {
     listIngredient.add(ingredient);
