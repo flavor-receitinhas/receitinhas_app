@@ -29,7 +29,6 @@ class AuthModule extends RegisterModule {
     di.registerFactory<AuthController>(
       () => AuthController(
         di(),
-        di(),
       ),
     );
   }

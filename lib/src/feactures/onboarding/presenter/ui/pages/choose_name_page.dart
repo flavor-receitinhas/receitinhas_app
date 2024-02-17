@@ -77,7 +77,6 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                     label:
                         AppLocalizations.of(context)!.difficultyRecipesConfirm,
                     onPressed: () {
-                      widget.ct.saveIsLogin();
                       widget.ct.creatFoodPref();
                       Navigator.pushNamedAndRemoveUntil(
                         context,

@@ -18,7 +18,6 @@ class SplashModule extends RegisterModule {
     di.registerFactory<SplashController>(
       () => SplashController(
         di(),
-        di(),
       ),
     );
   }

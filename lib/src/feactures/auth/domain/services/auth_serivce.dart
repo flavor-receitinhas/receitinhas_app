@@ -6,4 +6,5 @@ abstract class AuthService {
   Future<void> forgetPassword({required String email});
   Future<void> logout();
   Future<void> refreshToken();
+  Future<bool> isLogged();
 }

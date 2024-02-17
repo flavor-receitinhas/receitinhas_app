@@ -1,6 +1,4 @@
 enum KeyPreferences {
-  ///Se o usuario esta logado
-  isLogged(key: 'isLogged'),
   ///Escolher qual o tema
   isThemeLight(key: 'isThemeLight', defaultValue: true),
   ///Preferencias do onboarding

@@ -4,6 +4,8 @@ import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dar
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthServiceFirebase implements AuthService {
+  final _firebaseInstance = FirebaseAuth.instance;
+
   @override
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
@@ -13,8 +15,8 @@ class AuthServiceFirebase implements AuthService {
   Future<UserEntity> singIn(
       {required String email, required String password}) async {
     try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      final credential = await _firebaseInstance.signInWithEmailAndPassword(
+          email: email, password: password);
       final user = UserEntity(
         id: credential.user!.uid,
         email: email,
@@ -38,8 +40,7 @@ class AuthServiceFirebase implements AuthService {
   Future<UserEntity> singUp(
       {required String email, required String password}) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await _firebaseInstance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -64,7 +65,7 @@ class AuthServiceFirebase implements AuthService {
   @override
   Future<void> forgetPassword({required String email}) async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await _firebaseInstance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       print(e);
     }
@@ -72,10 +73,16 @@ class AuthServiceFirebase implements AuthService {
 
   @override
   Future<void> refreshToken() async {
-    Global.token = (await FirebaseAuth.instance.currentUser!.getIdToken(true))!;
+    Global.token = (await _firebaseInstance.currentUser!.getIdToken(true))!;
     print('Token: ${Global.token}');
     if (Global.token.isEmpty) {
       throw Exception('Token is empty');
     }
+  }
+
+  @override
+  Future<bool> isLogged() async {
+    final userLogged = _firebaseInstance.currentUser != null;
+    return userLogged;
   }
 }
