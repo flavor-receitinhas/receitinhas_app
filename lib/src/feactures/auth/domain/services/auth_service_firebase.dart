@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/auth/domain/entities/user_entity.dart';
 import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +20,7 @@ class AuthServiceFirebase implements AuthService {
         email: email,
         name: credential.user!.displayName,
       );
+      Global.token = await credential.user!.getIdToken() ?? '';
       return user;
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -65,6 +67,15 @@ class AuthServiceFirebase implements AuthService {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       print(e);
+    }
+  }
+
+  @override
+  Future<void> refreshToken() async {
+    Global.token = (await FirebaseAuth.instance.currentUser!.getIdToken(true))!;
+    print('Token: ${Global.token}');
+    if (Global.token.isEmpty) {
+      throw Exception('Token is empty');
     }
   }
 }

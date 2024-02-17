@@ -5,4 +5,5 @@ abstract class AuthService {
   Future<UserEntity> singUp({required String email, required String password});
   Future<void> forgetPassword({required String email});
   Future<void> logout();
+  Future<void> refreshToken();
 }

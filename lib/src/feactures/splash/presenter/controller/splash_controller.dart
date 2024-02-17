@@ -3,20 +3,20 @@ import 'package:app_receitas/src/core/services/preference/sembast/sembast_databa
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
+import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
-import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
-import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
+
 import 'package:flutter/material.dart';
 
 class SplashController extends ChangeNotifier {
   final Preference _preference;
+  final AuthService _authService;
 
   SplashController(
     this._preference,
+    this._authService,
   );
 
   bool isLogged = false;
@@ -39,6 +39,7 @@ class SplashController extends ChangeNotifier {
       await di.get<OnBoardingController>().init();
       isLogged = await readLoadingUser();
       if (isLogged) {
+        await _authService.refreshToken();
         route = CustomBottomBar.route;
       }
     } catch (e) {
