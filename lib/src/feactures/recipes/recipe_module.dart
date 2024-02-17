@@ -25,6 +25,7 @@ class RecipeModule extends RegisterModule {
       () => RecipeDatabaseImp(
         di(),
         di(),
+        di(),
       ),
     );
 

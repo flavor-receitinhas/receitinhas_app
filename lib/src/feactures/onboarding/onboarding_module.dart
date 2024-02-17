@@ -18,14 +18,24 @@ class OnboardingModule extends RegisterModule {
   @override
   void inicialize() {
     //data
-    di.registerFactory<UserDatabase>(() => UserDatabaseImp(di(), di()));
+    di.registerFactory<UserDatabase>(
+      () => UserDatabaseImp(
+        di(),
+        di(),
+        di(),
+      ),
+    );
 
     //Mapper
     di.registerFactory(() => UserFoodPrefMapper());
 
     //repository
     di.registerFactory<UserFoodPrefRepository>(
-        () => UserFoodPrefRepositoryImp(di(), di()));
+      () => UserFoodPrefRepositoryImp(
+        di(),
+        di(),
+      ),
+    );
 
     //controller
     di.registerFactory<OnBoardingController>(
