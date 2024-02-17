@@ -26,7 +26,9 @@ class CookiePage extends StatelessWidget {
           return switch (state) {
             PageState.loading => loading != null
                 ? loading!(context)
-                : const CircularProgressIndicator(),
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
             PageState.done => done(context),
             PageState.error => error != null
                 ? error!(context)
