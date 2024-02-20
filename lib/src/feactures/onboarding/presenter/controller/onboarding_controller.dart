@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/entities/user_food_pref_entity.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 class OnBoardingController extends ChangeNotifier {
   final UserFoodPrefRepository _repository;
 
-  OnBoardingController( this._repository);
+  OnBoardingController(this._repository);
 
   PageController pageController = PageController();
   int currentPage = 0;
@@ -30,11 +31,10 @@ class OnBoardingController extends ChangeNotifier {
   void creatFoodPref() {
     _repository.createUser(
       user: UserFoodPrefEntity(
-        userId: '5',
+        userId: Global.user!.id,
         protein: protein,
         dietaryRestriction: dietaryRestriction,
         difficultyRecipe: difficultyRecipe,
-        userName: userNameController.text.trim(),
       ),
     );
   }

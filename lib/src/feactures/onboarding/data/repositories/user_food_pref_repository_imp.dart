@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app_receitas/src/feactures/onboarding/data/database/user_data.dart';
 import 'package:app_receitas/src/feactures/onboarding/data/dtos/user_food_pref_dto.dart';
 import 'package:app_receitas/src/feactures/onboarding/data/mappers/user_food_pref_mapper.dart';
@@ -18,7 +17,6 @@ class UserFoodPrefRepositoryImp implements UserFoodPrefRepository {
     await userData.createUserPref(
       user: UserFoodPrefDto(
         userId: user.userId,
-        userName: user.userName,
         protein: user.protein,
         dietaryRestriction: user.dietaryRestriction,
         difficultyRecipe: user.difficultyRecipe,

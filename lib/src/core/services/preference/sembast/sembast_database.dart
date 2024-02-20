@@ -6,7 +6,8 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:uuid/uuid.dart';
 
-class PersistentDatabaseSembast implements PersistentDatabase<StoreSembastEnum> {
+class PersistentDatabaseSembast
+    implements PersistentDatabase<StoreSembastEnum> {
   late final Database _db;
 
   @override

@@ -5,7 +5,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_span.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
-import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -145,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (result && mounted) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  OnBoardingPage.route,
+                  CustomBottomBar.route,
                   (route) => false,
                 );
               }

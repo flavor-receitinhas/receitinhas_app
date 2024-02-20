@@ -10,7 +10,7 @@ class DioClient {
     required Map<String, dynamic> body,
     required Map<String, dynamic> headers,
   }) {
-    _log(method: 'put', path: url, headers: headers);
+    _log(method: 'put', path: url, headers: headers, body: body);
     return _dio.put<T>(
       url,
       data: body,
@@ -45,7 +45,7 @@ class DioClient {
     required Map<String, dynamic> body,
     required Map<String, dynamic> headers,
   }) {
-    _log(method: 'post', path: url, headers: headers);
+    _log(method: 'post', path: url, headers: headers, body: body);
     return _dio.post<T>(
       url,
       data: body,

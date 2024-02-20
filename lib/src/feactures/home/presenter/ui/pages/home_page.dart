@@ -1,5 +1,8 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
+import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
 import 'package:app_receitas/src/feactures/perfil/presenter/ui/pages/my_perfil_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page.dart';
@@ -7,8 +10,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final HomeController ct = di();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ct
+          .verifyOnboading()
+          .then((value) => Navigator.pushNamed(context, OnBoardingPage.route));
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +47,14 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CookieText(
-                        text: 'Ola, nietz!',
+                        text: 'Ola, ${Global.user?.email}',
                         typography: CookieTypography.title,
                       ),
-                      CookieText(
+                      const CookieText(
                         text: 'O que vamos cozinhar hoje ?',
                       ),
                     ],

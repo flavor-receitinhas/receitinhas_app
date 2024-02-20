@@ -20,9 +20,9 @@ class AuthServiceFirebase implements AuthService {
       final user = UserEntity(
         id: credential.user!.uid,
         email: email,
-        name: credential.user!.displayName,
       );
       Global.token = await credential.user!.getIdToken() ?? '';
+      Global.user = user;
       return user;
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -47,8 +47,9 @@ class AuthServiceFirebase implements AuthService {
       final user = UserEntity(
         id: credential.user!.uid,
         email: email,
-        name: credential.user!.displayName,
       );
+      Global.token = await credential.user!.getIdToken() ?? '';
+      Global.user = user;
       return user;
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -64,17 +65,16 @@ class AuthServiceFirebase implements AuthService {
 
   @override
   Future<void> forgetPassword({required String email}) async {
-    try {
-      await _firebaseInstance.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
+    await _firebaseInstance.sendPasswordResetEmail(email: email);
   }
 
   @override
   Future<void> refreshToken() async {
     Global.token = (await _firebaseInstance.currentUser!.getIdToken(true))!;
-    print('Token: ${Global.token}');
+    Global.user = UserEntity(
+      id: _firebaseInstance.currentUser!.uid,
+      email: _firebaseInstance.currentUser!.email!,
+    );
     if (Global.token.isEmpty) {
       throw Exception('Token is empty');
     }
