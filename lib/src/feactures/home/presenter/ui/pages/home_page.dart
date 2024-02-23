@@ -47,17 +47,21 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CookieText(
-                        text: 'Ola, ${Global.user?.email}',
-                        typography: CookieTypography.title,
-                      ),
-                      const CookieText(
-                        text: 'O que vamos cozinhar hoje ?',
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CookieText(
+                          text: 'Ola, ${Global.user?.email}',
+                          maxLine: 1,
+                          overflow: TextOverflow.ellipsis,
+                          typography: CookieTypography.title,
+                        ),
+                        const CookieText(
+                          text: 'O que vamos cozinhar hoje ?',
+                        ),
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
