@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/core/services/api_response/api_error/api_error.dart';
 
-class ApiUnknownError extends ApiError {
+class ApiUnprocessableEntityError extends ApiError {
   @override
   String message;
-  ApiUnknownError({
+  ApiUnprocessableEntityError({
     required this.message,
   });
 }
