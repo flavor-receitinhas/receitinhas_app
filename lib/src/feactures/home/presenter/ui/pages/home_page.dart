@@ -22,9 +22,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ct
-          .verifyOnboading()
-          .then((value) => Navigator.pushNamed(context, OnBoardingPage.route));
+      ct.verifyOnboading().then((value) =>
+          value ? Navigator.pushNamed(context, OnBoardingPage.route) : null);
     });
     super.initState();
   }
