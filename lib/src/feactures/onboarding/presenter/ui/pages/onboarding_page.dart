@@ -20,7 +20,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   void initState() {
     if (mounted) {
-      ct.init();
+      initPageController();
       ct.addListener(() {
         setState(() {});
       });
@@ -28,10 +28,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     super.initState();
   }
 
+  initPageController() async {
+    await ct.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageView(
-      onPageChanged: ct.onChangedPage,
+      onPageChanged: (value) async {
+        await ct.onChangedPage(value);
+      },
       controller: ct.pageController,
       children: [
         ProteinPreferencePage(ct: ct),

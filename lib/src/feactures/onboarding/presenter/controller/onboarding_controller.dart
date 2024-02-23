@@ -1,4 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
+import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/entities/user_food_pref_entity.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
@@ -8,23 +10,36 @@ import 'package:flutter/material.dart';
 
 class OnBoardingController extends ChangeNotifier {
   final UserFoodPrefRepository _repository;
+  final Preference _preference;
 
-  OnBoardingController(this._repository);
+  OnBoardingController(this._repository, this._preference);
 
   PageController pageController = PageController();
-  int currentPage = 0;
+  late int currentPage;
   List<Proteins> protein = [];
   List<DietaryRestrictions> dietaryRestriction = [];
   List<DifficultyRecipe> difficultyRecipe = [];
   TextEditingController userNameController = TextEditingController();
 
   Future<void> init() async {
-    pageController = PageController(initialPage: 0);
+    currentPage = await _preference.get<int>(
+      keyPreferences: KeyPreferences.onBoardingLastPage,
+    );
+    pageController.animateToPage(
+      currentPage,
+      curve: Curves.linear,
+      duration: Durations.short1,
+    );
+
     notifyListeners();
   }
 
-  void onChangedPage(int value) {
+  Future<void> onChangedPage(int value) async {
     currentPage = value;
+    await _preference.put(
+      value: value,
+      keyPreferences: KeyPreferences.onBoardingLastPage,
+    );
     notifyListeners();
   }
 
