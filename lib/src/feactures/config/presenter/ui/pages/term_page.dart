@@ -1,5 +1,5 @@
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:flutter/material.dart';
 
 class TermPage extends StatelessWidget {
@@ -9,14 +9,10 @@ class TermPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: const [
-          SizedBox(height: 10),
-          Row(
-            children: [
-              CookieLeftButton(title: 'Termos e condições'),
-            ],
-          ),
-          Padding(
+        children: [
+          const SizedBox(height: 10),
+          const CookieButton(label: 'Termos e condições').back(context),
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             child: CookieText(textAlign: TextAlign.start, text: '''
 Termos e Condições Temporários

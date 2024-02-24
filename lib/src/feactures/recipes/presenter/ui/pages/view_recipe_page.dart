@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
@@ -34,7 +34,9 @@ class _ViewRecipesPageState extends State<ViewRecipesPage> {
       state: ct.state,
       appBar: AppBar(
         surfaceTintColor: Theme.of(context).colorScheme.background,
-        title: const CookieText(text: 'Voltar'),
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        title: const CookieButton(label: 'Voltar').back(context),
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
       // bottomNavigationBar: Padding(

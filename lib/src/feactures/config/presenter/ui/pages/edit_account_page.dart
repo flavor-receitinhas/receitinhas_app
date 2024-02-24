@@ -1,6 +1,6 @@
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
-import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/select_container_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -40,7 +40,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            const CookieLeftButton(title: 'Editar conta'),
+            const CookieButton(label: 'Editar conta').back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(

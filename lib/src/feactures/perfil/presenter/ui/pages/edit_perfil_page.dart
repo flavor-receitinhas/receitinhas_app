@@ -1,5 +1,4 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
@@ -28,11 +27,7 @@ class EditPerfilPage extends StatelessWidget {
       body: ListView(
         children: [
           const AppBarPerfil(),
-          const Row(
-            children: [
-              CookieLeftButton(title: 'Perfil'),
-            ],
-          ),
+          const CookieButton(label: 'Voltar').back(context),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

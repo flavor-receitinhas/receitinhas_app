@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/select_ingredient_container.dart';
@@ -12,7 +13,9 @@ class SelectIngredients extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         surfaceTintColor: Theme.of(context).colorScheme.background,
-        title: const CookieText(text: 'Voltar'),
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        title: const CookieButton(label: 'Voltar').back(context),
       ),
       body: SafeArea(
         child: Padding(

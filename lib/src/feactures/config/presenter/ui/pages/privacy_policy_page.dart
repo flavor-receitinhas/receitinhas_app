@@ -1,5 +1,5 @@
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
@@ -10,14 +10,10 @@ class PrivacyPolicyPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          children: const [
-            SizedBox(height: 10),
-            Row(
-              children: [
-                CookieLeftButton(title: 'Políticas de Privacidade'),
-              ],
-            ),
-            Padding(
+          children: [
+            const SizedBox(height: 10),
+            const CookieButton(label: 'Políticas de Privacidade').back(context),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: CookieText(
                 textAlign: TextAlign.start,

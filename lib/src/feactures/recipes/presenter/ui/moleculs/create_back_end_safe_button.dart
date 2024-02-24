@@ -13,8 +13,11 @@ class CreateBackAndSafeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        GestureDetector(
-          onTap: () {
+        CookieButton(
+          prefix: const Icon(Icons.chevron_left, size: 28),
+          label: "Voltar",
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          onPressed: () {
             CookieSheetBottom(
               title: CookieText(
                 text: 'Deseja descartar sua receita ?',
@@ -31,9 +34,7 @@ class CreateBackAndSafeButton extends StatelessWidget {
                 CookieButton.outline(
                   label: 'Continuar escrevendo',
                   labelColor: Theme.of(context).colorScheme.onSecondary,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  onPressed: () => Navigator.pop(context),
                 ),
                 const SizedBox(height: 10),
                 CookieButton(
@@ -51,12 +52,7 @@ class CreateBackAndSafeButton extends StatelessWidget {
               ]),
             ).show(context);
           },
-          child: const Icon(
-            Icons.arrow_back_rounded,
-          ),
         ),
-        const SizedBox(width: 10),
-        const CookieText(text: 'Voltar'),
         const Spacer(),
         TextButton.icon(
           label: const Icon(Icons.save),
@@ -83,10 +79,15 @@ class CreateBackAndSafeButton extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   CookieButton.outline(
-                    label: 'Continuar escrevendo',
+                    label: 'Salvar receita como rascunho',
                     onPressed: () {
-                      Navigator.pop(context);
+                      ct.createRecipe();
                     },
+                  ),
+                  const SizedBox(height: 10),
+                  CookieButton.outline(
+                    label: 'Continuar escrevendo',
+                    onPressed: () => Navigator.pop(context),
                   )
                 ],
               ),

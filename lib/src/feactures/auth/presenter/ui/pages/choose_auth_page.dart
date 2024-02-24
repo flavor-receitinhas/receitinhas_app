@@ -66,6 +66,7 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.chooseAuthLoginButton,
           onPressed: () => Navigator.pushNamed(context, LoginPage.route),
+          width: MediaQuery.sizeOf(context).width,
         ),
         const SizedBox(height: 5)
       ],

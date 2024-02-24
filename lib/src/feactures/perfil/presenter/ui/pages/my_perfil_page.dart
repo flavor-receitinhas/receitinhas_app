@@ -1,5 +1,4 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/perfil/presenter/ui/atomic/appbar_perfil.dart';
@@ -19,13 +18,7 @@ class MyPerfilPage extends StatelessWidget {
         child: ListView(
           children: [
             const AppBarPerfil(),
-            const Row(
-              children: [
-                CookieLeftButton(
-                  title: 'Perfil',
-                ),
-              ],
-            ),
+            const CookieButton(label: 'Voltar').back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
@@ -92,6 +85,7 @@ class MyPerfilPage extends StatelessWidget {
                           label: 'Gerenciar',
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           backgroundColor: theme.onPrimary,
+                          labelColor: theme.secondary,
                           onPressed: () {},
                         ),
                       ),

@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/cookie_left_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/search_recipe.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/organisms/result_recipes.dart';
@@ -31,11 +31,7 @@ class _SearchPageState extends State<SearchPage> {
       body: ListView(
         children: [
           const SizedBox(height: 10),
-          const Row(
-            children: [
-              CookieLeftButton(title: 'Pesquisa'),
-            ],
-          ),
+          const CookieButton(label: 'Pesquisa').back(context),
           const SizedBox(height: 20),
           const SearchRecipe(),
           ResultRecipes(ct: ct),
