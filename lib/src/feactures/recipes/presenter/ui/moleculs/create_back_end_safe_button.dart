@@ -16,6 +16,7 @@ class CreateBackAndSafeButton extends StatelessWidget {
         CookieButton(
           prefix: const Icon(Icons.chevron_left, size: 28),
           label: "Voltar",
+          labelColor: Theme.of(context).colorScheme.onPrimary,
           backgroundColor: Theme.of(context).colorScheme.secondary,
           onPressed: () {
             CookieSheetBottom(

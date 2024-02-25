@@ -85,6 +85,7 @@ class CookieButton extends StatelessWidget {
               topRight: Radius.circular(10),
               bottomRight: Radius.circular(10),
             ),
+            labelColor: Theme.of(context).colorScheme.onPrimary,
           ),
         ],
       );
@@ -132,7 +133,7 @@ class CookieButton extends StatelessWidget {
             CookieText(
               text: label,
               typography: CookieTypography.button,
-              color: labelColor,
+              color: labelColor ?? Theme.of(context).colorScheme.onSecondary,
             ),
           ],
         ),
