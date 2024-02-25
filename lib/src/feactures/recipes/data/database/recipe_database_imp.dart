@@ -53,7 +53,7 @@ class RecipeDatabaseImp implements RecipeDatabase {
       },
     );
     final result = _apiResponse.handleResponse(response);
-
-    return result.values.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
+    
+    return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
   }
 }

@@ -5,7 +5,7 @@ import 'package:app_receitas/src/core/services/api_response/api_error/api_unproc
 import 'package:dio/dio.dart';
 
 class ApiResponse {
-  Map<String, dynamic> handleResponse(Response<dynamic> response) {
+  dynamic handleResponse(Response<dynamic> response) {
     switch (response.statusCode) {
       case 401:
         throw ApiUnauthenticatedError();
@@ -17,7 +17,6 @@ class ApiResponse {
         throw ApiInternalServerError(message: response.statusMessage!);
     }
     final result = response.data;
-
     return result;
   }
 }
