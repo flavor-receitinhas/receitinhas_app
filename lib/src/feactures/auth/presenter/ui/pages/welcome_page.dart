@@ -28,8 +28,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: CustomScreen(
         iconAppBar: IconButton(
           onPressed: _themeController.saveThemePref,
