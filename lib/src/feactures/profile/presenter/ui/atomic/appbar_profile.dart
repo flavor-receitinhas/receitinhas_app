@@ -1,8 +1,8 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:flutter/material.dart';
 
-class AppBarPerfil extends StatelessWidget {
-  const AppBarPerfil({super.key});
+class AppBarProfile extends StatelessWidget {
+  const AppBarProfile({super.key});
 
   @override
   Widget build(BuildContext context) {

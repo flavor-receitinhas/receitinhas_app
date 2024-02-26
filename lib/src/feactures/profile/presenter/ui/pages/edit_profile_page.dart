@@ -2,13 +2,13 @@ import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/atomic/appbar_perfil.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/moleculs/container_privacy.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/container_privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class EditPerfilPage extends StatelessWidget {
-  const EditPerfilPage({super.key});
+class EditProfilePage extends StatelessWidget {
+  const EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class EditPerfilPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          const AppBarPerfil(),
+          const AppBarProfile(),
           const CookieButton(label: 'Voltar').back(context),
           const SizedBox(height: 20),
           Padding(

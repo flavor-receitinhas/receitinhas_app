@@ -1,14 +1,23 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/atomic/appbar_perfil.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/pages/edit_perfil_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/controller/profile_controller.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class MyPerfilPage extends StatelessWidget {
+class MyProfilePage extends StatefulWidget {
   static const route = '/my-perfil';
-  const MyPerfilPage({super.key});
+  const MyProfilePage({super.key});
+
+  @override
+  State<MyProfilePage> createState() => _MyProfilePageState();
+}
+
+class _MyProfilePageState extends State<MyProfilePage> {
+  final ProfileController ct = di();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +26,7 @@ class MyPerfilPage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            const AppBarPerfil(),
+            const AppBarProfile(),
             const CookieButton(label: 'Voltar').back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -97,7 +106,7 @@ class MyPerfilPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const EditPerfilPage(),
+                                builder: (context) => const EditProfilePage(),
                               ),
                             );
                           },
