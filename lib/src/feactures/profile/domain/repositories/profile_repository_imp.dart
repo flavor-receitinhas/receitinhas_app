@@ -4,6 +4,7 @@ import 'package:app_receitas/src/core/services/api_response/api_response.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/mappers/profile_mapper.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
+import 'package:dio/dio.dart';
 
 class ProfileRepositoryImp extends ProfileRepository {
   final DioClient dio;
@@ -28,16 +29,22 @@ class ProfileRepositoryImp extends ProfileRepository {
 
   @override
   Future<void> updateImageProfile(String userID, String imagePath) async {
-    //   FormData data = FormData.fromMap({
-    //     "file": await MultipartFile.fromFile(
-    //       'file.path',
-    //       filename: 'fileName.jpg',
-    //     ),
-    //  });
-    final response =
-        await dio.put('$url/$path/$userID/image', body: {}, headers: {
-      'Authorization': Global.token,
+    Dio dio = di();
+    FormData data = FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+        'file.path',
+        filename: 'fileName.jpg',
+      ),
     });
+    final response = await dio.put(
+      '$url/$path/$userID/image',
+      data: data,
+      options: Options(
+        headers: {
+          'Authorization': Global.token,
+        },
+      ),
+    );
 
     _apiResponse.handleResponse(response);
   }

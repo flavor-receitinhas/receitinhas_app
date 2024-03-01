@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/profile_controller.dart';
@@ -20,10 +21,20 @@ class _MyProfilePageState extends State<MyProfilePage> {
   final ProfileController ct = di();
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    return Scaffold(
-      body: SafeArea(
+    return CookiePage(
+      state: ct.state,
+      done: (_) => SafeArea(
         child: ListView(
           children: [
             const AppBarProfile(),
@@ -40,8 +51,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            const CookieText(
-                              text: 'Nietzche',
+                            CookieText(
+                              text: ct.profile.name,
                               typography: CookieTypography.title,
                             ),
                             CookieText(
@@ -50,15 +61,15 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               typography: CookieTypography.button,
                             ),
                             const SizedBox(height: 10),
-                            const CookieText(
-                              text:
-                                  'Em uma noite estrelada, um sábio explorador refletia sobre suas viagens. Percebeu que, mais do que tesouros, as verdadeiras riquezas eram as memórias e aprendizados de cada jornada vivida.',
+                            CookieText(
+                              text: ct.profile.biography,
                             ),
                           ],
                         ),
                       ),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 45,
+                        child: Image.network(ct.profile.image),
                       ),
                     ],
                   ),
@@ -89,15 +100,15 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      Expanded(
-                        child: CookieButton(
-                          label: 'Gerenciar',
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          backgroundColor: theme.onPrimary,
-                          labelColor: theme.secondary,
-                          onPressed: () {},
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: CookieButton(
+                      //     label: 'Gerenciar',
+                      //     margin: const EdgeInsets.symmetric(horizontal: 10),
+                      //     backgroundColor: theme.onPrimary,
+                      //     labelColor: theme.secondary,
+                      //     onPressed: () {},
+                      //   ),
+                      // ),
                       Expanded(
                         child: CookieButton(
                           label: 'Editar perfil',

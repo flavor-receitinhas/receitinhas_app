@@ -3,12 +3,12 @@ import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entit
 class ProfileMappper {
   ProfileEntity fromMap(Map<String, dynamic> map) {
     return ProfileEntity(
-      userID: map['userID'] as String,
-      name: map['name'] as String,
-      biography: map['biography'] as String,
-      image: map['image'] as String,
-      createdAt: map['createdAt'] as int,
-      updatedAt: map['updatedAt'] as int,
+      userID: map['userID'] ,
+      name: map['name'] ?? '',
+      biography: map['biography'] ?? '',
+      image: map['image'] ?? '',
+      createdAt: map['createdAt'] ,
+      updatedAt: map['updatedAt'] ,
     );
   }
 
