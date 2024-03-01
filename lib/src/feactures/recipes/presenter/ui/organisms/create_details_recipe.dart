@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/container_create_info.dart';
@@ -14,16 +13,6 @@ class CreateDetailsRecipe extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CookieText(
-          text: 'Detalhes da receita',
-          typography: CookieTypography.title,
-        ),
-        const SizedBox(height: 20),
-        CookieTextField.outline(
-          hintText: 'Adicione aqui os detalhes da sua receita...',
-          controller: ct.detailsController,
-          maxLines: 4,
-        ),
         const SizedBox(height: 10),
         ContainerCreateInfo(
           title: 'Ingredientes',

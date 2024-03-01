@@ -8,10 +8,10 @@ import 'package:image_picker/image_picker.dart';
 
 class CreateRecipeController extends ChangeNotifier {
   var listMultiMedia = [];
- 
+
   final RecipeRepository _repository;
 
-  CreateRecipeController( this._repository);
+  CreateRecipeController(this._repository);
 
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
@@ -19,6 +19,17 @@ class CreateRecipeController extends ChangeNotifier {
   TextEditingController instructionController = TextEditingController();
   TextEditingController serveFoodController = TextEditingController();
   List<IngredientsEntity> listIngredient = [];
+  PageController pageController = PageController();
+  int currentPage = 0;
+
+  void init() {
+    pageController = PageController(initialPage: 0);
+  }
+
+  void onChangedPage(int value) {
+    currentPage = value;
+    notifyListeners();
+  }
 
   void pickMultiMedia() async {
     List<XFile> listImage =
