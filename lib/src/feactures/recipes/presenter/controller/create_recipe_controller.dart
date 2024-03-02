@@ -8,10 +8,10 @@ import 'package:image_picker/image_picker.dart';
 
 class CreateRecipeController extends ChangeNotifier {
   var listMultiMedia = [];
- 
+
   final RecipeRepository _repository;
 
-  CreateRecipeController( this._repository);
+  CreateRecipeController(this._repository);
 
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
@@ -26,6 +26,7 @@ class CreateRecipeController extends ChangeNotifier {
     for (var image in listImage) {
       listMultiMedia.add(File(image.path));
     }
+
     notifyListeners();
   }
 

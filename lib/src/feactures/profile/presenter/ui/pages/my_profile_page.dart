@@ -68,9 +68,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         ),
                       ),
                       CircleAvatar(
-                        radius: 45,
-                        child: Image.network(ct.profile.image),
-                      ),
+                          radius: 45,
+                          backgroundImage: NetworkImage(ct
+                                  .profile.image!.isNotEmpty
+                              ? ct.profile.image!
+                              : 'https://imgs.search.brave.com/oHbOpa1DFRhZUNfgOP9bJaHajzc4hRnBkdlbC1yWKfs/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wYWxl/c3RyYXBhcmFwcm9m/ZXNzb3Jlcy5jb20u/YnIvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMTIvZm90b3Mt/cGFyYS1wZXJmaWwt/Y2FjaG9ycm8tZGUt/b2N1bG9zLWUtZ3Jh/dmF0LWJvcmJvbGV0/YS5wbmc')),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -114,11 +116,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           label: 'Editar perfil',
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => const EditProfilePage(),
-                              ),
+                              EditProfilePage.route,
+                              arguments: ct.profile,
                             );
                           },
                         ),

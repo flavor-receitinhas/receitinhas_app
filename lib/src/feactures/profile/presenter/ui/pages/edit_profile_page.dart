@@ -1,14 +1,41 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/container_privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({super.key});
+class EditProfilePage extends StatefulWidget {
+  static const route = '/edit-perfil';
+  const EditProfilePage({
+    super.key,
+  });
+
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  EditProfileController ct = di();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ct.image;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +63,13 @@ class EditProfilePage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 60,
+                      backgroundImage: ct.image != null
+                          ? FileImage(ct.image!)
+                          : const NetworkImage(
+                                  'https://imgs.search.brave.com/oHbOpa1DFRhZUNfgOP9bJaHajzc4hRnBkdlbC1yWKfs/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wYWxl/c3RyYXBhcmFwcm9m/ZXNzb3Jlcy5jb20u/YnIvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMTIvZm90b3Mt/cGFyYS1wZXJmaWwt/Y2FjaG9ycm8tZGUt/b2N1bG9zLWUtZ3Jh/dmF0LWJvcmJvbGV0/YS5wbmc')
+                              as ImageProvider<Object>?,
                     ),
                     Expanded(
                       child: Column(
@@ -45,12 +77,20 @@ class EditProfilePage extends StatelessWidget {
                           CookieButton(
                             label: 'Alterar avatar',
                             margin: const EdgeInsets.symmetric(horizontal: 20),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                ct.pickImageLogo();
+                              });
+                            },
                           ),
                           const SizedBox(height: 10),
                           CookieTextButton(
                             text: 'Remover Imagem',
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                ct.removeImage();
+                              });
+                            },
                           ),
                         ],
                       ),

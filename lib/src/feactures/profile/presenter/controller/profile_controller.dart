@@ -25,8 +25,4 @@ class ProfileController extends ChangeNotifier {
   Future<void> updateProfile(ProfileEntity profile) async {
     await _repository.updateProfile(profile);
   }
-
-  Future<void> updateImageProfile(String userID, String path) async {
-    await _repository.updateImageProfile(userID, path);
-  }
 }
