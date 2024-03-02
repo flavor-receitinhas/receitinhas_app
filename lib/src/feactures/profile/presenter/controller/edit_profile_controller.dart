@@ -12,15 +12,18 @@ class EditProfileController extends ChangeNotifier {
 
   File? image;
   ProfileEntity? profile;
+  TextEditingController biographyController = TextEditingController();
 
   void init(context) async {
     final arguments = ModalRoute.of(context)!.settings.arguments;
     profile = arguments as ProfileEntity;
+    biographyController.text = profile!.biography;
     notifyListeners();
   }
 
-  Future<void> updateImageProfile(String userID, String path) async {
-    await _repository.updateImageProfile(userID, path);
+  Future<void> updateImageProfile() async {
+    await _repository.updateImageProfile(profile!.userID, image!.path);
+    //TODO Ver a questao de quando remover a imagem se vai enviar null ou vazio
   }
 
   Future<void> pickImageLogo() async {
@@ -30,6 +33,10 @@ class EditProfileController extends ChangeNotifier {
     image = File(fileImage!.path);
 
     notifyListeners();
+  }
+
+  Future<void> updateProfile(ProfileEntity profile) async {
+    await _repository.updateProfile(profile);
   }
 
   void removeImage() {

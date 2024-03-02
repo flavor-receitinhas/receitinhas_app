@@ -32,7 +32,7 @@ class ProfileRepositoryImp extends ProfileRepository {
     Dio dio = di();
     FormData data = FormData.fromMap({
       "file": await MultipartFile.fromFile(
-        'file.path',
+        imagePath,
         filename: 'fileName.jpg',
       ),
     });
@@ -51,7 +51,7 @@ class ProfileRepositoryImp extends ProfileRepository {
 
   @override
   Future<void> updateProfile(ProfileEntity profileEntity) async {
-    final response = await dio.put('$url/$path/${profileEntity.userID}',
+    final response = await dio.post('$url/$path/${profileEntity.userID}',
         body: _mapper.toMap(profileEntity),
         headers: {
           'Authorization': Global.token,

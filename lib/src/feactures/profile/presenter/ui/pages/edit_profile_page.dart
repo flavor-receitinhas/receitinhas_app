@@ -49,7 +49,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ), // Bordas arredondadas
         ),
         child: SvgPicture.asset('assets/icons/save.svg'),
-        onPressed: () {},
+        onPressed: () {
+          ct.profile!.biography = ct.biographyController.text;
+          ct.updateProfile(ct.profile!);
+          ct.updateImageProfile();
+        },
       ),
       body: ListView(
         children: [
@@ -167,10 +171,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   text: 'Sobre mim',
                 ),
                 const SizedBox(height: 10),
-                const CookieTextField.outline(
+                CookieTextField.outline(
                   hintText: 'Fale um pouco sobre você...',
                   maxLines: 6,
                   maxLength: 400,
+                  controller: ct.biographyController,
                 ),
                 const SizedBox(height: 20),
                 const CookieText(
