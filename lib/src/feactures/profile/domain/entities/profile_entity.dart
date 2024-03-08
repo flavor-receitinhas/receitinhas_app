@@ -2,7 +2,7 @@ class ProfileEntity {
   final String userID;
   final String name;
   String biography;
-  final String? image;
+  String? image;
   final int createdAt;
   final int updatedAt;
 

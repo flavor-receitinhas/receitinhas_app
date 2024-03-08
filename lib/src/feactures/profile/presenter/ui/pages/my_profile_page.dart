@@ -68,11 +68,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         ),
                       ),
                       CircleAvatar(
-                          radius: 45,
-                          backgroundImage: NetworkImage(ct
-                                  .profile.image!.isNotEmpty
-                              ? ct.profile.image!
-                              : 'https://imgs.search.brave.com/oHbOpa1DFRhZUNfgOP9bJaHajzc4hRnBkdlbC1yWKfs/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wYWxl/c3RyYXBhcmFwcm9m/ZXNzb3Jlcy5jb20u/YnIvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMTIvZm90b3Mt/cGFyYS1wZXJmaWwt/Y2FjaG9ycm8tZGUt/b2N1bG9zLWUtZ3Jh/dmF0LWJvcmJvbGV0/YS5wbmc')),
+                        radius: 45,
+                        backgroundImage: ct.profile.image!.isNotEmpty &&
+                                ct.profile.image != null
+                            ? NetworkImage(ct.profile.image!)
+                            : const AssetImage('assets/images/avatar.png')
+                                as ImageProvider,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),

@@ -6,6 +6,8 @@ import 'package:app_receitas/src/feactures/profile/domain/mappers/profile_mapper
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:dio/dio.dart';
 
+import 'package:http_parser/http_parser.dart';
+
 class ProfileRepositoryImp extends ProfileRepository {
   final DioClient dio;
   final ProfileMappper _mapper;
@@ -28,25 +30,34 @@ class ProfileRepositoryImp extends ProfileRepository {
   }
 
   @override
-  Future<void> updateImageProfile(String userID, String imagePath) async {
-    Dio dio = di();
-    FormData data = FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-        imagePath,
-        filename: 'fileName.jpg',
-      ),
-    });
-    final response = await dio.put(
-      '$url/$path/$userID/image',
-      data: data,
-      options: Options(
-        headers: {
-          'Authorization': Global.token,
-        },
-      ),
-    );
+  Future<void> updateImageProfile(String userID, String? imagePath) async {
+    try {
+      Dio dio = di();
+      print(imagePath);
+      final data = imagePath!.isEmpty
+          ? FormData.fromMap({})
+          : FormData.fromMap({
+              "file": await MultipartFile.fromFile(imagePath,
+                  contentType: MediaType('image', 'jpg')),
+            });
+      final response = await dio.put(
+        '$url/$path/$userID/image',
+        data: data,
+        options: Options(
+          headers: {
+            'Authorization': Global.token,
+          },
+        ),
+      );
 
-    _apiResponse.handleResponse(response);
+      _apiResponse.handleResponse(response);
+    } catch (e) {
+      if (e is DioException)
+        print(e.response!.data);
+      else {
+        print(e);
+      }
+    }
   }
 
   @override
@@ -58,5 +69,13 @@ class ProfileRepositoryImp extends ProfileRepository {
         });
 
     _apiResponse.handleResponse(response);
+  }
+
+  (Exception? exception, String sucess) teste() {
+    try {
+      return (null, 'Enviado com sucesso');
+    } catch (e) {
+      return (Exception(e), '');
+    }
   }
 }

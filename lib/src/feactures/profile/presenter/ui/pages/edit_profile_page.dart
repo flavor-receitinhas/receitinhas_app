@@ -67,13 +67,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundImage: ct.image != null
-                          ? FileImage(ct.image!)
-                          : const NetworkImage(
-                                  'https://imgs.search.brave.com/oHbOpa1DFRhZUNfgOP9bJaHajzc4hRnBkdlbC1yWKfs/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wYWxl/c3RyYXBhcmFwcm9m/ZXNzb3Jlcy5jb20u/YnIvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMTIvZm90b3Mt/cGFyYS1wZXJmaWwt/Y2FjaG9ycm8tZGUt/b2N1bG9zLWUtZ3Jh/dmF0LWJvcmJvbGV0/YS5wbmc')
-                              as ImageProvider<Object>?,
+                    Builder(
+                      builder: (context) {
+                        if (ct.profile?.image != null &&
+                            ct.profile!.image!.isNotEmpty) {
+                          return CircleAvatar(
+                            radius: 60,
+                            backgroundImage: NetworkImage(ct.profile!.image!),
+                          );
+                        }
+                        if (ct.image != null && ct.image!.path.isNotEmpty) {
+                          return CircleAvatar(
+                            radius: 60,
+                            backgroundImage: FileImage(ct.image!),
+                          );
+                        }
+                        return const CircleAvatar(
+                          radius: 60,
+                          backgroundImage:
+                              AssetImage('assets/images/avatar.png'),
+                        );
+                      },
                     ),
                     Expanded(
                       child: Column(

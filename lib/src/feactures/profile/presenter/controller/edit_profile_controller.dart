@@ -22,8 +22,7 @@ class EditProfileController extends ChangeNotifier {
   }
 
   Future<void> updateImageProfile() async {
-    await _repository.updateImageProfile(profile!.userID, image!.path);
-    //TODO Ver a questao de quando remover a imagem se vai enviar null ou vazio
+    await _repository.updateImageProfile(profile!.userID, image?.path);
   }
 
   Future<void> pickImageLogo() async {
@@ -40,7 +39,8 @@ class EditProfileController extends ChangeNotifier {
   }
 
   void removeImage() {
-    image = null;
+    image = File('');
+    profile!.image = null;
     notifyListeners();
   }
 }
