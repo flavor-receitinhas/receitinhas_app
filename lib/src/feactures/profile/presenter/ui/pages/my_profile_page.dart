@@ -122,7 +122,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               context,
                               EditProfilePage.route,
                               arguments: ct.profile,
-                            );
+                            ).then((value) =>
+                                ct.refreshProfile(ct.profile.userID));
                           },
                         ),
                       )

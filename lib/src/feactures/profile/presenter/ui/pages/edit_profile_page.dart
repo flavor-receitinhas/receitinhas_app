@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
@@ -33,7 +34,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   void dispose() {
-    ct.image;
+    ct.dispose();
     super.dispose();
   }
 
@@ -50,9 +51,42 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
         child: SvgPicture.asset('assets/icons/save.svg'),
         onPressed: () {
-          ct.profile!.biography = ct.biographyController.text;
-          ct.updateProfile(ct.profile!);
-          ct.updateImageProfile();
+          CookieSheetBottom(
+            title: CookieText(
+              text: 'Deseja salvar as alterações ?',
+              color: Theme.of(context).colorScheme.onSecondary,
+              typography: CookieTypography.title,
+            ),
+            body: Column(
+              children: [
+                CookieText(
+                  text:
+                      'Verifique bem se tem certeza, assim podemos mostrar ao mundo o seu novo perfil!',
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                const SizedBox(height: 10),
+                CookieButton(
+                  label: 'Salvar alterações',
+                  onPressed: () {
+                    ct.profile!.biography = ct.biographyController.text;
+                    ct.updateProfile(ct.profile!);
+                    ct.updateImageProfile();
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                ),
+                const SizedBox(height: 10),
+                CookieButton.outline(
+                  label: 'Descartar alterações',
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
+          ).show(context);
         },
       ),
       body: ListView(

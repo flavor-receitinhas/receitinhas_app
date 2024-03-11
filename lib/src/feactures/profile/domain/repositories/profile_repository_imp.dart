@@ -33,7 +33,6 @@ class ProfileRepositoryImp extends ProfileRepository {
   Future<void> updateImageProfile(String userID, String? imagePath) async {
     try {
       Dio dio = di();
-      print(imagePath);
       final data = imagePath!.isEmpty
           ? FormData.fromMap({})
           : FormData.fromMap({
@@ -71,11 +70,5 @@ class ProfileRepositoryImp extends ProfileRepository {
     _apiResponse.handleResponse(response);
   }
 
-  (Exception? exception, String sucess) teste() {
-    try {
-      return (null, 'Enviado com sucesso');
-    } catch (e) {
-      return (Exception(e), '');
-    }
-  }
+
 }
