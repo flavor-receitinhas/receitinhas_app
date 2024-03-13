@@ -21,6 +21,7 @@ class CreateRecipeController extends ChangeNotifier {
   List<IngredientsEntity> listIngredient = [];
   PageController pageController = PageController();
   int currentPage = 0;
+  Duration durationRecipe = const Duration(hours: 0, minutes: 0);
 
   void init() {
     pageController = PageController(initialPage: 0);
@@ -77,5 +78,15 @@ class CreateRecipeController extends ChangeNotifier {
       timePrepared: 1,
     );
     await _repository.createRecipe(recipe);
+  }
+
+  String get durationRecipeString {
+    if (durationRecipe.inMinutes == 0) {
+      return '';
+    }
+    if (durationRecipe.inHours == 0) {
+      return '${durationRecipe.inMinutes}min';
+    }
+    return '${durationRecipe.inHours}h ${durationRecipe.inMinutes.remainder(60)}min';
   }
 }

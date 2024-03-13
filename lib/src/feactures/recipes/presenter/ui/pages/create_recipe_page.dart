@@ -29,9 +29,10 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
     return PageView(
       onPageChanged: ct.onChangedPage,
       controller: ct.pageController,
+      physics: const NeverScrollableScrollPhysics(),
       children: [
         IntroduceCreatePage(ct: ct),
-        const InfoCreatePage(),
+         InfoCreatePage(ct: ct,),
       ],
     );
   }
