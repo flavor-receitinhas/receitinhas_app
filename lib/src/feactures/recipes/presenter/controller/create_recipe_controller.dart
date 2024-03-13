@@ -20,11 +20,14 @@ class CreateRecipeController extends ChangeNotifier {
   TextEditingController serveFoodController = TextEditingController();
   List<IngredientsEntity> listIngredient = [];
   PageController pageController = PageController();
+  PageController containerController = PageController();
   int currentPage = 0;
   Duration durationRecipe = const Duration(hours: 0, minutes: 0);
+  DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
 
   void init() {
     pageController = PageController(initialPage: 0);
+    containerController = PageController(initialPage: 0);
   }
 
   void onChangedPage(int value) {
@@ -88,5 +91,16 @@ class CreateRecipeController extends ChangeNotifier {
       return '${durationRecipe.inMinutes}min';
     }
     return '${durationRecipe.inHours}h ${durationRecipe.inMinutes.remainder(60)}min';
+  }
+
+  String get difficultyRecipeString {
+    if (difficultyRecipe.name == 'easy') {
+      return 'Fácil';
+    }
+    if (difficultyRecipe.name == 'medium') {
+      return 'Médio';
+    }
+
+    return 'Difícil';
   }
 }
