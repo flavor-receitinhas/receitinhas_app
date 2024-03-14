@@ -36,7 +36,14 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                 );
               },
             ),
-            InfoContainerDifficultyRecipe(ct: ct),
+            InfoContainerDifficultyRecipe(
+              ct: ct,
+              onChanged: (e) {
+                setState(() {
+                  widget.ct.difficultyRecipe = e;
+                });
+              },
+            ),
             InfoContainerPortion(
               ct: ct,
               onChangedField: (value) {
@@ -66,7 +73,12 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
             const SizedBox(height: 10),
             CookieButton(
               label: 'Voltar',
-              onPressed: () {},
+              onPressed: () {
+                ct.pageController.previousPage(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                );
+              },
             ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

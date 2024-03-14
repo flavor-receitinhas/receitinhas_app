@@ -7,17 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class InfoContainerDifficultyRecipe extends StatefulWidget {
+class InfoContainerDifficultyRecipe extends StatelessWidget {
   final CreateRecipeController ct;
-  const InfoContainerDifficultyRecipe({super.key, required this.ct});
+  final Function(DifficultyRecipe) onChanged;
+  const InfoContainerDifficultyRecipe(
+      {super.key, required this.ct, required this.onChanged});
 
-  @override
-  State<InfoContainerDifficultyRecipe> createState() =>
-      _InfoContainerDifficultyRecipeState();
-}
-
-class _InfoContainerDifficultyRecipeState
-    extends State<InfoContainerDifficultyRecipe> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,11 +40,9 @@ class _InfoContainerDifficultyRecipeState
                       label: AppLocalizations.of(context)!
                           .difficultyRecipesOptions(e.name),
                       onPressed: () {
-                        setState(() {
-                          widget.ct.difficultyRecipe = e;
-                        });
+                        onChanged(e);
                       },
-                      isSelect: widget.ct.difficultyRecipe == e,
+                      isSelect: ct.difficultyRecipe == e,
                       prefix: SvgPicture.asset(
                         ImageContext().svgIconDifficulty(e),
                         colorFilter: ColorFilter.mode(
@@ -65,14 +58,32 @@ class _InfoContainerDifficultyRecipeState
                 )
                 .toList(),
           ),
-          CookieButton(
-            label: 'Proximo',
-            onPressed: () {
-              widget.ct.containerController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
-              );
-            },
+          Row(
+            children: [
+              Expanded(
+                child: CookieButton(
+                  label: 'Voltar',
+                  onPressed: () {
+                    ct.containerController.previousPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: CookieButton(
+                  label: 'Proximo',
+                  onPressed: () {
+                    ct.containerController.nextPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),

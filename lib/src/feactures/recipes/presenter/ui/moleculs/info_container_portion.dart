@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class InfoContainerPortion extends StatelessWidget {
@@ -93,14 +94,33 @@ class InfoContainerPortion extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          CookieButton(
-            label: 'Salvar',
-            onPressed: () {
-              ct.pageController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
-              );
-            },
+          Row(
+            children: [
+              Expanded(
+                child: CookieButton(
+                  label: 'Voltar',
+                  onPressed: () {
+                    ct.containerController.previousPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  },
+                ),
+              ),
+              
+              const SizedBox(width: 20),
+              Expanded(
+                child: CookieButton(
+                  label: 'Salvar',
+                  onPressed: () {
+                    ct.pageController.nextPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
