@@ -1,10 +1,20 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class InfoContainerPortion extends StatelessWidget {
-  const InfoContainerPortion({super.key});
+  final CreateRecipeController ct;
+  final Function(String) onChangedField;
+  final Function() onPressedDecresead;
+  final Function() onPressedIncrease;
+  const InfoContainerPortion(
+      {super.key,
+      required this.ct,
+      required this.onChangedField,
+      required this.onPressedDecresead,
+      required this.onPressedIncrease});
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +30,17 @@ class InfoContainerPortion extends StatelessWidget {
         children: [
           CookieText(
             text: 'Porções',
-            typography: CookieTypography.title,
+            typography: CookieTypography.button,
             color: Theme.of(context).colorScheme.onSecondary,
           ),
+          const SizedBox(height: 20),
           CookieText(
-            text: 'Quantas porções sua receita pode servir?',
-            typography: CookieTypography.button,
+            text: 'Quantas porções sua\nreceita pode servir?',
+            typography: CookieTypography.title,
             color: Theme.of(context).colorScheme.onSecondary,
             textAlign: TextAlign.center,
           ),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -40,11 +52,55 @@ class InfoContainerPortion extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
               ),
+              IconButton(
+                onPressed: onPressedDecresead,
+                color: Theme.of(context).colorScheme.onSecondary,
+                icon: const Icon(
+                  Icons.remove_circle_rounded,
+                  size: 30,
+                ),
+              ),
+              SizedBox(
+                width: 50,
+                child: TextField(
+                  controller: ct.portionController,
+                  onChanged: onChangedField,
+                  maxLength: 3,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  decoration: const InputDecoration(
+                    counterText: '',
+                    hintStyle: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: onPressedIncrease,
+                color: Theme.of(context).colorScheme.onSecondary,
+                icon: const Icon(
+                  Icons.add_circle_rounded,
+                  size: 30,
+                ),
+              ),
             ],
           ),
+          const Spacer(),
           CookieButton(
             label: 'Salvar',
-            onPressed: () {},
+            onPressed: () {
+              ct.pageController.nextPage(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
+            },
           ),
         ],
       ),

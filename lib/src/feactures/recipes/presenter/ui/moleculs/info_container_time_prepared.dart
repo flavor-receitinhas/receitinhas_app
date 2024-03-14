@@ -5,16 +5,12 @@ import 'package:duration_time_picker/duration_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InfoContainerTimePrepared extends StatefulWidget {
+class InfoContainerTimePrepared extends StatelessWidget {
   final CreateRecipeController ct;
-  const InfoContainerTimePrepared({super.key, required this.ct});
+  final void Function(Duration) onChange;
+  const InfoContainerTimePrepared(
+      {super.key, required this.ct, required this.onChange});
 
-  @override
-  State<InfoContainerTimePrepared> createState() =>
-      _InfoContainerTimePreparedState();
-}
-
-class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,21 +29,19 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
             color: Theme.of(context).colorScheme.onSecondary,
           ),
           DurationTimePicker(
-            size: 250,
-            duration: widget.ct.durationRecipe,
+            size: 230,
+            duration: ct.durationRecipe,
             labelStyle: GoogleFonts.jetBrainsMono(
                 textStyle: const TextStyle(
-              fontSize: 50,
+              fontSize: 45,
             )),
             progressColor: Theme.of(context).colorScheme.primary,
-            onChange: (val) {
-              setState(() => widget.ct.durationRecipe = val);
-            },
+            onChange: onChange,
           ),
           CookieButton(
             label: 'Proximo',
             onPressed: () {
-              widget.ct.containerController.nextPage(
+              ct.containerController.nextPage(
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.ease,
               );

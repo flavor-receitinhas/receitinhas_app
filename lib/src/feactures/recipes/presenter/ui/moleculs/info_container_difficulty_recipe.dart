@@ -29,13 +29,13 @@ class _InfoContainerDifficultyRecipeState
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CookieText(
             text: 'Dificuldade',
             typography: CookieTypography.title,
             color: Theme.of(context).colorScheme.onSecondary,
           ),
-          const SizedBox(height: 10),
           Column(
             children: DifficultyRecipe.values
                 .map(
@@ -65,14 +65,13 @@ class _InfoContainerDifficultyRecipeState
                 )
                 .toList(),
           ),
-          const SizedBox(height: 20),
           CookieButton(
             label: 'Proximo',
             onPressed: () {
-              //      ct.pageController.nextPage(
-              //   duration: const Duration(milliseconds: 500),
-              //   curve: Curves.ease,
-              // );
+              widget.ct.containerController.nextPage(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
             },
           ),
         ],

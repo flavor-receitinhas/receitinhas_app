@@ -18,12 +18,14 @@ class CreateRecipeController extends ChangeNotifier {
   TextEditingController detailsController = TextEditingController();
   TextEditingController instructionController = TextEditingController();
   TextEditingController serveFoodController = TextEditingController();
+  TextEditingController portionController = TextEditingController();
   List<IngredientsEntity> listIngredient = [];
   PageController pageController = PageController();
   PageController containerController = PageController();
   int currentPage = 0;
   Duration durationRecipe = const Duration(hours: 0, minutes: 0);
   DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
+  int portion = 0;
 
   void init() {
     pageController = PageController(initialPage: 0);

@@ -5,9 +5,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_co
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_difficulty_recipe.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_portion.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_time_prepared.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class InfoCreatePage extends StatefulWidget {
@@ -24,9 +22,46 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.45,
+        child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: ct.containerController,
+          children: [
+            InfoContainerTimePrepared(
+              ct: ct,
+              onChange: (val) {
+                setState(
+                  () => widget.ct.durationRecipe = val,
+                );
+              },
+            ),
+            InfoContainerDifficultyRecipe(ct: ct),
+            InfoContainerPortion(
+              ct: ct,
+              onChangedField: (value) {
+                ct.portion = int.tryParse(value) ?? 0;
+              },
+              onPressedIncrease: () {
+                setState(() {
+                  ct.portion++;
+                  ct.portionController.text = ct.portion.toString();
+                });
+              },
+              onPressedDecresead: () {
+                if (ct.portion > 0) {
+                  ct.portion--;
+                }
+                setState(() {
+                  ct.portionController.text = ct.portion.toString();
+                });
+              },
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             const SizedBox(height: 10),
             CookieButton(
@@ -85,36 +120,25 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                           ],
                         ),
                         const SizedBox(width: 16),
-                        Column(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/pot.svg',
-                              colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.onPrimary,
-                                BlendMode.srcIn,
+                        Visibility(
+                          visible: ct.portion > 0,
+                          child: Column(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/pot.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Theme.of(context).colorScheme.onPrimary,
+                                  BlendMode.srcIn,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 5),
-                            const CookieText(text: '5 porções')
-                          ],
+                              const SizedBox(height: 5),
+                              CookieText(text: '${ct.portion} porções')
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: PageView(
-                //physics: const NeverScrollableScrollPhysics(),
-                controller: ct.containerController,
-                children: [
-                  InfoContainerTimePrepared(
-                    ct: ct,
-                  ),
-                  InfoContainerDifficultyRecipe(ct: ct),
-                  const InfoContainerPortion(),
                 ],
               ),
             ),
