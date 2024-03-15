@@ -62,7 +62,7 @@ class InfoContainerPortion extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 50,
+                width: 60,
                 child: TextField(
                   controller: ct.portionController,
                   onChanged: onChangedField,

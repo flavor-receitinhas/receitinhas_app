@@ -1,47 +1,59 @@
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/select_ingredient_container.dart';
 import 'package:flutter/material.dart';
 
-class SelectIngredients extends StatelessWidget {
+class SelectIngredients extends StatefulWidget {
   const SelectIngredients({super.key});
 
   @override
+  State<SelectIngredients> createState() => _SelectIngredientsState();
+}
+
+class _SelectIngredientsState extends State<SelectIngredients> {
+  String dropdownValue = 'Unidade 1';
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        surfaceTintColor: Theme.of(context).colorScheme.background,
-        automaticallyImplyLeading: false,
-        titleSpacing: 0,
-        title: const CookieButton(label: 'Voltar').back(context),
-      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 10, right: 16, left: 16),
-          child: CustomScrollView(
-            slivers: [
-              const SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CookieText(
-                      text: 'Selecionar ingredientes',
-                      typography: CookieTypography.title,
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  const CookieButton(label: 'Voltar').back(context),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10),
+                        CookieText(
+                          text: 'Selecionar ingredientes',
+                          typography: CookieTypography.title,
+                        ),
+                        SizedBox(height: 10),
+                        CookieTextFieldSearch(
+                            hintText: 'Pesquise seus ingredientes'),
+                        SizedBox(height: 20),
+                        CookieText(
+                          text: 'Ingredientes selecionados (1)',
+                          typography: CookieTypography.button,
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 10),
-                    CookieTextFieldSearch(
-                        hintText: 'Pesquise seus ingredientes'),
-                    SizedBox(height: 20),
-                    CookieText(
-                        text: 'Ingredientes selecionados (1)',
-                        typography: CookieTypography.button),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SliverVisibility(
-                visible: true,
+            ),
+            SliverVisibility(
+              visible: true,
+              sliver: SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 sliver: SliverList.builder(
                   itemCount: 3,
                   itemBuilder: (context, index) {
@@ -49,61 +61,150 @@ class SelectIngredients extends StatelessWidget {
                   },
                 ),
               ),
-              const SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: CookieText(
-                    text: 'Escolha outros ingredientes abaixo',
-                    typography: CookieTypography.button,
-                  ),
+            ),
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16, 20, 16, 10),
+                child: CookieText(
+                  text: 'Escolha outros ingredientes abaixo',
+                  typography: CookieTypography.button,
                 ),
               ),
-              SliverList.builder(
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              sliver: SliverList.builder(
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                  return Stack(
-                    children: [
-                      Container(
-                        height: 90,
-                        padding: const EdgeInsets.only(
-                          right: 10,
-                          top: 10,
-                          bottom: 10,
+                  return InkWell(
+                    onTap: () {
+                      CookieSheetBottom(
+                        alignmentTitle: Alignment.center,
+                        title: CookieText(
+                          text: 'Selecionar quantidade',
+                          typography: CookieTypography.title,
+                          color: Theme.of(context).colorScheme.onSecondary,
                         ),
-                        margin: const EdgeInsets.only(top: 20),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Row(
+                        body: Column(
                           children: [
-                            SizedBox(width: 110),
-                            Expanded(
-                              child: CookieText(
-                                text: 'Salada de Legume  asdasda  asd',
-                                typography: CookieTypography.button,
-                                maxLine: 2,
-                                overflow: TextOverflow.ellipsis,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  icon: const Icon(
+                                    Icons.remove_circle_rounded,
+                                    size: 30,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 60,
+                                  child: TextField(
+                                    // controller: ct.portionController,
+                                    // onChanged: onChangedField,
+                                    maxLength: 3,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    decoration: InputDecoration(
+                                      counterText: '',
+                                      hintStyle: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  icon: const Icon(
+                                    Icons.add_circle_rounded,
+                                    size: 30,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  style: BorderStyle.solid,
+                                  width: 1,
+                                ),
+                              ),
+                              child: DropdownButton(
+                                iconEnabledColor:
+                                    Theme.of(context).colorScheme.onSecondary,
+                                value: dropdownValue,
+                                dropdownColor:
+                                    Theme.of(context).colorScheme.onPrimary,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                underline: const SizedBox(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValue = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Unidade 1',
+                                  'Unidade 2',
+                                  'Unidade 3',
+                                  'Unidade 4'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: CookieText(
+                                      text: value,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary,
+                                    ),
+                                  );
+                                }).toList(),
                               ),
                             ),
+                            const SizedBox(height: 20),
+                            CookieButton(
+                              label: 'Confirmar',
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            )
                           ],
                         ),
+                      ).show(context);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Image.network(
-                          'https://media.discordapp.net/attachments/1071892919633576117/1174455155555586088/image.png?ex=6567a799&is=65553299&hm=e89afd78cf99f59bc2346946ae7355ba03fde27ad8a59c7cd50c6354835ed334&=&width=121&height=113',
-                          height: 100,
-                          width: 100,
-                        ),
+                      child: const CookieText(
+                        text: 'Salada de Legume  asdasda  asd',
+                        typography: CookieTypography.button,
+                        maxLine: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ],
+                    ),
                   );
                 },
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

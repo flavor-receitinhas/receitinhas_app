@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/info_create_page.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/ingredient_create_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/introduce_create_page.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,8 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         IntroduceCreatePage(ct: ct),
-         InfoCreatePage(ct: ct,),
+        InfoCreatePage(ct: ct),
+        IngredientCreatePage(ct: ct),
       ],
     );
   }
