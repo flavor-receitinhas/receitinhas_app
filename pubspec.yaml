@@ -15,10 +15,10 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  intl: ^0.18.0
+  intl: ^0.18.1
   flutter_svg: ^2.0.7
   sembast: ^3.5.0+1
-  uuid: ^3.0.7
+  uuid: ^4.3.3
   path: ^1.8.3
   path_provider: ^2.0.15
   firebase_core: ^2.15.1
@@ -35,10 +35,13 @@ dependencies:
   duration_time_picker:
     path: ../packages/duration_time_picker
   google_fonts: ^6.2.1
+  flutter_quill:
+    path: ../packages/flutter-quill
+  vsc_quill_delta_to_html: ^1.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 flutter:
   generate: true

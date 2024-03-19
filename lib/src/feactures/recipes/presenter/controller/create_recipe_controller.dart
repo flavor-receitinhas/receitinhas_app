@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_en
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateRecipeController extends ChangeNotifier {
@@ -26,6 +27,7 @@ class CreateRecipeController extends ChangeNotifier {
   Duration durationRecipe = const Duration(hours: 0, minutes: 0);
   DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
   int portion = 0;
+  final quillController = QuillController.basic();
 
   void init() {
     pageController = PageController(initialPage: 0);

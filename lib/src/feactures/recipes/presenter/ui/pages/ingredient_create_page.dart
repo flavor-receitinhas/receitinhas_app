@@ -25,6 +25,7 @@ class IngredientCreatePage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
+            const SizedBox(height: 10),
             CookieButton(
               label: 'Voltar',
               onPressed: () {

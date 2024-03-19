@@ -35,20 +35,6 @@ class CreateDetailsRecipe extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        ContainerCreateInfo(
-          title: 'Instruções de preparo',
-          iconSvg: 'assets/icons/knife.svg',
-          child: CookieTextField(
-            controller: ct.instructionController,
-            maxLines: 4,
-            validator: (value) {
-              if (value != null && value.length < 30) {
-                return "Escreva mais algumas instruções";
-              }
-              return null;
-            },
-          ),
-        ),
         const SizedBox(height: 20),
         ContainerCreateInfo(
           title: 'Hora de se servir!',
