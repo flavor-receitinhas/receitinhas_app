@@ -72,15 +72,28 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
         label: 'Próximo',
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
-          widget.ct.pageController.nextPage(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.ease,
-          );
+          if (widget.ct.quillInstructionController.document
+                  .toPlainText()
+                  .length >
+              50) {
+            widget.ct.pageController.nextPage(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.ease,
+            );
+          } else {
+            final snackBar = SnackBar(
+              content: const CookieText(
+                  text: 'Escreva no minimo 50 caracteres para avançar.'),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
         },
       ),
       body: SafeArea(
         child: ListView(
           children: [
+            const SizedBox(height: 10),
             CookieButton(
               label: 'Voltar',
               onPressed: () {

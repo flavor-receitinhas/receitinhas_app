@@ -43,25 +43,3 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
     );
   }
 }
-
-// return Scaffold(
-//   body: SafeArea(
-//     child: Form(
-//       autovalidateMode: AutovalidateMode.onUserInteraction,
-//       key: formKey,
-//       child: ListView(
-//         padding: const EdgeInsets.symmetric(horizontal: 16),
-//         children: [
-//           const SizedBox(height: 10),
-//           CreateBackAndSafeButton(ct: ct),
-//           const SizedBox(height: 10),
-//           
-//           const SizedBox(height: 20),
-//           const CreateAdditionalInfo(),
-//           const SizedBox(height: 20),
-//           CreateDetailsRecipe(ct: ct),
-//           const SizedBox(height: 20),
-//         ],
-//       ),
-//     ),
-//   ),

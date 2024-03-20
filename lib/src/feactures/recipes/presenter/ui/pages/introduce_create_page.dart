@@ -26,10 +26,20 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
         label: 'Proximo',
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
-          ct.pageController.nextPage(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.ease,
-          );
+          if (formKey.currentState!.validate() &&
+              ct.listMultiMedia.isNotEmpty) {
+            ct.pageController.nextPage(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.ease,
+            );
+          }
+          if (ct.listMultiMedia.isEmpty) {
+            final snackBar = SnackBar(
+              content: const CookieText(text: 'Adicione uma imagem'),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
         },
       ),
       body: SafeArea(
@@ -141,8 +151,8 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         ),
                         controller: ct.titleController,
                         validator: (value) {
-                          if (value!.isNotEmpty && value.length < 3) {
-                            return 'Escreva um titulo, com no minimo 3 letras';
+                          if (value!.isEmpty || value.length < 3) {
+                            return 'Escreva um titulo com no mínimo 3 letras';
                           }
                           return null;
                         },
@@ -167,7 +177,13 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                       CookieTextField.outline(
                         hintText: 'Fale um pouco da sua receita aqui...',
                         controller: ct.detailsController,
-                        maxLines: 5,
+                        minLines: 5,
+                        validator: (value) {
+                          if (value!.isEmpty || value.length < 10) {
+                            return 'Escreva um pouco mais sobre a receita';
+                          }
+                          return null;
+                        },
                       ),
                     ],
                   ),

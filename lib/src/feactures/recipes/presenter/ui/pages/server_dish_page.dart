@@ -83,6 +83,7 @@ class _ServerDishPageState extends State<ServerDishPage> {
       body: SafeArea(
         child: ListView(
           children: [
+            const SizedBox(height: 10),
             CookieButton(
               label: 'Voltar',
               onPressed: () {
@@ -146,7 +147,8 @@ class _ServerDishPageState extends State<ServerDishPage> {
                             customStyles: defaultStyles,
                             controller: widget.ct.quillServerController,
                             minHeight: 200,
-                            placeholder: 'Escreva em detalhes como servir o prato...',
+                            placeholder:
+                                'Escreva em detalhes como servir o prato...',
                           ),
                         ),
                       )

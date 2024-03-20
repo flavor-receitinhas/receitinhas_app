@@ -41,10 +41,19 @@ class InfoContainerTimePrepared extends StatelessWidget {
           CookieButton(
             label: 'Proximo',
             onPressed: () {
-              ct.containerController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
-              );
+              if (ct.durationRecipe.inMinutes > 0) {
+                ct.containerController.nextPage(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                );
+              } else {
+                //TODO Melhorar o snack bar ja que ta em cima do container
+                final snackBar = SnackBar(
+                  content: const CookieText(text: 'Informe o tempo de preparo'),
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
             },
           ),
         ],

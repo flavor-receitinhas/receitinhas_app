@@ -107,16 +107,26 @@ class InfoContainerPortion extends StatelessWidget {
                   },
                 ),
               ),
-              
               const SizedBox(width: 20),
               Expanded(
                 child: CookieButton(
                   label: 'Salvar',
                   onPressed: () {
-                    ct.pageController.nextPage(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.ease,
-                    );
+                    if (ct.portion > 0) {
+                      ct.pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    } else {
+                      //TODO Melhorar o snack bar ja que ta em cima do container
+                      final snackBar = SnackBar(
+                        content: const CookieText(
+                            text: 'Informe quantas porções sua receita pode servir'),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondary,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
                   },
                 ),
               ),

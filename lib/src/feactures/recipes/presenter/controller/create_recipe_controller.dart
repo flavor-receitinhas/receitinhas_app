@@ -42,7 +42,7 @@ class CreateRecipeController extends ChangeNotifier {
 
   void pickMultiMedia() async {
     List<XFile> listImage =
-        await ImagePicker().pickMultipleMedia(imageQuality: 50);
+        await ImagePicker().pickMultipleMedia();
     for (var image in listImage) {
       listMultiMedia.add(File(image.path));
     }
