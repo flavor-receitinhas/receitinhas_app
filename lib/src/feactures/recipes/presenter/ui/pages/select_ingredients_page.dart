@@ -5,14 +5,14 @@ import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/select_ingredient_container.dart';
 import 'package:flutter/material.dart';
 
-class SelectIngredients extends StatefulWidget {
-  const SelectIngredients({super.key});
+class SelectIngredientsPage extends StatefulWidget {
+  const SelectIngredientsPage({super.key});
 
   @override
-  State<SelectIngredients> createState() => _SelectIngredientsState();
+  State<SelectIngredientsPage> createState() => _SelectIngredientsPageState();
 }
 
-class _SelectIngredientsState extends State<SelectIngredients> {
+class _SelectIngredientsPageState extends State<SelectIngredientsPage> {
   String dropdownValue = 'Unidade 1';
   @override
   Widget build(BuildContext context) {

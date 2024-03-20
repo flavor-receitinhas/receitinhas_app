@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class IntructionCreatePage extends StatefulWidget {
+class ServerDishPage extends StatefulWidget {
   final CreateRecipeController ct;
-  const IntructionCreatePage({super.key, required this.ct});
+  const ServerDishPage({super.key, required this.ct});
 
   @override
-  State<IntructionCreatePage> createState() => _IntructionCreatePageState();
+  State<ServerDishPage> createState() => _ServerDishPageState();
 }
 
-class _IntructionCreatePageState extends State<IntructionCreatePage> {
+class _ServerDishPageState extends State<ServerDishPage> {
   @override
   Widget build(BuildContext context) {
     final colorText = Theme.of(context).colorScheme.onPrimary;
@@ -66,10 +66,12 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
         null,
       ),
     );
-
+    // print(QuillDeltaToHtmlConverter(
+    //         widget.ct.quillServerController.document.toDelta().toJson())
+    //     .convert());
     return Scaffold(
       bottomNavigationBar: CookieButton(
-        label: 'Próximo',
+        label: 'Finalizar',
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
           widget.ct.pageController.nextPage(
@@ -96,9 +98,15 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CookieText(
-                    text: 'Instruções de preparo',
+                    text: 'Hora de se servir!',
                     typography: CookieTypography.title,
                   ),
+                  const SizedBox(height: 20),
+                  const CookieText(
+                    text:
+                        'Escreva um consideração final dando alguma dica ou informação útil para quem estiver concluindo ou concluir a receita.',
+                  ),
+                  const SizedBox(height: 10),
                   QuillToolbar.simple(
                     configurations: QuillSimpleToolbarConfigurations(
                       buttonOptions: QuillSimpleToolbarButtonOptions(
@@ -111,7 +119,7 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
                         color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      controller: widget.ct.quillInstructionController,
+                      controller: widget.ct.quillServerController,
                       showAlignmentButtons: false,
                       showCodeBlock: false,
                       showDividers: false,
@@ -132,13 +140,13 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
                   Column(
                     children: [
                       ContainerCreateInfo(
-                        iconSvg: 'assets/icons/knife.svg',
+                        iconSvg: 'assets/icons/pan.svg',
                         child: QuillEditor.basic(
                           configurations: QuillEditorConfigurations(
                             customStyles: defaultStyles,
-                            controller: widget.ct.quillInstructionController,
+                            controller: widget.ct.quillServerController,
                             minHeight: 200,
-                            placeholder: 'Escreva as instruções de preparo...',
+                            placeholder: 'Escreva em detalhes como servir o prato...',
                           ),
                         ),
                       )

@@ -2,7 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients_page.dart';
 import 'package:flutter/material.dart';
 
 class IngredientCreatePage extends StatelessWidget {
@@ -60,7 +60,7 @@ class IngredientCreatePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SelectIngredients(),
+                              builder: (context) => const SelectIngredientsPage(),
                             ),
                           );
                         },

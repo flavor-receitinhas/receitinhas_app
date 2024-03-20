@@ -27,7 +27,8 @@ class CreateRecipeController extends ChangeNotifier {
   Duration durationRecipe = const Duration(hours: 0, minutes: 0);
   DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
   int portion = 0;
-  final quillController = QuillController.basic();
+  final quillInstructionController = QuillController.basic();
+  final quillServerController = QuillController.basic();
 
   void init() {
     pageController = PageController(initialPage: 0);
