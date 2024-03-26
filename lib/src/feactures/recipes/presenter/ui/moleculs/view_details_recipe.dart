@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 class ViewDetailsRecipe extends StatelessWidget {
   final String details;
@@ -18,6 +19,7 @@ class ViewDetailsRecipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -72,8 +74,11 @@ class ViewDetailsRecipe extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              CookieText(
-                text: instruction,
+              HtmlWidget(
+                instruction,
+                textStyle: TextStyle(
+                  color: theme.onPrimary,
+                ),
               ),
             ],
           ),
@@ -96,8 +101,11 @@ class ViewDetailsRecipe extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                CookieText(
-                  text: serveFood,
+                HtmlWidget(
+                  serveFood,
+                  textStyle: TextStyle(
+                    color: theme.onPrimary,
+                  ),
                 ),
               ],
             ),
