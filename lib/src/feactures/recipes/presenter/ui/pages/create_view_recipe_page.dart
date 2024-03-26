@@ -5,6 +5,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_in
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
+
 class CreateViewRecipePage extends StatelessWidget {
   final CreateRecipeController ct;
   const CreateViewRecipePage({super.key, required this.ct});
@@ -59,11 +60,12 @@ class CreateViewRecipePage extends StatelessWidget {
                             .toDelta()
                             .toJson())
                         .convert(),
-                    serveFood: QuillDeltaToHtmlConverter(ct
-                            .quillServerController.document
-                            .toDelta()
-                            .toJson())
-                        .convert(),
+                    serveFood: ct.quillServerController.document.toPlainText().trim().isEmpty
+                        ? ''
+                        : QuillDeltaToHtmlConverter(ct
+                                .quillServerController.document.toDelta()
+                                .toJson())
+                            .convert(),
                   ),
                   const SizedBox(height: 10),
                 ],
