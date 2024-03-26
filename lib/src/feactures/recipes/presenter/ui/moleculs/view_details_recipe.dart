@@ -1,12 +1,20 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ViewDetailsRecipe extends StatelessWidget {
-  final RecipeEntity recipe;
-  const ViewDetailsRecipe({super.key, required this.recipe});
+  final String details;
+  final List<String> ingredients;
+  final String instruction;
+  final String serveFood;
+  const ViewDetailsRecipe({
+    super.key,
+    required this.details,
+    required this.ingredients,
+    required this.instruction,
+    required this.serveFood,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,7 @@ class ViewDetailsRecipe extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         CookieText(
-          text: recipe.details!,
+          text: details,
         ),
         const SizedBox(height: 20),
         CustomContainer(
@@ -38,11 +46,11 @@ class ViewDetailsRecipe extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               ListView.builder(
-                itemCount: recipe.ingredients.length,
+                itemCount: ingredients.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return CookieText(text: recipe.ingredients[index]);
+                  return CookieText(text: ingredients[index]);
                 },
               )
             ],
@@ -65,14 +73,14 @@ class ViewDetailsRecipe extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               CookieText(
-                text: recipe.instruction,
+                text: instruction,
               ),
             ],
           ),
         ),
         const SizedBox(height: 20),
         Visibility(
-          visible: recipe.serveFood!.isNotEmpty,
+          visible: serveFood.isNotEmpty,
           child: CustomContainer(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +97,7 @@ class ViewDetailsRecipe extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 CookieText(
-                  text: recipe.serveFood!,
+                  text: serveFood,
                 ),
               ],
             ),

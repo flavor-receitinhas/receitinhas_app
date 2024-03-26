@@ -30,7 +30,7 @@ class InfoContainerTimePrepared extends StatelessWidget {
           ),
           DurationTimePicker(
             size: 230,
-            duration: ct.durationRecipe,
+            duration: ct.timePreparedRecipe,
             labelStyle: GoogleFonts.jetBrainsMono(
                 textStyle: const TextStyle(
               fontSize: 45,
@@ -41,7 +41,7 @@ class InfoContainerTimePrepared extends StatelessWidget {
           CookieButton(
             label: 'Proximo',
             onPressed: () {
-              if (ct.durationRecipe.inMinutes > 0) {
+              if (ct.timePreparedRecipe.inMinutes > 0) {
                 ct.containerController.nextPage(
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.ease,

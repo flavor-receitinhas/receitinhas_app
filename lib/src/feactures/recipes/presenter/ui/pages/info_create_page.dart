@@ -32,7 +32,7 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
               ct: ct,
               onChange: (val) {
                 setState(
-                  () => widget.ct.durationRecipe = val,
+                  () => widget.ct.timePreparedRecipe = val,
                 );
               },
             ),
@@ -100,7 +100,7 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Visibility(
-                          visible: ct.durationRecipe.inMinutes > 0,
+                          visible: ct.timePreparedRecipe.inMinutes > 0,
                           child: Column(
                             children: [
                               SvgPicture.asset(

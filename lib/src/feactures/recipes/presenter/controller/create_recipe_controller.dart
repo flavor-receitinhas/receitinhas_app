@@ -6,6 +6,7 @@ import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_re
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
 class CreateRecipeController extends ChangeNotifier {
   var listMultiMedia = [];
@@ -17,14 +18,12 @@ class CreateRecipeController extends ChangeNotifier {
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-  TextEditingController instructionController = TextEditingController();
-  TextEditingController serveFoodController = TextEditingController();
   TextEditingController portionController = TextEditingController();
   List<IngredientsEntity> listIngredient = [];
   PageController pageController = PageController();
   PageController containerController = PageController();
   int currentPage = 0;
-  Duration durationRecipe = const Duration(hours: 0, minutes: 0);
+  Duration timePreparedRecipe = const Duration(hours: 0, minutes: 0);
   DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
   int portion = 0;
   final quillInstructionController = QuillController.basic();
@@ -41,8 +40,7 @@ class CreateRecipeController extends ChangeNotifier {
   }
 
   void pickMultiMedia() async {
-    List<XFile> listImage =
-        await ImagePicker().pickMultipleMedia();
+    List<XFile> listImage = await ImagePicker().pickMultipleMedia();
     for (var image in listImage) {
       listMultiMedia.add(File(image.path));
     }
@@ -77,11 +75,15 @@ class CreateRecipeController extends ChangeNotifier {
       title: titleController.text,
       subTitle: subTitleController.text,
       details: detailsController.text,
-      serveFood: serveFoodController.text,
+      serveFood: QuillDeltaToHtmlConverter(
+        quillServerController.document.toDelta().toJson(),
+      ).convert(),
       difficultyRecipe: DifficultyRecipe.easy,
       images: [],
       ingredients: [],
-      instruction: instructionController.text,
+      instruction: QuillDeltaToHtmlConverter(
+        quillInstructionController.document.toDelta().toJson(),
+      ).convert(),
       portion: 1,
       timePrepared: 1,
     );
@@ -89,13 +91,13 @@ class CreateRecipeController extends ChangeNotifier {
   }
 
   String get durationRecipeString {
-    if (durationRecipe.inMinutes == 0) {
+    if (timePreparedRecipe.inMinutes == 0) {
       return '';
     }
-    if (durationRecipe.inHours == 0) {
-      return '${durationRecipe.inMinutes}min';
+    if (timePreparedRecipe.inHours == 0) {
+      return '${timePreparedRecipe.inMinutes}min';
     }
-    return '${durationRecipe.inHours}h ${durationRecipe.inMinutes.remainder(60)}min';
+    return '${timePreparedRecipe.inHours}h ${timePreparedRecipe.inMinutes.remainder(60)}min';
   }
 
   String get difficultyRecipeString {
