@@ -72,7 +72,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ct.updateProfile(ct.profile!);
                     ct.updateImageProfile();
                     Navigator.pop(context);
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                   },
                 ),
                 const SizedBox(height: 10),
@@ -91,7 +91,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       body: ListView(
         children: [
-          const AppBarProfile(),
+          const AppBarProfile(
+            title: 'Seu perfil',
+            subTitle: 'Aqui fica suas receitas publicadas',
+          ),
           const CookieButton(label: 'Voltar').back(context),
           const SizedBox(height: 20),
           Padding(

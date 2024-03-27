@@ -2,7 +2,10 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:flutter/material.dart';
 
 class AppBarProfile extends StatelessWidget {
-  const AppBarProfile({super.key});
+  final String title;
+  final String subTitle;
+
+  const AppBarProfile({super.key, required this.title, required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +16,11 @@ class AppBarProfile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CookieText(
-            text: 'Seu perfil',
+            text: title,
             typography: CookieTypography.title,
             color: theme.primary,
           ),
-          const CookieText(text: 'Aqui fica suas receitas publicadas'),
+          CookieText(text: subTitle),
         ],
       ),
     );

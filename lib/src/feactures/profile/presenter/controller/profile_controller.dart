@@ -12,6 +12,7 @@ class ProfileController extends ChangeNotifier {
   PageState state = PageState.loading;
 
   void init() async {
+    state = PageState.loading;
     profile = await _repository.getProfile(Global.user!.id);
     state = PageState.done;
     notifyListeners();
@@ -20,11 +21,6 @@ class ProfileController extends ChangeNotifier {
   Future<ProfileEntity> getProfile(String id) async {
     final profile = await _repository.getProfile(id);
     return profile;
-  }
-
-  Future<void> refreshProfile(String id) async {
-    profile = await _repository.getProfile(id);
-    notifyListeners();
   }
 
   Future<void> updateProfile(ProfileEntity profile) async {

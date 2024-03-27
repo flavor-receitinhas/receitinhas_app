@@ -5,21 +5,19 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
-import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class MyProfilePage extends StatefulWidget {
-  static const route = '/my-perfil';
-  const MyProfilePage({super.key});
+class ViewProfilePage extends StatefulWidget {
+  static const route = '/view-profile';
+  const ViewProfilePage({super.key});
 
   @override
-  State<MyProfilePage> createState() => _MyProfilePageState();
+  State<ViewProfilePage> createState() => _ViewProfilePageState();
 }
 
-class _MyProfilePageState extends State<MyProfilePage> {
+class _ViewProfilePageState extends State<ViewProfilePage> {
   final ProfileController ct = di();
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
@@ -37,10 +35,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       done: (_) => SafeArea(
         child: ListView(
           children: [
-            const AppBarProfile(
-              title: 'Seu perfil',
-              subTitle: 'Aqui fica suas receitas publicadas',
-            ),
+            const AppBarProfile(title: 'Explorar Perfil', subTitle: 'Descubra as criações culinárias deste usuário',),
             const CookieButton(label: 'Voltar').back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -81,63 +76,30 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          CookieText(text: '8'),
-                          CookieText(text: 'Receitas'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CookieText(text: '315'),
-                          CookieText(text: 'Likes'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CookieText(text: '20'),
-                          CookieText(text: 'Seguidores'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      // Expanded(
-                      //   child: CookieButton(
-                      //     label: 'Gerenciar',
-                      //     margin: const EdgeInsets.symmetric(horizontal: 10),
-                      //     backgroundColor: theme.onPrimary,
-                      //     labelColor: theme.secondary,
-                      //     onPressed: () {},
-                      //   ),
-                      // ),
-                      Expanded(
-                        child: CookieButton(
-                          label: 'Editar perfil',
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          onPressed: () {
-                            setState(() {
-                              Navigator.pushNamed(
-                                context,
-                                EditProfilePage.route,
-                                arguments: ct.profile,
-                              ).then((value) {
-                                if (value == true) {
-                                  ct.init();
-                                }
-                              });
-                            });
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20),
+                  // const Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '8'),
+                  //         CookieText(text: 'Receitas'),
+                  //       ],
+                  //     ),
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '315'),
+                  //         CookieText(text: 'Likes'),
+                  //       ],
+                  //     ),
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '20'),
+                  //         CookieText(text: 'Seguidores'),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: 20),
                   const CookieTextFieldSearch(
                     hintText: 'Pesquise sua receita favorita',
                   ),

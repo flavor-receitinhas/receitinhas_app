@@ -7,6 +7,7 @@ import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_pro
 import 'package:app_receitas/src/feactures/profile/presenter/controller/profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/edit_profile_page.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/view_profile_page.dart';
 import 'package:flutter/widgets.dart';
 
 class ProfileModule extends RegisterModule {
@@ -14,6 +15,7 @@ class ProfileModule extends RegisterModule {
   Map<String, Widget> routers = {
     MyProfilePage.route: const MyProfilePage(),
     EditProfilePage.route: const EditProfilePage(),
+    ViewProfilePage.route: const ViewProfilePage(),
   };
 
   @override
