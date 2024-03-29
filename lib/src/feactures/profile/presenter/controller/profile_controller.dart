@@ -13,6 +13,7 @@ class ProfileController extends ChangeNotifier {
 
   void init() async {
     state = PageState.loading;
+    notifyListeners();
     profile = await _repository.getProfile(Global.user!.id);
     state = PageState.done;
     notifyListeners();

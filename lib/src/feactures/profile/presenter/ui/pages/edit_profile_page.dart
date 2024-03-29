@@ -71,7 +71,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ct.profile!.biography = ct.biographyController.text;
                     ct.updateProfile(ct.profile!);
                     ct.updateImageProfile();
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                     Navigator.pop(context, true);
                   },
                 ),

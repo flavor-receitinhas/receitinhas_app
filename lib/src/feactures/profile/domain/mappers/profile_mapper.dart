@@ -6,7 +6,7 @@ class ProfileMappper {
       userID: map['userID'] ,
       name: map['name'] ?? '',
       biography: map['biography'] ?? '',
-      image: map['image'] ?? '',
+      image: map['image'],
       createdAt: map['createdAt'] ,
       updatedAt: map['updatedAt'] ,
     );

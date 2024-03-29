@@ -72,8 +72,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       ),
                       CircleAvatar(
                         radius: 45,
-                        backgroundImage: ct.profile.image != null &&
-                                ct.profile.image!.isNotEmpty
+                        backgroundImage: ct.profile.image != null
                             ? NetworkImage(ct.profile.image!)
                             : const AssetImage('assets/images/avatar.png')
                                 as ImageProvider,
@@ -81,30 +80,30 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          CookieText(text: '8'),
-                          CookieText(text: 'Receitas'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CookieText(text: '315'),
-                          CookieText(text: 'Likes'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CookieText(text: '20'),
-                          CookieText(text: 'Seguidores'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
+                  // const Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '8'),
+                  //         CookieText(text: 'Receitas'),
+                  //       ],
+                  //     ),
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '315'),
+                  //         CookieText(text: 'Likes'),
+                  //       ],
+                  //     ),
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '20'),
+                  //         CookieText(text: 'Seguidores'),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: 20),
                   Row(
                     children: [
                       // Expanded(
@@ -121,16 +120,14 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           label: 'Editar perfil',
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           onPressed: () {
-                            setState(() {
-                              Navigator.pushNamed(
-                                context,
-                                EditProfilePage.route,
-                                arguments: ct.profile,
-                              ).then((value) {
-                                if (value == true) {
-                                  ct.init();
-                                }
-                              });
+                            Navigator.pushNamed(
+                              context,
+                              EditProfilePage.route,
+                              arguments: ct.profile.copyWith(),
+                            ).then((value) {
+                              if (value == true) {
+                                ct.init();
+                              }
                             });
                           },
                         ),
