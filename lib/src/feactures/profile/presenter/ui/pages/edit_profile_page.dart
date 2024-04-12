@@ -7,7 +7,9 @@ import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/back_sheet.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/container_privacy.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/save_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -59,35 +61,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               color: Theme.of(context).colorScheme.onSecondary,
               typography: CookieTypography.title,
             ),
-            body: Column(
-              children: [
-                CookieText(
-                  text:
-                      'Verifique bem se tem certeza, assim podemos mostrar ao mundo o seu novo perfil!',
-                  color: Theme.of(context).colorScheme.onSecondary,
-                ),
-                const SizedBox(height: 10),
-                CookieButton(
-                  label: 'Salvar alterações',
-                  onPressed: () async {
-                    ct.profile!.biography = ct.biographyController.text;
-                    await ct.updateProfile(ct.profile!);
-                    await ct.updateImageProfile();
-                    Navigator.pop(context, true);
-                    Navigator.pop(context, true);
-                  },
-                ),
-                const SizedBox(height: 10),
-                CookieButton.outline(
-                  label: 'Descartar alterações',
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+            body: SaveSheet(ct: ct),
           ).show(context);
         },
       ),
@@ -97,7 +71,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
             title: 'Seu perfil',
             subTitle: 'Aqui fica suas receitas publicadas',
           ),
-          const CookieButton(label: 'Voltar').back(context),
+          CookieButton(
+            label: 'Voltar',
+            onPressed: () {
+              CookieSheetBottom(
+                title: CookieText(
+                  text: 'Você deseja descartar as alterações?',
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  typography: CookieTypography.title,
+                ),
+                body: const BackSheet(),
+              ).show(context);
+            },
+          ).back(context),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -108,17 +94,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   children: [
                     Builder(
                       builder: (context) {
+                        if (ct.image != null && ct.image!.path.isNotEmpty) {
+                          return CircleAvatar(
+                            radius: 60,
+                            backgroundImage: FileImage(ct.image!),
+                          );
+                        }
                         if (ct.profile?.image != null &&
                             ct.profile!.image!.isNotEmpty) {
                           return CircleAvatar(
                             radius: 60,
                             backgroundImage: NetworkImage(ct.profile!.image!),
-                          );
-                        }
-                        if (ct.image != null && ct.image!.path.isNotEmpty) {
-                          return CircleAvatar(
-                            radius: 60,
-                            backgroundImage: FileImage(ct.image!),
                           );
                         }
                         return const CircleAvatar(
@@ -234,8 +220,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 const CookieText(
                   text: 'Privacidade',
                 ),
-                const SizedBox(height: 10),
-                const ContainerPrivacy(text: 'Ocultar receitas'),
                 const SizedBox(height: 10),
                 const ContainerPrivacy(text: 'Ocultar seguidores'),
                 const SizedBox(height: 10),

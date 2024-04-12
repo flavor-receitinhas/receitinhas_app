@@ -15,6 +15,7 @@ class EditProfileController extends ChangeNotifier {
   ProfileEntity? profile;
   TextEditingController biographyController = TextEditingController();
   PageState state = PageState.loading;
+  bool isRemoveImage = false;
 
   void init(context) async {
     state = PageState.loading;
@@ -31,11 +32,14 @@ class EditProfileController extends ChangeNotifier {
   }
 
   Future<void> pickImageLogo() async {
-    final fileImage = await ImagePicker()
-        .pickImage(source: ImageSource.gallery, imageQuality: 50);
+    final fileImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    image = File(fileImage!.path);
-
+    if (fileImage == null) {
+      return;
+    }
+    image = File(fileImage.path);
+    isRemoveImage = false;
     notifyListeners();
   }
 
@@ -44,6 +48,7 @@ class EditProfileController extends ChangeNotifier {
 
   void removeImage() {
     image = File('');
+    isRemoveImage = true;
     profile!.image = null;
     notifyListeners();
   }
