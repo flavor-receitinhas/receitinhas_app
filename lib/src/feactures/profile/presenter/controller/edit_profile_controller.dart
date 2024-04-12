@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,14 @@ class EditProfileController extends ChangeNotifier {
   File? image;
   ProfileEntity? profile;
   TextEditingController biographyController = TextEditingController();
+  PageState state = PageState.loading;
 
   void init(context) async {
+    state = PageState.loading;
     final arguments = ModalRoute.of(context)!.settings.arguments;
     profile = arguments as ProfileEntity;
     biographyController.text = profile!.biography;
+    state = PageState.done;
     notifyListeners();
   }
 
@@ -35,9 +39,8 @@ class EditProfileController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateProfile(ProfileEntity profile) async {
-    await _repository.updateProfile(profile);
-  }
+  Future<void> updateProfile(ProfileEntity profile) =>
+      _repository.updateProfile(profile);
 
   void removeImage() {
     image = File('');

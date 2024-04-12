@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
@@ -41,7 +42,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    return Scaffold(
+    return CookiePage(
+      state: ct.state,
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primary,
         shape: const RoundedRectangleBorder(
@@ -67,10 +69,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 const SizedBox(height: 10),
                 CookieButton(
                   label: 'Salvar alterações',
-                  onPressed: () {
+                  onPressed: () async {
                     ct.profile!.biography = ct.biographyController.text;
-                    ct.updateProfile(ct.profile!);
-                    ct.updateImageProfile();
+                    await ct.updateProfile(ct.profile!);
+                    await ct.updateImageProfile();
                     Navigator.pop(context, true);
                     Navigator.pop(context, true);
                   },
@@ -89,7 +91,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ).show(context);
         },
       ),
-      body: ListView(
+      done: (_) => ListView(
         children: [
           const AppBarProfile(
             title: 'Seu perfil',
