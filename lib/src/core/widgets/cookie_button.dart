@@ -78,7 +78,7 @@ class CookieButton extends StatelessWidget {
         children: [
           CookieButton(
             label: label,
-            onPressed: () => Navigator.pop(context),
+            onPressed: onPressed ?? () => Navigator.pop(context),
             backgroundColor: Theme.of(context).colorScheme.secondary,
             prefix: const Icon(Icons.chevron_left, size: 28),
             borderRadius: const BorderRadius.only(

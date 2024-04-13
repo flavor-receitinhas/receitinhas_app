@@ -1,23 +1,46 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/atomic/appbar_perfil.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/pages/edit_perfil_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/controller/profile_controller.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class MyPerfilPage extends StatelessWidget {
+class MyProfilePage extends StatefulWidget {
   static const route = '/my-perfil';
-  const MyPerfilPage({super.key});
+  const MyProfilePage({super.key});
+
+  @override
+  State<MyProfilePage> createState() => _MyProfilePageState();
+}
+
+class _MyProfilePageState extends State<MyProfilePage> {
+  final ProfileController ct = di();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    return Scaffold(
-      body: SafeArea(
+    return CookiePage(
+      state: ct.state,
+      done: (_) => SafeArea(
         child: ListView(
           children: [
-            const AppBarPerfil(),
+            const AppBarProfile(
+              title: 'Seu perfil',
+              subTitle: 'Aqui fica suas receitas publicadas',
+            ),
             const CookieButton(label: 'Voltar').back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -31,8 +54,8 @@ class MyPerfilPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            const CookieText(
-                              text: 'Nietzche',
+                            CookieText(
+                              text: ct.profile.name,
                               typography: CookieTypography.title,
                             ),
                             CookieText(
@@ -41,65 +64,71 @@ class MyPerfilPage extends StatelessWidget {
                               typography: CookieTypography.button,
                             ),
                             const SizedBox(height: 10),
-                            const CookieText(
-                              text:
-                                  'Em uma noite estrelada, um sábio explorador refletia sobre suas viagens. Percebeu que, mais do que tesouros, as verdadeiras riquezas eram as memórias e aprendizados de cada jornada vivida.',
+                            CookieText(
+                              text: ct.profile.biography,
                             ),
                           ],
                         ),
                       ),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 45,
+                        backgroundImage: ct.profile.image != null
+                            ? NetworkImage(ct.profile.image!)
+                            : const AssetImage('assets/images/avatar.png')
+                                as ImageProvider,
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          CookieText(text: '8'),
-                          CookieText(text: 'Receitas'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CookieText(text: '315'),
-                          CookieText(text: 'Likes'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CookieText(text: '20'),
-                          CookieText(text: 'Seguidores'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
+                  // const Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '8'),
+                  //         CookieText(text: 'Receitas'),
+                  //       ],
+                  //     ),
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '315'),
+                  //         CookieText(text: 'Likes'),
+                  //       ],
+                  //     ),
+                  //     Column(
+                  //       children: [
+                  //         CookieText(text: '20'),
+                  //         CookieText(text: 'Seguidores'),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: 20),
                   Row(
                     children: [
-                      Expanded(
-                        child: CookieButton(
-                          label: 'Gerenciar',
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          backgroundColor: theme.onPrimary,
-                          labelColor: theme.secondary,
-                          onPressed: () {},
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: CookieButton(
+                      //     label: 'Gerenciar',
+                      //     margin: const EdgeInsets.symmetric(horizontal: 10),
+                      //     backgroundColor: theme.onPrimary,
+                      //     labelColor: theme.secondary,
+                      //     onPressed: () {},
+                      //   ),
+                      // ),
                       Expanded(
                         child: CookieButton(
                           label: 'Editar perfil',
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => const EditPerfilPage(),
-                              ),
-                            );
+                              EditProfilePage.route,
+                              arguments: ct.profile.copyWith(),
+                            ).then((value) {
+                              if (value == true) {
+                                ct.init();
+                              }
+                            });
                           },
                         ),
                       )

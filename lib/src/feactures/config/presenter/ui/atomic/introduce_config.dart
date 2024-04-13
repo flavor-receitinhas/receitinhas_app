@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/pages/my_perfil_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class IntroduceConfig extends StatelessWidget {
@@ -25,7 +25,7 @@ class IntroduceConfig extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, MyPerfilPage.route);
+            Navigator.pushNamed(context, MyProfilePage.route);
           },
           child: Container(
             height: 60,

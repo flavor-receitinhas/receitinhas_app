@@ -8,6 +8,7 @@ class CookiePage extends StatelessWidget {
   final Widget Function(BuildContext)? loading;
   final Widget Function(BuildContext)? error;
   final PreferredSizeWidget? appBar;
+  final Widget? floatingActionButton;
   const CookiePage({
     super.key,
     required this.state,
@@ -15,12 +16,14 @@ class CookiePage extends StatelessWidget {
     this.error,
     this.loading,
     this.appBar,
+    this.floatingActionButton,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
+      floatingActionButton: floatingActionButton,
       body: Builder(
         builder: (context) {
           return switch (state) {
