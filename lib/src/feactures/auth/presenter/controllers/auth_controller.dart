@@ -20,7 +20,7 @@ class AuthController extends ChangeNotifier {
 
   Future<bool> registerFirebase() async {
     try {
-      await _authService.singUp(
+      await _authService.signUp(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
@@ -34,7 +34,7 @@ class AuthController extends ChangeNotifier {
 
   Future<bool> loginFirebase() async {
     try {
-      await _authService.singIn(
+      await _authService.signIn(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
@@ -52,6 +52,16 @@ class AuthController extends ChangeNotifier {
       );
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<bool> loginGoogle() async {
+    try {
+      await _authService.signInGoogle();
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }
