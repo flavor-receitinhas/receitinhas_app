@@ -47,7 +47,6 @@ class InfoContainerTimePrepared extends StatelessWidget {
                   curve: Curves.ease,
                 );
               } else {
-                //TODO Melhorar o snack bar ja que ta em cima do container
                 final snackBar = SnackBar(
                   content: const CookieText(text: 'Informe o tempo de preparo'),
                   backgroundColor: Theme.of(context).colorScheme.secondary,

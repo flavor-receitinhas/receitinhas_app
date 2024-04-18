@@ -39,6 +39,7 @@ dependencies:
     path: ../packages/flutter-quill
   vsc_quill_delta_to_html: ^1.0.4
   flutter_widget_from_html_core: ^0.14.11
+  dotted_border: ^2.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

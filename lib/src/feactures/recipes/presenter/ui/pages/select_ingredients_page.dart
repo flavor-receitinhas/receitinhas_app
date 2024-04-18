@@ -3,7 +3,9 @@ import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/select_ingredient_container.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class SelectIngredientsPage extends StatefulWidget {
   const SelectIngredientsPage({super.key});
@@ -50,16 +52,32 @@ class _SelectIngredientsPageState extends State<SelectIngredientsPage> {
                 ],
               ),
             ),
-            SliverVisibility(
-              visible: true,
-              sliver: SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                sliver: SliverList.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return const SelectIngredientContainer();
-                  },
-                ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Visibility(
+                    visible: true,
+                    child: DottedBorder(
+                      dashPattern: const [4, 5],
+                      borderPadding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 20),
+                      borderType: BorderType.RRect,
+                      radius: const Radius.circular(10),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      strokeWidth: 1,
+                      child: SizedBox(
+                        height: 150,
+                        child: ListView.builder(
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return const SelectIngredientContainer();
+                          },
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
             const SliverToBoxAdapter(
