@@ -1,11 +1,11 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_food_pref_repository.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_omboarding_repository.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends ChangeNotifier {
   final RecipeRepository _recipeRepository;
-  final UserFoodPrefRepository _userFoodPrefRepository;
+  final UserOmboardingRepository _userFoodPrefRepository;
 
   HomeController(this._recipeRepository, this._userFoodPrefRepository);
 
@@ -14,7 +14,8 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<bool> verifyOnboading() async {
-    final result = await _userFoodPrefRepository.getUser(id: Global.user!.id);
+    final result =
+        await _userFoodPrefRepository.getUserPref(userId: Global.user!.id);
     if (result.dietaryRestriction.isEmpty) {
       return true;
     }

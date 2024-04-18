@@ -77,7 +77,8 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                     label:
                         AppLocalizations.of(context)!.difficultyRecipesConfirm,
                     onPressed: () {
-                      widget.ct.creatFoodPref();
+                      widget.ct.updateFoodPref();
+                      widget.ct.updateNameProfile();
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         CustomBottomBar.route,
