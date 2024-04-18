@@ -43,8 +43,8 @@ class OnBoardingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateFoodPref() {
-    _repository.updateUserPref(
+  Future<void> updateFoodPref() async {
+    await _repository.updateUserPref(
       user: UserFoodPrefEntity(
         userId: Global.user!.id,
         protein: protein,

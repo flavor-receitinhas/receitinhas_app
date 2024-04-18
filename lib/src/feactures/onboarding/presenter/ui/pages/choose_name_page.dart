@@ -76,14 +76,16 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                   CookieButton(
                     label:
                         AppLocalizations.of(context)!.difficultyRecipesConfirm,
-                    onPressed: () {
-                      widget.ct.updateFoodPref();
-                      widget.ct.updateNameProfile();
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        CustomBottomBar.route,
-                        (route) => false,
-                      );
+                    onPressed: () async {
+                      await widget.ct.updateFoodPref();
+                      await widget.ct.updateNameProfile();
+                      if (context.mounted) {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          CustomBottomBar.route,
+                          (route) => false,
+                        );
+                      }
                     },
                   ),
                 ],
