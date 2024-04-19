@@ -12,7 +12,7 @@ class LeaveAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       insetPadding: const EdgeInsets.all(20),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       title: CookieText(

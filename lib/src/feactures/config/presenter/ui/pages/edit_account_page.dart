@@ -53,7 +53,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
               ct.selectRestriction != ct.userPref!.dietaryRestriction) {
             await ct.updateOnBoarding();
           }
-          if (ct.userNameController.text != Global.user!.name) {
+          if (ct.userNameController.text != Global.profile!.name) {
             await ct.updateNameProfile();
           }
           Navigator.pop(context);

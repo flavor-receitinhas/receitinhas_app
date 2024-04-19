@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/services/api_response/api_error/api_error.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/entities/user_food_pref_entity.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
@@ -18,22 +19,26 @@ class EditAccountController extends ChangeNotifier {
   UserFoodPrefEntity? userPref;
 
   Future<void> init() async {
-    userNameController.text = Global.user!.name ?? '';
+   // userNameController.text = Global.user!.name ?? '';
     await loadingOnBoardingPrefs();
     state = PageState.done;
     notifyListeners();
   }
 
-  Future<void> updateNameProfile() async {
+  Future<String?> updateNameProfile() async {
     try {
       await _onBoardingRepository.updateUserName(
         userId: Global.user!.id,
         name: userNameController.text,
       );
-      Global.user!.name = userNameController.text;
+      Global.profile?.name = userNameController.text;
     } catch (e) {
-      print(e);
+      if (e is ApiError) {
+        return e.message;
+      }
+      rethrow;
     }
+    return null;
   }
 
   Future<void> loadingOnBoardingPrefs() async {

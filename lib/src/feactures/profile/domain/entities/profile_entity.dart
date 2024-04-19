@@ -1,6 +1,6 @@
 class ProfileEntity {
   final String userID;
-  final String name;
+  String name;
   String biography;
   String? image;
   final int createdAt;
