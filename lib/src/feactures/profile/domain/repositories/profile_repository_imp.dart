@@ -31,32 +31,24 @@ class ProfileRepositoryImp extends ProfileRepository {
 
   @override
   Future<void> updateImageProfile(String userID, String? imagePath) async {
-    try {
-      Dio dio = di();
-      final data = imagePath!.isEmpty
-          ? FormData.fromMap({})
-          : FormData.fromMap({
-              "file": await MultipartFile.fromFile(imagePath,
-                  contentType: MediaType('image', 'jpg')),
-            });
-      final response = await dio.put(
-        '$url/$path/$userID/image',
-        data: data,
-        options: Options(
-          headers: {
-            'Authorization': Global.token,
-          },
-        ),
-      );
+    Dio dio = di();
+    final data = imagePath!.isEmpty
+        ? FormData.fromMap({})
+        : FormData.fromMap({
+            "file": await MultipartFile.fromFile(imagePath,
+                contentType: MediaType('image', 'jpg')),
+          });
+    final response = await dio.put(
+      '$url/$path/$userID/image',
+      data: data,
+      options: Options(
+        headers: {
+          'Authorization': Global.token,
+        },
+      ),
+    );
 
-      _apiResponse.handleResponse(response);
-    } catch (e) {
-      if (e is DioException)
-        print(e.response!.data);
-      else {
-        print(e);
-      }
-    }
+    _apiResponse.handleResponse(response);
   }
 
   @override
@@ -69,6 +61,4 @@ class ProfileRepositoryImp extends ProfileRepository {
 
     _apiResponse.handleResponse(response);
   }
-
-
 }
