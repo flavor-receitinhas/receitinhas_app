@@ -19,7 +19,7 @@ class EditAccountController extends ChangeNotifier {
   UserFoodPrefEntity? userPref;
 
   Future<void> init() async {
-   // userNameController.text = Global.user!.name ?? '';
+     userNameController.text = Global.profile?.name ?? '';
     await loadingOnBoardingPrefs();
     state = PageState.done;
     notifyListeners();
