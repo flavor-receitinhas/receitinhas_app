@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
@@ -11,17 +10,18 @@ class ProfileController extends ChangeNotifier {
   late ProfileEntity profile;
   PageState state = PageState.loading;
 
-  void init() async {
-    state = PageState.loading;
-    notifyListeners();
-    profile = await _repository.getProfile(Global.user!.id);
+  void init(BuildContext context) async {
+    var arguments = ModalRoute.of(context)!.settings.arguments as ProfileEntity;
+    profile = arguments;
     state = PageState.done;
     notifyListeners();
   }
 
-  Future<ProfileEntity> getProfile(String id) async {
-    final profile = await _repository.getProfile(id);
-    return profile;
+  Future<void> getProfile(String id) async {
+    state = PageState.loading;
+    profile = await _repository.getProfile(id);
+    state = PageState.done;
+    notifyListeners();
   }
 
   Future<void> updateProfile(ProfileEntity profile) async {

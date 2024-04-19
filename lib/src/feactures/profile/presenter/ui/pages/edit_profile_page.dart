@@ -107,10 +107,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             backgroundImage: NetworkImage(ct.profile!.image!),
                           );
                         }
-                        return const CircleAvatar(
+                        return CircleAvatar(
                           radius: 60,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
                           backgroundImage:
-                              AssetImage('assets/images/avatar.png'),
+                              const AssetImage('assets/images/avatar.png'),
                         );
                       },
                     ),

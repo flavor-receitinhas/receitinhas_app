@@ -8,28 +8,30 @@ class ContainerProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, MyProfilePage.route);
-      },
-      child: Container(
-        height: 60,
-        width: 60,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Global.profile?.image!.isNotEmpty == true
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  Global.profile!.image!,
-                  fit: BoxFit.cover,
-                ),
-              )
-            : const Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-      ),
-    );
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            MyProfilePage.route,
+            arguments: Global.profile,
+          );
+        },
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: BorderRadius.circular(15),
+            image: DecorationImage(
+              image: Global.profile!.image != null &&
+                      Global.profile!.image!.isNotEmpty
+                  ? NetworkImage(
+                      Global.profile!.image!,
+                    )
+                  : const AssetImage('assets/images/avatar.png')
+                      as ImageProvider<Object>,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ));
   }
 }
