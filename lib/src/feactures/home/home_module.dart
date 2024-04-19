@@ -12,8 +12,9 @@ class HomeModule extends RegisterModule {
 
   @override
   void inicialize() {
-    di.registerFactory<HomeController>(
+    di.registerLazySingleton<HomeController>(
       () => HomeController(
+        di(),
         di(),
         di(),
       ),

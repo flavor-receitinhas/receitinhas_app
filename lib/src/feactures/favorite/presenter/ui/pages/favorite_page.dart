@@ -4,6 +4,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/container_recipe.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/organize_recipes.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +27,10 @@ class _FavoritePageState extends State<FavoritePage> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: ListView(
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CookieText(
@@ -39,19 +40,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       CookieText(text: 'Gerencie suas receitas favoritas'),
                     ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, MyProfilePage.route);
-                    },
-                    child: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
+                  ContainerProfileImage()
                 ],
               ),
               const SizedBox(height: 20),

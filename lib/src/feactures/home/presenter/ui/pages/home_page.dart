@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
-import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
-import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +22,18 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ct.verifyOnboading().then((value) =>
-          value ? Navigator.pushNamed(context, OnBoardingPage.route) : null);
+      ct.init(context);
+    });
+    ct.addListener(() {
+      setState(() {});
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CookiePage(
+      state: ct.state,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, CreateRecipePage.route);
@@ -38,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: SvgPicture.asset('assets/icons/edit.svg'),
       ),
-      body: SafeArea(
+      done: (_) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
           child: ListView(
@@ -51,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CookieText(
-                          text: 'Ola, ${Global.user?.email}',
+                          text: 'Olá, ${Global.profile?.name}',
                           maxLine: 1,
                           overflow: TextOverflow.ellipsis,
                           typography: CookieTypography.title,
@@ -62,19 +65,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, MyProfilePage.route);
-                    },
-                    child: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
+                  const ContainerProfileImage(),
                 ],
               ),
               const SizedBox(height: 20),
