@@ -10,6 +10,11 @@ class ValidatorOnboarding {
     if (value.length > 30) {
       return 'O nome deve ter no maximo 30 letras';
     }
+    RegExp usernameRegex =
+        RegExp(r'^(?!.*\.\.)(?![_\.])(?!.*\.$)[a-zA-Z0-9._]{1,30}$');
+    if (!usernameRegex.hasMatch(value)) {
+      return 'Nome de usuário inválido';
+    }
     return null;
   }
 
