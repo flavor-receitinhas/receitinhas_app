@@ -2,9 +2,14 @@ import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
 import 'package:flutter/material.dart';
 
-class ContainerProfileImage extends StatelessWidget {
+class ContainerProfileImage extends StatefulWidget {
   const ContainerProfileImage({super.key});
 
+  @override
+  State<ContainerProfileImage> createState() => _ContainerProfileImageState();
+}
+
+class _ContainerProfileImageState extends State<ContainerProfileImage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -13,7 +18,7 @@ class ContainerProfileImage extends StatelessWidget {
             context,
             MyProfilePage.route,
             arguments: Global.profile,
-          );
+          ).then((value) => setState(() {}));
         },
         child: Container(
           height: 60,

@@ -5,7 +5,6 @@ import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favori
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/container_recipe.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/organize_recipes.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
-import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 

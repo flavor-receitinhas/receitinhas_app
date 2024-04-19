@@ -44,9 +44,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
             CookieButton(
               label: 'Voltar',
               onPressed: () {
-                setState(() {
-                  Global.profile = ct.profile;
-                });
+                Global.profile = ct.profile;
                 Navigator.pop(context);
               },
             ).back(context),
