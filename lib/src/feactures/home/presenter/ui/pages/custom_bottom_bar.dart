@@ -1,7 +1,9 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
+import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +26,17 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
 
   int _index = 0;
 
+  final HomeController ct = di();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +56,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   _index = value;
                 },
               );
+              ct.pageController.jumpToPage(value);
             },
             items: [
               BottomNavigationBarItem(
@@ -118,7 +132,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             ),
           );
         },
-        child: pages[_index],
+        child: PageView(
+          controller: ct.pageController,
+          children: pages,
+        ),
       ),
     );
   }

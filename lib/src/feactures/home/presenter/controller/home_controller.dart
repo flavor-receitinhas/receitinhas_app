@@ -15,6 +15,7 @@ class HomeController extends ChangeNotifier {
       this._profileRepository);
 
   PageState state = PageState.loading;
+  PageController pageController = PageController();
 
   Future<void> init(BuildContext context) async {
     await verifyOnboading().then((value) =>
