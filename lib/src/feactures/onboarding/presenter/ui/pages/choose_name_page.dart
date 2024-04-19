@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/validator_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -65,12 +66,7 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                   CookieTextField(
                     hintText: AppLocalizations.of(context)!.chooseNameHintText,
                     controller: widget.ct.userNameController,
-                    validator: (value) {
-                      if (value != null && value.length < 3) {
-                        return 'O nome deve ter no minimo 3 letras';
-                      }
-                      return null;
-                    },
+                    validator: ValidatorOnboarding.validateName,
                   ),
                   const SizedBox(height: 20),
                   CookieButton(
