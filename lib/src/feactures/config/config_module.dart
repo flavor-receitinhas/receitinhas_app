@@ -18,6 +18,7 @@ class ConfigModule extends RegisterModule {
       () => ConfigController(
         di(),
         di(),
+        di(),
       ),
     );
     di.registerFactory<EditAccountController>(
