@@ -37,7 +37,7 @@ class _OrganizeRecipesState extends State<OrganizeRecipes> {
                     typography: CookieTypography.button,
                     onPressed: () {
                       setState(() {
-                        widget.ct.recentFirst;
+//                        widget.ct.recentFirst;
                       });
                       Navigator.pop(context);
                     },
@@ -48,7 +48,7 @@ class _OrganizeRecipesState extends State<OrganizeRecipes> {
                     color: colorTheme.onSecondary,
                     typography: CookieTypography.button,
                     onPressed: () {
-                      widget.ct.recentOlder;
+                      // widget.ct.recentOlder;
                       Navigator.pop(context);
                     },
                   ),
@@ -58,7 +58,7 @@ class _OrganizeRecipesState extends State<OrganizeRecipes> {
                     color: colorTheme.onSecondary,
                     typography: CookieTypography.button,
                     onPressed: () {
-                      widget.ct.organizeAZ;
+                      // widget.ct.organizeAZ;
                       Navigator.pop(context);
                     },
                   ),
@@ -68,7 +68,7 @@ class _OrganizeRecipesState extends State<OrganizeRecipes> {
                     color: colorTheme.onSecondary,
                     typography: CookieTypography.button,
                     onPressed: () {
-                      widget.ct.organizeZA;
+                      // widget.ct.organizeZA;
                       Navigator.pop(context);
                     },
                   ),
