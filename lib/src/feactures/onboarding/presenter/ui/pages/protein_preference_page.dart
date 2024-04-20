@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/proteins_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/validator_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -52,9 +53,8 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
                             .proteinPreferenceOptions(e.name),
                         onPressed: () {
                           setState(() {
-                            ct.protein.contains(e)
-                                ? ct.protein.remove(e)
-                                : ct.protein.add(e);
+                            ValidatorOnboarding.validateTapProtein(
+                                ct.protein, e);
                           });
                         },
                         isSelect: ct.protein.contains(e),

@@ -1,36 +1,24 @@
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:flutter/material.dart';
 
-class SelectContainerPreference extends StatefulWidget {
-  final List<String> listPreference;
-  final String preference;
+class SelectContainerPreference extends StatelessWidget {
+  final List<Enum> listPreference;
+  final Enum preference;
   final String title;
-
+  final void Function()? onTap;
   const SelectContainerPreference({
     super.key,
     required this.title,
     required this.listPreference,
     required this.preference,
+    required this.onTap,
   });
 
   @override
-  State<SelectContainerPreference> createState() =>
-      _SelectContainerPreferenceState();
-}
-
-class _SelectContainerPreferenceState extends State<SelectContainerPreference> {
-  @override
   Widget build(BuildContext context) {
-    final title = widget.title;
     final theme = Theme.of(context).colorScheme;
     return InkWell(
-      onTap: () {
-        setState(() {
-          widget.listPreference.contains(widget.preference)
-              ? widget.listPreference.remove(widget.preference)
-              : widget.listPreference.add(widget.preference);
-        });
-      },
+      onTap: onTap,
       child: Row(
         children: [
           Container(
@@ -38,10 +26,10 @@ class _SelectContainerPreferenceState extends State<SelectContainerPreference> {
             height: 32,
             width: 32,
             decoration: BoxDecoration(
-              color: widget.listPreference.contains(widget.preference) ? theme.primary : null,
+              color: listPreference.contains(preference) ? theme.primary : null,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: widget.listPreference.contains(widget.preference)
+                color: listPreference.contains(preference)
                     ? theme.primary
                     : const Color.fromARGB(255, 255, 255, 255),
                 width: 2,

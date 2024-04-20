@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
@@ -107,10 +108,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             backgroundImage: NetworkImage(ct.profile!.image!),
                           );
                         }
-                        return const CircleAvatar(
+                        return CircleAvatar(
                           radius: 60,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
                           backgroundImage:
-                              AssetImage('assets/images/avatar.png'),
+                              AssetImage(ImageProfileEnum.avatar.path),
                         );
                       },
                     ),

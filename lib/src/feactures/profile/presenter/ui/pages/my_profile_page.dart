@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
@@ -22,7 +23,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     ct.addListener(() {
       setState(() {});
     });
@@ -41,7 +42,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
               title: 'Seu perfil',
               subTitle: 'Aqui fica suas receitas publicadas',
             ),
-            const CookieButton(label: 'Voltar').back(context),
+            CookieButton(
+              label: 'Voltar',
+              onPressed: () {
+                Global.profile = ct.profile;
+                Navigator.pop(context);
+              },
+            ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
@@ -70,11 +77,14 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           ],
                         ),
                       ),
+                      const SizedBox(width: 10),
                       CircleAvatar(
                         radius: 45,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondary,
                         backgroundImage: ct.profile.image != null
                             ? NetworkImage(ct.profile.image!)
-                            : const AssetImage('assets/images/avatar.png')
+                            : AssetImage(ImageProfileEnum.avatar.path)
                                 as ImageProvider,
                       ),
                     ],
@@ -126,7 +136,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               arguments: ct.profile.copyWith(),
                             ).then((value) {
                               if (value == true) {
-                                ct.init();
+                                ct.getProfile(Global.user!.id);
                               }
                             });
                           },

@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
@@ -20,7 +21,7 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
   final ProfileController ct = di();
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     ct.addListener(() {
       setState(() {});
     });
@@ -35,7 +36,10 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
       done: (_) => SafeArea(
         child: ListView(
           children: [
-            const AppBarProfile(title: 'Explorar Perfil', subTitle: 'Descubra as criações culinárias deste usuário',),
+            const AppBarProfile(
+              title: 'Explorar Perfil',
+              subTitle: 'Descubra as criações culinárias deste usuário',
+            ),
             const CookieButton(label: 'Voltar').back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -67,10 +71,12 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
                       ),
                       CircleAvatar(
                         radius: 45,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondary,
                         backgroundImage: ct.profile.image != null &&
                                 ct.profile.image!.isNotEmpty
                             ? NetworkImage(ct.profile.image!)
-                            : const AssetImage('assets/images/avatar.png')
+                            : AssetImage(ImageProfileEnum.avatar.path)
                                 as ImageProvider,
                       ),
                     ],

@@ -123,7 +123,6 @@ class AuthServiceFirebase implements AuthService {
       Global.user = user;
       return user;
     } catch (e) {
-      print('Sign in with Google failed: $e');
       rethrow;
     }
   }

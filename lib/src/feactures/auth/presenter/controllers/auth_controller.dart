@@ -19,49 +19,29 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<bool> registerFirebase() async {
-    try {
-      await _authService.signUp(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      return true;
-    } catch (e) {
-      print(e);
-
-      return false;
-    }
+    await _authService.signUp(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+    return true;
   }
 
   Future<bool> loginFirebase() async {
-    try {
-      await _authService.signIn(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      return true;
-    } catch (e) {
-      print(e.toString());
-    }
-    return false;
+    await _authService.signIn(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+    return true;
   }
 
   Future<void> forgetPassword() async {
-    try {
-      await _authService.forgetPassword(
-        email: emailController.text.trim(),
-      );
-    } catch (e) {
-      print(e);
-    }
+    await _authService.forgetPassword(
+      email: emailController.text.trim(),
+    );
   }
 
   Future<bool> loginGoogle() async {
-    try {
-      await _authService.signInGoogle();
-      return true;
-    } catch (e) {
-      print(e);
-      return false;
-    }
+    await _authService.signInGoogle();
+    return true;
   }
 }
