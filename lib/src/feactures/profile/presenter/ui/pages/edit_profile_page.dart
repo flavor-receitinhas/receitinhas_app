@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
@@ -112,7 +113,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           backgroundColor:
                               Theme.of(context).colorScheme.secondary,
                           backgroundImage:
-                              const AssetImage('assets/images/avatar.png'),
+                              AssetImage(ImageProfileEnum.avatar.path),
                         );
                       },
                     ),

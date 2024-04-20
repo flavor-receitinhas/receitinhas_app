@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _ContainerProfileImageState extends State<ContainerProfileImage> {
                   ? NetworkImage(
                       Global.profile!.image!,
                     )
-                  : const AssetImage('assets/images/avatar.png')
+                  : AssetImage(ImageProfileEnum.avatar.path)
                       as ImageProvider<Object>,
               fit: BoxFit.cover,
             ),

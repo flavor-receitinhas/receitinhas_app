@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
@@ -83,7 +84,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                             Theme.of(context).colorScheme.secondary,
                         backgroundImage: ct.profile.image != null
                             ? NetworkImage(ct.profile.image!)
-                            : const AssetImage('assets/images/avatar.png')
+                            : AssetImage(ImageProfileEnum.avatar.path)
                                 as ImageProvider,
                       ),
                     ],
