@@ -58,7 +58,32 @@ class _FavoritePageState extends State<FavoritePage> {
                 hintText: 'Pesquise sua receita favorita',
               ),
               const SizedBox(height: 10),
-              OrganizeRecipes(ct: ct),
+              OrganizeRecipes(
+                onTapRecent: () {
+                  setState(() {
+                    ct.listFavoriteRecipes('createdAt');
+                  });
+                  Navigator.pop(context);
+                },
+                onTapOld: () {
+                  setState(() {
+                    ct.listFavoriteRecipes('createdAt');
+                  });
+                  Navigator.pop(context);
+                },
+                onTapAsc: () {
+                  setState(() {
+                    ct.listFavoriteRecipes('name');
+                  });
+                  Navigator.pop(context);
+                },
+                onTapDesc: () async {
+                  setState(() {
+                    ct.listFavoriteRecipes('name');
+                  });
+                  Navigator.pop(context);
+                },
+              ),
               ListView.builder(
                 itemCount: ct.listFavorite.length,
                 shrinkWrap: true,

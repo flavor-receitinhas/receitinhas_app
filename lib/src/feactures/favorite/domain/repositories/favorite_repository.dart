@@ -4,5 +4,5 @@ import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_ent
 abstract class FavoriteRepository {
   Future<void> addFavorite(FavoriteDto favoriteDto);
   Future<void> removeFavorite(String userId, String recipeId);
-  Future<List<FavoriteEntity>> getFavorites();
+  Future<List<FavoriteEntity>> getFavorites(String orderBy);
 }

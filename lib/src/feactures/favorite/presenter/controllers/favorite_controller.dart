@@ -11,26 +11,28 @@ class FavoriteController extends ChangeNotifier {
 
   List<FavoriteEntity> listFavorite = [];
   var state = PageState.loading;
+  var orderBy = 'createdAt';
 
   Future<void> init() async {
-    listFavorite = await listFavoriteRecipes();
+    await listFavoriteRecipes(orderBy);
     state = PageState.done;
     notifyListeners();
   }
 
-  Future<List<FavoriteEntity>> listFavoriteRecipes() async {
-    return await _repository.getFavorites();
+  Future<void> listFavoriteRecipes(String orderBy) async {
+    state = PageState.loading;
+    listFavorite = await _repository.getFavorites(orderBy);
+    state = PageState.done;
+    notifyListeners();
   }
 
   Future<void> addFavorite(FavoriteDto favorite) async {
     await _repository.addFavorite(favorite);
-    listFavorite = await listFavoriteRecipes();
     notifyListeners();
   }
 
   Future<void> removeFavorite(String userId, String recipeId) async {
     await _repository.removeFavorite(userId, recipeId);
-    listFavorite = await listFavoriteRecipes();
     notifyListeners();
   }
 }

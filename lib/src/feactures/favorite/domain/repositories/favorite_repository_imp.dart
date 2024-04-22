@@ -29,9 +29,9 @@ class FavoriteRepositoryImp extends FavoriteRepository {
   }
 
   @override
-  Future<List<FavoriteEntity>> getFavorites() async {
+  Future<List<FavoriteEntity>> getFavorites(String orderBy) async {
     final response = await _dioClient.get(
-      '$url/$path/${Global.user!.id}',
+      '$url/$path/${Global.user!.id}?sort=$orderBy',
       headers: {
         'Authorization': Global.token,
       },
