@@ -1,11 +1,9 @@
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/select_ingredient_container.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/sheet_select_ingredient.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/list_all_ingredients.dart';
-import 'package:dotted_border/dotted_border.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/list_select_ingredients.dart';
 import 'package:flutter/material.dart';
 
 class SelectIngredientsPage extends StatefulWidget {
@@ -49,41 +47,9 @@ class _SelectIngredientsPageState extends State<SelectIngredientsPage> {
                 ],
               ),
             ),
-            SliverVisibility(
+            const SliverVisibility(
               visible: true,
-              sliver: SliverToBoxAdapter(
-                child: DottedBorder(
-                  dashPattern: const [4, 5],
-                  borderPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 5,
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-                  borderType: BorderType.RRect,
-                  radius: const Radius.circular(10),
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  strokeWidth: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CookieText(
-                        text: 'Ingredientes selecionados (1)',
-                        typography: CookieTypography.button,
-                      ),
-                      const SizedBox(height: 10),
-                      ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return const SelectIngredientContainer();
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              sliver: ListSelectIngredients(),
             ),
             const SliverToBoxAdapter(
               child: Padding(
@@ -95,7 +61,7 @@ class _SelectIngredientsPageState extends State<SelectIngredientsPage> {
               ),
             ),
             const SliverPadding(
-              padding:  EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               sliver: ListAllIngredients(),
             )
           ],
