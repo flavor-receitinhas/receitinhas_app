@@ -28,7 +28,7 @@ class _ContainerProfileImageState extends State<ContainerProfileImage> {
             color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
-              image: Global.profile!.image != null &&
+              image: Global.profile?.image != null &&
                       Global.profile!.image!.isNotEmpty
                   ? NetworkImage(
                       Global.profile!.image!,

@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
@@ -19,9 +20,19 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   final FavoriteController ct = di();
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return CookiePage(
+      state: ct.state,
+      done: (_) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: ListView(
@@ -47,19 +58,47 @@ class _FavoritePageState extends State<FavoritePage> {
                 hintText: 'Pesquise sua receita favorita',
               ),
               const SizedBox(height: 10),
-              OrganizeRecipes(ct: ct),
+              OrganizeRecipes(
+                onTapRecent: () {
+                  setState(() {
+                    ct.listFavoriteRecipes('createdAt');
+                  });
+                  Navigator.pop(context);
+                },
+                onTapOld: () {
+                  setState(() {
+                    ct.listFavoriteRecipes('createdAt');
+                  });
+                  Navigator.pop(context);
+                },
+                onTapAsc: () {
+                  setState(() {
+                    ct.listFavoriteRecipes('name');
+                  });
+                  Navigator.pop(context);
+                },
+                onTapDesc: () async {
+                  setState(() {
+                    ct.listFavoriteRecipes('name');
+                  });
+                  Navigator.pop(context);
+                },
+              ),
               ListView.builder(
-                itemCount: 5,
+                itemCount: ct.listFavorite.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
+                itemBuilder: (context, idx) {
+                  final favorite = ct.listFavorite[idx];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, ViewRecipesPage.route);
                       },
-                      child: const ContainerRecipe(),
+                      child: ContainerRecipe(
+                        nameRecipe: favorite.name,
+                      ),
                     ),
                   );
                 },
