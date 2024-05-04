@@ -64,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             controller: ct.passwordController,
             obscureText: true,
+            maxLines: 1,
           ),
           const SizedBox(height: 10),
           CookieButton(
@@ -112,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
           label: AppLocalizations.of(context)!.loginButton,
           onPressed: () async {
             var result = await ct.loginFirebase();
-            if (!result && mounted) {
+            if (!result && context.mounted) {
               final snackBar = SnackBar(
                 content: CookieText(
                   text: AppLocalizations.of(context)!.loginTextSnack,
