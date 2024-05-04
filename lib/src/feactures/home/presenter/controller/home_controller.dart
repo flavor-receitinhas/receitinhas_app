@@ -16,6 +16,7 @@ class HomeController extends ChangeNotifier {
 
   PageState state = PageState.loading;
   PageController pageController = PageController();
+  int indexPage = 0;
 
   Future<void> init(BuildContext context) async {
     await verifyOnboading().then((value) =>
@@ -29,8 +30,14 @@ class HomeController extends ChangeNotifier {
     await _recipeRepository.listRecipe();
   }
 
-  loadingProfile() async {
+  Future<void> loadingProfile() async {
     Global.profile = await _profileRepository.getProfile(Global.user!.id);
+    notifyListeners();
+  }
+
+  void changePage(int page) {
+    pageController.jumpToPage(page);
+    indexPage = page;
     notifyListeners();
   }
 
