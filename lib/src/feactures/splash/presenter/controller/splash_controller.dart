@@ -14,7 +14,7 @@ class SplashController extends ChangeNotifier {
     this._authService,
   );
 
-  String route = CustomBottomBar.route;
+  String route = WelcomePage.route;
 
   Future<void> init() async {
     await loadDependences();

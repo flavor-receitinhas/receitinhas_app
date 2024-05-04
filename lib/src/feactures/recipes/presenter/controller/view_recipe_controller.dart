@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/widgets/cookie_page.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';

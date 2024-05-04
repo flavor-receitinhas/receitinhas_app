@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:app_receitas/src/core/widgets/cookie_page.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:flutter/material.dart';

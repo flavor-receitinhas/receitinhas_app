@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/widgets/cookie_page.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_entity.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository.dart';
