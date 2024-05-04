@@ -4,10 +4,10 @@ import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/atomic/bottom_bar_home.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomBar extends StatefulWidget {
   static const route = '/home';
@@ -24,8 +24,6 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
     const ConfigPage(),
   ];
 
-  int _index = 0;
-
   final HomeController ct = di();
 
   @override
@@ -40,68 +38,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: BottomNavigationBar(
-            showSelectedLabels: false,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            currentIndex: _index,
-            unselectedItemColor: Colors.grey[300],
-            selectedFontSize: 0,
-            onTap: (value) {
-              setState(
-                () {
-                  _index = value;
-                },
-              );
-              ct.pageController.jumpToPage(value);
-            },
-            items: [
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/home.svg'),
-                label: '',
-                activeIcon: SvgPicture.asset(
-                  'assets/icons/home.svg',
-                  colorFilter: const ColorFilter.mode(
-                      Color(0xff222222), BlendMode.srcIn),
-                ),
-                backgroundColor: Theme.of(context).colorScheme.primary,
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/favorite.svg'),
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                label: '',
-                activeIcon: SvgPicture.asset(
-                  'assets/icons/favorite.svg',
-                  colorFilter: const ColorFilter.mode(
-                      Color(0xff222222), BlendMode.srcIn),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/settings.svg'),
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                label: '',
-                activeIcon: SvgPicture.asset(
-                  'assets/icons/settings.svg',
-                  colorFilter: const ColorFilter.mode(
-                      Color(0xff222222), BlendMode.srcIn),
-                ),
-              ),
-
-              /// Profile
-            ],
-          ),
-        ),
+      bottomNavigationBar: BottomBarHome(
+        currentIndex: ct.indexPage,
+        onTap: ct.changePage,
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     // Ação ao pressionar o botão flutuante
-      //   },
-      //   child: Icon(Icons.add),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: PopScope(
         canPop: false,
         onPopInvoked: (bool didPop) {
@@ -134,6 +74,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         },
         child: PageView(
           controller: ct.pageController,
+          onPageChanged: ct.changePage,
           children: pages,
         ),
       ),
