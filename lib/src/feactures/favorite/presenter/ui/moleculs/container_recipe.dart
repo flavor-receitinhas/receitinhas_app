@@ -2,7 +2,8 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:flutter/material.dart';
 
 class ContainerRecipe extends StatelessWidget {
-  const ContainerRecipe({super.key});
+  final String nameRecipe;
+  const ContainerRecipe({super.key, required this.nameRecipe});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ContainerRecipe extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CookieText(
-                  text: 'Salada de Legume  asdasda  asd',
+                  text: nameRecipe,
                   maxLine: 1,
                   overflow: TextOverflow.ellipsis,
                   color: Theme.of(context).colorScheme.onSecondary,

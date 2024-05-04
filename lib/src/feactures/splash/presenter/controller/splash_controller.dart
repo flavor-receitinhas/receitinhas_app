@@ -4,7 +4,6 @@ import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
-import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,6 @@ class SplashController extends ChangeNotifier {
   Future<void> loadDependences() async {
     await di.get<PersistentDatabaseSembast>().starting();
     await di.get<ThemeService>().init();
-    await di.get<OnBoardingController>().init();
     if (await _authService.isLogged()) {
       await _authService.refreshToken();
       route = CustomBottomBar.route;

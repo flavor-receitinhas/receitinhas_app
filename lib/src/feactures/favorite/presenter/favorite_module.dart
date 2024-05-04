@@ -1,5 +1,8 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/register_module.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/mappers/favorite_mapper.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository_imp.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +15,19 @@ class FavoriteModule implements RegisterModule {
 
   @override
   void inicialize() {
+    //Mapper
+    di.registerFactory(() => FavoriteMapper());
+
+    //Repositories
+    di.registerFactory<FavoriteRepository>(
+      () => FavoriteRepositoryImp(di(), di(), di()),
+    );
+
     //Controller
-    di.registerFactory<FavoriteController>(() => FavoriteController());
+    di.registerFactory<FavoriteController>(
+      () => FavoriteController(
+        di(),
+      ),
+    );
   }
 }
