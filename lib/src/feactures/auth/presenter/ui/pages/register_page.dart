@@ -94,6 +94,33 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             ),
             const SizedBox(height: 10),
+            CookieButton(
+              label: 'Google',
+              onPressed: () async {
+                final result = await ct.loginGoogle();
+                if (!result && context.mounted) {
+                  final snackBar = SnackBar(
+                    content: CookieText(
+                      text: AppLocalizations.of(context)!.registerTextSnack,
+                      color: theme.onSecondary,
+                    ),
+                    action: SnackBarAction(
+                      label: AppLocalizations.of(context)!.registerOptionSnack,
+                      onPressed: () {},
+                    ),
+                  );
+                  snack.showSnackBar(snackBar);
+                }
+                if (result && context.mounted) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    CustomBottomBar.route,
+                    (route) => false,
+                  );
+                }
+              },
+            ),
+            const SizedBox(height: 10),
             RichText(
               textAlign: TextAlign.center,
               text: CookieTextSpan(
@@ -129,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
             if (formKey.currentState!.validate()) {
               var result = await ct.registerFirebase();
 
-              if (!result && mounted) {
+              if (!result && context.mounted) {
                 final snackBar = SnackBar(
                   content: CookieText(
                     text: AppLocalizations.of(context)!.registerTextSnack,
@@ -142,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 );
                 snack.showSnackBar(snackBar);
               }
-              if (result && mounted) {
+              if (result && context.mounted) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   CustomBottomBar.route,

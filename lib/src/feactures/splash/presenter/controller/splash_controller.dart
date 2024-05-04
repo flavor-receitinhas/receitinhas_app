@@ -23,16 +23,12 @@ class SplashController extends ChangeNotifier {
   }
 
   Future<void> loadDependences() async {
-    try {
-      await di.get<PersistentDatabaseSembast>().starting();
-      await di.get<ThemeService>().init();
-      await di.get<OnBoardingController>().init();
-      if (await _authService.isLogged()) {
-        await _authService.refreshToken();
-        route = CustomBottomBar.route;
-      }
-    } catch (e) {
-      print(e);
+    await di.get<PersistentDatabaseSembast>().starting();
+    await di.get<ThemeService>().init();
+    await di.get<OnBoardingController>().init();
+    if (await _authService.isLogged()) {
+      await _authService.refreshToken();
+      route = CustomBottomBar.route;
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/auth/domain/entities/user_entity.dart';
 import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthServiceFirebase implements AuthService {
   final _firebaseInstance = FirebaseAuth.instance;
@@ -12,7 +13,7 @@ class AuthServiceFirebase implements AuthService {
   }
 
   @override
-  Future<UserEntity> singIn(
+  Future<UserEntity> signIn(
       {required String email, required String password}) async {
     try {
       final credential = await _firebaseInstance.signInWithEmailAndPassword(
@@ -37,7 +38,7 @@ class AuthServiceFirebase implements AuthService {
   }
 
   @override
-  Future<UserEntity> singUp(
+  Future<UserEntity> signUp(
       {required String email, required String password}) async {
     try {
       final credential = await _firebaseInstance.createUserWithEmailAndPassword(
@@ -84,5 +85,45 @@ class AuthServiceFirebase implements AuthService {
   Future<bool> isLogged() async {
     final userLogged = _firebaseInstance.currentUser != null;
     return userLogged;
+  }
+
+  @override
+  Future<UserEntity> signInGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser == null) {
+        throw FirebaseAuthException(
+          code: 'ERROR_ABORTED_BY_USER',
+          message: 'Sign-in aborted by user',
+        );
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential result =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? userResult = result.user;
+
+      if (userResult == null) {
+        throw FirebaseAuthException(
+          code: 'ERROR_NO_USER',
+          message: 'No user associated with this credential',
+        );
+      }
+      
+      final user = UserEntity(email: userResult.email!, id: userResult.uid);
+      Global.token = await userResult.getIdToken() ?? '';
+      Global.user = user;
+      return user;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

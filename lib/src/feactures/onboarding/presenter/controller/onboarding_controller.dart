@@ -5,11 +5,11 @@ import 'package:app_receitas/src/feactures/onboarding/domain/entities/user_food_
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/proteins_enum.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_food_pref_repository.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_omboarding_repository.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingController extends ChangeNotifier {
-  final UserFoodPrefRepository _repository;
+  final UserOmboardingRepository _repository;
   final Preference _preference;
 
   OnBoardingController(this._repository, this._preference);
@@ -43,8 +43,8 @@ class OnBoardingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void creatFoodPref() {
-    _repository.createUser(
+  Future<void> updateFoodPref() async {
+    await _repository.updateUserPref(
       user: UserFoodPrefEntity(
         userId: Global.user!.id,
         protein: protein,
@@ -53,4 +53,12 @@ class OnBoardingController extends ChangeNotifier {
       ),
     );
   }
+
+  Future<void> updateNameProfile() {
+    return _repository.updateUserName(
+      userId: Global.user!.id,
+      name: userNameController.text,
+    );
+  }
+
 }

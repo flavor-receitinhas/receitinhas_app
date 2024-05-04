@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/validator_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -62,9 +63,8 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
                             .difficultyRecipesOptions(e.name),
                         onPressed: () {
                           setState(() {
-                            ct.difficultyRecipe.contains(e)
-                                ? ct.difficultyRecipe.remove(e)
-                                : ct.difficultyRecipe.add(e);
+                            ValidatorOnboarding.validateTapDifficulty(
+                                ct.difficultyRecipe, e);
                           });
                         },
                         isSelect: ct.difficultyRecipe.contains(e),

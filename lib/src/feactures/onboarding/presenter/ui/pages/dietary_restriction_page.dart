@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context.dart';
+import 'package:app_receitas/src/feactures/onboarding/presenter/validator_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -64,26 +65,11 @@ class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
                               .dietaryRestrictionOptions(e.name),
                           onPressed: () {
                             setState(() {
-                              ct.dietaryRestriction.contains(e)
-                                  ? ct.dietaryRestriction
-                                      .remove(e)
-                                  : ct.dietaryRestriction.add(e);
-                              if (ct.dietaryRestriction.contains(
-                                      DietaryRestrictions.noRestriction) &&
-                                  e == DietaryRestrictions.noRestriction) {
-                                ct.dietaryRestriction
-                                    .remove(DietaryRestrictions.gluten);
-                                ct.dietaryRestriction
-                                    .remove(DietaryRestrictions.lactose);
-                              }
-                              if (e != DietaryRestrictions.noRestriction) {
-                                ct.dietaryRestriction
-                                    .remove(DietaryRestrictions.noRestriction);
-                              }
+                              ValidatorOnboarding.validateTapDietaryRestriction(
+                                  ct.dietaryRestriction, e);
                             });
                           },
-                          isSelect:
-                              ct.dietaryRestriction.contains(e),
+                          isSelect: ct.dietaryRestriction.contains(e),
                           backgroundColor:
                               Theme.of(context).colorScheme.onPrimary,
                           prefix: SvgPicture.asset(

@@ -1,19 +1,52 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_page.dart';
+import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/atomic/appbar_perfil.dart';
-import 'package:app_receitas/src/feactures/perfil/presenter/ui/moleculs/container_privacy.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/back_sheet.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/container_privacy.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/save_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class EditPerfilPage extends StatelessWidget {
-  const EditPerfilPage({super.key});
+class EditProfilePage extends StatefulWidget {
+  static const route = '/edit-perfil';
+  const EditProfilePage({
+    super.key,
+  });
+
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  EditProfileController ct = di();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ct.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    return Scaffold(
+    return CookiePage(
+      state: ct.state,
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primary,
         shape: const RoundedRectangleBorder(
@@ -22,12 +55,36 @@ class EditPerfilPage extends StatelessWidget {
           ), // Bordas arredondadas
         ),
         child: SvgPicture.asset('assets/icons/save.svg'),
-        onPressed: () {},
+        onPressed: () {
+          CookieSheetBottom(
+            title: CookieText(
+              text: 'Deseja salvar as alterações ?',
+              color: Theme.of(context).colorScheme.onSecondary,
+              typography: CookieTypography.title,
+            ),
+            body: SaveSheet(ct: ct),
+          ).show(context);
+        },
       ),
-      body: ListView(
+      done: (_) => ListView(
         children: [
-          const AppBarPerfil(),
-          const CookieButton(label: 'Voltar').back(context),
+          const AppBarProfile(
+            title: 'Seu perfil',
+            subTitle: 'Aqui fica suas receitas publicadas',
+          ),
+          CookieButton(
+            label: 'Voltar',
+            onPressed: () {
+              CookieSheetBottom(
+                title: CookieText(
+                  text: 'Você deseja descartar as alterações?',
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  typography: CookieTypography.title,
+                ),
+                body: const BackSheet(),
+              ).show(context);
+            },
+          ).back(context),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -36,8 +93,29 @@ class EditPerfilPage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(
-                      radius: 60,
+                    Builder(
+                      builder: (context) {
+                        if (ct.image != null && ct.image!.path.isNotEmpty) {
+                          return CircleAvatar(
+                            radius: 60,
+                            backgroundImage: FileImage(ct.image!),
+                          );
+                        }
+                        if (ct.profile?.image != null &&
+                            ct.profile!.image!.isNotEmpty) {
+                          return CircleAvatar(
+                            radius: 60,
+                            backgroundImage: NetworkImage(ct.profile!.image!),
+                          );
+                        }
+                        return CircleAvatar(
+                          radius: 60,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                          backgroundImage:
+                              AssetImage(ImageProfileEnum.avatar.path),
+                        );
+                      },
                     ),
                     Expanded(
                       child: Column(
@@ -45,12 +123,20 @@ class EditPerfilPage extends StatelessWidget {
                           CookieButton(
                             label: 'Alterar avatar',
                             margin: const EdgeInsets.symmetric(horizontal: 20),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                ct.pickImageLogo();
+                              });
+                            },
                           ),
                           const SizedBox(height: 10),
                           CookieTextButton(
                             text: 'Remover Imagem',
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                ct.removeImage();
+                              });
+                            },
                           ),
                         ],
                       ),
@@ -127,17 +213,16 @@ class EditPerfilPage extends StatelessWidget {
                   text: 'Sobre mim',
                 ),
                 const SizedBox(height: 10),
-                const CookieTextField.outline(
+                CookieTextField.outline(
                   hintText: 'Fale um pouco sobre você...',
                   maxLines: 6,
                   maxLength: 400,
+                  controller: ct.biographyController,
                 ),
                 const SizedBox(height: 20),
                 const CookieText(
                   text: 'Privacidade',
                 ),
-                const SizedBox(height: 10),
-                const ContainerPrivacy(text: 'Ocultar receitas'),
                 const SizedBox(height: 10),
                 const ContainerPrivacy(text: 'Ocultar seguidores'),
                 const SizedBox(height: 10),

@@ -32,6 +32,8 @@ dependencies:
   flutter_carousel_widget: ^2.1.2
   image_picker: ^1.0.4
   flutter_staggered_grid_view: ^0.7.0
+  http_parser: ^4.0.2
+
   duration_time_picker:
     path: ../packages/duration_time_picker
   google_fonts: ^6.2.1

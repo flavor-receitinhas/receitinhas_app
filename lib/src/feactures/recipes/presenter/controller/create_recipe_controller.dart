@@ -44,6 +44,7 @@ class CreateRecipeController extends ChangeNotifier {
     for (var image in listImage) {
       listMultiMedia.add(File(image.path));
     }
+
     notifyListeners();
   }
 
