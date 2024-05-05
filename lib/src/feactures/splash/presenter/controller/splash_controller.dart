@@ -25,7 +25,7 @@ class SplashController extends ChangeNotifier {
     await di.get<PersistentDatabaseSembast>().starting();
     await di.get<ThemeService>().init();
     if (await _authService.isLogged()) {
-      await _authService.refreshToken();
+      await _authService.refreshToken(forceRefresh: true);
       route = CustomBottomBar.route;
     }
   }

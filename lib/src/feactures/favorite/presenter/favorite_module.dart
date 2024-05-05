@@ -20,7 +20,7 @@ class FavoriteModule implements RegisterModule {
 
     //Repositories
     di.registerFactory<FavoriteRepository>(
-      () => FavoriteRepositoryImp(di(), di(), di()),
+      () => FavoriteRepositoryImp(di(), di()),
     );
 
     //Controller

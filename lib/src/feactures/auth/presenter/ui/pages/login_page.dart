@@ -64,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             controller: ct.passwordController,
             obscureText: true,
-            maxLines: 1,
           ),
           const SizedBox(height: 10),
           CookieButton(

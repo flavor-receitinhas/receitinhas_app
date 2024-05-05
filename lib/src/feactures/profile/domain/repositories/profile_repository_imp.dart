@@ -1,30 +1,30 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/library/dio_client.dart';
-import 'package:app_receitas/src/core/services/api_response/api_response.dart';
+import 'package:app_receitas/src/core/services/api/api_recipes.dart';
+import 'package:app_receitas/src/core/services/api/api_response.dart';
+import 'package:app_receitas/src/core/services/api/response_request_mapper.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/mappers/profile_mapper.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:dio/dio.dart';
-
 import 'package:http_parser/http_parser.dart';
 
 class ProfileRepositoryImp extends ProfileRepository {
-  final DioClient dio;
   final ProfileMappper _mapper;
+  final ApiRecipes _apiRecipes;
   final ApiResponse _apiResponse;
+  final ResponseRequestMapper _responseRequestMapper;
 
-  ProfileRepositoryImp(this.dio, this._apiResponse, this._mapper);
+  ProfileRepositoryImp(this._apiRecipes, this._mapper, this._apiResponse,
+      this._responseRequestMapper);
 
   String url = Global.dnsApi;
   String path = 'profile';
 
   @override
   Future<ProfileEntity> getProfile(String userID) async {
-    final response = await dio.get('$url/$path/$userID', headers: {
-      'Authorization': Global.token,
-    });
-
-    final result = _apiResponse.handleResponse(response);
+    final result = await _apiRecipes.get(
+      path: '$url/$path/$userID',
+    );
 
     return _mapper.fromMap(result);
   }
@@ -48,17 +48,14 @@ class ProfileRepositoryImp extends ProfileRepository {
       ),
     );
 
-    _apiResponse.handleResponse(response);
+    _apiResponse.handleResponse(_responseRequestMapper.fromDio(response));
   }
 
   @override
   Future<void> updateProfile(ProfileEntity profileEntity) async {
-    final response = await dio.post('$url/$path/${profileEntity.userID}',
-        body: _mapper.toMap(profileEntity),
-        headers: {
-          'Authorization': Global.token,
-        });
-
-    _apiResponse.handleResponse(response);
+    _apiRecipes.post(
+      path: '$url/$path/${profileEntity.userID}',
+      body: _mapper.toMap(profileEntity),
+    );
   }
 }

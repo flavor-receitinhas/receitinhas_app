@@ -29,6 +29,7 @@ class ProfileModule extends RegisterModule {
         di(),
         di(),
         di(),
+        di(),
       ),
     );
 
