@@ -31,7 +31,7 @@ class ApiRecipes {
       path,
       headers: _apiHeader(),
     );
-    _apiResponse.handleResponse(response);
+    return _apiResponse.handleResponse(response);
   }
 
   Future<dynamic> post(
