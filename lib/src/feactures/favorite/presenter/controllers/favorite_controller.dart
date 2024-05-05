@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_entity.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -11,17 +12,17 @@ class FavoriteController extends ChangeNotifier {
 
   List<FavoriteEntity> listFavorite = [];
   var state = PageState.loading;
-  var orderBy = 'createdAt';
+  var orderDefault = OrderEnum.createdAtAsc;
 
   Future<void> init() async {
-    await listFavoriteRecipes(orderBy);
+    await listFavoriteRecipes(orderDefault);
     state = PageState.done;
     notifyListeners();
   }
 
-  Future<void> listFavoriteRecipes(String orderBy) async {
+  Future<void> listFavoriteRecipes(OrderEnum order) async {
     state = PageState.loading;
-    listFavorite = await _repository.getFavorites(orderBy);
+    listFavorite = await _repository.getFavorites(order);
     state = PageState.done;
     notifyListeners();
   }

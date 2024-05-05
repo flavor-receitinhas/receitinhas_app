@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/library/dio_client.dart';
 import 'package:app_receitas/src/core/services/api_response/api_response.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_entity.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/mappers/favorite_mapper.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository.dart';
 
@@ -29,9 +30,9 @@ class FavoriteRepositoryImp extends FavoriteRepository {
   }
 
   @override
-  Future<List<FavoriteEntity>> getFavorites(String orderBy) async {
+  Future<List<FavoriteEntity>> getFavorites(OrderEnum orderBy) async {
     final response = await _dioClient.get(
-      '$url/$path/${Global.user!.id}?sort=$orderBy',
+      '$url/$path/${Global.user!.id}?sort=${orderBy.name}&isDesc=${orderBy.isDesc}',
       headers: {
         'Authorization': Global.token,
       },
