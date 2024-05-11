@@ -1,5 +1,5 @@
 class ResponseRequestEntity {
-  final Map<String, dynamic> data;
+  final dynamic data;
 
   final int statusCode;
 
