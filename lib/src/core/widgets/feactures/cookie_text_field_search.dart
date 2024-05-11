@@ -8,6 +8,7 @@ class CookieTextFieldSearch extends StatelessWidget {
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
   final void Function()? onTap;
+  final void Function()? onEditingComplete;
 
   const CookieTextFieldSearch({
     super.key,
@@ -17,6 +18,7 @@ class CookieTextFieldSearch extends StatelessWidget {
     this.prefixIcon,
     this.validator,
     this.onTap,
+    this.onEditingComplete,
   });
 
   @override
@@ -25,6 +27,7 @@ class CookieTextFieldSearch extends StatelessWidget {
       onTap: onTap,
       controller: controller,
       validator: validator,
+      onEditingComplete: onEditingComplete,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSecondary,
           ),

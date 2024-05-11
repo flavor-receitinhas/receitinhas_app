@@ -5,5 +5,9 @@ import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.d
 abstract class FavoriteRepository {
   Future<void> addFavorite(FavoriteDto favoriteDto);
   Future<void> removeFavorite(String userId, String recipeId);
-  Future<List<FavoriteEntity>> getFavorites(OrderEnum orderBy);
+  Future<List<FavoriteEntity>> getFavorites({
+    required OrderEnum orderBy,
+    required int page,
+    String? search,
+  });
 }

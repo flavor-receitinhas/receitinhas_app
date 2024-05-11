@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_entity.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/container_recipe.dart';
@@ -9,6 +10,7 @@ import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/organi
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class FavoritePage extends StatefulWidget {
   static const route = '/favorite';
@@ -30,79 +32,115 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   @override
+  void dispose() {
+    ct.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
       done: (_) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: ListView(
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CookieText(
-                        text: 'Lista de Favoritos',
-                        typography: CookieTypography.title,
-                      ),
-                      CookieText(text: 'Gerencie suas receitas favoritas'),
-                    ],
-                  ),
-                  ContainerProfileImage()
-                ],
-              ),
-              const SizedBox(height: 20),
-              const CookieTextFieldSearch(
-                hintText: 'Pesquise sua receita favorita',
-              ),
-              const SizedBox(height: 10),
-              OrganizeRecipes(
-                onTapRecent: () {
-                  setState(() {
-                    ct.listFavoriteRecipes(OrderEnum.createdAtAsc);
-                  });
-                  Navigator.pop(context);
-                },
-                onTapOld: () {
-                  setState(() {
-                    ct.listFavoriteRecipes(OrderEnum.createdAtDesc);
-                  });
-                  Navigator.pop(context);
-                },
-                onTapAsc: () {
-                  setState(() {
-                    ct.listFavoriteRecipes(OrderEnum.nameAsc);
-                  });
-                  Navigator.pop(context);
-                },
-                onTapDesc: () async {
-                  setState(() {
-                    ct.listFavoriteRecipes(OrderEnum.nameDesc);
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              ListView.builder(
-                itemCount: ct.listFavorite.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, idx) {
-                  final favorite = ct.listFavorite[idx];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, ViewRecipesPage.route);
-                      },
-                      child: ContainerRecipe(
-                        nameRecipe: favorite.name,
-                      ),
+          child: CustomScrollView(
+            slivers: [
+              const SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CookieText(
+                          text: 'Lista de Favoritos',
+                          typography: CookieTypography.title,
+                        ),
+                        CookieText(text: 'Gerencie suas receitas favoritas'),
+                      ],
                     ),
-                  );
-                },
+                    ContainerProfileImage()
+                  ],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    CookieTextFieldSearch(
+                      hintText: 'Pesquise sua receita favorita',
+                      controller: ct.favoriteController,
+                      onEditingComplete: () {
+                        ct.refreshPage();
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    OrganizeRecipes(
+                      onTapRecent: () {
+                        setState(() {
+                          ct.order = OrderEnum.createdAtAsc;
+                          ct.refreshPage();
+                        });
+                        Navigator.pop(context);
+                      },
+                      onTapOld: () {
+                        setState(() {
+                          ct.order = OrderEnum.createdAtDesc;
+                          ct.refreshPage();
+                        });
+                        Navigator.pop(context);
+                      },
+                      onTapAsc: () {
+                        setState(() {
+                          ct.order = OrderEnum.nameAsc;
+                          ct.refreshPage();
+                        });
+                        Navigator.pop(context);
+                      },
+                      onTapDesc: () async {
+                        setState(() {
+                          ct.order = OrderEnum.nameDesc;
+                          ct.refreshPage();
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              PagedSliverList<int, FavoriteEntity>(
+                pagingController: ct.pagingController,
+                builderDelegate: PagedChildBuilderDelegate<FavoriteEntity>(
+                    animateTransitions: true,
+                    noItemsFoundIndicatorBuilder: (context) {
+                      return const Center(
+                        child: CookieText(
+                          text: 'Nenhuma receita encontrada',
+                        ),
+                      );
+                    },
+                    newPageErrorIndicatorBuilder: (context) {
+                      return const Center(
+                        child: CookieText(
+                          text: 'Erro ao carregar receitas',
+                        ),
+                      );
+                    
+                    },
+                    itemBuilder: (context, favorite, idx) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, ViewRecipesPage.route);
+                          },
+                          child: ContainerRecipe(
+                            nameRecipe: favorite.name,
+                          ),
+                        ),
+                      );
+                    }),
               ),
             ],
           ),

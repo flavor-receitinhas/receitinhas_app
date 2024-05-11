@@ -24,10 +24,14 @@ class FavoriteRepositoryImp extends FavoriteRepository {
   }
 
   @override
-  Future<List<FavoriteEntity>> getFavorites(OrderEnum orderBy) async {
+  Future<List<FavoriteEntity>> getFavorites({
+    required OrderEnum orderBy,
+    required int page,
+    String? search,
+  }) async {
     final result = await _apiRecipes.get(
       path:
-          '$url/$path/${Global.user!.id}?sort=${orderBy.name}&isDesc=${orderBy.isDesc}',
+          '$url/$path/${Global.user!.id}?sort=${orderBy.name}&isDesc=${orderBy.isDesc}&page=$page${search != null && search.isNotEmpty ? '&search=$search' : ''}',
     );
 
     return (result as List).map((e) => _mapper.fromJson(e)).toList();
