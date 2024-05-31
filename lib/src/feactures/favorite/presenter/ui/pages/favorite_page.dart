@@ -113,6 +113,13 @@ class _FavoritePageState extends State<FavoritePage> {
                 pagingController: ct.pagingController,
                 builderDelegate: PagedChildBuilderDelegate<FavoriteEntity>(
                     animateTransitions: true,
+                    firstPageErrorIndicatorBuilder: (context) {
+                      return const Center(
+                        child: CookieText(
+                          text: 'Erro ao carregar receitas',
+                        ),
+                      );
+                    },
                     noItemsFoundIndicatorBuilder: (context) {
                       return const Center(
                         child: CookieText(
@@ -126,7 +133,6 @@ class _FavoritePageState extends State<FavoritePage> {
                           text: 'Erro ao carregar receitas',
                         ),
                       );
-                    
                     },
                     itemBuilder: (context, favorite, idx) {
                       return Padding(

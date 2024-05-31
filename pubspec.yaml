@@ -33,12 +33,13 @@ dependencies:
   image_picker: ^1.0.4
   flutter_staggered_grid_view: ^0.7.0
   http_parser: ^4.0.2
-
   duration_time_picker:
-    path: ../packages/duration_time_picker
+    git: 
+      url: https://github.com/cledsonv/duration_time_picker.git
   google_fonts: ^6.2.1
   flutter_quill:
-    path: ../packages/flutter-quill
+    git: 
+      url: https://github.com/cledsonv/flutter-quill.git
   vsc_quill_delta_to_html: ^1.0.4
   flutter_widget_from_html_core: ^0.14.11
   dotted_border: ^2.1.0
