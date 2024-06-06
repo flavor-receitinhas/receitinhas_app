@@ -5,6 +5,7 @@ abstract class ApiClient {
     String url, {
     required Map<String, dynamic> body,
     required Map<String, dynamic> headers,
+    bool isformData = false,
   });
 
   Future<ResponseRequestEntity> delete<T>(
@@ -20,5 +21,6 @@ abstract class ApiClient {
     String url, {
     required Map<String, dynamic> body,
     required Map<String, dynamic> headers,
+    bool isformData = false,
   });
 }

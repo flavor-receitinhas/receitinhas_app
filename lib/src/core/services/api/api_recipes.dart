@@ -4,60 +4,62 @@ import 'package:app_receitas/src/core/services/api/api_response.dart';
 import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
 
 class ApiRecipes {
-  // final response = await _dioClient.post(
-  //   '$url/$path/${favoriteDto.userId}',
-  //   body: _mapper.toJsonDto(favoriteDto),
-  //   headers: {
-  //     'Authorization': Global.token,
-  //   },
-  // );
-
   final ApiClient _apiClient;
-  final ApiResponse _apiResponse;
+  final ApiResponseParser _apiResponse;
   final AuthService _authService;
 
   const ApiRecipes(this._apiClient, this._apiResponse, this._authService);
-
-  Map<String, dynamic> _apiHeader() {
-    _authService.refreshToken();
+  String get url => Global.dnsApi;
+  Future<Map<String, dynamic>> _apiHeader() async {
+    await _authService.refreshToken();
     return {
       'Authorization': Global.token,
     };
   }
 
-  Future<dynamic> get<T>(
-      {required String path, Map<String, dynamic>? body}) async {
-    final response = await _apiClient.get<T>(
-      path,
-      headers: _apiHeader(),
+  Future<dynamic> get({
+    required String path,
+    Map<String, dynamic>? body,
+  }) async {
+    final response = await _apiClient.get(
+      url + path,
+      headers: await _apiHeader(),
     );
     return _apiResponse.handleResponse(response);
   }
 
-  Future<dynamic> post(
-      {required String path, Map<String, dynamic>? body}) async {
+  Future<dynamic> post({
+    required String path,
+    Map<String, dynamic>? body,
+    bool isformData = false,
+  }) async {
     final response = await _apiClient.post(
-      path,
+      url + path,
       body: body ?? {},
-      headers: _apiHeader(),
+      headers: await _apiHeader(),
+      isformData: isformData,
     );
     return _apiResponse.handleResponse(response);
   }
 
-  Future<dynamic> put(
-      {required String path, Map<String, dynamic>? body}) async {
+  Future<dynamic> put({
+    required String path,
+    Map<String, dynamic>? body,
+    bool isformData = false,
+  }) async {
     final response = await _apiClient.put(
-      path,
+      url + path,
       body: body ?? {},
-      headers: _apiHeader(),
+      headers: await _apiHeader(),
+      isformData: isformData,
     );
     return _apiResponse.handleResponse(response);
   }
 
   Future<dynamic> delete({required String path}) async {
     final response = await _apiClient.delete(
-      path,
-      headers: _apiHeader(),
+      url + path,
+      headers: await _apiHeader(),
     );
     return _apiResponse.handleResponse(response);
   }

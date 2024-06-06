@@ -28,8 +28,6 @@ class ProfileModule extends RegisterModule {
       () => ProfileRepositoryImp(
         di(),
         di(),
-        di(),
-        di(),
       ),
     );
 

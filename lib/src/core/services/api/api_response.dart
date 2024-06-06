@@ -5,8 +5,7 @@ import 'package:app_receitas/src/core/services/api/api_error/api_unauthenticated
 import 'package:app_receitas/src/core/services/api/api_error/api_unprocessable_entity_error.dart';
 import 'package:app_receitas/src/core/services/api/response_request_entity.dart';
 
-
-class ApiResponse {
+class ApiResponseParser {
   dynamic handleResponse(ResponseRequestEntity response) {
     switch (response.statusCode) {
       case 401:
@@ -14,13 +13,12 @@ class ApiResponse {
       case 403:
         throw ApiForbiddenError();
       case 404:
-       throw ApiNotFoundError();
-      case 422:
-        throw ApiUnprocessableEntityError(message: response.statusMessage);
+        throw ApiNotFoundError();
       case 500:
-        throw ApiInternalServerError(message: response.statusMessage);
+        throw ApiInternalServerError(message: 'Erro no sistema');
+      case 422:
+        throw ApiUnprocessableEntityError(message: response.data['message']);
     }
-    final result = response.data;
-    return result;
+    return response.data;
   }
 }

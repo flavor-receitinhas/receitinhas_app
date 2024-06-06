@@ -26,7 +26,7 @@ class UserOmboardingRepositoryImp implements UserOmboardingRepository {
 
   @override
   Future<UserFoodPrefEntity> getUserPref({required String userId}) async {
-    final result = await _apiRecipes.get<Map<String, dynamic>>(
+    final result = await _apiRecipes.get(
       path: '$url/$pathApi/$userId/preference',
     );
 

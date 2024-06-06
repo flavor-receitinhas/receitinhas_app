@@ -17,11 +17,18 @@ class DioClient extends ApiClient {
     String url, {
     required Map<String, dynamic> body,
     required Map<String, dynamic> headers,
+    bool isformData = false,
   }) async {
-    _log(method: 'put', path: url, headers: headers, body: body);
+    dynamic data = body;
+    if (isformData) {
+      _log(method: 'put', path: url, headers: headers);
+      data = FormData.fromMap(data);
+    } else {
+      _log(method: 'put', path: url, headers: headers, body: body);
+    }
     final response = await _dio.put(
       url,
-      data: body,
+      data: data,
       options: Options(headers: headers),
     );
     return _requestMapper.fromDio(response);
@@ -58,8 +65,15 @@ class DioClient extends ApiClient {
     String url, {
     required Map<String, dynamic> body,
     required Map<String, dynamic> headers,
+    bool isformData = false,
   }) async {
-    _log(method: 'post', path: url, headers: headers, body: body);
+    dynamic data = body;
+    if (isformData) {
+      _log(method: 'post', path: url, headers: headers);
+      data = FormData.fromMap(data);
+    } else {
+      _log(method: 'post', path: url, headers: headers, body: body);
+    }
     final response = await _dio.post<T>(
       url,
       data: body,

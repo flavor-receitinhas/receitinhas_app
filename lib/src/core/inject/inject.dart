@@ -13,7 +13,7 @@ class Inject {
   static void inicialize() {
     //Persistente
     di.registerLazySingleton(() => PersistentDatabaseSembast());
-    
+
     //Preference
     di.registerFactory<Preference>(
       () => Preference(
@@ -29,6 +29,6 @@ class Inject {
     di.registerFactory<ApiClient>(() => DioClient(di()));
     di.registerFactory(() => ResponseRequestMapper());
     di.registerFactory(() => ApiRecipes(di(), di(), di()));
-    di.registerFactory(() => ApiResponse());
+    di.registerFactory(() => ApiResponseParser());
   }
 }

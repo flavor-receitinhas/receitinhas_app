@@ -28,7 +28,7 @@ class EditProfileController extends ChangeNotifier {
 
   Future<void> updateImageProfile() async {
     if (image == null) return;
-    await _repository.updateImageProfile(profile!.userID, image?.path);
+    await _repository.updateImageProfile(profile!.userID, image!.path);
   }
 
   Future<void> pickImageLogo() async {
