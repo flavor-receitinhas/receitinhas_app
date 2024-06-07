@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 GetIt di = GetIt.instance;
 
 class Global {
-  static const String dnsApi = 'http://192.168.1.9:8080';
+  static const String dnsApi = 'https://api.codeventura.com.br';
   static String token = '';
   static UserEntity? user;
   static ProfileEntity? profile;
