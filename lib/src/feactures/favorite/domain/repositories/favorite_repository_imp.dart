@@ -12,13 +12,12 @@ class FavoriteRepositoryImp extends FavoriteRepository {
 
   FavoriteRepositoryImp(this._mapper, this._apiRecipes);
 
-  String url = Global.dnsApi;
   String path = 'favorite';
 
   @override
   Future<void> addFavorite(FavoriteDto favoriteDto) async {
     await _apiRecipes.post(
-      path: '$url/$path/${favoriteDto.userId}',
+      path: '/$path/${favoriteDto.userId}',
       body: _mapper.toJsonDto(favoriteDto),
     );
   }
@@ -31,7 +30,7 @@ class FavoriteRepositoryImp extends FavoriteRepository {
   }) async {
     final result = await _apiRecipes.get(
       path:
-          '$url/$path/${Global.user!.id}?sort=${orderBy.name}&isDesc=${orderBy.isDesc}&page=$page${search != null && search.isNotEmpty ? '&search=$search' : ''}',
+          '/$path/${Global.user!.id}?sort=${orderBy.name}&isDesc=${orderBy.isDesc}&page=$page${search != null && search.isNotEmpty ? '&search=$search' : ''}',
     );
 
     return (result as List).map((e) => _mapper.fromJson(e)).toList();
@@ -39,6 +38,6 @@ class FavoriteRepositoryImp extends FavoriteRepository {
 
   @override
   Future<void> removeFavorite(String userId, String recipeId) async {
-    await _apiRecipes.delete(path: '$url/$path/$userId/$recipeId');
+    await _apiRecipes.delete(path: '/$path/$userId/$recipeId');
   }
 }
