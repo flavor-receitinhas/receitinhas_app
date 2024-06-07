@@ -85,6 +85,18 @@ class _ConfigPageState extends State<ConfigPage> {
                   child: Transform.scale(
                     scale: 0.8,
                     child: Switch(
+                      thumbIcon: WidgetStateProperty.all(
+                        ct.darkTheme
+                            ? const Icon(
+                                Icons.light_mode,
+                                color: Colors.white,
+                              )
+                            : const Icon(
+                                Icons.dark_mode,
+                                color: Colors.white,
+                              ),
+                      ),
+                      activeColor: theme.primary,
                       value: ct.darkTheme,
                       onChanged: (value) {
                         ct.changeTheme();
@@ -125,7 +137,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     ),
                   );
                 },
-                action: Icon(Icons.chevron_right),
+                action: const Icon(Icons.chevron_right),
               ),
               const SizedBox(height: 10),
               ContainerConfig(
