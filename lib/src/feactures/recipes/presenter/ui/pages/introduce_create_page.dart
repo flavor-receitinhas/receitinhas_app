@@ -178,6 +178,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         hintText: 'Fale um pouco da sua receita aqui...',
                         controller: ct.detailsController,
                         minLines: 5,
+                        maxLines: 10,
                         validator: (value) {
                           if (value!.isEmpty || value.length < 10) {
                             return 'Escreva um pouco mais sobre a receita';
