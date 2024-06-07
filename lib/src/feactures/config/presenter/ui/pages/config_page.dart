@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
@@ -134,13 +135,7 @@ class _ConfigPageState extends State<ConfigPage> {
                 textColor: const Color(0xffFF5757),
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return LeaveAlertDialog(ct: ct);
-                    },
-                  );
+                  LeaveAlertDialog(ct: ct).show(context);
                 },
               ),
               const SizedBox(height: 20),

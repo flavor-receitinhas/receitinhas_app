@@ -1,5 +1,4 @@
-import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:flutter/material.dart';
@@ -10,22 +9,22 @@ class LeaveAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      insetPadding: const EdgeInsets.all(20),
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30))),
-      backgroundColor: Theme.of(context).colorScheme.onPrimary,
+    return const SizedBox.shrink();
+  }
+
+  void show(BuildContext context) {
+    CookieSheetBottom(
       title: CookieText(
         text: 'Deseja realmente sair da sua conta?',
         color: Theme.of(context).colorScheme.onSecondary,
         typography: CookieTypography.button,
       ),
-      content: Column(
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           CookieText(
             text:
-                'Lembrando que ao sair da sua conta, podera acessar ela novamente usando suas credenciais.',
+                'Lembrando que ao sair da sua conta, poderá acessar ela novamente usando suas credenciais.',
             color: Theme.of(context).colorScheme.onSecondary,
           ),
           const SizedBox(height: 20),
@@ -47,9 +46,9 @@ class LeaveAlertDialog extends StatelessWidget {
                         context, WelcomePage.route, (route) => false),
                   );
             },
-          )
+          ),
         ],
       ),
-    );
+    ).show(context);
   }
 }
