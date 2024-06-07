@@ -55,39 +55,48 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                   prefix: const Icon(Icons.chevron_left, size: 28),
                   label: "Voltar",
                   onPressed: () {
-                    CookieSheetBottom(
-                      title: CookieText(
-                        text: 'Deseja descartar sua receita ?',
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        typography: CookieTypography.title,
-                      ),
-                      body: Column(children: [
-                        CookieText(
-                          text:
-                              'Ao descartar, não podemos recuperar o que foi escrito na sua receita.',
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
-                        const SizedBox(height: 10),
-                        CookieButton.outline(
-                          label: 'Continuar escrevendo',
-                          labelColor: Theme.of(context).colorScheme.onSecondary,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        const SizedBox(height: 10),
-                        CookieButton(
-                          label: 'Descartar receita',
-                          labelColor: Theme.of(context).colorScheme.onPrimary,
-                          backgroundColor: Colors.red,
-                          onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              CustomBottomBar.route,
-                              (route) => false,
-                            );
-                          },
-                        )
-                      ]),
-                    ).show(context);
+                    ct.showDialogDiscard()
+                        ? CookieSheetBottom(
+                            title: CookieText(
+                              text: 'Deseja descartar sua receita ?',
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              typography: CookieTypography.title,
+                            ),
+                            body: Column(children: [
+                              CookieText(
+                                text:
+                                    'Ao descartar, não podemos recuperar o que foi escrito na sua receita.',
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
+                              ),
+                              const SizedBox(height: 10),
+                              CookieButton.outline(
+                                label: 'Continuar escrevendo',
+                                labelColor:
+                                    Theme.of(context).colorScheme.onSecondary,
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              const SizedBox(height: 10),
+                              CookieButton(
+                                label: 'Descartar receita',
+                                labelColor:
+                                    Theme.of(context).colorScheme.onPrimary,
+                                backgroundColor: Colors.red,
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    CustomBottomBar.route,
+                                    (route) => false,
+                                  );
+                                },
+                              )
+                            ]),
+                          ).show(context)
+                        : Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            CustomBottomBar.route,
+                            (route) => false,
+                          );
                   },
                 ).back(context),
                 Padding(
