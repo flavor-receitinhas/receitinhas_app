@@ -11,6 +11,7 @@ class CookieTextField extends StatelessWidget {
   final bool border;
   final BorderRadius? borderRadius;
   final int? maxLines;
+  final int? minLines;
   final int? maxLength;
 
   const CookieTextField(
@@ -23,7 +24,8 @@ class CookieTextField extends StatelessWidget {
       this.validator,
       this.maxLines,
       this.borderRadius,
-      this.maxLength})
+      this.maxLength,
+      this.minLines})
       : border = true;
 
   const CookieTextField.outline({
@@ -37,6 +39,7 @@ class CookieTextField extends StatelessWidget {
     this.maxLines,
     this.borderRadius,
     this.maxLength,
+    this.minLines,
   }) : border = false;
 
   @override
@@ -46,7 +49,7 @@ class CookieTextField extends StatelessWidget {
       validator: validator,
       obscureText: obscureText,
       maxLines: maxLines ?? 1,
-      minLines: maxLines ?? 1,
+      minLines: minLines,
       maxLength: maxLength,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -64,16 +67,19 @@ class CookieTextField extends StatelessWidget {
           borderSide: border
               ? BorderSide(
                   color: Theme.of(context).colorScheme.onSurface, width: 1)
-              : const BorderSide(),
+              : const BorderSide(style: BorderStyle.none),
           borderRadius: borderRadius ?? BorderRadius.circular(16),
         ),
         border: OutlineInputBorder(
           borderRadius: borderRadius ?? BorderRadius.circular(16),
+          borderSide: border
+              ? BorderSide(color: Theme.of(context).colorScheme.onSurface)
+              : const BorderSide(style: BorderStyle.none),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: border
               ? BorderSide(color: Theme.of(context).colorScheme.onSurface)
-              : const BorderSide(),
+              : const BorderSide(style: BorderStyle.none),
           borderRadius: borderRadius ?? BorderRadius.circular(16),
         ),
         suffixIcon: suffixIcon,

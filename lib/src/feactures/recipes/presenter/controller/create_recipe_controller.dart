@@ -4,7 +4,9 @@ import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_en
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
 class CreateRecipeController extends ChangeNotifier {
   var listMultiMedia = [];
@@ -16,13 +18,29 @@ class CreateRecipeController extends ChangeNotifier {
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-  TextEditingController instructionController = TextEditingController();
-  TextEditingController serveFoodController = TextEditingController();
+  TextEditingController portionController = TextEditingController();
   List<IngredientsEntity> listIngredient = [];
+  PageController pageController = PageController();
+  PageController containerController = PageController();
+  int currentPage = 0;
+  Duration timePreparedRecipe = const Duration(hours: 0, minutes: 0);
+  DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
+  int portion = 0;
+  final quillInstructionController = QuillController.basic();
+  final quillServerController = QuillController.basic();
+
+  void init() {
+    pageController = PageController(initialPage: 0);
+    containerController = PageController(initialPage: 0);
+  }
+
+  void onChangedPage(int value) {
+    currentPage = value;
+    notifyListeners();
+  }
 
   void pickMultiMedia() async {
-    List<XFile> listImage =
-        await ImagePicker().pickMultipleMedia(imageQuality: 50);
+    List<XFile> listImage = await ImagePicker().pickMultipleMedia();
     for (var image in listImage) {
       listMultiMedia.add(File(image.path));
     }
@@ -58,14 +76,39 @@ class CreateRecipeController extends ChangeNotifier {
       title: titleController.text,
       subTitle: subTitleController.text,
       details: detailsController.text,
-      serveFood: serveFoodController.text,
+      serveFood: QuillDeltaToHtmlConverter(
+        quillServerController.document.toDelta().toJson(),
+      ).convert(),
       difficultyRecipe: DifficultyRecipe.easy,
       images: [],
       ingredients: [],
-      instruction: instructionController.text,
+      instruction: QuillDeltaToHtmlConverter(
+        quillInstructionController.document.toDelta().toJson(),
+      ).convert(),
       portion: 1,
       timePrepared: 1,
     );
     await _repository.createRecipe(recipe);
+  }
+
+  String get durationRecipeString {
+    if (timePreparedRecipe.inMinutes == 0) {
+      return '';
+    }
+    if (timePreparedRecipe.inHours == 0) {
+      return '${timePreparedRecipe.inMinutes}min';
+    }
+    return '${timePreparedRecipe.inHours}h ${timePreparedRecipe.inMinutes.remainder(60)}min';
+  }
+
+  String get difficultyRecipeString {
+    if (difficultyRecipe.name == 'easy') {
+      return 'Fácil';
+    }
+    if (difficultyRecipe.name == 'medium') {
+      return 'Médio';
+    }
+
+    return 'Difícil';
   }
 }

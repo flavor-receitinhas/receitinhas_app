@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/recipe_search_container.dart';

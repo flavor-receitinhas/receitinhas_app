@@ -23,7 +23,6 @@ class OnboardingModule extends RegisterModule {
       () => UserOmboardingRepositoryImp(
         di(),
         di(),
-        di(),
       ),
     );
 

@@ -1,12 +1,21 @@
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ViewIntroduceRecipe extends StatelessWidget {
-  final RecipeEntity recipe;
-  const ViewIntroduceRecipe({super.key, required this.recipe});
+  final String title;
+  final String? subTitle;
+  final int timePrepared;
+  final int portion;
+  final String difficultyRecipe;
+  const ViewIntroduceRecipe(
+      {super.key,
+      required this.title,
+      required this.subTitle,
+      required this.timePrepared,
+      required this.portion,
+      required this.difficultyRecipe});
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +23,18 @@ class ViewIntroduceRecipe extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CookieText(
-          text: recipe.title,
+          text: title,
           typography: CookieTypography.title,
         ),
         const SizedBox(height: 20),
-        CookieText(
-          text: recipe.subTitle!,
-        ),
-        const SizedBox(height: 20),
+        subTitle!.isNotEmpty && subTitle != null
+            ? CookieText(
+                text: subTitle!,
+              )
+            : const SizedBox.shrink(),
+        subTitle!.isNotEmpty && subTitle != null
+            ? const SizedBox(height: 20)
+            : const SizedBox.shrink(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -38,7 +51,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      CookieText(text: '${recipe.timePrepared} min'),
+                      CookieText(text: '$timePrepared min'),
                     ],
                   ),
                   const SizedBox(width: 16),
@@ -52,7 +65,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      CookieText(text: recipe.difficultyRecipe.name)
+                      CookieText(text: difficultyRecipe)
                     ],
                   ),
                   const SizedBox(width: 16),
@@ -67,9 +80,9 @@ class ViewIntroduceRecipe extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       CookieText(
-                        text: recipe.portion != 1
-                            ? '${recipe.portion} porções'
-                            : '${recipe.portion} porção',
+                        text: portion != 1
+                            ? '$portion porções'
+                            : '$portion porção',
                       )
                     ],
                   ),

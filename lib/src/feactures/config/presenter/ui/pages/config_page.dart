@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';

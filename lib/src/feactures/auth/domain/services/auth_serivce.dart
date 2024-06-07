@@ -6,6 +6,6 @@ abstract class AuthService {
   Future<UserEntity> signInGoogle();
   Future<void> forgetPassword({required String email});
   Future<void> logout();
-  Future<void> refreshToken();
+  Future<void> refreshToken({bool forceRefresh = false});
   Future<bool> isLogged();
 }

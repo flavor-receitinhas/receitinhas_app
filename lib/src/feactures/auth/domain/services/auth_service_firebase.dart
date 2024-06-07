@@ -70,12 +70,17 @@ class AuthServiceFirebase implements AuthService {
   }
 
   @override
-  Future<void> refreshToken() async {
-    Global.token = (await _firebaseInstance.currentUser!.getIdToken(true))!;
+  Future<void> refreshToken({bool forceRefresh = false}) async {
+    if (_firebaseInstance.currentUser == null) {
+      throw Exception('User not logged in');
+    }
+    Global.token =
+        (await _firebaseInstance.currentUser!.getIdToken(forceRefresh))!;
     Global.user = UserEntity(
       id: _firebaseInstance.currentUser!.uid,
       email: _firebaseInstance.currentUser!.email!,
     );
+
     if (Global.token.isEmpty) {
       throw Exception('Token is empty');
     }
@@ -117,7 +122,7 @@ class AuthServiceFirebase implements AuthService {
           message: 'No user associated with this credential',
         );
       }
-      
+
       final user = UserEntity(email: userResult.email!, id: userResult.uid);
       Global.token = await userResult.getIdToken() ?? '';
       Global.user = user;

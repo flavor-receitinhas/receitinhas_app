@@ -1,54 +1,44 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/library/dio_client.dart';
-import 'package:app_receitas/src/core/services/api_response/api_response.dart';
+import 'package:app_receitas/src/core/services/api/api_recipes.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_entity.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/mappers/favorite_mapper.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository.dart';
 
 class FavoriteRepositoryImp extends FavoriteRepository {
-  final DioClient _dioClient;
-  final ApiResponse _apiResponse;
   final FavoriteMapper _mapper;
+  final ApiRecipes _apiRecipes;
 
-  FavoriteRepositoryImp(this._dioClient, this._apiResponse, this._mapper);
+  FavoriteRepositoryImp(this._mapper, this._apiRecipes);
 
   String url = Global.dnsApi;
   String path = 'favorite';
 
   @override
   Future<void> addFavorite(FavoriteDto favoriteDto) async {
-    final response = await _dioClient.post(
-      '$url/$path/${favoriteDto.userId}',
+    await _apiRecipes.post(
+      path: '$url/$path/${favoriteDto.userId}',
       body: _mapper.toJsonDto(favoriteDto),
-      headers: {
-        'Authorization': Global.token,
-      },
     );
-    _apiResponse.handleResponse(response);
   }
 
   @override
-  Future<List<FavoriteEntity>> getFavorites(String orderBy) async {
-    final response = await _dioClient.get(
-      '$url/$path/${Global.user!.id}?sort=$orderBy',
-      headers: {
-        'Authorization': Global.token,
-      },
+  Future<List<FavoriteEntity>> getFavorites({
+    required OrderEnum orderBy,
+    required int page,
+    String? search,
+  }) async {
+    final result = await _apiRecipes.get(
+      path:
+          '$url/$path/${Global.user!.id}?sort=${orderBy.name}&isDesc=${orderBy.isDesc}&page=$page${search != null && search.isNotEmpty ? '&search=$search' : ''}',
     );
-    final result = _apiResponse.handleResponse(response);
 
     return (result as List).map((e) => _mapper.fromJson(e)).toList();
   }
 
   @override
   Future<void> removeFavorite(String userId, String recipeId) async {
-    final response = await _dioClient.delete(
-      '$url/$path/$userId/$recipeId',
-      headers: {
-        'Authorization': Global.token,
-      },
-    );
-    _apiResponse.handleResponse(response);
+    await _apiRecipes.delete(path: '$url/$path/$userId/$recipeId');
   }
 }

@@ -1,6 +1,6 @@
-import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_sheet_bottom.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:flutter/material.dart';
 
 class OrganizeRecipes extends StatelessWidget {

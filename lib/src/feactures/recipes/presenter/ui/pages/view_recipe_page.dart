@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_page.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
@@ -63,9 +63,20 @@ class _ViewRecipesPageState extends State<ViewRecipesPage> {
                     .map((e) => Image.network(e, fit: BoxFit.cover))
                     .toList()),
             const SizedBox(height: 10),
-            ViewIntroduceRecipe(recipe: ct.recipe),
+            ViewIntroduceRecipe(
+              title: ct.recipe.title,
+              difficultyRecipe: ct.recipe.difficultyRecipe.name,
+              portion: ct.recipe.portion,
+              subTitle: ct.recipe.subTitle,
+              timePrepared: ct.recipe.timePrepared,
+            ),
             const SizedBox(height: 20),
-            ViewDetailsRecipe(recipe: ct.recipe),
+            ViewDetailsRecipe(
+              details: ct.recipe.details!,
+              ingredients: ct.recipe.ingredients,
+              serveFood: ct.recipe.serveFood!,
+              instruction: ct.recipe.instruction,
+            ),
             const SizedBox(height: 10),
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:email_validator/email_validator.dart';

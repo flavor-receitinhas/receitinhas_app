@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
 import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';

@@ -1,5 +1,5 @@
-import 'package:app_receitas/src/core/widgets/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/atomic/container_filter.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/custom_slide.dart';
 import 'package:flutter/material.dart';

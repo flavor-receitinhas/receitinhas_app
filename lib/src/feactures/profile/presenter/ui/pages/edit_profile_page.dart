@@ -1,11 +1,11 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/image_profile_enum.dart';
-import 'package:app_receitas/src/core/widgets/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_page.dart';
-import 'package:app_receitas/src/core/widgets/cookie_sheet_bottom.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text_button.dart';
-import 'package:app_receitas/src/core/widgets/cookie_text_field.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_sheet_bottom.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/back_sheet.dart';
