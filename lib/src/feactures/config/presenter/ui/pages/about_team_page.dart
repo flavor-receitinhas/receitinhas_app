@@ -16,7 +16,7 @@ class AboutTeamPage extends StatelessWidget {
             child: CookieText(textAlign: TextAlign.start, text: '''
 Nossa Equipe
 
-Bem-vindo à equipe dedicada por trás do UpMeal. Estamos entusiasmados em apresentar as mentes criativas que trabalham incansavelmente para tornar a sua experiência ainda melhor.
+Bem-vindo à equipe dedicada por trás do Flavor. Estamos entusiasmados em apresentar as mentes criativas que trabalham incansavelmente para tornar a sua experiência ainda melhor.
 
 Estamos comprometidos em criar um aplicativo que atenda às suas necessidades e expectativas. Agradecemos por fazer parte da nossa jornada e esperamos continuar aprimorando e inovando para oferecer a você a melhor experiência possível.
             '''),
