@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/config/presenter/controllers/config_c
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/leave_alert_dialog.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/about_team_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/changed_password_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/edit_account_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/privacy_policy_page.dart';
@@ -134,6 +135,20 @@ class _ConfigPageState extends State<ConfigPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const TermPage(),
+                    ),
+                  );
+                },
+                action: const Icon(Icons.chevron_right),
+              ),
+              const SizedBox(height: 10),
+              ContainerConfig(
+                icon: 'assets/icons/persons.svg',
+                text: 'Nossa equipe',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AboutTeamPage(),
                     ),
                   );
                 },
