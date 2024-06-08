@@ -1,9 +1,7 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/config_page.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/pages/favorite_page.dart';
-import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/atomic/bottom_bar_home.dart';
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -24,23 +22,21 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
     const ConfigPage(),
   ];
 
-  final HomeController ct = di();
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
-    ct.addListener(() {
-      setState(() {});
+  PageController pageController = PageController();
+  int indexPage = 0;
+  void changePage(int page) {
+    setState(() {
+      pageController.jumpToPage(page);
+      indexPage = page;
     });
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomBarHome(
-        currentIndex: ct.indexPage,
-        onTap: ct.changePage,
+        currentIndex: indexPage,
+        onTap: changePage,
       ),
       body: PopScope(
         canPop: false,
@@ -73,8 +69,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           );
         },
         child: PageView(
-          controller: ct.pageController,
-          onPageChanged: ct.changePage,
+          controller: pageController,
+          onPageChanged: changePage,
           children: pages,
         ),
       ),
