@@ -28,6 +28,7 @@ class CreateRecipeController extends ChangeNotifier {
   int portion = 0;
   final quillInstructionController = QuillController.basic();
   final quillServerController = QuillController.basic();
+  File thumbImage = File('');
 
   void init() {
     pageController = PageController(initialPage: 0);
@@ -36,6 +37,15 @@ class CreateRecipeController extends ChangeNotifier {
 
   void onChangedPage(int value) {
     currentPage = value;
+    notifyListeners();
+  }
+
+  Future<void> pickThumb() async {
+    final XFile? image =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      thumbImage = File(image.path);
+    }
     notifyListeners();
   }
 
@@ -87,6 +97,7 @@ class CreateRecipeController extends ChangeNotifier {
       ).convert(),
       portion: 1,
       timePrepared: 1,
+      thumb: '',
     );
     await _repository.createRecipe(recipe);
   }

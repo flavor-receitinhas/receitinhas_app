@@ -14,6 +14,7 @@ class RecipeMapper {
       'ingredients': entity.ingredients,
       'instruction': entity.instruction,
       'serveFood': entity.serveFood,
+      'thumb': entity.thumb,
     };
   }
 
@@ -33,6 +34,7 @@ class RecipeMapper {
           (map['ingredients'] as List).map((e) => e.toString()).toList(),
       instruction: map['instruction'],
       serveFood: map['serveFood'] as String?,
+      thumb: map['thumb'] as String,
     );
   }
 }
