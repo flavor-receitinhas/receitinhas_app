@@ -28,7 +28,7 @@ class CreateRecipeController extends ChangeNotifier {
   int portion = 0;
   final quillInstructionController = QuillController.basic();
   final quillServerController = QuillController.basic();
-  File thumbImage = File('');
+  File? thumbImage;
 
   void init() {
     pageController = PageController(initialPage: 0);

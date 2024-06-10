@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
@@ -40,7 +42,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
 
             return;
           }
-          if (ct.thumbImage.path.isEmpty) {
+          if (ct.thumbImage == null) {
             const CookieSnackBar(text: 'Adicione uma imagem de capa')
                 .show(context);
             return;
@@ -117,7 +119,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                       ),
                       const SizedBox(height: 10),
                       SelectImageRecipe(
-                          hasImage: ct.thumbImage.path.isNotEmpty,
+                          hasImage: ct.thumbImage != null,
                           onTap: () {
                             setState(() {
                               ct.pickThumb();
@@ -125,10 +127,12 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                           },
                           image: ct.thumbImage,
                           child: Center(
-                            child: Image.file(
-                              ct.thumbImage,
-                              height: 250,
-                            ),
+                            child: ct.thumbImage != null
+                                ? Image.file(
+                                    ct.thumbImage!,
+                                    height: 250,
+                                  )
+                                : const SizedBox.shrink(),
                           )),
                       const SizedBox(height: 20),
                       CookieTextField.outline(
