@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';

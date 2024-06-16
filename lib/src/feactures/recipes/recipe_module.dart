@@ -1,9 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/register_module.dart';
-import 'package:app_receitas/src/feactures/recipes/data/database/recipe_database.dart';
-import 'package:app_receitas/src/feactures/recipes/data/database/recipe_database_imp.dart';
-import 'package:app_receitas/src/feactures/recipes/data/mappers/recipe_mapper.dart';
-import 'package:app_receitas/src/feactures/recipes/data/repositories/recipe_repository_imp.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_mapper.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository_imp.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
@@ -20,20 +18,13 @@ class RecipeModule extends RegisterModule {
 
   @override
   void inicialize() {
-    //Database
-    di.registerFactory<RecipeDatabase>(
-      () => RecipeDatabaseImp(
-        di(),
-        di(),
-      ),
-    );
-
     //Mapper
     di.registerFactory(() => RecipeMapper());
 
     //Repository
     di.registerFactory<RecipeRepository>(
       () => RecipeRepositoryImp(
+        di(),
         di(),
       ),
     );
