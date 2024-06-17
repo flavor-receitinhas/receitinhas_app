@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ChangedPasswordPage extends StatelessWidget {
+   static const route = '/changed-password';
   const ChangedPasswordPage({super.key});
 
   @override

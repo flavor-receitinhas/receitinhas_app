@@ -13,6 +13,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditAccountPage extends StatefulWidget {
+  static const route = '/edit-account';
   const EditAccountPage({super.key});
 
   @override
