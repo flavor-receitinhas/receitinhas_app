@@ -50,6 +50,10 @@ class CookieTextFieldSearch extends StatelessWidget {
         suffixIcon: SvgPicture.asset(
           'assets/icons/search.svg',
           fit: BoxFit.scaleDown,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.onSecondary,
+            BlendMode.srcIn,
+          ),
         ),
       ),
     );
