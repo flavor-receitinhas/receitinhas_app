@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ChangedPasswordPage extends StatelessWidget {
-   static const route = '/changed-password';
+  static const route = '/changed-password';
   const ChangedPasswordPage({super.key});
 
   @override
@@ -42,6 +42,7 @@ class ChangedPasswordPage extends StatelessWidget {
                   const CookieTextField.outline(
                     hintText: 'Escreva sua senha antiga',
                     obscureText: true,
+                    maxLines: 1,
                   ),
                   const SizedBox(height: 20),
                   const CookieText(
@@ -51,6 +52,7 @@ class ChangedPasswordPage extends StatelessWidget {
                   const SizedBox(height: 10),
                   const CookieTextField.outline(
                     hintText: 'Digite sua nova senha',
+                    maxLines: 1,
                     obscureText: true,
                   ),
                   const SizedBox(height: 20),
@@ -61,6 +63,7 @@ class ChangedPasswordPage extends StatelessWidget {
                   const SizedBox(height: 10),
                   const CookieTextField.outline(
                     hintText: 'Confirme sua nova senha',
+                    maxLines: 1,
                     obscureText: true,
                   ),
                   const SizedBox(height: 30),

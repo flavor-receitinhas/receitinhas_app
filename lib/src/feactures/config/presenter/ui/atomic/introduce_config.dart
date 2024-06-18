@@ -10,19 +10,22 @@ class IntroduceConfig extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CookieText(
-              text: 'Configurações',
-              typography: CookieTypography.title,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            const CookieText(
-              text: 'Personalize conforme sua preferência',
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CookieText(
+                text: 'Configurações',
+                typography: CookieTypography.title,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              const CookieText(
+                text: 'Personalize conforme sua preferência',
+              ),
+            ],
+          ),
         ),
+        const SizedBox(width: 10),
         const ContainerProfileImage(),
       ],
     );

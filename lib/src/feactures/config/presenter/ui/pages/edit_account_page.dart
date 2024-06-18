@@ -57,7 +57,9 @@ class _EditAccountPageState extends State<EditAccountPage> {
           if (ct.userNameController.text != Global.profile!.name) {
             await ct.updateNameProfile();
           }
-          Navigator.pop(context);
+          if (context.mounted) {
+            Navigator.pop(context);
+          }
         },
       ),
       done: (_) => SafeArea(
