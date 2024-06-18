@@ -1,23 +1,24 @@
-import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_buttom_floating.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
+   static const route = '/privacy-policy';
   const PrivacyPolicyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [
-            const SizedBox(height: 10),
-            const CookieButton(label: 'Políticas de Privacidade').back(context),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              child: CookieText(
-                textAlign: TextAlign.start,
-                text: '''
+        child: CustomScrollView(
+          slivers: [
+            BackButtomFloating(label: 'Política de Privacidade'),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                child: CookieText(
+                  textAlign: TextAlign.start,
+                  text: '''
 Política de Privacidade Temporária
             
 Esta Política de Privacidade temporária descreve como as informações pessoais são coletadas, usadas e compartilhadas quando você utiliza nosso aplicativo.
@@ -70,6 +71,7 @@ Se tiver dúvidas ou preocupações sobre esta Política de Privacidade temporá
 
 Última atualização: 08/01/2024
 ''',
+                ),
               ),
             ),
           ],

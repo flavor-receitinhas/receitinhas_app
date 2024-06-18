@@ -32,7 +32,9 @@ class ContainerConfig extends StatelessWidget {
           children: [
             SvgPicture.asset(icon),
             const SizedBox(width: 15),
-            CookieText(text: text, color: textColor),
+            CookieText(
+                text: text,
+                color: textColor ?? theme.onPrimary.withOpacity(0.7)),
             const Spacer(),
             action ?? const SizedBox.shrink(),
           ],

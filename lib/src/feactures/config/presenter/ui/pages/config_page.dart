@@ -42,7 +42,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Conta',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -50,12 +50,7 @@ class _ConfigPageState extends State<ConfigPage> {
                 text: 'Editar Conta',
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EditAccountPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, EditAccountPage.route);
                 },
               ),
               const SizedBox(height: 10),
@@ -64,11 +59,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 text: 'Alterar senha',
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ChangedPasswordPage(),
-                    ),
+                    ChangedPasswordPage.route,
                   );
                 },
               ),
@@ -76,7 +69,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Personalização',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -111,7 +104,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Personalização',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -119,11 +112,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 text: 'Politicas de privacidade',
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const PrivacyPolicyPage(),
-                    ),
+                    PrivacyPolicyPage.route,
                   );
                 },
               ),
@@ -132,11 +123,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 icon: 'assets/icons/document.svg',
                 text: 'Termos e condições',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const TermPage(),
-                    ),
+                    TermPage.route,
                   );
                 },
                 action: const Icon(Icons.chevron_right),
@@ -146,11 +135,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 icon: 'assets/icons/persons.svg',
                 text: 'Nossa equipe',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const AboutTeamPage(),
-                    ),
+                    AboutTeamPage.route,
                   );
                 },
                 action: const Icon(Icons.chevron_right),
@@ -169,13 +156,13 @@ class _ConfigPageState extends State<ConfigPage> {
               Center(
                 child: CookieText(
                   text: 'Versão do Aplicativo',
-                  color: theme.secondary,
+                  color: theme.onPrimary.withOpacity(0.5),
                 ),
               ),
               Center(
                 child: CookieText(
                   text: '0.0.1',
-                  color: theme.secondary,
+                  color: theme.onPrimary.withOpacity(0.5),
                 ),
               )
             ],

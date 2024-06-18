@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:flutter/material.dart';
 
 class AboutTeamPage extends StatelessWidget {
+  static const route = '/about-team';
   const AboutTeamPage({super.key});
 
   @override
