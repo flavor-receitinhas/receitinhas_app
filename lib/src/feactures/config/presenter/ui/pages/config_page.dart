@@ -42,7 +42,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Conta',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -69,7 +69,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Personalização',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -104,7 +104,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Personalização',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -156,13 +156,13 @@ class _ConfigPageState extends State<ConfigPage> {
               Center(
                 child: CookieText(
                   text: 'Versão do Aplicativo',
-                  color: theme.secondary,
+                  color: theme.onPrimary.withOpacity(0.5),
                 ),
               ),
               Center(
                 child: CookieText(
                   text: '0.0.1',
-                  color: theme.secondary,
+                  color: theme.onPrimary.withOpacity(0.5),
                 ),
               )
             ],
