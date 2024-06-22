@@ -1,9 +1,8 @@
-import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/back_button_introduce_create.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/leave_recipe_sheet.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/select_image_recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -73,35 +72,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                               color: Theme.of(context).colorScheme.onSecondary,
                               typography: CookieTypography.title,
                             ),
-                            body: Column(children: [
-                              CookieText(
-                                text:
-                                    'Ao descartar, não podemos recuperar o que foi escrito na sua receita.',
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                              const SizedBox(height: 10),
-                              CookieButton.outline(
-                                label: 'Continuar escrevendo',
-                                labelColor:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                onPressed: () => Navigator.pop(context),
-                              ),
-                              const SizedBox(height: 10),
-                              CookieButton(
-                                label: 'Descartar receita',
-                                labelColor:
-                                    Theme.of(context).colorScheme.onPrimary,
-                                backgroundColor: Colors.red,
-                                onPressed: () {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    CustomBottomBar.route,
-                                    (route) => false,
-                                  );
-                                },
-                              )
-                            ]),
+                            body: const LeaveRecipeSheet(),
                           ).show(context)
                         : Navigator.pushNamedAndRemoveUntil(
                             context,
@@ -110,7 +81,6 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                           );
                   },
                 ).back(context),
-                const BackButtonIntroduceCreate(),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
