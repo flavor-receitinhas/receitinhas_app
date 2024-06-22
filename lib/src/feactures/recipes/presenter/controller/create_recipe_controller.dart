@@ -102,8 +102,8 @@ class CreateRecipeController extends ChangeNotifier {
       instruction: QuillDeltaToHtmlConverter(
         quillInstructionController.document.toDelta().toJson(),
       ).convert(),
-      portion: 1,
-      timePrepared: 1,
+      portion: portion,
+      timePrepared: timePreparedRecipe.inMinutes,
       thumb: '',
     );
     await _repository.createRecipe(recipe);

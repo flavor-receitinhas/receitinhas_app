@@ -22,53 +22,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.45,
-        child: PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: ct.containerController,
-          children: [
-            InfoContainerTimePrepared(
-              ct: ct,
-              onChange: (val) {
-                setState(
-                  () => widget.ct.timePreparedRecipe = val,
-                );
-              },
-            ),
-            InfoContainerDifficultyRecipe(
-              ct: ct,
-              onChanged: (e) {
-                setState(() {
-                  widget.ct.difficultyRecipe = e;
-                });
-              },
-            ),
-            InfoContainerPortion(
-              ct: ct,
-              onChangedField: (value) {
-                ct.portion = int.tryParse(value) ?? 0;
-              },
-              onPressedIncrease: () {
-                setState(() {
-                  ct.portion++;
-                  ct.portionController.text = ct.portion.toString();
-                });
-              },
-              onPressedDecresead: () {
-                if (ct.portion > 0) {
-                  ct.portion--;
-                }
-                setState(() {
-                  ct.portionController.text = ct.portion.toString();
-                });
-              },
-            ),
-          ],
-        ),
-      ),
       body: SafeArea(
-        child: ListView(
+        child: Column(
           children: [
             const SizedBox(height: 10),
             CookieButton(
@@ -150,6 +105,52 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                         ),
                       ],
                     ),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.48,
+              child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: ct.containerController,
+                children: [
+                  InfoContainerTimePrepared(
+                    ct: ct,
+                    onChange: (val) {
+                      setState(
+                        () => widget.ct.timePreparedRecipe = val,
+                      );
+                    },
+                  ),
+                  InfoContainerDifficultyRecipe(
+                    ct: ct,
+                    onChanged: (e) {
+                      setState(() {
+                        widget.ct.difficultyRecipe = e;
+                      });
+                    },
+                  ),
+                  InfoContainerPortion(
+                    ct: ct,
+                    onChangedField: (value) {
+                      ct.portion = int.tryParse(value) ?? 0;
+                    },
+                    onPressedIncrease: () {
+                      setState(() {
+                        ct.portion++;
+                        ct.portionController.text = ct.portion.toString();
+                      });
+                    },
+                    onPressedDecresead: () {
+                      if (ct.portion > 0) {
+                        ct.portion--;
+                      }
+                      setState(() {
+                        ct.portionController.text = ct.portion.toString();
+                      });
+                    },
                   ),
                 ],
               ),

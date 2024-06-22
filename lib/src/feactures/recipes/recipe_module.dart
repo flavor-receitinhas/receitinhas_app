@@ -6,6 +6,7 @@ import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_re
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/widgets.dart';
 
@@ -14,6 +15,7 @@ class RecipeModule extends RegisterModule {
   Map<String, Widget> routers = {
     ViewRecipesPage.route: const ViewRecipesPage(),
     CreateRecipePage.route: const CreateRecipePage(),
+    SelectIngredientsPage.route: const SelectIngredientsPage(),
   };
 
   @override

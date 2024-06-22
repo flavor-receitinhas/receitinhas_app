@@ -118,10 +118,10 @@ class InfoContainerPortion extends StatelessWidget {
                         curve: Curves.ease,
                       );
                     } else {
-                      //TODO Melhorar o snack bar ja que ta em cima do container
                       final snackBar = SnackBar(
                         content: const CookieText(
-                            text: 'Informe quantas porções sua receita pode servir'),
+                            text:
+                                'Informe quantas porções sua receita pode servir'),
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                       );
