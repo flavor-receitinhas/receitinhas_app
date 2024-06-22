@@ -1,12 +1,10 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/list_all_ingredients.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/list_select_ingredients.dart';
 import 'package:flutter/material.dart';
 
 class SelectIngredientsPage extends StatefulWidget {
+  static const route = '/select-ingredients';
   const SelectIngredientsPage({super.key});
 
   @override

@@ -57,12 +57,9 @@ class IngredientCreatePage extends StatelessWidget {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const SelectIngredientsPage(),
-                            ),
+                            SelectIngredientsPage.route,
                           );
                         },
                         icon: const Icon(
