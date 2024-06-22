@@ -37,9 +37,11 @@ class SelectContainerPreference extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          CookieText(
-            text: title,
-            color: theme.onPrimary,
+          Expanded(
+            child: CookieText(
+              text: title,
+              color: theme.onPrimary,
+            ),
           )
         ],
       ),

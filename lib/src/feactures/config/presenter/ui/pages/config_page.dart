@@ -1,9 +1,11 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/leave_alert_dialog.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/about_team_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/changed_password_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/edit_account_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/privacy_policy_page.dart';
@@ -40,7 +42,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Conta',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -48,12 +50,7 @@ class _ConfigPageState extends State<ConfigPage> {
                 text: 'Editar Conta',
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EditAccountPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, EditAccountPage.route);
                 },
               ),
               const SizedBox(height: 10),
@@ -62,11 +59,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 text: 'Alterar senha',
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ChangedPasswordPage(),
-                    ),
+                    ChangedPasswordPage.route,
                   );
                 },
               ),
@@ -74,7 +69,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Personalização',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -85,6 +80,18 @@ class _ConfigPageState extends State<ConfigPage> {
                   child: Transform.scale(
                     scale: 0.8,
                     child: Switch(
+                      thumbIcon: WidgetStateProperty.all(
+                        ct.darkTheme
+                            ? const Icon(
+                                Icons.light_mode,
+                                color: Colors.white,
+                              )
+                            : const Icon(
+                                Icons.dark_mode,
+                                color: Colors.white,
+                              ),
+                      ),
+                      activeColor: theme.primary,
                       value: ct.darkTheme,
                       onChanged: (value) {
                         ct.changeTheme();
@@ -97,7 +104,7 @@ class _ConfigPageState extends State<ConfigPage> {
               CookieText(
                 text: 'Personalização',
                 typography: CookieTypography.button,
-                color: theme.onPrimary.withOpacity(0.5),
+                color: theme.onPrimary,
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -105,11 +112,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 text: 'Politicas de privacidade',
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const PrivacyPolicyPage(),
-                    ),
+                    PrivacyPolicyPage.route,
                   );
                 },
               ),
@@ -118,14 +123,24 @@ class _ConfigPageState extends State<ConfigPage> {
                 icon: 'assets/icons/document.svg',
                 text: 'Termos e condições',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const TermPage(),
-                    ),
+                    TermPage.route,
                   );
                 },
-                action: Icon(Icons.chevron_right),
+                action: const Icon(Icons.chevron_right),
+              ),
+              const SizedBox(height: 10),
+              ContainerConfig(
+                icon: 'assets/icons/persons.svg',
+                text: 'Nossa equipe',
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    AboutTeamPage.route,
+                  );
+                },
+                action: const Icon(Icons.chevron_right),
               ),
               const SizedBox(height: 10),
               ContainerConfig(
@@ -134,26 +149,20 @@ class _ConfigPageState extends State<ConfigPage> {
                 textColor: const Color(0xffFF5757),
                 action: const Icon(Icons.chevron_right),
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return LeaveAlertDialog(ct: ct);
-                    },
-                  );
+                  LeaveAlertDialog(ct: ct).show(context);
                 },
               ),
               const SizedBox(height: 20),
               Center(
                 child: CookieText(
                   text: 'Versão do Aplicativo',
-                  color: theme.secondary,
+                  color: theme.onPrimary.withOpacity(0.5),
                 ),
               ),
               Center(
                 child: CookieText(
                   text: '0.0.1',
-                  color: theme.secondary,
+                  color: theme.onPrimary.withOpacity(0.5),
                 ),
               )
             ],

@@ -1,20 +1,21 @@
-import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_buttom_floating.dart';
 import 'package:flutter/material.dart';
 
 class TermPage extends StatelessWidget {
+  static const route = '/termos';
   const TermPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          const SizedBox(height: 10),
-          const CookieButton(label: 'Termos e condições').back(context),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: CookieText(textAlign: TextAlign.start, text: '''
+    return const Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          BackButtomFloating(label: 'Termos e condições'),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: CookieText(textAlign: TextAlign.start, text: '''
 Termos e Condições Temporários
 
 Estes Termos e Condições temporários ("Termos") regem o uso do aplicativo. Ao utilizar o Aplicativo, você concorda com estes Termos.
@@ -65,7 +66,8 @@ Estes Termos são regidos e interpretados de acordo com as leis do Brasil. Qualq
 Para entrar em contato conosco sobre estes Termos, utilize as informações de contato fornecidas no Aplicativo.
 
 Última atualização: 08/01/2024
-'''),
+          '''),
+            ),
           ),
         ],
       ),

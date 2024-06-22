@@ -21,6 +21,15 @@ class _HomePageState extends State<HomePage> {
   final HomeController ct = di();
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,

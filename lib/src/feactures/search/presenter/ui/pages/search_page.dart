@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_buttom_floating.dart';
 import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/search_recipe.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/organisms/result_recipes.dart';
@@ -28,13 +28,15 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          const SizedBox(height: 10),
-          const CookieButton(label: 'Pesquisa').back(context),
-          const SizedBox(height: 20),
-          const SearchRecipe(),
-          ResultRecipes(ct: ct),
+      body: CustomScrollView(
+        slivers: [
+          const BackButtomFloating(label: 'Pesquisa'),
+          const SliverPadding(
+              padding: EdgeInsets.only(
+                top: 10,
+              ),
+              sliver: SliverToBoxAdapter(child: SearchRecipe())),
+          SliverToBoxAdapter(child: ResultRecipes(ct: ct)),
         ],
       ),
     );

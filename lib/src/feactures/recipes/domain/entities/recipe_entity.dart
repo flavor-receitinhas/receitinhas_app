@@ -12,6 +12,7 @@ class RecipeEntity {
   final List<String> ingredients;
   final String instruction;
   final String? serveFood;
+  final String thumb;
 
   RecipeEntity(
       {this.id,
@@ -24,5 +25,6 @@ class RecipeEntity {
       required this.portion,
       required this.ingredients,
       required this.instruction,
-      this.serveFood});
+      this.serveFood,
+      required this.thumb});
 }
