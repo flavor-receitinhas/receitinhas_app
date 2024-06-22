@@ -1,9 +1,8 @@
-import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
+import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/back_button_introduce_create.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/leave_recipe_sheet.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/select_image_recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -62,7 +61,26 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                const BackButtonIntroduceCreate(),
+                CookieButton(
+                  prefix: const Icon(Icons.chevron_left, size: 28),
+                  label: "Voltar",
+                  onPressed: () {
+                    ct.showDialogDiscard()
+                        ? CookieSheetBottom(
+                            title: CookieText(
+                              text: 'Deseja descartar sua receita ?',
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              typography: CookieTypography.title,
+                            ),
+                            body: const LeaveRecipeSheet(),
+                          ).show(context)
+                        : Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            CustomBottomBar.route,
+                            (route) => false,
+                          );
+                  },
+                ).back(context),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

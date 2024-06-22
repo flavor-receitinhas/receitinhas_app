@@ -58,6 +58,13 @@ class CreateRecipeController extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool showDialogDiscard() {
+    return titleController.text.isNotEmpty ||
+        subTitleController.text.isNotEmpty ||
+        detailsController.text.isNotEmpty ||
+        listMultiMedia.isNotEmpty;
+  }
+
   void removeImage(File image) {
     listMultiMedia.removeWhere((e) => e == image);
     notifyListeners();
