@@ -19,12 +19,22 @@ class CreateRecipePage extends StatefulWidget {
 class _CreateRecipePageState extends State<CreateRecipePage> {
   final CreateRecipeController ct = di();
 
+  final List<Widget> routes = [];
+
   @override
   void initState() {
     ct.init();
     ct.addListener(() {
       setState(() {});
     });
+    routes.addAll([
+      IntroduceCreatePage(ct: ct),
+      InfoCreatePage(ct: ct),
+      IngredientCreatePage(ct: ct),
+      IntructionCreatePage(ct: ct),
+      ServerDishPage(ct: ct),
+      CreateViewRecipePage(ct: ct),
+    ]);
     super.initState();
   }
 
@@ -34,14 +44,7 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
       onPageChanged: ct.onChangedPage,
       controller: ct.pageController,
       physics: const NeverScrollableScrollPhysics(),
-      children: [
-        IntroduceCreatePage(ct: ct),
-        InfoCreatePage(ct: ct),
-        IngredientCreatePage(ct: ct),
-        IntructionCreatePage(ct: ct),
-        ServerDishPage(ct: ct),
-        CreateViewRecipePage(ct: ct),
-      ],
+      children: routes,
     );
   }
 }

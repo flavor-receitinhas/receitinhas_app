@@ -60,7 +60,8 @@ class IngredientCreatePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SelectIngredientsPage(),
+                              builder: (context) =>
+                                  const SelectIngredientsPage(),
                             ),
                           );
                         },

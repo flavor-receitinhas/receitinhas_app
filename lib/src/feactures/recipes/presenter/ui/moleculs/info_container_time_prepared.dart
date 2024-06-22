@@ -28,8 +28,9 @@ class InfoContainerTimePrepared extends StatelessWidget {
             typography: CookieTypography.title,
             color: Theme.of(context).colorScheme.onSecondary,
           ),
+          const Spacer(),
           DurationTimePicker(
-            size: 230,
+            size: 190,
             duration: ct.timePreparedRecipe,
             labelStyle: GoogleFonts.jetBrainsMono(
                 textStyle: const TextStyle(
@@ -38,6 +39,7 @@ class InfoContainerTimePrepared extends StatelessWidget {
             progressColor: Theme.of(context).colorScheme.primary,
             onChange: onChange,
           ),
+          const Spacer(),
           CookieButton(
             label: 'Proximo',
             onPressed: () {
