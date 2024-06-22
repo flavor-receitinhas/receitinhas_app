@@ -1,5 +1,4 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 class BackButtonIntroduceCreate extends StatelessWidget {
@@ -35,11 +34,8 @@ class BackButtonIntroduceCreate extends StatelessWidget {
               labelColor: Theme.of(context).colorScheme.onPrimary,
               backgroundColor: Colors.red,
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  CustomBottomBar.route,
-                  (route) => false,
-                );
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
             )
           ]),
