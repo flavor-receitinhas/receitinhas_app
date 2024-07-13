@@ -123,6 +123,9 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                       InfoContainerTimePrepared(
                         ct: ct,
                         onChange: (val) {
+                          if (val.inHours > 99) {
+                            return;
+                          }
                           setState(() {
                             widget.ct.timePreparedRecipe = val;
                             widget.ct.hourController.text =
