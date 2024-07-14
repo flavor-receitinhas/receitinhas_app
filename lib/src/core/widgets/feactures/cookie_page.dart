@@ -1,12 +1,14 @@
+import 'package:app_receitas/src/core/widgets/feactures/pages/cookie_page_error.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/export_manager.dart';
 
 enum PageState { loading, done, error }
 
 class CookiePage extends StatelessWidget {
-  final Widget Function(BuildContext) done;
-  final PageState state;
-  final Widget Function(BuildContext)? loading;
-  final Widget Function(BuildContext)? error;
+  final Widget Function() done;
+  final StateManager state;
+  final Widget Function()? loading;
+  final Object? error;
   final PreferredSizeWidget? appBar;
   final Widget? floatingActionButton;
   const CookiePage({
@@ -21,24 +23,18 @@ class CookiePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
+    return ManagerPageBuilder(
+      state: state,
+      error: error,
       floatingActionButton: floatingActionButton,
-      body: Builder(
-        builder: (context) {
-          return switch (state) {
-            PageState.loading => loading != null
-                ? loading!(context)
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-            PageState.done => done(context),
-            PageState.error => error != null
-                ? error!(context)
-                : const Text('Error') // TODO: Criar tela padrão de erro
-          };
-        },
-      ),
+      appBar: appBar,
+      pageDone: done,
+      pageInitial: () => const CookiePageError(),
+      pageError: (_) => const CookiePageError(),
+      pageDisconnected: () => const CookiePageError(),
+      pageLoading: () => const CookiePageError(),
+      pageLoggedOut: () => const CookiePageError(),
+      pageMaintenance: () => const CookiePageError(),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
@@ -11,6 +10,7 @@ import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:page_manager/manager_page.dart';
 
 class FavoritePage extends StatefulWidget {
   static const route = '/favorite';
@@ -20,28 +20,12 @@ class FavoritePage extends StatefulWidget {
   State<FavoritePage> createState() => _FavoritePageState();
 }
 
-class _FavoritePageState extends State<FavoritePage> {
-  final FavoriteController ct = di();
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
-    ct.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    ct.dispose();
-    super.dispose();
-  }
-
+class _FavoritePageState extends ManagerPage<FavoriteController, FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
-      done: (_) => SafeArea(
+      done: () => SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: CustomScrollView(
