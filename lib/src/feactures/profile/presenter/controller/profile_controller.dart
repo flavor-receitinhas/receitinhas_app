@@ -15,7 +15,7 @@ class ProfileController extends ManagerStore {
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
-          profile = arguments as ProfileEntity;
+          profile = arguments['profile'] as ProfileEntity;
           recipes = await getUserRecipes(profile.userID);
         },
       );

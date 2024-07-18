@@ -91,7 +91,7 @@ class _MyProfilePageState
                             Navigator.pushNamed(
                               context,
                               EditProfilePage.route,
-                              arguments: ct.profile.copyWith(),
+                              arguments: {'profile' : ct.profile},
                             ).then((value) {
                               if (value == true) {
                                 ct.getProfile(Global.user!.id);

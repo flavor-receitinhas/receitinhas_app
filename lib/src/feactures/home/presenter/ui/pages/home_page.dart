@@ -21,9 +21,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ManagerPage<HomeController, HomePage> {
   @override
-  void initState() async {
-    await ct.verifyOnboading().then((value) =>
-        value ? Navigator.pushNamed(context, OnBoardingPage.route) : null);
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        ct.verifyOnboading().then((value) =>
+            value ? Navigator.pushNamed(context, OnBoardingPage.route) : null);
+      },
+    );
     super.initState();
   }
 

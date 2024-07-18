@@ -13,7 +13,7 @@ class ViewRecipeController extends ManagerStore {
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
-          id = arguments as String;
+          id = arguments['id'] as String;
           recipe = await getRecipe();
         },
       );

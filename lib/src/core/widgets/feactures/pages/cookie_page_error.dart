@@ -17,7 +17,8 @@ class CookiePageError extends StatelessWidget {
               typography: CookieTypography.title,
             ),
             const CookieText(
-                text: 'Alguma coisa deu errado, mas não se preocupe.'),
+              text: 'Alguma coisa deu errado, mas não se preocupe.',
+            ),
             const Spacer(),
           ],
         ),
