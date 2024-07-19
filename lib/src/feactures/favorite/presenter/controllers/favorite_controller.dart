@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:page_manager/export_manager.dart';
 
-class FavoriteController extends ManagerStore {
+class FavoriteController extends ChangeNotifier {
   final FavoriteRepository _repository;
 
   FavoriteController(this._repository);
@@ -17,20 +17,21 @@ class FavoriteController extends ManagerStore {
       PagingController(firstPageKey: 0);
   final favoriteController = TextEditingController();
   final _pageSize = 25;
+  StateManager state = StateManager.loading;
 
-  @override
-  void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          // await listFavoriteRecipes(orderDefault);
-          //TODO Ele primeiro pegar a ordem default da lista, ou pegar de um banco de dados local qual salvou
-          pagingController.addPageRequestListener(_fetch);
-        },
-      );
+  void init() {
+    // await listFavoriteRecipes(orderDefault);
+    //TODO Ele primeiro pegar a ordem default da lista, ou pegar de um banco de dados local qual salvou
+    pagingController.addPageRequestListener(_fetch);
+
+    state = StateManager.done;
+    notifyListeners();
+  }
 
   @override
   void dispose() {
-    pagingController.dispose();
     super.dispose();
+    pagingController.dispose();
   }
 
   Future<List<FavoriteEntity>> listFavoriteRecipes(
@@ -50,28 +51,23 @@ class FavoriteController extends ManagerStore {
     notifyListeners();
   }
 
-  Future<void> _fetch(int pageKey) => handleTry(
-        call: () async {
-          if (pageKey == 0) {
-            state = StateManager.loading;
-          }
-          final result = await listFavoriteRecipes(
-            orderBy: order,
-            page: pageKey,
-            search: favoriteController.text,
-          );
+  Future<void> _fetch(int pageKey) async {
+    if (pageKey == 0) {
+      state = StateManager.loading;
+    }
+    final result = await listFavoriteRecipes(
+      orderBy: order,
+      page: pageKey,
+      search: favoriteController.text,
+    );
 
-          final isLastPage = result.length < _pageSize;
-          if (isLastPage) {
-            pagingController.appendLastPage(result);
-          } else {
-            pagingController.appendPage(result, ++pageKey);
-          }
-        },
-        setError: (e) {
-          pagingController.error = e;
-        },
-      );
+    final isLastPage = result.length < _pageSize;
+    if (isLastPage) {
+      pagingController.appendLastPage(result);
+    } else {
+      pagingController.appendPage(result, ++pageKey);
+    }
+  }
 
   void refreshPage() {
     pagingController.notifyListeners();

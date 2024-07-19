@@ -2,8 +2,6 @@ import 'package:app_receitas/src/core/widgets/feactures/pages/cookie_page_error.
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 
-enum PageState { loading, done, error }
-
 class CookiePage extends StatelessWidget {
   final Widget Function() done;
   final StateManager state;
@@ -29,10 +27,14 @@ class CookiePage extends StatelessWidget {
       floatingActionButton: floatingActionButton,
       appBar: appBar,
       pageDone: done,
-      pageInitial: () => const CookiePageError(),
+      pageInitial: () => Center(
+        child: loading != null ? loading!() : const CircularProgressIndicator(),
+      ),
       pageError: (_) => const CookiePageError(),
       pageDisconnected: () => const CookiePageError(),
-      pageLoading: () => const CookiePageError(),
+      pageLoading: () => Center(
+        child: loading != null ? loading!() : const CircularProgressIndicator(),
+      ),
       pageLoggedOut: () => const CookiePageError(),
       pageMaintenance: () => const CookiePageError(),
     );
