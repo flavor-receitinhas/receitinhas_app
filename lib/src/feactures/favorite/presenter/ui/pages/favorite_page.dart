@@ -11,7 +11,6 @@ import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:page_manager/manager_page.dart';
 
 class FavoritePage extends StatefulWidget {
   static const route = '/favorite';
