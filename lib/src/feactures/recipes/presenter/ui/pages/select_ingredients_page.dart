@@ -16,38 +16,38 @@ class _SelectIngredientsPageState extends State<SelectIngredientsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () {
-          CookieSheetBottom(
-            alignmentTitle: Alignment.center,
-            title: CookieText(
-              text: 'Não encontrou seu igrediente ?',
-              typography: CookieTypography.title,
-              color: Theme.of(context).colorScheme.onSecondary,
-            ),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CookieText(
-                  text: 'Digite ele no campo abaixo',
-                  color: Theme.of(context).colorScheme.onSecondary,
-                ),
-                const SizedBox(height: 10),
-                const CookieTextField.outline(
-                  hintText: 'Digite o ingrediente',
-                ),
-                const SizedBox(height: 20),
-                const CookieButton(label: 'Confirmar')
-              ],
-            ),
-          ).show(context);
-        },
-        child: const Icon(Icons.question_mark_outlined),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(50),
+      //   ),
+      //   backgroundColor: Theme.of(context).colorScheme.primary,
+      //   onPressed: () {
+      //     CookieSheetBottom(
+      //       alignmentTitle: Alignment.center,
+      //       title: CookieText(
+      //         text: 'Não encontrou seu igrediente ?',
+      //         typography: CookieTypography.title,
+      //         color: Theme.of(context).colorScheme.onSecondary,
+      //       ),
+      //       body: Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           CookieText(
+      //             text: 'Digite ele no campo abaixo',
+      //             color: Theme.of(context).colorScheme.onSecondary,
+      //           ),
+      //           const SizedBox(height: 10),
+      //           const CookieTextField.outline(
+      //             hintText: 'Digite o ingrediente',
+      //           ),
+      //           const SizedBox(height: 20),
+      //           const CookieButton(label: 'Confirmar')
+      //         ],
+      //       ),
+      //     ).show(context);
+      //   },
+      //   child: const Icon(Icons.question_mark_outlined),
+      // ),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -83,7 +83,7 @@ class _SelectIngredientsPageState extends State<SelectIngredientsPage> {
             ),
             const SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 20, 16, 10),
+                padding: EdgeInsets.fromLTRB(16, 20, 16, 0),
                 child: CookieText(
                   text: 'Escolha outros ingredientes abaixo',
                   typography: CookieTypography.button,
@@ -91,7 +91,7 @@ class _SelectIngredientsPageState extends State<SelectIngredientsPage> {
               ),
             ),
             const SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               sliver: ListAllIngredients(),
             )
           ],

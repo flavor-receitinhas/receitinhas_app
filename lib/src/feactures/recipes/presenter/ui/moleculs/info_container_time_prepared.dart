@@ -79,8 +79,9 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
                   size: 190,
                   duration: widget.ct.timePreparedRecipe,
                   labelStyle: GoogleFonts.jetBrainsMono(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       fontSize: 45,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                   progressColor: Theme.of(context).colorScheme.primary,
