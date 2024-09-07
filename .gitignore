@@ -45,3 +45,5 @@ app.*.map.json
 .metadata
 pubspec.lock
 coverage/lcov.info
+
+/android/app/google-services.json
