@@ -22,26 +22,26 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   final FavoriteController ct = di();
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
-    ct.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
 
   @override
-  void dispose() {
-    ct.dispose();
-    super.dispose();
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        ct.addListener(() {
+          setState(() {});
+        });
+        ct.init();
+      },
+    );
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
-      done: (_) => SafeArea(
+      done: () => SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: CustomScrollView(
