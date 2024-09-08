@@ -1,11 +1,13 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_ingredient.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ListSelectIngredients extends StatelessWidget {
-  const ListSelectIngredients({super.key});
+  final List<IngredientRecipeEntity> ingredients;
+  const ListSelectIngredients({super.key, required this.ingredients});
 
   @override
   Widget build(BuildContext context) {
@@ -33,21 +35,22 @@ class ListSelectIngredients extends StatelessWidget {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 5,
+              itemCount: ingredients.length,
               itemBuilder: (context, index) {
+                final ingredient = ingredients[index];
                 return ContainerIngredient(
-                  body: const Column(
+                  body: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CookieText(
-                        text: 'Salada de Legumes ',
+                        text: ingredient.ingredient.name,
                         typography: CookieTypography.button,
                         maxLine: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       CookieText(
-                        text: '2 unidades',
+                        text: '${ingredient.quantity} ${ingredient.unit}',
                       ),
                     ],
                   ),

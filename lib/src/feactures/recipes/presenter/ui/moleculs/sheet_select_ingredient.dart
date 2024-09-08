@@ -20,7 +20,7 @@ class SheetSelectIngredient extends StatelessWidget {
                 size: 30,
               ),
             ),
-            const SizedBox(
+            SizedBox(
               width: 60,
               child: TextField(
                 // controller: ct.portionController,
@@ -31,8 +31,9 @@ class SheetSelectIngredient extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   counterText: '',
                   hintStyle: TextStyle(
                     fontSize: 30,

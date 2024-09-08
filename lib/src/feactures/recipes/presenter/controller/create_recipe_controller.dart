@@ -13,13 +13,15 @@ class CreateRecipeController extends ChangeNotifier {
 
   final RecipeRepository _repository;
 
-  CreateRecipeController(this._repository);
+  CreateRecipeController(
+    this._repository,
+  );
 
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   TextEditingController portionController = TextEditingController();
-  List<IngredientsEntity> listIngredient = [];
+  List<IngredientEntity> listIngredient = [];
   PageController pageController = PageController();
   PageController containerController = PageController();
   int currentPage = 0;
@@ -82,11 +84,11 @@ class CreateRecipeController extends ChangeNotifier {
   //   dio.post('$url/$path', data: imageData);
   // }
 
-  void addIngredient(IngredientsEntity ingredient) {
+  void addIngredient(IngredientEntity ingredient) {
     listIngredient.add(ingredient);
   }
 
-  void deleteIngredient(IngredientsEntity ingredient) {
+  void deleteIngredient(IngredientEntity ingredient) {
     listIngredient.remove(ingredient);
     notifyListeners();
   }
