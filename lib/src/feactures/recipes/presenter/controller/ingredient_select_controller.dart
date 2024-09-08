@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/enum/unit_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/ingredient_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -15,6 +16,8 @@ class IngredientSelectController extends ManagerStore {
   final _pageSize = 25;
   final ingredientController = TextEditingController();
   final List<IngredientRecipeEntity> listIngredientSelect = [];
+  final TextEditingController quantityController = TextEditingController();
+  UnitEnum? unit;
 
   @override
   void init(Map<String, dynamic> arguments) {
@@ -68,5 +71,27 @@ class IngredientSelectController extends ManagerStore {
     pagingController.notifyListeners();
     pagingController.refresh();
     state = StateManager.done;
+  }
+
+  void decreaseQuantity() {
+    final result = int.parse(quantityController.text);
+    quantityController.text = result > 0 ? (result - 1).toString() : '0';
+    notifyListeners();
+  }
+
+  void increaseQuantity() {
+    final result = int.tryParse(quantityController.text);
+    quantityController.text = result == null ? '1' : (result + 1).toString();
+    notifyListeners();
+  }
+
+  void addIngredientSelect(IngredientEntity ingredient) {
+    final ingredientSelect = IngredientRecipeEntity(
+      ingredient: ingredient,
+      quantity: double.parse(quantityController.text),
+      unit: unit!.name,
+    );
+    listIngredientSelect.add(ingredientSelect);
+    notifyListeners();
   }
 }

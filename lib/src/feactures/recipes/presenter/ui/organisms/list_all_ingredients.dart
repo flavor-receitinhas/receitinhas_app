@@ -88,7 +88,10 @@ class ListAllIngredients extends StatelessWidget {
                     typography: CookieTypography.title,
                     color: Theme.of(context).colorScheme.onSecondary,
                   ),
-                  body: const SheetSelectIngredient(),
+                  body: SheetSelectIngredient(
+                    ct: ct,
+                    ingredient: ingredient,
+                  ),
                 ).show(context);
               },
               child: ContainerIngredient(
