@@ -97,12 +97,17 @@ class ListAllIngredients extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ContainerIngredient(
-                  body: CookieText(
-                    text: ingredient.name,
-                    typography: CookieTypography.button,
+                  body: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CookieText(
+                        text: ingredient.name,
+                        typography: CookieTypography.button,
+                      ),
+                    ],
                   ),
                   icon: const Icon(Icons.add),
-                  onTap: () {},
                 ),
               ),
             );

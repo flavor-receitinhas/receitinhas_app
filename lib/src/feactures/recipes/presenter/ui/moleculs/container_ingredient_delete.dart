@@ -17,6 +17,7 @@ class ContainerIngredientDelete extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           CookieText(
             text: ingredient.ingredient.name,

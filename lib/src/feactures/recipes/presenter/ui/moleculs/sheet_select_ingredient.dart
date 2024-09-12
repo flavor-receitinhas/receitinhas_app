@@ -5,6 +5,7 @@ import 'package:app_receitas/src/feactures/recipes/domain/enum/unit_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/ingredient_select_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SheetSelectIngredient extends StatefulWidget {
   final IngredientSelectController ct;
@@ -34,13 +35,15 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
               ),
             ),
             SizedBox(
-              width: 60,
+              width: 100,
               child: TextField(
                 controller: widget.ct.quantityController,
                 // onChanged: onChangedField,
-                maxLength: 3,
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+                ],
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

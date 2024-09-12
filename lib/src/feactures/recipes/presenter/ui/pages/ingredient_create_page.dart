@@ -2,7 +2,6 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/container_ingredient_delete.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +14,14 @@ class IngredientCreatePage extends StatefulWidget {
 }
 
 class _IngredientCreatePageState extends State<IngredientCreatePage> {
+  String formatDouble(double value) {
+    if (value == value.toInt()) {
+      return value.toInt().toString();
+    } else {
+      return value.toString();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,9 +91,26 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
                             itemBuilder: (context, index) {
                               final ingredient =
                                   widget.ct.listIngredientSelect[index];
-                              return ContainerIngredientDelete(
-                                ingredient: ingredient,
-                                deleteOnPressed: () {},
+                              return Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CookieText(
+                                      text: ingredient.ingredient.name,
+                                      typography: CookieTypography.button,
+                                    ),
+                                    CookieText(
+                                      text:
+                                          '${formatDouble(ingredient.quantity)} ${ingredient.unit}',
+                                      typography: CookieTypography.body,
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                           ),
