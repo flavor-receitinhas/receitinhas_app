@@ -36,7 +36,7 @@ class _EditProfilePageState
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(50),
-          ), // Bordas arredondadas
+          ),
         ),
         child: SvgPicture.asset('assets/icons/save.svg'),
         onPressed: () {

@@ -60,7 +60,15 @@ class _SelectIngredientsPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  const CookieButton(label: 'Voltar').back(context),
+                  CookieButton(
+                    label: 'Voltar',
+                    onPressed: () {
+                      Navigator.pop(
+                        context,
+                        {'ingredients': ct.listIngredientSelect},
+                      );
+                    },
+                  ).back(context),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
@@ -86,10 +94,13 @@ class _SelectIngredientsPageState
             ),
             SliverVisibility(
               visible: ct.listIngredientSelect.isNotEmpty,
-              sliver: Padding(
+              sliver: SliverPadding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ListSelectIngredients(
+                sliver: ListSelectIngredients(
                   ingredients: ct.listIngredientSelect,
+                  deleteOnPressed: (ingredient) {
+                    ct.deleteIngredientSelect(ingredient);
+                  },
                 ),
               ),
             ),

@@ -94,13 +94,16 @@ class ListAllIngredients extends StatelessWidget {
                   ),
                 ).show(context);
               },
-              child: ContainerIngredient(
-                body: CookieText(
-                  text: ingredient.name,
-                  typography: CookieTypography.button,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ContainerIngredient(
+                  body: CookieText(
+                    text: ingredient.name,
+                    typography: CookieTypography.button,
+                  ),
+                  icon: const Icon(Icons.add),
+                  onTap: () {},
                 ),
-                icon: const Icon(Icons.add),
-                onTap: () {},
               ),
             );
           }),

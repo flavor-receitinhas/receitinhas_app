@@ -15,7 +15,7 @@ class IngredientSelectController extends ManagerStore {
       PagingController(firstPageKey: 0);
   final _pageSize = 25;
   final ingredientController = TextEditingController();
-  final List<IngredientRecipeEntity> listIngredientSelect = [];
+  List<IngredientRecipeEntity> listIngredientSelect = [];
   final TextEditingController quantityController = TextEditingController();
   UnitEnum? unit;
 
@@ -23,6 +23,9 @@ class IngredientSelectController extends ManagerStore {
   void init(Map<String, dynamic> arguments) {
     handleTry(
       call: () async {
+        arguments['ingredients'] != null
+            ? listIngredientSelect = arguments['ingredients']
+            : listIngredientSelect = [];
         pagingController.addPageRequestListener(_fetch);
       },
     );
@@ -92,6 +95,11 @@ class IngredientSelectController extends ManagerStore {
       unit: unit!.name,
     );
     listIngredientSelect.add(ingredientSelect);
+    notifyListeners();
+  }
+
+  void deleteIngredientSelect(IngredientRecipeEntity ingredient) {
+    listIngredientSelect.remove(ingredient);
     notifyListeners();
   }
 }

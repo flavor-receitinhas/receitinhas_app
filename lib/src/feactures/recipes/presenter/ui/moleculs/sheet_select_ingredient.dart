@@ -17,6 +17,7 @@ class SheetSelectIngredient extends StatefulWidget {
 }
 
 class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
+  bool isFieldsEmpty = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -102,10 +103,22 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
             }).toList(),
           ),
         ),
+        if (isFieldsEmpty)
+          const CookieText(
+            text: 'Campos obrigatórios',
+            color: Colors.red,
+          ),
         const SizedBox(height: 20),
         CookieButton(
           label: 'Confirmar',
           onPressed: () {
+            if (widget.ct.quantityController.text.isEmpty &&
+                widget.ct.unit == null) {
+              setState(() {
+                isFieldsEmpty = true;
+              });
+              return;
+            }
             setState(() {
               widget.ct.addIngredientSelect(widget.ingredient);
               widget.ct.quantityController.clear();

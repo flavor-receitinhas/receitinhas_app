@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class CreateRecipeController extends ChangeNotifier {
   bool isWriteTime = false;
   final hourController = TextEditingController();
   final minuteController = TextEditingController();
+  List<IngredientRecipeEntity> listIngredientSelect = [];
 
   void init() {
     pageController = PageController(initialPage: 0);
@@ -133,5 +135,10 @@ class CreateRecipeController extends ChangeNotifier {
     }
 
     return 'Difícil';
+  }
+
+  void deleteIngredientSelect(IngredientRecipeEntity ingredient) {
+    listIngredientSelect.remove(ingredient);
+    notifyListeners();
   }
 }

@@ -12,7 +12,9 @@ class ContainerIngredient extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
+      padding: const EdgeInsets.only(
+        top: 10,
+      ),
       child: Row(
         children: [
           Expanded(
