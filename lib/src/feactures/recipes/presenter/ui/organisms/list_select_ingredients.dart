@@ -1,15 +1,22 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_ingredient.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/container_ingredient_delete.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-class ListSelectIngredients extends StatelessWidget {
-  const ListSelectIngredients({super.key});
+class ListSelectIngredients extends StatefulWidget {
+  final List<IngredientRecipeEntity> ingredients;
+  final void Function(IngredientRecipeEntity indexIngredient) deleteOnPressed;
+  const ListSelectIngredients(
+      {super.key, required this.ingredients, required this.deleteOnPressed});
 
   @override
+  State<ListSelectIngredients> createState() => _ListSelectIngredientsState();
+}
+
+class _ListSelectIngredientsState extends State<ListSelectIngredients> {
+  @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
     return SliverToBoxAdapter(
       child: DottedBorder(
         dashPattern: const [4, 5],
@@ -25,40 +32,24 @@ class ListSelectIngredients extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CookieText(
-              text: 'Ingredientes selecionados (1)',
+            CookieText(
+              text: 'Ingredientes selecionados (${widget.ingredients.length})',
               typography: CookieTypography.button,
             ),
             const SizedBox(height: 10),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 5,
+              itemCount: widget.ingredients.length,
               itemBuilder: (context, index) {
-                return ContainerIngredient(
-                  body: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CookieText(
-                        text: 'Salada de Legumes ',
-                        typography: CookieTypography.button,
-                        maxLine: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      CookieText(
-                        text: '2 unidades',
-                      ),
-                    ],
-                  ),
-                  icon: SvgPicture.asset(
-                    'assets/icons/delete.svg',
-                    colorFilter: ColorFilter.mode(
-                      theme.onPrimary,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  onTap: () {},
+                final ingredient = widget.ingredients[index];
+                return ContainerIngredientDelete(
+                  ingredient: ingredient,
+                  deleteOnPressed: () {
+                    widget.deleteOnPressed(
+                      widget.ingredients[index],
+                    );
+                  },
                 );
               },
             ),

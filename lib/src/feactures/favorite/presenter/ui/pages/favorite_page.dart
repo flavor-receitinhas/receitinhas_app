@@ -71,9 +71,7 @@ class _FavoritePageState extends State<FavoritePage> {
                     CookieTextFieldSearch(
                       hintText: 'Pesquise sua receita favorita',
                       controller: ct.favoriteController,
-                      onEditingComplete: () {
-                        ct.refreshPage();
-                      },
+                      onEditingComplete: ct.refreshPage,
                     ),
                     const SizedBox(height: 10),
                     OrganizeRecipes(
@@ -112,41 +110,42 @@ class _FavoritePageState extends State<FavoritePage> {
               PagedSliverList<int, FavoriteEntity>(
                 pagingController: ct.pagingController,
                 builderDelegate: PagedChildBuilderDelegate<FavoriteEntity>(
-                    animateTransitions: true,
-                    firstPageErrorIndicatorBuilder: (context) {
-                      return const Center(
-                        child: CookieText(
-                          text: 'Erro ao carregar receitas',
+                  animateTransitions: true,
+                  firstPageErrorIndicatorBuilder: (context) {
+                    return const Center(
+                      child: CookieText(
+                        text: 'Erro ao carregar receitas',
+                      ),
+                    );
+                  },
+                  noItemsFoundIndicatorBuilder: (context) {
+                    return const Center(
+                      child: CookieText(
+                        text: 'Nenhuma receita encontrada',
+                      ),
+                    );
+                  },
+                  newPageErrorIndicatorBuilder: (context) {
+                    return const Center(
+                      child: CookieText(
+                        text: 'Erro ao carregar receitas',
+                      ),
+                    );
+                  },
+                  itemBuilder: (context, favorite, idx) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, ViewRecipesPage.route);
+                        },
+                        child: ContainerRecipe(
+                          nameRecipe: favorite.name,
                         ),
-                      );
-                    },
-                    noItemsFoundIndicatorBuilder: (context) {
-                      return const Center(
-                        child: CookieText(
-                          text: 'Nenhuma receita encontrada',
-                        ),
-                      );
-                    },
-                    newPageErrorIndicatorBuilder: (context) {
-                      return const Center(
-                        child: CookieText(
-                          text: 'Erro ao carregar receitas',
-                        ),
-                      );
-                    },
-                    itemBuilder: (context, favorite, idx) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, ViewRecipesPage.route);
-                          },
-                          child: ContainerRecipe(
-                            nameRecipe: favorite.name,
-                          ),
-                        ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

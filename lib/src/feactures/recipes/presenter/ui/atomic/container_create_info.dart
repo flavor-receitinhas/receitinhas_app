@@ -23,7 +23,13 @@ class ContainerCreateInfo extends StatelessWidget {
                 text: title ?? '',
                 typography: CookieTypography.button,
               ),
-              SvgPicture.asset(iconSvg),
+              SvgPicture.asset(
+                iconSvg,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.onPrimary,
+                  BlendMode.srcIn,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 10),

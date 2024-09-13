@@ -1,9 +1,13 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/register_module.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_mapper.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/repositories/ingredient_repository.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/repositories/ingredient_repository_imp.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository_imp.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/controller/ingredient_select_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients_page.dart';
@@ -22,10 +26,17 @@ class RecipeModule extends RegisterModule {
   void inicialize() {
     //Mapper
     di.registerFactory(() => RecipeMapper());
+    di.registerFactory(() => IngredientMapper());
 
     //Repository
     di.registerFactory<RecipeRepository>(
       () => RecipeRepositoryImp(
+        di(),
+        di(),
+      ),
+    );
+    di.registerFactory<IngredientRepository>(
+      () => IngredientRepositoryImp(
         di(),
         di(),
       ),
@@ -39,6 +50,11 @@ class RecipeModule extends RegisterModule {
     );
     di.registerFactory<ViewRecipeController>(
       () => ViewRecipeController(
+        di(),
+      ),
+    );
+    di.registerFactory<IngredientSelectController>(
+      () => IngredientSelectController(
         di(),
       ),
     );

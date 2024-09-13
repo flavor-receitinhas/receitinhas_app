@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +14,15 @@ class CreateRecipeController extends ChangeNotifier {
 
   final RecipeRepository _repository;
 
-  CreateRecipeController(this._repository);
+  CreateRecipeController(
+    this._repository,
+  );
 
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   TextEditingController portionController = TextEditingController();
-  List<IngredientsEntity> listIngredient = [];
+  List<IngredientEntity> listIngredient = [];
   PageController pageController = PageController();
   PageController containerController = PageController();
   int currentPage = 0;
@@ -32,6 +35,7 @@ class CreateRecipeController extends ChangeNotifier {
   bool isWriteTime = false;
   final hourController = TextEditingController();
   final minuteController = TextEditingController();
+  List<IngredientRecipeEntity> listIngredientSelect = [];
 
   void init() {
     pageController = PageController(initialPage: 0);
@@ -82,11 +86,11 @@ class CreateRecipeController extends ChangeNotifier {
   //   dio.post('$url/$path', data: imageData);
   // }
 
-  void addIngredient(IngredientsEntity ingredient) {
+  void addIngredient(IngredientEntity ingredient) {
     listIngredient.add(ingredient);
   }
 
-  void deleteIngredient(IngredientsEntity ingredient) {
+  void deleteIngredient(IngredientEntity ingredient) {
     listIngredient.remove(ingredient);
     notifyListeners();
   }
@@ -131,5 +135,10 @@ class CreateRecipeController extends ChangeNotifier {
     }
 
     return 'Difícil';
+  }
+
+  void deleteIngredientSelect(IngredientRecipeEntity ingredient) {
+    listIngredientSelect.remove(ingredient);
+    notifyListeners();
   }
 }

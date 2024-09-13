@@ -72,9 +72,10 @@ class InfoContainerPortion extends StatelessWidget {
                   ],
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSecondary,
                   ),
                   decoration: const InputDecoration(
                     counterText: '',
