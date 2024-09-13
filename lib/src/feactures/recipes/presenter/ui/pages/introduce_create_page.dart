@@ -159,6 +159,8 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                           bottomRight: Radius.circular(16),
                           topLeft: Radius.circular(16),
                         ),
+                        maxLength: 50,
+                        maxLines: 1,
                         controller: ct.titleController,
                         validator: (value) {
                           if (value!.isEmpty || value.length < 3) {
@@ -177,6 +179,8 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                           bottomRight: Radius.circular(16),
                           topLeft: Radius.circular(16),
                         ),
+                        maxLength: 100,
+                        maxLines: 3,
                       ),
                       const SizedBox(height: 20),
                       const CookieText(
