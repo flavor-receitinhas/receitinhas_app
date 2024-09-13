@@ -42,17 +42,20 @@ class ContainerIngredient extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            constraints: const BoxConstraints(
-              maxHeight: 86,
-              minHeight: 64,
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              constraints: const BoxConstraints(
+                maxHeight: 86,
+                minHeight: 64,
+              ),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: theme.primary,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: icon,
             ),
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: theme.primary,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: icon,
           ),
         ],
       ),

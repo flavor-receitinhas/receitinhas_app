@@ -100,6 +100,7 @@ class ListAllIngredients extends StatelessWidget {
                   body: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CookieText(
                         text: ingredient.name,

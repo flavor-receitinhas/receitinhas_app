@@ -38,20 +38,21 @@ class _ListSelectIngredientsState extends State<ListSelectIngredients> {
             ),
             const SizedBox(height: 10),
             ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: widget.ingredients.length,
-                itemBuilder: (context, index) {
-                  final ingredient = widget.ingredients[index];
-                  return ContainerIngredientDelete(
-                    ingredient: ingredient,
-                    deleteOnPressed: () {
-                      widget.deleteOnPressed(
-                        widget.ingredients[index],
-                      );
-                    },
-                  );
-                }),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: widget.ingredients.length,
+              itemBuilder: (context, index) {
+                final ingredient = widget.ingredients[index];
+                return ContainerIngredientDelete(
+                  ingredient: ingredient,
+                  deleteOnPressed: () {
+                    widget.deleteOnPressed(
+                      widget.ingredients[index],
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),

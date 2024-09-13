@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients_page.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/validator/number_convert.dart';
 import 'package:flutter/material.dart';
 
 class IngredientCreatePage extends StatefulWidget {
@@ -14,14 +15,6 @@ class IngredientCreatePage extends StatefulWidget {
 }
 
 class _IngredientCreatePageState extends State<IngredientCreatePage> {
-  String formatDouble(double value) {
-    if (value == value.toInt()) {
-      return value.toInt().toString();
-    } else {
-      return value.toString();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_ingredient.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/validator/number_convert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -26,7 +27,7 @@ class ContainerIngredientDelete extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           CookieText(
-            text: '${ingredient.quantity} ${ingredient.unit}',
+            text: '${formatDouble(ingredient.quantity)} ${ingredient.unit}',
           ),
         ],
       ),
