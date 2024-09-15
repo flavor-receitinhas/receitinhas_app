@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
@@ -22,6 +23,12 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
         label: 'Proximo',
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
+          if (widget.ct.listIngredientSelect.isEmpty) {
+            const CookieSnackBar(
+              text: 'Adicione pelo menos um ingrediente',
+            ).show(context);
+            return;
+          }
           widget.ct.pageController.nextPage(
             duration: const Duration(milliseconds: 500),
             curve: Curves.ease,
