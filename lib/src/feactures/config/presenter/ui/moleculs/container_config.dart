@@ -1,6 +1,6 @@
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ContainerConfig extends StatelessWidget {
   final String icon;
@@ -30,7 +30,7 @@ class ContainerConfig extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SvgPicture.asset(icon),
+            CookieSvg(path: icon),
             const SizedBox(width: 15),
             CookieText(
                 text: text,

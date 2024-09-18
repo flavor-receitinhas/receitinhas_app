@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -47,13 +48,9 @@ class CookieTextFieldSearch extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,
         ),
-        suffixIcon: SvgPicture.asset(
-          'assets/icons/search.svg',
-          fit: BoxFit.scaleDown,
-          colorFilter: ColorFilter.mode(
-            Theme.of(context).colorScheme.onSecondary,
-            BlendMode.srcIn,
-          ),
+        suffixIcon: CookieSvg(
+          path: 'assets/icons/search.svg',
+          color: Theme.of(context).colorScheme.onSecondary,
         ),
       ),
     );

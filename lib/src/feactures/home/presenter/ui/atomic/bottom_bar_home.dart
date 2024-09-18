@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,38 +17,41 @@ class BottomBarHome extends StatelessWidget {
           showSelectedLabels: false,
           backgroundColor: Theme.of(context).colorScheme.primary,
           currentIndex: currentIndex,
-          unselectedItemColor: Colors.grey[300],
+          unselectedItemColor: Theme.of(context).colorScheme.onSecondary,
           selectedFontSize: 0,
           onTap: onTap,
           items: [
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/home.svg'),
+              icon: CookieSvg(
+                path: 'assets/icons/home.svg',
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
               label: '',
-              activeIcon: SvgPicture.asset(
-                'assets/icons/home.svg',
-                colorFilter:
-                    const ColorFilter.mode(Color(0xff222222), BlendMode.srcIn),
+              activeIcon: const CookieSvg(
+                path: 'assets/icons/home.svg',
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/favorite.svg'),
+              icon: CookieSvg(
+                path: 'assets/icons/favorite.svg',
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: SvgPicture.asset(
-                'assets/icons/favorite.svg',
-                colorFilter:
-                    const ColorFilter.mode(Color(0xff222222), BlendMode.srcIn),
+              activeIcon: const CookieSvg(
+                path: 'assets/icons/favorite.svg',
               ),
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/settings.svg'),
+              icon: CookieSvg(
+                path: 'assets/icons/settings.svg',
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: SvgPicture.asset(
-                'assets/icons/settings.svg',
-                colorFilter:
-                    const ColorFilter.mode(Color(0xff222222), BlendMode.srcIn),
+              activeIcon: const CookieSvg(
+                path: 'assets/icons/settings.svg',
               ),
             ),
           ],

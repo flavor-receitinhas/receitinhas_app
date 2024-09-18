@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/controller/onboarding_controller.dart';
@@ -72,12 +73,9 @@ class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
                           isSelect: ct.dietaryRestriction.contains(e),
                           backgroundColor:
                               Theme.of(context).colorScheme.onPrimary,
-                          prefix: SvgPicture.asset(
-                            ImageContext().svgIconRestriction(e),
-                            colorFilter: ColorFilter.mode(
-                              Theme.of(context).colorScheme.onSecondary,
-                              BlendMode.srcIn,
-                            ),
+                          prefix: CookieSvg(
+                            path: ImageContext().svgIconRestriction(e),
+                            color: Theme.of(context).colorScheme.onSecondary,
                           ),
                           labelColor: Theme.of(context).colorScheme.onSecondary,
                         ),

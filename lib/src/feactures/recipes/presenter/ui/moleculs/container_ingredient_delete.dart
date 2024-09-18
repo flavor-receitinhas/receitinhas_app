@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_ingredient.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/validator/number_convert.dart';
@@ -31,12 +32,8 @@ class ContainerIngredientDelete extends StatelessWidget {
           ),
         ],
       ),
-      icon: SvgPicture.asset(
-        'assets/icons/delete.svg',
-        colorFilter: ColorFilter.mode(
-          theme.onPrimary,
-          BlendMode.srcIn,
-        ),
+      icon: const CookieSvg(
+        path: 'assets/icons/delete.svg',
       ),
       onTap: deleteOnPressed,
     );

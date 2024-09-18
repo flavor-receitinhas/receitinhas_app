@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
@@ -43,13 +44,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      SvgPicture.asset(
-                        'assets/icons/clock.svg',
-                        colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.onPrimary,
-                          BlendMode.srcIn,
-                        ),
-                      ),
+                      const CookieSvg(path: 'assets/icons/clock.svg'),
                       const SizedBox(height: 5),
                       CookieText(text: '$timePrepared min'),
                     ],
@@ -57,12 +52,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
                   const SizedBox(width: 16),
                   Column(
                     children: [
-                      SvgPicture.asset(
-                        'assets/icons/fire.svg',
-                        colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.onPrimary,
-                          BlendMode.srcIn,
-                        ),
+                      const CookieSvg(
+                        path: 'assets/icons/fire.svg',
                       ),
                       const SizedBox(height: 5),
                       CookieText(text: difficultyRecipe)
@@ -71,13 +62,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                   const SizedBox(width: 16),
                   Column(
                     children: [
-                      SvgPicture.asset(
-                        'assets/icons/pot.svg',
-                        colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.onPrimary,
-                          BlendMode.srcIn,
-                        ),
-                      ),
+                      const CookieSvg(path: 'assets/icons/pot.svg'),
                       const SizedBox(height: 5),
                       CookieText(
                         text: portion != 1

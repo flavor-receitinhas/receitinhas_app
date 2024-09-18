@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
@@ -36,14 +37,14 @@ class ViewDetailsRecipe extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CookieText(
+                  CookieText(
                     text: 'Ingredientes',
                     typography: CookieTypography.title,
                   ),
-                  SvgPicture.asset('assets/icons/carrot.svg'),
+                  CookieSvg(path: 'assets/icons/carrot.svg'),
                 ],
               ),
               const SizedBox(height: 10),
@@ -63,14 +64,14 @@ class ViewDetailsRecipe extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CookieText(
+                  CookieText(
                     text: 'Instruções de preparo',
                     typography: CookieTypography.title,
                   ),
-                  SvgPicture.asset('assets/icons/knife.svg'),
+                  CookieSvg(path: 'assets/icons/knife.svg'),
                 ],
               ),
               const SizedBox(height: 20),
@@ -90,14 +91,14 @@ class ViewDetailsRecipe extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const CookieText(
+                    CookieText(
                       text: 'Hora de se servir!',
                       typography: CookieTypography.title,
                     ),
-                    SvgPicture.asset('assets/icons/pan.svg'),
+                    CookieSvg(path: 'assets/icons/pan.svg'),
                   ],
                 ),
                 const SizedBox(height: 20),
