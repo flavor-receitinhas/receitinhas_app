@@ -7,7 +7,9 @@ import 'package:app_receitas/src/core/services/api/response_request_mapper.dart'
 import 'package:app_receitas/src/core/services/preference/sembast/sembast_database.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
+import 'package:app_receitas/src/core/widgets/feactures/manager_dialog.dart';
 import 'package:dio/dio.dart';
+import 'package:page_manager/handles/manager_handle_dialog_error.dart';
 
 class Inject {
   static void inicialize() {
@@ -30,5 +32,10 @@ class Inject {
     di.registerFactory(() => ResponseRequestMapper());
     di.registerFactory(() => ApiRecipes(di(), di(), di()));
     di.registerFactory(() => ApiResponseParser());
+
+    //Dialog package Page Manager
+    di.registerFactory<ManagerHandleDialogError>(
+      () => ManagerDialog(),
+    );
   }
 }

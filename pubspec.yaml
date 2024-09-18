@@ -47,6 +47,7 @@ dependencies:
   page_manager:
     git:
       url: https://github.com/lucascardo12/page_manager.git
+      ref: 0.0.3
   package_info_plus: ^8.0.2
 
 dependency_overrides:
