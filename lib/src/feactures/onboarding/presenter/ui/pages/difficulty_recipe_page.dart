@@ -7,7 +7,6 @@ import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context
 import 'package:app_receitas/src/feactures/onboarding/presenter/validator_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/svg.dart';
 
 class DifficultRecipePage extends StatefulWidget {
   final OnBoardingController ct;

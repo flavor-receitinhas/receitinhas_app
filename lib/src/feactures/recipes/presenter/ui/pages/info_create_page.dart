@@ -7,7 +7,6 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_co
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_portion.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_time_prepared.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class InfoCreatePage extends StatefulWidget {
   final CreateRecipeController ct;

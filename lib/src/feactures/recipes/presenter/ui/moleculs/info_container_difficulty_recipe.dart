@@ -5,7 +5,6 @@ import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_re
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoContainerDifficultyRecipe extends StatelessWidget {

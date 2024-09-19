@@ -2,7 +2,6 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ContainerCreateInfo extends StatelessWidget {
   final String? title;

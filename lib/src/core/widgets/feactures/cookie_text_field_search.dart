@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
+import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CookieTextFieldSearch extends StatelessWidget {
   final String? hintText;
@@ -49,7 +49,7 @@ class CookieTextFieldSearch extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         suffixIcon: CookieSvg(
-          path: 'assets/icons/search.svg',
+          path: IconEnum.search.path,
           color: Theme.of(context).colorScheme.onSecondary,
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
+import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BottomBarHome extends StatelessWidget {
   final int currentIndex;
@@ -23,35 +23,35 @@ class BottomBarHome extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: CookieSvg(
-                path: 'assets/icons/home.svg',
+                path: IconEnum.home.path,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
               label: '',
-              activeIcon: const CookieSvg(
-                path: 'assets/icons/home.svg',
+              activeIcon: CookieSvg(
+                path: IconEnum.home.path,
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
             BottomNavigationBarItem(
               icon: CookieSvg(
-                path: 'assets/icons/favorite.svg',
+                path: IconEnum.favorite.path,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: const CookieSvg(
-                path: 'assets/icons/favorite.svg',
+              activeIcon: CookieSvg(
+                path: IconEnum.favorite.path,
               ),
             ),
             BottomNavigationBarItem(
               icon: CookieSvg(
-                path: 'assets/icons/settings.svg',
+                path: IconEnum.settings.path,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: const CookieSvg(
-                path: 'assets/icons/settings.svg',
+              activeIcon: CookieSvg(
+                path: IconEnum.settings.path,
               ),
             ),
           ],
