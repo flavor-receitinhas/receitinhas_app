@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
@@ -6,7 +7,6 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_co
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_portion.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_time_prepared.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class InfoCreatePage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -62,12 +62,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                               visible: ct.timePreparedRecipe.inMinutes > 0,
                               child: Column(
                                 children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/clock.svg',
-                                    colorFilter: ColorFilter.mode(
-                                      Theme.of(context).colorScheme.onPrimary,
-                                      BlendMode.srcIn,
-                                    ),
+                                  const CookieSvg(
+                                    path: 'assets/icons/clock.svg',
                                   ),
                                   const SizedBox(height: 5),
                                   CookieText(
@@ -79,12 +75,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                             const SizedBox(width: 16),
                             Column(
                               children: [
-                                SvgPicture.asset(
-                                  'assets/icons/fire.svg',
-                                  colorFilter: ColorFilter.mode(
-                                    Theme.of(context).colorScheme.onPrimary,
-                                    BlendMode.srcIn,
-                                  ),
+                                const CookieSvg(
+                                  path: 'assets/icons/fire.svg',
                                 ),
                                 const SizedBox(height: 5),
                                 CookieText(text: ct.difficultyRecipeString)
@@ -95,12 +87,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                               visible: ct.portion > 0,
                               child: Column(
                                 children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/pot.svg',
-                                    colorFilter: ColorFilter.mode(
-                                      Theme.of(context).colorScheme.onPrimary,
-                                      BlendMode.srcIn,
-                                    ),
+                                  const CookieSvg(
+                                    path: 'assets/icons/pot.svg',
                                   ),
                                   const SizedBox(height: 5),
                                   CookieText(text: '${ct.portion} porções')

@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 
 class InfoContainerPortion extends StatelessWidget {
   final CreateRecipeController ct;
@@ -45,13 +45,10 @@ class InfoContainerPortion extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/icons/pot.svg',
+              CookieSvg(
+                path: 'assets/icons/pot.svg',
                 height: 70,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.onSecondary,
-                  BlendMode.srcIn,
-                ),
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
               IconButton(
                 onPressed: onPressedDecresead,

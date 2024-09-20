@@ -1,8 +1,9 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
+import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ChangedPasswordPage extends StatelessWidget {
   static const route = '/changed-password';
@@ -19,7 +20,7 @@ class ChangedPasswordPage extends StatelessWidget {
             Radius.circular(50),
           ),
         ),
-        child: SvgPicture.asset('assets/icons/save.svg'),
+        child: CookieSvg(path: IconEnum.save.path),
         onPressed: () {},
       ),
       body: SafeArea(

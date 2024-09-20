@@ -1,7 +1,9 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
+import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
 import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
@@ -9,7 +11,6 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_rec
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:page_manager/manager_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,7 +41,7 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
           Navigator.pushNamed(context, CreateRecipePage.route);
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
-        child: SvgPicture.asset('assets/icons/edit.svg'),
+        child: CookieSvg(path: IconEnum.edit.path),
       ),
       done: () => SafeArea(
         child: Padding(

@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
+import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
@@ -38,7 +39,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: 'assets/icons/person.svg',
+              icon: IconEnum.person.path,
               text: 'Editar Conta',
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -47,7 +48,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: 'assets/icons/key.svg',
+              icon: IconEnum.key.path,
               text: 'Alterar senha',
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -65,7 +66,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: 'assets/icons/moon.svg',
+              icon: IconEnum.moon.path,
               text: 'Modo notuno',
               action: SizedBox(
                 height: 20,
@@ -100,7 +101,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: 'assets/icons/eye.svg',
+              icon: IconEnum.eye.path,
               text: 'Politicas de privacidade',
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -112,7 +113,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: 'assets/icons/document.svg',
+              icon: IconEnum.document.path,
               text: 'Termos e condições',
               onTap: () {
                 Navigator.pushNamed(
@@ -124,7 +125,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: 'assets/icons/persons.svg',
+              icon: IconEnum.persons.path,
               text: 'Nossa equipe',
               onTap: () {
                 Navigator.pushNamed(
@@ -136,7 +137,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: 'assets/icons/sing_out.svg',
+              icon: IconEnum.logOut.path,
               text: 'Sair da conta',
               textColor: const Color(0xffFF5757),
               action: const Icon(Icons.chevron_right),

@@ -1,10 +1,10 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/image_context.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoContainerDifficultyRecipe extends StatelessWidget {
@@ -43,12 +43,8 @@ class InfoContainerDifficultyRecipe extends StatelessWidget {
                         onChanged(e);
                       },
                       isSelect: ct.difficultyRecipe == e,
-                      prefix: SvgPicture.asset(
-                        ImageContext().svgIconDifficulty(e),
-                        colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.onPrimary,
-                          BlendMode.srcIn,
-                        ),
+                      prefix: CookieSvg(
+                        path: ImageContext().svgIconDifficulty(e),
                       ),
                       backgroundColor:
                           Theme.of(context).colorScheme.onSecondary,

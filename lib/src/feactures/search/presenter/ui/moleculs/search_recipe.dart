@@ -1,9 +1,10 @@
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
+import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/filter_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SearchRecipe extends StatelessWidget {
   const SearchRecipe({super.key});
@@ -42,9 +43,7 @@ class SearchRecipe extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  child: SvgPicture.asset(
-                    'assets/icons/menu.svg',
-                  ),
+                  child: CookieSvg(path: IconEnum.menu.path),
                 ),
               ),
             ],

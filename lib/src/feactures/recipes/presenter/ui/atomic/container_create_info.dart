@@ -1,7 +1,7 @@
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ContainerCreateInfo extends StatelessWidget {
   final String? title;
@@ -23,13 +23,7 @@ class ContainerCreateInfo extends StatelessWidget {
                 text: title ?? '',
                 typography: CookieTypography.button,
               ),
-              SvgPicture.asset(
-                iconSvg,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.onPrimary,
-                  BlendMode.srcIn,
-                ),
-              ),
+              CookieSvg(path: iconSvg),
             ],
           ),
           const SizedBox(height: 10),

@@ -2,16 +2,17 @@ import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_sheet_bottom.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
+import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/back_sheet.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/container_privacy.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/save_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:page_manager/export_manager.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _EditProfilePageState
             Radius.circular(50),
           ),
         ),
-        child: SvgPicture.asset('assets/icons/save.svg'),
+        child: CookieSvg(path: IconEnum.save.path),
         onPressed: () {
           CookieSheetBottom(
             title: CookieText(
