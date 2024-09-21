@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SelectImageRecipe extends StatefulWidget {
+class SelectImageRecipe extends StatelessWidget {
   final void Function() onTap;
   final Widget child;
   final dynamic image;
@@ -13,16 +13,11 @@ class SelectImageRecipe extends StatefulWidget {
       required this.hasImage});
 
   @override
-  State<SelectImageRecipe> createState() => _SelectImageRecipeState();
-}
-
-class _SelectImageRecipeState extends State<SelectImageRecipe> {
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
-      child: widget.hasImage
-          ? widget.child
+      onTap: onTap,
+      child: hasImage
+          ? child
           : Container(
               height: 200,
               width: MediaQuery.sizeOf(context).width,

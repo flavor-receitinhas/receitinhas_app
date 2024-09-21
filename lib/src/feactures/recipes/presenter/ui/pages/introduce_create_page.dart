@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/leave_recipe_sheet.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/select_image_recipe.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/carousel_select_images_recipe.dart';
 import 'package:flutter/material.dart';
 
 class IntroduceCreatePage extends StatefulWidget {
@@ -18,6 +19,12 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
   CreateRecipeController get ct => widget.ct;
   final formKey = GlobalKey<FormState>();
   final _carouselController = CarouselController();
+
+  @override
+  void dispose() {
+    _carouselController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,95 +99,8 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         typography: CookieTypography.title,
                       ),
                       const SizedBox(height: 10),
-                      SelectImageRecipe(
-                        hasImage: ct.listImagesRecipe.isNotEmpty,
-                        image: ct.listImagesRecipe,
-                        onTap: () async {
-                          final images = await ct.pickMultiImagesRecipe();
-                          for (var i = 0; i < images.length; i++) {
-                            if (ct.listImagesRecipe.length < 10) {
-                              ct.listImagesRecipe.add(images[i]);
-                            } else {
-                              if (context.mounted) {
-                                const CookieSnackBar(
-                                  text: 'Só é permitido 10 imagens por receita',
-                                ).show(context);
-                              }
-                              break;
-                            }
-                          }
-                          setState(() {});
-                        },
-                        child: SizedBox(
-                          height: 250,
-                          child: CarouselView(
-                            controller: _carouselController,
-                            onTap: (value) async {
-                              final images = await ct.pickMultiImagesRecipe();
-                              for (var i = 0; i < images.length; i++) {
-                                if (ct.listImagesRecipe.length < 10) {
-                                  ct.listImagesRecipe.add(images[i]);
-                                } else {
-                                  if (context.mounted) {
-                                    const CookieSnackBar(
-                                      text:
-                                          'Só é permitido 10 imagens por receita',
-                                    ).show(context);
-                                  }
-                                  break;
-                                }
-                              }
-                              setState(() {});
-                            },
-                            itemExtent: 500,
-                            itemSnapping: true,
-                            shrinkExtent: 50,
-                            children: ct.listImagesRecipe
-                                .map(
-                                  (e) => Stack(
-                                    alignment: Alignment.topRight,
-                                    children: [
-                                      Center(child: Image.file(e)),
-                                      IconButton(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary,
-                                        onPressed: () {
-                                          setState(() {
-                                            ct.removeImage(e);
-                                          });
-                                        },
-                                        icon: const Icon(Icons.delete),
-                                      ),
-                                      if (e != ct.listImagesRecipe.last)
-                                        Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Icon(
-                                            size: 35,
-                                            Icons.keyboard_arrow_right,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary,
-                                          ),
-                                        ),
-                                      if (e != ct.listImagesRecipe.first)
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Icon(
-                                            size: 35,
-                                            Icons.keyboard_arrow_left,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary,
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                      ),
+                      CarouselSelectImagesRecipe(
+                          ct: ct, carouselController: _carouselController),
                       const SizedBox(height: 20),
                       const CookieText(
                         text: 'Capa da receita',
