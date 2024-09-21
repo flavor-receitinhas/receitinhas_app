@@ -4,8 +4,8 @@ import 'package:app_receitas/src/feactures/home/presenter/ui/pages/custom_bottom
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/leave_recipe_sheet.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/select_image_recipe.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/carousel_select_images_recipe.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
 class IntroduceCreatePage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -18,6 +18,13 @@ class IntroduceCreatePage extends StatefulWidget {
 class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
   CreateRecipeController get ct => widget.ct;
   final formKey = GlobalKey<FormState>();
+  final _carouselController = CarouselController();
+
+  @override
+  void dispose() {
+    _carouselController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +34,13 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
           if (formKey.currentState!.validate() &&
-              ct.listMultiMedia.isNotEmpty) {
+              ct.listImagesRecipe.isNotEmpty) {
             ct.pageController.nextPage(
               duration: const Duration(milliseconds: 500),
               curve: Curves.ease,
             );
           }
-          if (ct.listMultiMedia.isEmpty) {
+          if (ct.listImagesRecipe.isEmpty) {
             const CookieSnackBar(text: 'Adicione uma imagem da receita')
                 .show(context);
 
@@ -92,42 +99,8 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         typography: CookieTypography.title,
                       ),
                       const SizedBox(height: 10),
-                      SelectImageRecipe(
-                        hasImage: ct.listMultiMedia.isNotEmpty,
-                        image: ct.listMultiMedia,
-                        onTap: () {
-                          setState(() {
-                            ct.pickMultiMedia();
-                          });
-                        },
-                        child: FlutterCarousel(
-                          options: CarouselOptions(
-                            height: 250,
-                            showIndicator: true,
-                            autoPlay: false,
-                            viewportFraction: 1,
-                            autoPlayAnimationDuration:
-                                const Duration(milliseconds: 500),
-                            padEnds: false,
-                          ),
-                          items: ct.listMultiMedia
-                              .map(
-                                (e) => Stack(
-                                  alignment: Alignment.topRight,
-                                  children: [
-                                    Image.file(e),
-                                    IconButton(
-                                      onPressed: () {
-                                        ct.removeImage(e);
-                                      },
-                                      icon: const Icon(Icons.delete),
-                                    )
-                                  ],
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
+                      CarouselSelectImagesRecipe(
+                          ct: ct, carouselController: _carouselController),
                       const SizedBox(height: 20),
                       const CookieText(
                         text: 'Capa da receita',
@@ -136,10 +109,9 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                       const SizedBox(height: 10),
                       SelectImageRecipe(
                           hasImage: ct.thumbImage != null,
-                          onTap: () {
-                            setState(() {
-                              ct.pickThumb();
-                            });
+                          onTap: () async {
+                            await ct.pickThumb();
+                            setState(() {});
                           },
                           image: ct.thumbImage,
                           child: Center(
