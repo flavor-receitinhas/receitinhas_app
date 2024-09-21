@@ -40,7 +40,7 @@ class CreateViewRecipePage extends StatelessWidget {
                             const Duration(milliseconds: 500),
                         padEnds: false,
                       ),
-                      items: ct.listMultiMedia
+                      items: ct.listImagesRecipe
                           .map((e) => Image.file(e, fit: BoxFit.cover))
                           .toList()),
                   const SizedBox(height: 10),

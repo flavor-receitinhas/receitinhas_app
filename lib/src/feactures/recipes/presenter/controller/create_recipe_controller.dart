@@ -10,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
 class CreateRecipeController extends ChangeNotifier {
-  var listMultiMedia = [];
 
   final RecipeRepository _repository;
 
@@ -36,6 +35,7 @@ class CreateRecipeController extends ChangeNotifier {
   final hourController = TextEditingController();
   final minuteController = TextEditingController();
   List<IngredientRecipeEntity> listIngredientSelect = [];
+  List<File> listImagesRecipe = [];
 
   void init() {
     pageController = PageController(initialPage: 0);
@@ -56,32 +56,33 @@ class CreateRecipeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> pickMultiMedia() async {
-    List<XFile> listImage = await ImagePicker().pickMultipleMedia();
+  Future<List<File>> pickMultiImagesRecipe() async {
+    List<XFile> listImage = await ImagePicker().pickMultiImage();
+    final List<File> listImagesRecipe = [];
     for (var image in listImage) {
-      listMultiMedia.add(File(image.path));
+      listImagesRecipe.add(File(image.path));
     }
 
-    notifyListeners();
+    return listImagesRecipe;
   }
 
   bool showDialogDiscard() {
     return titleController.text.isNotEmpty ||
         subTitleController.text.isNotEmpty ||
         detailsController.text.isNotEmpty ||
-        listMultiMedia.isNotEmpty;
+        listImagesRecipe.isNotEmpty;
   }
 
   void removeImage(File image) {
-    listMultiMedia.removeWhere((e) => e == image);
+    listImagesRecipe.removeWhere((e) => e == image);
     notifyListeners();
   }
 
   // void sendImage() async {
   //   FormData imageData = FormData();
-  //   for (var i = 0; i < listMultiMedia.length; i++) {
+  //   for (var i = 0; i < listImagesRecipe.length; i++) {
   //     imageData.files.add(MapEntry('images',
-  //         await MultipartFile.fromFile(listMultiMedia[i], filename: '$i.jpg')));
+  //         await MultipartFile.fromFile(listImagesRecipe[i], filename: '$i.jpg')));
   //   }
   //   dio.post('$url/$path', data: imageData);
   // }

@@ -5,7 +5,6 @@ import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_r
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/leave_recipe_sheet.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/select_image_recipe.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
 class IntroduceCreatePage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -18,6 +17,7 @@ class IntroduceCreatePage extends StatefulWidget {
 class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
   CreateRecipeController get ct => widget.ct;
   final formKey = GlobalKey<FormState>();
+  final _carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,13 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
           if (formKey.currentState!.validate() &&
-              ct.listMultiMedia.isNotEmpty) {
+              ct.listImagesRecipe.isNotEmpty) {
             ct.pageController.nextPage(
               duration: const Duration(milliseconds: 500),
               curve: Curves.ease,
             );
           }
-          if (ct.listMultiMedia.isEmpty) {
+          if (ct.listImagesRecipe.isEmpty) {
             const CookieSnackBar(text: 'Adicione uma imagem da receita')
                 .show(context);
 
@@ -93,39 +93,92 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                       ),
                       const SizedBox(height: 10),
                       SelectImageRecipe(
-                        hasImage: ct.listMultiMedia.isNotEmpty,
-                        image: ct.listMultiMedia,
-                        onTap: () {
-                          setState(() {
-                            ct.pickMultiMedia();
-                          });
+                        hasImage: ct.listImagesRecipe.isNotEmpty,
+                        image: ct.listImagesRecipe,
+                        onTap: () async {
+                          final images = await ct.pickMultiImagesRecipe();
+                          for (var i = 0; i < images.length; i++) {
+                            if (ct.listImagesRecipe.length < 10) {
+                              ct.listImagesRecipe.add(images[i]);
+                            } else {
+                              if (context.mounted) {
+                                const CookieSnackBar(
+                                  text: 'Só é permitido 10 imagens por receita',
+                                ).show(context);
+                              }
+                              break;
+                            }
+                          }
+                          setState(() {});
                         },
-                        child: FlutterCarousel(
-                          options: CarouselOptions(
-                            height: 250,
-                            showIndicator: true,
-                            autoPlay: false,
-                            viewportFraction: 1,
-                            autoPlayAnimationDuration:
-                                const Duration(milliseconds: 500),
-                            padEnds: false,
+                        child: SizedBox(
+                          height: 250,
+                          child: CarouselView(
+                            controller: _carouselController,
+                            onTap: (value) async {
+                              final images = await ct.pickMultiImagesRecipe();
+                              for (var i = 0; i < images.length; i++) {
+                                if (ct.listImagesRecipe.length < 10) {
+                                  ct.listImagesRecipe.add(images[i]);
+                                } else {
+                                  if (context.mounted) {
+                                    const CookieSnackBar(
+                                      text:
+                                          'Só é permitido 10 imagens por receita',
+                                    ).show(context);
+                                  }
+                                  break;
+                                }
+                              }
+                              setState(() {});
+                            },
+                            itemExtent: 500,
+                            itemSnapping: true,
+                            shrinkExtent: 50,
+                            children: ct.listImagesRecipe
+                                .map(
+                                  (e) => Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      Center(child: Image.file(e)),
+                                      IconButton(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        onPressed: () {
+                                          setState(() {
+                                            ct.removeImage(e);
+                                          });
+                                        },
+                                        icon: const Icon(Icons.delete),
+                                      ),
+                                      if (e != ct.listImagesRecipe.last)
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Icon(
+                                            size: 35,
+                                            Icons.keyboard_arrow_right,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ),
+                                        ),
+                                      if (e != ct.listImagesRecipe.first)
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Icon(
+                                            size: 35,
+                                            Icons.keyboard_arrow_left,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
                           ),
-                          items: ct.listMultiMedia
-                              .map(
-                                (e) => Stack(
-                                  alignment: Alignment.topRight,
-                                  children: [
-                                    Image.file(e),
-                                    IconButton(
-                                      onPressed: () {
-                                        ct.removeImage(e);
-                                      },
-                                      icon: const Icon(Icons.delete),
-                                    )
-                                  ],
-                                ),
-                              )
-                              .toList(),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -136,10 +189,9 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                       const SizedBox(height: 10),
                       SelectImageRecipe(
                           hasImage: ct.thumbImage != null,
-                          onTap: () {
-                            setState(() {
-                              ct.pickThumb();
-                            });
+                          onTap: () async {
+                            await ct.pickThumb();
+                            setState(() {});
                           },
                           image: ct.thumbImage,
                           child: Center(
