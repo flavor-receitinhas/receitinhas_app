@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:app_receitas/src/feactures/profile/domain/dtos/profile_dto.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class EditProfileController extends ManagerStore {
 
   Future<void> updateImageProfile() async {
     if (image == null) return;
-    await _repository.updateImageProfile(profile!.userID, image!.path);
+    await _repository.updateImageProfile(profile!.userId, image!.path);
   }
 
   Future<void> pickImageLogo() async {
@@ -40,8 +41,14 @@ class EditProfileController extends ManagerStore {
     notifyListeners();
   }
 
-  Future<void> updateProfile(ProfileEntity profile) =>
-      _repository.updateProfile(profile);
+  Future<void> updateProfile(ProfileEntity profile) async =>
+      await _repository.updateProfile(
+        userId: profile.userId,
+        profileDto: ProfileDto(
+          name: profile.name,
+          biography: profile.biography,
+        ),
+      );
 
   void removeImage() {
     image = File('');
