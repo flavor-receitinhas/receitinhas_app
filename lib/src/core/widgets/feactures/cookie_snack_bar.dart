@@ -8,6 +8,7 @@ class CookieSnackBar {
 
   void show(BuildContext context) {
     final snackBar = SnackBar(
+      behavior: SnackBarBehavior.floating,
       content: CookieText(text: text),
       backgroundColor:
           backgroundColor ?? Theme.of(context).colorScheme.secondary,
