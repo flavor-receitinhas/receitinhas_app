@@ -31,7 +31,7 @@ class SelectContainerPreference extends StatelessWidget {
               border: Border.all(
                 color: listPreference.contains(preference)
                     ? theme.primary
-                    : const Color.fromARGB(255, 255, 255, 255),
+                    : theme.onPrimary,
                 width: 2,
               ),
             ),
