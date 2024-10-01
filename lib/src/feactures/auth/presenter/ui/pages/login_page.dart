@@ -7,6 +7,7 @@ import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_sc
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/forget_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:page_manager/entities/state_manager.dart';
 import 'package:page_manager/manager_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -95,6 +96,7 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
           onPressed: () async {
             await ct.loginFirebase();
           },
+          isLoading: ct.state == StateManager.loading,
         ),
         const SizedBox(height: 5)
       ],

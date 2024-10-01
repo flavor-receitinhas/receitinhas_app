@@ -70,6 +70,7 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               controller: ct.passwordController,
               prefixIcon: const Icon(Icons.lock_outline_rounded),
               obscureText: true,
+              maxLines: 1,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppLocalizations.of(context)!
@@ -138,6 +139,7 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               await ct.registerFirebase();
             }
           },
+          isLoading: ct.state == StateManager.loading,
         ),
         const SizedBox(height: 5)
       ],

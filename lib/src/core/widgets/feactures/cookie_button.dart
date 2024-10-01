@@ -35,8 +35,11 @@ class CookieButton extends StatelessWidget {
   ///Cor da borda
   final Color? borderColor;
 
-  //Define raio da borda
+  ///Define raio da borda
   final BorderRadiusGeometry? borderRadius;
+
+  ///Fazer um Loading no botao
+  final bool isLoading;
 
   const CookieButton({
     super.key,
@@ -50,6 +53,7 @@ class CookieButton extends StatelessWidget {
     this.borderRadius,
     this.height = 50,
     this.width,
+    this.isLoading = false,
   })  : border = false,
         borderColor = Colors.transparent;
 
@@ -66,6 +70,7 @@ class CookieButton extends StatelessWidget {
     this.borderRadius,
     this.height = 50,
     this.width,
+    this.isLoading = false,
   }) : border = true;
 
   /// CookieButton com Navigator.pop(context)
@@ -130,11 +135,18 @@ class CookieButton extends StatelessWidget {
             prefix != null
                 ? const SizedBox(width: 10)
                 : const SizedBox.shrink(),
-            CookieText(
-              text: label,
-              typography: CookieTypography.button,
-              color: labelColor ?? Theme.of(context).colorScheme.onSecondary,
-            ),
+            isLoading
+                ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).colorScheme.onSecondary,
+                    ),
+                  )
+                : CookieText(
+                    text: label,
+                    typography: CookieTypography.button,
+                    color:
+                        labelColor ?? Theme.of(context).colorScheme.onSecondary,
+                  ),
           ],
         ),
       ),
