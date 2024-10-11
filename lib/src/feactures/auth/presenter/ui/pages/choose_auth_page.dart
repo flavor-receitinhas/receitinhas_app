@@ -38,8 +38,6 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
         ),
         iconSize: 36,
       ),
-      image:
-          'https://media.discordapp.net/attachments/1071892919633576117/1139340986322014208/image.png?width=518&height=518',
       body: Column(
         children: [
           CookieText(
@@ -59,13 +57,53 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.chooseAuthRegisterButton,
           labelColor: Theme.of(context).colorScheme.primary,
-          onPressed: () => Navigator.pushNamed(context, RegisterPage.route),
+          onPressed: () => Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const RegisterPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(1.0, 0.0);
+                const end = Offset.zero;
+                const curve = Curves.ease;
+
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: child,
+                );
+              },
+            ),
+          ),
         ),
         const SizedBox(height: 10),
         CookieButton(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           label: AppLocalizations.of(context)!.chooseAuthLoginButton,
-          onPressed: () => Navigator.pushNamed(context, LoginPage.route),
+          onPressed: () => Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const LoginPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(1.0, 0.0);
+                const end = Offset.zero;
+                const curve = Curves.ease;
+
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: child,
+                );
+              },
+            ),
+          ),
           width: MediaQuery.sizeOf(context).width,
         ),
         const SizedBox(height: 5)

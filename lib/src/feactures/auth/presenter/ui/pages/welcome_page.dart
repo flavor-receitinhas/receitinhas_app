@@ -38,8 +38,6 @@ class _WelcomePageState extends State<WelcomePage> {
           ),
           iconSize: 36,
         ),
-        image:
-            'https://media.discordapp.net/attachments/1071892919633576117/1138544562135117974/image.png?width=615&height=539',
         body: Column(
           children: [
             CookieText(
@@ -57,9 +55,26 @@ class _WelcomePageState extends State<WelcomePage> {
         bottomBar: [
           CookieButton(
             label: AppLocalizations.of(context)!.welcomeBottomAppBar,
-            onPressed: () => Navigator.pushNamed(
+            onPressed: () => Navigator.push(
               context,
-              ChooseAuthPage.route,
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    const ChooseAuthPage(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(1.0, 0.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+            
+                  var tween = Tween(begin: begin, end: end)
+                      .chain(CurveTween(curve: curve));
+            
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
+              ),
             ),
           ),
           const SizedBox(height: 5),
