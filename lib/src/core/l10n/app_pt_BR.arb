@@ -48,5 +48,15 @@
     "chooseNameTitle" : "Um chefe deve ter um nome memóravel!",
     "chooseNameBody" : "Como podemos te chamar ?",
     "chooseNameHintText" : "Escreva seu nome...",
-    "chooseNameConfirm" : "Próxima etapa"
+    "chooseNameConfirm" : "Próxima etapa",
+    "favoriteOrganizeRecipesTitle": "Organizar por",
+    "favoriteOrganizeRecipesRecentFirst": "Mais recente primeiro",
+    "favoriteOrganizeRecipesOldestFirst": "Mais antigo primeiro",
+    "favoriteOrganizeRecipesNameAsc": "Nome de A a Z",
+    "favoriteOrganizeRecipesNameDesc": "Nome de Z a A",
+    "favoritePageTitle": "Lista de Favoritos",
+    "favoritePageSubtitle": "Gerencie suas receitas favoritas",
+    "favoritePageSearchHint": "Pesquise sua receita favorita",
+    "favoritePageErrorLoading": "Erro ao carregar receitas",
+    "favoritePageNoItemsFound": "Nenhuma receita encontrada"
 }
