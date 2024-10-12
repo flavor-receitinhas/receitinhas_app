@@ -1,6 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/library/api_client.dart';
-import 'package:app_receitas/src/core/library/dio_client.dart';
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
 import 'package:app_receitas/src/core/services/api/api_response.dart';
 import 'package:app_receitas/src/core/services/api/response_request_mapper.dart';
@@ -28,7 +27,7 @@ class Inject {
 
     //Api
     di.registerFactory<Dio>(() => Dio());
-    di.registerFactory<ApiClient>(() => DioClient(di()));
+    di.registerFactory<ApiClient>(() => ApiClient(di()));
     di.registerFactory(() => ResponseRequestMapper());
     di.registerFactory(() => ApiRecipes(di(), di(), di()));
     di.registerFactory(() => ApiResponseParser());
