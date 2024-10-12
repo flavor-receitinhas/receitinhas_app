@@ -15,7 +15,9 @@ class ApiResponseParser {
       case 404:
         throw ApiNotFoundError();
       case 500:
-        throw ApiInternalServerError(message: 'Erro no sistema');
+        throw ApiInternalServerError(
+          message: response.data['message'] ?? 'Erro no sistema',
+        );
       case 422:
         throw ApiUnprocessableEntityError(message: response.data['message']);
     }
