@@ -38,8 +38,6 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
         ),
         iconSize: 36,
       ),
-      image:
-          'https://media.discordapp.net/attachments/1071892919633576117/1139340986322014208/image.png?width=518&height=518',
       body: Column(
         children: [
           CookieText(

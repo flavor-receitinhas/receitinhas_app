@@ -39,9 +39,7 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
         icon: const Icon(Icons.arrow_back_ios_outlined),
       ),
       sideAppBar: MainAxisAlignment.start,
-      image:
-          'https://media.discordapp.net/attachments/1071892919633576117/1139752601982873670/image.png?width=550&height=475',
-      body: Column(
+        body: Column(
         children: [
           CookieText(
             text: AppLocalizations.of(context)!.loginTitle,

@@ -38,8 +38,6 @@ class _WelcomePageState extends State<WelcomePage> {
           ),
           iconSize: 36,
         ),
-        image:
-            'https://media.discordapp.net/attachments/1071892919633576117/1138544562135117974/image.png?width=615&height=539',
         body: Column(
           children: [
             CookieText(
@@ -57,10 +55,7 @@ class _WelcomePageState extends State<WelcomePage> {
         bottomBar: [
           CookieButton(
             label: AppLocalizations.of(context)!.welcomeBottomAppBar,
-            onPressed: () => Navigator.pushNamed(
-              context,
-              ChooseAuthPage.route,
-            ),
+            onPressed: () => Navigator.pushNamed(context, ChooseAuthPage.route),
           ),
           const SizedBox(height: 5),
         ],
