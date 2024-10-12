@@ -10,7 +10,7 @@ class Preference {
 
   Future<T> get<T>({required KeyPreferences keyPreferences}) async {
     final result = await _persistentDatabaseSembast.get(
-      id: keyPreferences.key,
+      id: keyPreferences.name,
       store: StoreSembastEnum.userPreference,
     );
     if (result == null) {
@@ -25,10 +25,10 @@ class Preference {
     required KeyPreferences keyPreferences,
   }) async {
     await _persistentDatabaseSembast.update(
-      id: keyPreferences.key,
+      id: keyPreferences.name,
       objeto: UserPreferenceEntity(
         value: value,
-        id: keyPreferences.key,
+        id: keyPreferences.name,
       ).toJson(),
       store: StoreSembastEnum.userPreference,
     );
@@ -36,7 +36,7 @@ class Preference {
 
   Future<void> delete({required KeyPreferences keyPreferences}) async {
     await _persistentDatabaseSembast.delete(
-      id: keyPreferences.key,
+      id: keyPreferences.name,
       store: StoreSembastEnum.userPreference,
     );
   }
