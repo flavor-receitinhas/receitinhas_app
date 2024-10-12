@@ -1,9 +1,11 @@
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoContainerPortion extends StatelessWidget {
   final CreateRecipeController ct;
@@ -30,13 +32,13 @@ class InfoContainerPortion extends StatelessWidget {
       child: Column(
         children: [
           CookieText(
-            text: 'Porções',
+            text: AppLocalizations.of(context)!.recipePortionTitle,
             typography: CookieTypography.button,
             color: Theme.of(context).colorScheme.onSecondary,
           ),
           const SizedBox(height: 20),
           CookieText(
-            text: 'Quantas porções sua\nreceita pode servir?',
+            text: AppLocalizations.of(context)!.recipePortionQuestion,
             typography: CookieTypography.title,
             color: Theme.of(context).colorScheme.onSecondary,
             textAlign: TextAlign.center,
@@ -46,7 +48,7 @@ class InfoContainerPortion extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CookieSvg(
-                path: 'assets/icons/pot.svg',
+                path: IconEnum.pot.path,
                 height: 70,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
@@ -99,7 +101,7 @@ class InfoContainerPortion extends StatelessWidget {
             children: [
               Expanded(
                 child: CookieButton(
-                  label: 'Voltar',
+                  label: AppLocalizations.of(context)!.recipeDifficultyBack,
                   onPressed: () {
                     ct.containerController.previousPage(
                       duration: const Duration(milliseconds: 500),
@@ -111,7 +113,7 @@ class InfoContainerPortion extends StatelessWidget {
               const SizedBox(width: 20),
               Expanded(
                 child: CookieButton(
-                  label: 'Salvar',
+                  label: AppLocalizations.of(context)!.recipeCreateBackEndSafeButtonSave,
                   onPressed: () {
                     if (ct.portion > 0) {
                       ct.pageController.nextPage(
@@ -120,9 +122,10 @@ class InfoContainerPortion extends StatelessWidget {
                       );
                     } else {
                       final snackBar = SnackBar(
-                        content: const CookieText(
-                            text:
-                                'Informe quantas porções sua receita pode servir'),
+                        content:  CookieText(
+                          text: AppLocalizations.of(context)!
+                              .recipePortionSnackBarMessage,
+                        ),
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                       );

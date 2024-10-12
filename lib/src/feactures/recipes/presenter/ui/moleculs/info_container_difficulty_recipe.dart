@@ -27,7 +27,7 @@ class InfoContainerDifficultyRecipe extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CookieText(
-            text: 'Dificuldade',
+            text: AppLocalizations.of(context)!.recipeDifficultyTitle,
             typography: CookieTypography.title,
             color: Theme.of(context).colorScheme.onSecondary,
           ),
@@ -58,7 +58,7 @@ class InfoContainerDifficultyRecipe extends StatelessWidget {
             children: [
               Expanded(
                 child: CookieButton(
-                  label: 'Voltar',
+                  label: AppLocalizations.of(context)!.recipeDifficultyBack,
                   onPressed: () {
                     ct.containerController.previousPage(
                       duration: const Duration(milliseconds: 500),
@@ -70,7 +70,7 @@ class InfoContainerDifficultyRecipe extends StatelessWidget {
               const SizedBox(width: 20),
               Expanded(
                 child: CookieButton(
-                  label: 'Proximo',
+                  label: AppLocalizations.of(context)!.recipeDifficultyNext,
                   onPressed: () {
                     ct.containerController.nextPage(
                       duration: const Duration(milliseconds: 500),

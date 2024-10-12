@@ -1,8 +1,9 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewIntroduceRecipe extends StatelessWidget {
   final String title;
@@ -46,7 +47,10 @@ class ViewIntroduceRecipe extends StatelessWidget {
                     children: [
                       CookieSvg(path: IconEnum.clock.path),
                       const SizedBox(height: 5),
-                      CookieText(text: '$timePrepared min'),
+                      CookieText(
+                        text:
+                            '$timePrepared ${AppLocalizations.of(context)!.recipeIntroduceTimePrepared}',
+                      ),
                     ],
                   ),
                   const SizedBox(width: 16),
@@ -66,8 +70,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
                       const SizedBox(height: 5),
                       CookieText(
                         text: portion != 1
-                            ? '$portion porções'
-                            : '$portion porção',
+                            ? '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionPlural}'
+                            : '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionSingular}',
                       )
                     ],
                   ),

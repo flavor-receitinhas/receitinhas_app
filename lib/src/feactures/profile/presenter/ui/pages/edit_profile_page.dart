@@ -6,7 +6,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/back_sheet.dart';
@@ -14,6 +14,7 @@ import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/contain
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/save_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const route = '/edit-perfil';
@@ -43,7 +44,8 @@ class _EditProfilePageState
         onPressed: () {
           CookieSheetBottom(
             title: CookieText(
-              text: 'Deseja salvar as alterações ?',
+              text: AppLocalizations.of(context)!
+                  .profileEditProfilePageSaveChanges,
               color: Theme.of(context).colorScheme.onSecondary,
               typography: CookieTypography.title,
             ),
@@ -53,16 +55,18 @@ class _EditProfilePageState
       ),
       done: () => ListView(
         children: [
-          const AppBarProfile(
-            title: 'Seu perfil',
-            subTitle: 'Aqui fica suas receitas publicadas',
+          AppBarProfile(
+            title: AppLocalizations.of(context)!.profileEditProfilePageTitle,
+            subTitle:
+                AppLocalizations.of(context)!.profileEditProfilePageSubtitle,
           ),
           CookieButton(
-            label: 'Voltar',
+            label: AppLocalizations.of(context)!.profileEditProfilePageBack,
             onPressed: () {
               CookieSheetBottom(
                 title: CookieText(
-                  text: 'Você deseja descartar as alterações?',
+                  text: AppLocalizations.of(context)!
+                      .profileEditProfilePageConfirmExit,
                   color: Theme.of(context).colorScheme.onSecondary,
                   typography: CookieTypography.title,
                 ),
@@ -106,7 +110,8 @@ class _EditProfilePageState
                       child: Column(
                         children: [
                           CookieButton(
-                            label: 'Alterar avatar',
+                            label: AppLocalizations.of(context)!
+                                .profileEditProfilePageChangeProfilePicture,
                             margin: const EdgeInsets.symmetric(horizontal: 20),
                             onPressed: () {
                               setState(() {
@@ -116,7 +121,8 @@ class _EditProfilePageState
                           ),
                           const SizedBox(height: 10),
                           CookieTextButton(
-                            text: 'Remover Imagem',
+                            text: AppLocalizations.of(context)!
+                                .profileEditProfilePageRemoveProfilePicture,
                             onPressed: () {
                               setState(() {
                                 ct.removeImage();
@@ -131,7 +137,8 @@ class _EditProfilePageState
                 const SizedBox(height: 10),
                 Center(
                   child: CookieText(
-                    text: 'A imagem tem que ter no minimo 256x256px',
+                    text: AppLocalizations.of(context)!
+                        .profileEditProfilePageImageRequirement,
                     color: Theme.of(context)
                         .colorScheme
                         .onPrimary
@@ -139,8 +146,9 @@ class _EditProfilePageState
                   ),
                 ),
                 const SizedBox(height: 20),
-                const CookieText(
-                  text: 'Título',
+                CookieText(
+                  text: AppLocalizations.of(context)!
+                      .profileEditProfilePageTitleLabel,
                 ),
                 const SizedBox(height: 10),
                 DropdownButtonFormField(
@@ -148,7 +156,8 @@ class _EditProfilePageState
                   dropdownColor: theme.secondary,
                   borderRadius: BorderRadius.circular(10),
                   decoration: InputDecoration(
-                    hintText: 'Selecione um título',
+                    hintText: AppLocalizations.of(context)!
+                        .profileEditProfilePageTitleHint,
                     hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -184,8 +193,8 @@ class _EditProfilePageState
                 const SizedBox(height: 10),
                 Center(
                   child: CookieText(
-                    text:
-                        'Selecione um título na qual você mais se indentifica',
+                    text: AppLocalizations.of(context)!
+                        .profileEditProfilePageTitleDescription,
                     textAlign: TextAlign.center,
                     color: Theme.of(context)
                         .colorScheme
@@ -194,24 +203,31 @@ class _EditProfilePageState
                   ),
                 ),
                 const SizedBox(height: 20),
-                const CookieText(
-                  text: 'Sobre mim',
+                CookieText(
+                  text: AppLocalizations.of(context)!
+                      .profileEditProfilePageAboutMe,
                 ),
                 const SizedBox(height: 10),
                 CookieTextField.outline(
-                  hintText: 'Fale um pouco sobre você...',
+                  hintText: AppLocalizations.of(context)!
+                      .profileEditProfilePageAboutMeHint,
                   maxLines: 6,
                   maxLength: 400,
                   controller: ct.biographyController,
                 ),
                 const SizedBox(height: 20),
-                const CookieText(
-                  text: 'Privacidade',
+                CookieText(
+                  text: AppLocalizations.of(context)!
+                      .profileEditProfilePagePrivacy,
                 ),
                 const SizedBox(height: 10),
-                const ContainerPrivacy(text: 'Ocultar seguidores'),
+                ContainerPrivacy(
+                    text: AppLocalizations.of(context)!
+                        .profileEditProfilePageHideFollowers),
                 const SizedBox(height: 10),
-                const ContainerPrivacy(text: 'Ocultar likes'),
+                ContainerPrivacy(
+                    text: AppLocalizations.of(context)!
+                        .profileEditProfilePageHideLikes),
                 const SizedBox(height: 20),
               ],
             ),

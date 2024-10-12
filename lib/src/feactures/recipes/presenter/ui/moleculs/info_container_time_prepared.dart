@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/write_tim
 import 'package:duration_time_picker/duration_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoContainerTimePrepared extends StatefulWidget {
   final CreateRecipeController ct;
@@ -48,7 +49,7 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
               ),
               const Spacer(),
               CookieText(
-                text: 'Tempo de preparo',
+                text: AppLocalizations.of(context)!.recipeTimePreparedTitle,
                 typography: CookieTypography.title,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
@@ -89,7 +90,7 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
                 ),
           const Spacer(),
           CookieButton(
-            label: 'Proximo',
+            label: AppLocalizations.of(context)!.recipeDifficultyNext,
             onPressed: () {
               if (widget.ct.timePreparedRecipe.inMinutes > 0) {
                 widget.ct.containerController.nextPage(
@@ -98,7 +99,9 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
                 );
               } else {
                 final snackBar = SnackBar(
-                  content: const CookieText(text: 'Informe o tempo de preparo'),
+                  content: CookieText(
+                      text: AppLocalizations.of(context)!
+                          .recipeTimePreparedSnackBarMessage),
                   backgroundColor: Theme.of(context).colorScheme.secondary,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);

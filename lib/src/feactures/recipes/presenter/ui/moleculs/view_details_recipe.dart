@@ -1,9 +1,10 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewDetailsRecipe extends StatelessWidget {
   final String details;
@@ -22,10 +23,9 @@ class ViewDetailsRecipe extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CookieText(
-          text: 'Detalhes da receita',
+        CookieText(
+          text: AppLocalizations.of(context)!.recipeDetailsTitle,
           typography: CookieTypography.title,
         ),
         const SizedBox(height: 20),
@@ -40,8 +40,8 @@ class ViewDetailsRecipe extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CookieText(
-                    text: 'Ingredientes',
+                  CookieText(
+                    text: AppLocalizations.of(context)!.recipeIngredientsTitle,
                     typography: CookieTypography.title,
                   ),
                   CookieSvg(path: IconEnum.carrot.path),
@@ -67,8 +67,8 @@ class ViewDetailsRecipe extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CookieText(
-                    text: 'Instruções de preparo',
+                  CookieText(
+                    text: AppLocalizations.of(context)!.recipeInstructionsTitle,
                     typography: CookieTypography.title,
                   ),
                   CookieSvg(path: IconEnum.knife.path),
@@ -94,8 +94,8 @@ class ViewDetailsRecipe extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const CookieText(
-                      text: 'Hora de se servir!',
+                    CookieText(
+                      text: AppLocalizations.of(context)!.recipeServeFoodTitle,
                       typography: CookieTypography.title,
                     ),
                     CookieSvg(path: IconEnum.pan.path),

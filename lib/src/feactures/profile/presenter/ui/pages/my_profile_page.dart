@@ -10,6 +10,7 @@ import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/edit_profi
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:page_manager/export_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyProfilePage extends StatefulWidget {
   static const route = '/my-perfil';
@@ -23,18 +24,18 @@ class _MyProfilePageState
     extends ManagerPage<ProfileController, MyProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
     return CookiePage(
       state: ct.state,
       done: () => SafeArea(
         child: ListView(
           children: [
-            const AppBarProfile(
-              title: 'Seu perfil',
-              subTitle: 'Aqui fica suas receitas publicadas',
+            AppBarProfile(
+              title: AppLocalizations.of(context)!.profileMyProfilePageTitle,
+              subTitle:
+                  AppLocalizations.of(context)!.profileMyProfilePageSubtitle,
             ),
             CookieButton(
-              label: 'Voltar',
+              label: AppLocalizations.of(context)!.profileMyProfilePageBack,
               onPressed: () {
                 Global.profile = ct.profile;
                 Navigator.pop(context);
@@ -56,11 +57,11 @@ class _MyProfilePageState
                               text: ct.profile.name,
                               typography: CookieTypography.title,
                             ),
-                            CookieText(
-                              text: 'mestre-cuca',
-                              color: theme.primary,
-                              typography: CookieTypography.button,
-                            ),
+                            // CookieText(
+                            //   text: 'mestre-cuca',
+                            //   color: theme.primary,
+                            //   typography: CookieTypography.button,
+                            // ),
                             const SizedBox(height: 10),
                             CookieText(
                               text: ct.profile.biography,
@@ -85,13 +86,14 @@ class _MyProfilePageState
                     children: [
                       Expanded(
                         child: CookieButton(
-                          label: 'Editar perfil',
+                          label: AppLocalizations.of(context)!
+                              .profileMyProfilePageEditProfile,
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           onPressed: () {
                             Navigator.pushNamed(
                               context,
                               EditProfilePage.route,
-                              arguments: {'profile' : ct.profile},
+                              arguments: {'profile': ct.profile},
                             ).then((value) {
                               if (value == true) {
                                 ct.getProfile(Global.user!.id);
@@ -103,13 +105,15 @@ class _MyProfilePageState
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const CookieTextFieldSearch(
-                    hintText: 'Pesquise sua receita favorita',
+                  CookieTextFieldSearch(
+                    hintText: AppLocalizations.of(context)!
+                        .profileMyProfilePageSearchHint,
                   ),
                   const SizedBox(height: 20),
                   ct.recipes.isEmpty
-                      ? const CookieText(
-                          text: 'Você ainda não tem receitas publicadas...',
+                      ? CookieText(
+                          text: AppLocalizations.of(context)!
+                              .profileMyProfilePageNoRecipes,
                           typography: CookieTypography.button,
                         )
                       : MasonryGridView.builder(

@@ -6,6 +6,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/controller/ingredie
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SheetSelectIngredient extends StatefulWidget {
   final IngredientSelectController ct;
@@ -83,7 +84,7 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
             iconEnabledColor: Theme.of(context).colorScheme.onSecondary,
             value: widget.ct.unit,
             hint: CookieText(
-              text: 'Escolha a unidade',
+              text: AppLocalizations.of(context)!.recipeSelectIngredientHint,
               color: Theme.of(context).colorScheme.onSecondary,
             ),
             dropdownColor: Theme.of(context).colorScheme.onPrimary,
@@ -107,13 +108,14 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
           ),
         ),
         if (isFieldsEmpty)
-          const CookieText(
-            text: 'Campos obrigatórios',
+          CookieText(
+            text: AppLocalizations.of(context)!
+                .recipeSelectIngredientRequiredFields,
             color: Colors.red,
           ),
         const SizedBox(height: 20),
         CookieButton(
-          label: 'Confirmar',
+          label: AppLocalizations.of(context)!.recipeSelectIngredientConfirm,
           onPressed: () {
             if (widget.ct.quantityController.text.isEmpty &&
                 widget.ct.unit == null) {
