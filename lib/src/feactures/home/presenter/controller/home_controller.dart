@@ -24,7 +24,7 @@ class HomeController extends ManagerStore {
       );
 
   Future<List<RecipeEntity>> listRecipe() async {
-    return await _recipeRepository.listRecipe();
+    return await _recipeRepository.getUserRecipes(Global.user!.id);
   }
 
   Future<void> loadingProfile() async {
@@ -33,8 +33,9 @@ class HomeController extends ManagerStore {
   }
 
   Future<bool> verifyOnboading() async {
-    final result =
-        await _userFoodPrefRepository.getUserPref(userId: Global.user!.id);
+    final result = await _userFoodPrefRepository.getUserPref(
+      userId: Global.user!.id,
+    );
     if (result.dietaryRestriction.isEmpty) {
       return true;
     }
