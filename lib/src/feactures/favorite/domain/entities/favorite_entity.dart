@@ -3,8 +3,8 @@ class FavoriteEntity {
   final String recipeId;
   final String userId;
   final String name;
-  final int createdAt;
-  final int updatedAt;
+  final String createdAt;
+  final String updatedAt;
 
   FavoriteEntity({
     required this.id,

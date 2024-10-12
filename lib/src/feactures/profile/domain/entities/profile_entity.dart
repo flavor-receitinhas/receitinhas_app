@@ -4,8 +4,8 @@ class ProfileEntity {
   String name;
   String biography;
   String? image;
-  final int createdAt;
-  final int updatedAt;
+  final String createdAt;
+  final String updatedAt;
   final int totalRecipes;
 
   ProfileEntity({
@@ -24,8 +24,8 @@ class ProfileEntity {
     String? name,
     String? biography,
     String? image,
-    int? createdAt,
-    int? updatedAt,
+    String? createdAt,
+    String? updatedAt,
     int? totalRecipes,
   }) {
     return ProfileEntity(
