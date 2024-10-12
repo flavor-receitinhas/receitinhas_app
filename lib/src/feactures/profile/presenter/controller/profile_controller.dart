@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/feactures/profile/domain/dtos/profile_dto.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
@@ -16,7 +17,7 @@ class ProfileController extends ManagerStore {
   void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
           profile = arguments['profile'] as ProfileEntity;
-          recipes = await getUserRecipes(profile.userID);
+          recipes = await getUserRecipes(profile.userId);
         },
       );
 
@@ -32,6 +33,12 @@ class ProfileController extends ManagerStore {
   }
 
   Future<void> updateProfile(ProfileEntity profile) async {
-    await _repository.updateProfile(profile);
+    await _repository.updateProfile(
+      userId: profile.userId,
+      profileDto: ProfileDto(
+        name: profile.name,
+        biography: profile.biography,
+      ),
+    );
   }
 }
