@@ -42,18 +42,19 @@ class _ViewRecipesPageState
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
-            FlutterCarousel(
-                options: CarouselOptions(
-                  height: 250,
-                  showIndicator: true,
-                  autoPlay: true,
-                  viewportFraction: 1,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
-                  padEnds: false,
-                ),
-                items: ct.recipe.images
-                    .map((e) => Image.network(e, fit: BoxFit.cover))
-                    .toList()),
+            //TODO Colocar as imagens da receita no carrosel ( Atualmente implementando novo modelo)
+            // FlutterCarousel(
+            //     options: CarouselOptions(
+            //       height: 250,
+            //       showIndicator: true,
+            //       autoPlay: true,
+            //       viewportFraction: 1,
+            //       autoPlayAnimationDuration: const Duration(milliseconds: 500),
+            //       padEnds: false,
+            //     ),
+            //     items: ct.recipe.images
+            //         .map((e) => Image.network(e, fit: BoxFit.cover))
+            //         .toList()),
             const SizedBox(height: 10),
             ViewIntroduceRecipe(
               title: ct.recipe.title,

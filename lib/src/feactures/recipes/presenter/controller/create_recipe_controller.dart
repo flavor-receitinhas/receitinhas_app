@@ -10,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
 class CreateRecipeController extends ChangeNotifier {
-
   final RecipeRepository _repository;
 
   CreateRecipeController(
@@ -36,6 +35,7 @@ class CreateRecipeController extends ChangeNotifier {
   final minuteController = TextEditingController();
   List<IngredientRecipeEntity> listIngredientSelect = [];
   List<File> listImagesRecipe = [];
+  
 
   void init() {
     pageController = PageController(initialPage: 0);
@@ -105,14 +105,12 @@ class CreateRecipeController extends ChangeNotifier {
         quillServerController.document.toDelta().toJson(),
       ).convert(),
       difficultyRecipe: DifficultyRecipe.easy,
-      images: [],
       ingredients: [],
       instruction: QuillDeltaToHtmlConverter(
         quillInstructionController.document.toDelta().toJson(),
       ).convert(),
       portion: portion,
       timePrepared: timePreparedRecipe.inMinutes,
-      thumb: '',
     );
     await _repository.createRecipe(recipe);
   }
