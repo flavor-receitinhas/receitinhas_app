@@ -3,7 +3,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recip
 import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/recipe_search_container.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ResultRecipes extends StatelessWidget {
   final ResearchController ct;
   const ResultRecipes({super.key, required this.ct});
@@ -18,7 +18,8 @@ class ResultRecipes extends StatelessWidget {
           Visibility(
             visible: ct.recipes.isNotEmpty,
             child: CookieText(
-              text: 'Resultados da pesquisa (${ct.recipes.length})',
+              text:
+                  '${AppLocalizations.of(context)!.searchRecipeSearchResults} (${ct.recipes.length})',
             ),
           ),
           ListView.builder(

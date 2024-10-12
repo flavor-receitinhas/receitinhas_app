@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
@@ -7,6 +8,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_co
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_portion.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/info_container_time_prepared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoCreatePage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -30,7 +32,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
               children: [
                 const SizedBox(height: 10),
                 CookieButton(
-                  label: 'Voltar',
+                  label:
+                      AppLocalizations.of(context)!.profileViewProfilePageBack,
                   onPressed: () {
                     ct.pageController.previousPage(
                       duration: const Duration(milliseconds: 500),
@@ -44,14 +47,15 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CookieText(
-                        text: 'Personalize informações básicas',
+                      CookieText(
+                        text: AppLocalizations.of(context)!
+                            .recipeCustomizeBasicInfoTitle,
                         typography: CookieTypography.title,
                       ),
                       const SizedBox(height: 10),
-                      const CookieText(
-                        text:
-                            'Essas informações vão ajudar a indentificar coisas básicas da sua receita, então seja bem consiso.',
+                      CookieText(
+                        text: AppLocalizations.of(context)!
+                            .recipeCustomizeBasicInfoDescription,
                       ),
                       const SizedBox(height: 20),
                       CustomContainer(
@@ -62,8 +66,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                               visible: ct.timePreparedRecipe.inMinutes > 0,
                               child: Column(
                                 children: [
-                                  const CookieSvg(
-                                    path: 'assets/icons/clock.svg',
+                                  CookieSvg(
+                                    path: IconEnum.clock.path,
                                   ),
                                   const SizedBox(height: 5),
                                   CookieText(
@@ -75,8 +79,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                             const SizedBox(width: 16),
                             Column(
                               children: [
-                                const CookieSvg(
-                                  path: 'assets/icons/fire.svg',
+                                CookieSvg(
+                                  path: IconEnum.fire.path,
                                 ),
                                 const SizedBox(height: 5),
                                 CookieText(text: ct.difficultyRecipeString)
@@ -87,11 +91,14 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                               visible: ct.portion > 0,
                               child: Column(
                                 children: [
-                                  const CookieSvg(
-                                    path: 'assets/icons/pot.svg',
+                                  CookieSvg(
+                                    path: IconEnum.pot.path,
                                   ),
                                   const SizedBox(height: 5),
-                                  CookieText(text: '${ct.portion} porções')
+                                  CookieText(
+                                    text:
+                                        '${ct.portion} ${AppLocalizations.of(context)!.recipePortions}',
+                                  )
                                 ],
                               ),
                             ),

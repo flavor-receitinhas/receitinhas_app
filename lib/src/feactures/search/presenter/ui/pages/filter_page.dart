@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/atomic/container_filter.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/custom_slide.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -21,7 +22,7 @@ class _FilterPageState extends State<FilterPage> {
     final theme = Theme.of(context).colorScheme;
     return Scaffold(
       bottomNavigationBar: CookieButton(
-        label: 'Aplicar filtro',
+        label: AppLocalizations.of(context)!.searchRecipeApplyFilter,
         margin: const EdgeInsets.only(bottom: 10, left: 16, right: 16),
         onPressed: () {
           Navigator.pop(context);
@@ -33,13 +34,13 @@ class _FilterPageState extends State<FilterPage> {
           child: ListView(
             children: [
               CookieText(
-                text: 'FILTRAR POR',
+                text: AppLocalizations.of(context)!.searchRecipeFilterBy,
                 typography: CookieTypography.title,
                 color: theme.primary,
               ),
               const SizedBox(height: 20),
-              const CookieText(
-                text: 'Ordernar por',
+              CookieText(
+                text: AppLocalizations.of(context)!.searchRecipeOrderBy,
               ),
               const SizedBox(height: 10),
               Row(
@@ -54,25 +55,25 @@ class _FilterPageState extends State<FilterPage> {
                     .toList(),
               ),
               const SizedBox(height: 20),
-              const CookieText(
-                text: 'Tempo de preparo(minutos)',
+              CookieText(
+                text: AppLocalizations.of(context)!.searchRecipePreparationTime,
                 typography: CookieTypography.button,
               ),
               const CustomSlide(),
               const SizedBox(height: 20),
-              const CookieText(
-                text: 'Ingredientes',
+              CookieText(
+                text: AppLocalizations.of(context)!.searchRecipeIngredients,
                 typography: CookieTypography.button,
               ),
               const SizedBox(height: 20),
-              const CookieText(
-                text: 'Porções',
+              CookieText(
+                text: AppLocalizations.of(context)!.searchRecipePortions,
                 typography: CookieTypography.button,
               ),
               const CustomSlide(),
               const SizedBox(height: 20),
-              const CookieText(
-                text: 'Preferência alimentar',
+              CookieText(
+                text: AppLocalizations.of(context)!.searchRecipeFoodPreference,
                 typography: CookieTypography.button,
               ),
               const SizedBox(height: 10),
@@ -92,8 +93,8 @@ class _FilterPageState extends State<FilterPage> {
                 },
               ),
               const SizedBox(height: 20),
-              const CookieText(
-                text: 'Dificuldade',
+              CookieText(
+                text: AppLocalizations.of(context)!.searchRecipeDifficulty,
                 typography: CookieTypography.button,
               ),
               const SizedBox(height: 10),

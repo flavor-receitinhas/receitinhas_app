@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/list_a
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/organisms/list_select_ingredients.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectIngredientsPage extends StatefulWidget {
   static const route = '/select-ingredients';
@@ -15,7 +16,6 @@ class SelectIngredientsPage extends StatefulWidget {
 
 class _SelectIngredientsPageState
     extends ManagerPage<IngredientSelectController, SelectIngredientsPage> {
-  String dropdownValue = 'Unidade 1';
   @override
   Widget build(BuildContext context) {
     return CookiePage(
@@ -61,7 +61,7 @@ class _SelectIngredientsPageState
                 children: [
                   const SizedBox(height: 10),
                   CookieButton(
-                    label: 'Voltar',
+                    label: AppLocalizations.of(context)!.recipeDifficultyBack,
                     onPressed: () {
                       Navigator.pop(
                         context,
@@ -75,13 +75,15 @@ class _SelectIngredientsPageState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 10),
-                        const CookieText(
-                          text: 'Selecionar ingredientes',
+                        CookieText(
+                          text: AppLocalizations.of(context)!
+                              .recipeSelectIngredientsTitle,
                           typography: CookieTypography.title,
                         ),
                         const SizedBox(height: 10),
                         CookieTextFieldSearch(
-                          hintText: 'Pesquise seus ingredientes',
+                          hintText: AppLocalizations.of(context)!
+                              .recipeSearchIngredientsHint,
                           controller: ct.ingredientController,
                           onEditingComplete: ct.refreshPage,
                         ),
@@ -104,11 +106,12 @@ class _SelectIngredientsPageState
                 ),
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 10, 16, 0),
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
                 child: CookieText(
-                  text: 'Escolha outros ingredientes abaixo',
+                  text: AppLocalizations.of(context)!
+                      .recipeChooseOtherIngredients,
                   typography: CookieTypography.button,
                 ),
               ),

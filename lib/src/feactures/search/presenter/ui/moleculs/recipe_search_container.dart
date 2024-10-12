@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecipeSearchContainer extends StatelessWidget {
   final String image;
@@ -41,7 +42,8 @@ class RecipeSearchContainer extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
                 CookieText(
-                  text: '$timePrepared min',
+                  text:
+                      '$timePrepared ${AppLocalizations.of(context)!.recipeIntroduceTimePrepared}',
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
               ],

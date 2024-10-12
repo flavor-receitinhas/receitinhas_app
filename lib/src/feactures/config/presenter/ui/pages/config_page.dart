@@ -11,6 +11,7 @@ import 'package:app_receitas/src/feactures/config/presenter/ui/pages/privacy_pol
 import 'package:app_receitas/src/feactures/config/presenter/ui/pages/term_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConfigPage extends StatefulWidget {
   static const route = 'config';
@@ -33,14 +34,14 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             const IntroduceConfig(),
             const SizedBox(height: 20),
             CookieText(
-              text: 'Conta',
+              text: AppLocalizations.of(context)!.configAccount,
               typography: CookieTypography.button,
               color: theme.onPrimary,
             ),
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconEnum.person.path,
-              text: 'Editar Conta',
+              text: AppLocalizations.of(context)!.configEditAccount,
               action: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pushNamed(context, EditAccountPage.route);
@@ -49,7 +50,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconEnum.key.path,
-              text: 'Alterar senha',
+              text: AppLocalizations.of(context)!.configChangePassword,
               action: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pushNamed(
@@ -60,14 +61,14 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 20),
             CookieText(
-              text: 'Personalização',
+              text: AppLocalizations.of(context)!.configCustomization,
               typography: CookieTypography.button,
               color: theme.onPrimary,
             ),
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconEnum.moon.path,
-              text: 'Modo notuno',
+              text: AppLocalizations.of(context)!.configNightMode,
               action: SizedBox(
                 height: 20,
                 child: Transform.scale(
@@ -95,14 +96,14 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 20),
             CookieText(
-              text: 'Personalização',
+              text: AppLocalizations.of(context)!.configCustomization,
               typography: CookieTypography.button,
               color: theme.onPrimary,
             ),
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconEnum.eye.path,
-              text: 'Politicas de privacidade',
+              text: AppLocalizations.of(context)!.configPrivacyPolicy,
               action: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pushNamed(
@@ -114,7 +115,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconEnum.document.path,
-              text: 'Termos e condições',
+              text: AppLocalizations.of(context)!.configTermsConditions,
               onTap: () {
                 Navigator.pushNamed(
                   context,
@@ -126,7 +127,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconEnum.persons.path,
-              text: 'Nossa equipe',
+              text: AppLocalizations.of(context)!.configOurTeam,
               onTap: () {
                 Navigator.pushNamed(
                   context,
@@ -138,7 +139,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconEnum.logOut.path,
-              text: 'Sair da conta',
+              text: AppLocalizations.of(context)!.configLogout,
               textColor: const Color(0xffFF5757),
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -148,7 +149,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             const SizedBox(height: 20),
             Center(
               child: CookieText(
-                text: 'Versão do Aplicativo',
+                text: AppLocalizations.of(context)!.configAppVersion,
                 color: theme.onPrimary.withOpacity(0.5),
               ),
             ),

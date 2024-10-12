@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/search/presenter/controller/research_
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/search_recipe.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/organisms/result_recipes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchPage extends StatefulWidget {
   static const route = '/search';
@@ -30,7 +31,9 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const BackButtomFloating(label: 'Pesquisa'),
+          BackButtomFloating(
+            label: AppLocalizations.of(context)!.searchLabel,
+          ),
           const SliverPadding(
               padding: EdgeInsets.only(
                 top: 10,

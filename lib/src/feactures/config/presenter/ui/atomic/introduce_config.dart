@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IntroduceConfig extends StatelessWidget {
   const IntroduceConfig({super.key});
@@ -15,12 +16,12 @@ class IntroduceConfig extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CookieText(
-                text: 'Configurações',
+                text: AppLocalizations.of(context)!.configSettings,
                 typography: CookieTypography.title,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              const CookieText(
-                text: 'Personalize conforme sua preferência',
+              CookieText(
+                text: AppLocalizations.of(context)!.configCustomizePreference,
               ),
             ],
           ),

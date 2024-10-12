@@ -6,6 +6,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_in
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:page_manager/export_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewRecipesPage extends StatefulWidget {
   static const route = '/view-recipe';
@@ -25,7 +26,9 @@ class _ViewRecipesPageState
         surfaceTintColor: Theme.of(context).colorScheme.surface,
         automaticallyImplyLeading: false,
         titleSpacing: 0,
-        title: const CookieButton(label: 'Voltar').back(context),
+        title: CookieButton(
+          label: AppLocalizations.of(context)!.recipeDifficultyBack,
+        ).back(context),
         backgroundColor: Theme.of(context).colorScheme.surface,
       ),
       // bottomNavigationBar: Padding(

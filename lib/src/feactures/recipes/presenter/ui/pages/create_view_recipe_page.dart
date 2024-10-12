@@ -5,6 +5,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_in
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateViewRecipePage extends StatelessWidget {
   final CreateRecipeController ct;
@@ -18,7 +19,7 @@ class CreateViewRecipePage extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             CookieButton(
-              label: 'Voltar',
+              label: AppLocalizations.of(context)!.profileViewProfilePageBack,
               onPressed: () {
                 ct.pageController.previousPage(
                   duration: const Duration(milliseconds: 500),
@@ -60,10 +61,14 @@ class CreateViewRecipePage extends StatelessWidget {
                             .toDelta()
                             .toJson())
                         .convert(),
-                    serveFood: ct.quillServerController.document.toPlainText().trim().isEmpty
+                    serveFood: ct.quillServerController.document
+                            .toPlainText()
+                            .trim()
+                            .isEmpty
                         ? ''
                         : QuillDeltaToHtmlConverter(ct
-                                .quillServerController.document.toDelta()
+                                .quillServerController.document
+                                .toDelta()
                                 .toJson())
                             .convert(),
                   ),
