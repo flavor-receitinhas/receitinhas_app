@@ -55,27 +55,7 @@ class _WelcomePageState extends State<WelcomePage> {
         bottomBar: [
           CookieButton(
             label: AppLocalizations.of(context)!.welcomeBottomAppBar,
-            onPressed: () => Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    const ChooseAuthPage(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  const begin = Offset(1.0, 0.0);
-                  const end = Offset.zero;
-                  const curve = Curves.ease;
-            
-                  var tween = Tween(begin: begin, end: end)
-                      .chain(CurveTween(curve: curve));
-            
-                  return SlideTransition(
-                    position: animation.drive(tween),
-                    child: child,
-                  );
-                },
-              ),
-            ),
+            onPressed: () => Navigator.pushNamed(context, ChooseAuthPage.route),
           ),
           const SizedBox(height: 5),
         ],
