@@ -33,6 +33,7 @@ class ContainerRecipe extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
                 CookieText(
+                  //TODO aaaaaaaaaaaaa
                   text: '5 min',
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),

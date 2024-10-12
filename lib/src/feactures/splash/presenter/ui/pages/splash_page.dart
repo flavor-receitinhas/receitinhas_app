@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/splash/presenter/controller/splash_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashPage extends StatefulWidget {
   static const route = '/splash';
@@ -50,7 +51,9 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
           ),
-          const CookieText(text: 'Carregando...'),
+          CookieText(
+            text: AppLocalizations.of(context)!.splashLoading,
+          ),
         ],
       ),
     );

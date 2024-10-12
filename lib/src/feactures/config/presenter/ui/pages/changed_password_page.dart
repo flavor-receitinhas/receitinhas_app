@@ -2,8 +2,9 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangedPasswordPage extends StatelessWidget {
   static const route = '/changed-password';
@@ -28,50 +29,56 @@ class ChangedPasswordPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            const CookieButton(label: 'Alterar senha').back(context),
+            CookieButton(
+              label: AppLocalizations.of(context)!.configChangePassword,
+            ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 20),
-                  const CookieText(
-                    text: 'Senha antiga',
+                  CookieText(
+                    text: AppLocalizations.of(context)!.configOldPassword,
                     typography: CookieTypography.button,
                   ),
                   const SizedBox(height: 10),
-                  const CookieTextField.outline(
-                    hintText: 'Escreva sua senha antiga',
+                  CookieTextField.outline(
+                    hintText:
+                        AppLocalizations.of(context)!.configOldPasswordHint,
                     obscureText: true,
                     maxLines: 1,
                   ),
                   const SizedBox(height: 20),
-                  const CookieText(
-                    text: 'Nova senha',
+                  CookieText(
+                    text: AppLocalizations.of(context)!.configNewPassword,
                     typography: CookieTypography.button,
                   ),
                   const SizedBox(height: 10),
-                  const CookieTextField.outline(
-                    hintText: 'Digite sua nova senha',
+                  CookieTextField.outline(
+                    hintText:
+                        AppLocalizations.of(context)!.configNewPasswordHint,
                     maxLines: 1,
                     obscureText: true,
                   ),
                   const SizedBox(height: 20),
-                  const CookieText(
-                    text: 'Confirme a nova senha',
+                  CookieText(
+                    text:
+                        AppLocalizations.of(context)!.configConfirmNewPassword,
                     typography: CookieTypography.button,
                   ),
                   const SizedBox(height: 10),
-                  const CookieTextField.outline(
-                    hintText: 'Confirme sua nova senha',
+                  CookieTextField.outline(
+                    hintText: AppLocalizations.of(context)!
+                        .configConfirmNewPasswordHint,
                     maxLines: 1,
                     obscureText: true,
                   ),
                   const SizedBox(height: 30),
                   Center(
                     child: CookieText(
-                      text:
-                          'Você será notificado na sua caixa de emails\nsobre a mudança de senha.',
+                      text: AppLocalizations.of(context)!
+                          .configPasswordChangeNotification,
                       textAlign: TextAlign.center,
                       color: Theme.of(context)
                           .colorScheme

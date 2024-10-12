@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/welcome_page.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LeaveAlertDialog extends StatelessWidget {
   final ConfigController ct;
@@ -15,7 +16,7 @@ class LeaveAlertDialog extends StatelessWidget {
   void show(BuildContext context) {
     CookieSheetBottom(
       title: CookieText(
-        text: 'Deseja realmente sair da sua conta?',
+        text: AppLocalizations.of(context)!.configLogoutPrompt,
         color: Theme.of(context).colorScheme.onSecondary,
         typography: CookieTypography.button,
       ),
@@ -23,13 +24,12 @@ class LeaveAlertDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CookieText(
-            text:
-                'Lembrando que ao sair da sua conta, poderá acessar ela novamente usando suas credenciais.',
+            text: AppLocalizations.of(context)!.configLogoutReminder,
             color: Theme.of(context).colorScheme.onSecondary,
           ),
           const SizedBox(height: 20),
           CookieButton.outline(
-            label: 'Não desejo sair da conta',
+            label: AppLocalizations.of(context)!.configDontLogout,
             labelColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               Navigator.pop(context);
@@ -37,13 +37,16 @@ class LeaveAlertDialog extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           CookieButton(
-            label: 'Sair da conta',
+            label: AppLocalizations.of(context)!.configLogout,
             labelColor: Theme.of(context).colorScheme.onPrimary,
             backgroundColor: Colors.red,
             onPressed: () {
               ct.logout().then(
                     (value) => Navigator.pushNamedAndRemoveUntil(
-                        context, WelcomePage.route, (route) => false),
+                      context,
+                      WelcomePage.route,
+                      (route) => false,
+                    ),
                   );
             },
           ),

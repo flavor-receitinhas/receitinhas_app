@@ -3,6 +3,7 @@ import 'package:app_receitas/src/feactures/recipes/presenter/validator/minute_te
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WriteTimePrepared extends StatefulWidget {
   final TextEditingController minuteController;
@@ -49,7 +50,7 @@ class _WriteTimePreparedState extends State<WriteTimePrepared> {
             ),
             const SizedBox(height: 10),
             CookieText(
-              text: 'Horas',
+              text: AppLocalizations.of(context)!.recipeWriteTimePreparedHours,
               color: Theme.of(context).colorScheme.onSecondary,
               typography: CookieTypography.button,
             ),
@@ -87,7 +88,8 @@ class _WriteTimePreparedState extends State<WriteTimePrepared> {
             ),
             const SizedBox(height: 10),
             CookieText(
-              text: 'Minutos',
+              text:
+                  AppLocalizations.of(context)!.recipeWriteTimePreparedMinutes,
               color: Theme.of(context).colorScheme.onSecondary,
               typography: CookieTypography.button,
             ),

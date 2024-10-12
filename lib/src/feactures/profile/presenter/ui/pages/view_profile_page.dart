@@ -9,6 +9,7 @@ import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_pr
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:page_manager/manager_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewProfilePage extends StatefulWidget {
   static const route = '/view-profile';
@@ -22,17 +23,19 @@ class _ViewProfilePageState
     extends ManagerPage<ProfileController, ViewProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
     return CookiePage(
       state: ct.state,
       done: () => SafeArea(
         child: ListView(
           children: [
-            const AppBarProfile(
-              title: 'Explorar Perfil',
-              subTitle: 'Descubra as criações culinárias deste usuário',
+            AppBarProfile(
+              title: AppLocalizations.of(context)!.profileViewProfilePageTitle,
+              subTitle:
+                  AppLocalizations.of(context)!.profileViewProfilePageSubtitle,
             ),
-            const CookieButton(label: 'Voltar').back(context),
+            CookieButton(
+              label: AppLocalizations.of(context)!.profileViewProfilePageBack,
+            ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
@@ -48,11 +51,6 @@ class _ViewProfilePageState
                             CookieText(
                               text: ct.profile.name,
                               typography: CookieTypography.title,
-                            ),
-                            CookieText(
-                              text: 'mestre-cuca',
-                              color: theme.primary,
-                              typography: CookieTypography.button,
                             ),
                             const SizedBox(height: 10),
                             CookieText(
@@ -74,13 +72,15 @@ class _ViewProfilePageState
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const CookieTextFieldSearch(
-                    hintText: 'Pesquise sua receita favorita',
+                  CookieTextFieldSearch(
+                    hintText: AppLocalizations.of(context)!
+                        .profileViewProfilePageSearchHint,
                   ),
                   const SizedBox(height: 20),
                   ct.recipes.isEmpty
-                      ? const CookieText(
-                          text: 'Esse chefe não tem receitas publicadas...',
+                      ? CookieText(
+                          text: AppLocalizations.of(context)!
+                              .profileViewProfilePageNoRecipes,
                           typography: CookieTypography.button,
                         )
                       : MasonryGridView.builder(

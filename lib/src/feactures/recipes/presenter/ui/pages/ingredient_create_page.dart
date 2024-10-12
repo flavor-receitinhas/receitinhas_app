@@ -1,12 +1,13 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/validator/number_convert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IngredientCreatePage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -21,12 +22,12 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CookieButton(
-        label: 'Proximo',
+        label: AppLocalizations.of(context)!.recipeDifficultyNext,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
           if (widget.ct.listIngredientSelect.isEmpty) {
-            const CookieSnackBar(
-              text: 'Adicione pelo menos um ingrediente',
+            CookieSnackBar(
+              text: AppLocalizations.of(context)!.recipeAddAtLeastOneIngredient,
             ).show(context);
             return;
           }
@@ -41,7 +42,7 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
           children: [
             const SizedBox(height: 10),
             CookieButton(
-              label: 'Voltar',
+              label: AppLocalizations.of(context)!.recipeDifficultyBack,
               onPressed: () {
                 widget.ct.pageController.previousPage(
                   duration: const Duration(milliseconds: 500),
@@ -55,18 +56,18 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  const CookieText(
-                    text: 'Ingredientes',
+                  CookieText(
+                    text: AppLocalizations.of(context)!.recipeIngredientsTitle,
                     typography: CookieTypography.title,
                   ),
                   const SizedBox(height: 20),
-                  const CookieText(
-                    text:
-                        'Essas informações vão ajudar a indentificar coisas básicas da sua receita, então seja bem consiso.',
+                  CookieText(
+                    text: AppLocalizations.of(context)!
+                        .recipeBasicInfoDescription,
                   ),
                   const SizedBox(height: 20),
                   ContainerCreateInfo(
-                    title: 'Ingredientes',
+                    title: AppLocalizations.of(context)!.recipeIngredientsTitle,
                     iconSvg: IconEnum.carrot.path,
                     child: GestureDetector(
                       onTap: () {

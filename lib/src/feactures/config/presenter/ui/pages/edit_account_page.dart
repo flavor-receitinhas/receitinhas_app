@@ -4,7 +4,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/edit_account_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/select_container_preference.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
@@ -59,7 +59,9 @@ class _EditAccountPageState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            const CookieButton(label: 'Editar conta').back(context),
+            CookieButton(
+              label: AppLocalizations.of(context)!.configEditAccount,
+            ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Form(
@@ -69,19 +71,19 @@ class _EditAccountPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 20),
-                    const CookieText(
-                      text: 'Nome',
+                    CookieText(
+                      text: AppLocalizations.of(context)!.configName,
                       typography: CookieTypography.button,
                     ),
                     const SizedBox(height: 10),
                     CookieTextField.outline(
-                      hintText: 'Escreva seu nome...',
+                      hintText: AppLocalizations.of(context)!.configNameHint,
                       controller: ct.userNameController,
                       validator: ValidatorOnboarding.validateName,
                     ),
                     const SizedBox(height: 20),
-                    const CookieText(
-                      text: 'Preferência alimentar',
+                    CookieText(
+                      text: AppLocalizations.of(context)!.configFoodPreference,
                       typography: CookieTypography.button,
                     ),
                     const SizedBox(height: 10),
@@ -114,8 +116,9 @@ class _EditAccountPageState
                       },
                     ),
                     const SizedBox(height: 20),
-                    const CookieText(
-                      text: 'Restrição alimentar',
+                    CookieText(
+                      text: AppLocalizations.of(context)!
+                          .configDietaryRestriction,
                       typography: CookieTypography.button,
                     ),
                     const SizedBox(height: 10),

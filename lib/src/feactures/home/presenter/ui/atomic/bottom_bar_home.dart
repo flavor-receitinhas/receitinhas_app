@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:flutter/material.dart';
 
 class BottomBarHome extends StatelessWidget {

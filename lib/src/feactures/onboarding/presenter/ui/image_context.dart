@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart' as icon;
+import 'package:app_receitas/src/core/global/icon_enum.dart' as icon;
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/proteins_enum.dart';

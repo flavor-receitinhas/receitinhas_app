@@ -6,6 +6,7 @@ import 'package:app_receitas/src/feactures/home/presenter/ui/atomic/bottom_bar_h
 import 'package:app_receitas/src/feactures/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomBottomBar extends StatefulWidget {
   static const route = '/home';
@@ -40,17 +41,19 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
       ),
       body: PopScope(
         canPop: false,
-        onPopInvoked: (bool didPop) {
+        onPopInvokedWithResult: (didPop, result) {
           if (didPop) {
             return;
           }
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: const CookieText(text: 'Deseja sair do app?'),
+              title: CookieText(
+                text: AppLocalizations.of(context)!.customBottomBarExitAppTitle,
+              ),
               actions: [
                 CookieTextButton(
-                  text: 'Cancelar',
+                  text: AppLocalizations.of(context)!.customBottomBarCancel,
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     Navigator.of(context).pop(context);
@@ -58,7 +61,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 ),
                 const SizedBox(width: 10),
                 CookieTextButton(
-                  text: 'Sair',
+                  text: AppLocalizations.of(context)!.customBottomBarExit,
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     SystemNavigator.pop();

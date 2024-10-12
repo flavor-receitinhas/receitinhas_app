@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_sheet_bottom.dart
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrganizeRecipes extends StatelessWidget {
   final void Function() onTapRecent;
@@ -22,12 +23,15 @@ class OrganizeRecipes extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const CookieText(text: 'Organizar por'),
+        CookieText(
+          text: AppLocalizations.of(context)!.favoriteOrganizeRecipesTitle,
+        ),
         IconButton(
           onPressed: () {
             CookieSheetBottom(
               title: CookieText(
-                text: 'Organizar por',
+                text:
+                    AppLocalizations.of(context)!.favoriteOrganizeRecipesTitle,
                 typography: CookieTypography.title,
                 color: colorTheme.onSecondary,
               ),
@@ -35,28 +39,32 @@ class OrganizeRecipes extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CookieTextButton(
-                    text: 'Mais recente primeiro',
+                    text: AppLocalizations.of(context)!
+                        .favoriteOrganizeRecipesRecentFirst,
                     color: colorTheme.onSecondary,
                     typography: CookieTypography.button,
                     onPressed: onTapRecent,
                   ),
                   const SizedBox(height: 10),
                   CookieTextButton(
-                    text: 'Mais antigo primeiro',
+                    text: AppLocalizations.of(context)!
+                        .favoriteOrganizeRecipesOldestFirst,
                     color: colorTheme.onSecondary,
                     typography: CookieTypography.button,
                     onPressed: onTapOld,
                   ),
                   const SizedBox(height: 10),
                   CookieTextButton(
-                    text: 'Nome de A a Z',
+                    text: AppLocalizations.of(context)!
+                        .favoriteOrganizeRecipesNameAsc,
                     color: colorTheme.onSecondary,
                     typography: CookieTypography.button,
                     onPressed: onTapAsc,
                   ),
                   const SizedBox(height: 10),
                   CookieTextButton(
-                    text: 'Nome de Z a A',
+                    text: AppLocalizations.of(context)!
+                        .favoriteOrganizeRecipesNameDesc,
                     color: colorTheme.onSecondary,
                     typography: CookieTypography.button,
                     onPressed: onTapDesc,

@@ -1,11 +1,12 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ServerDishPage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -78,7 +79,7 @@ class _ServerDishPageState extends State<ServerDishPage> {
     //     .convert());
     return Scaffold(
       bottomNavigationBar: CookieButton(
-        label: 'Finalizar',
+        label: AppLocalizations.of(context)!.recipeFinish,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
           widget.ct.pageController.nextPage(
@@ -92,7 +93,7 @@ class _ServerDishPageState extends State<ServerDishPage> {
           children: [
             const SizedBox(height: 10),
             CookieButton(
-              label: 'Voltar',
+              label: AppLocalizations.of(context)!.recipeDifficultyBack,
               onPressed: () {
                 widget.ct.pageController.previousPage(
                   duration: const Duration(milliseconds: 500),
@@ -105,14 +106,14 @@ class _ServerDishPageState extends State<ServerDishPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CookieText(
-                    text: 'Hora de se servir!',
+                  CookieText(
+                    text: AppLocalizations.of(context)!.recipeServeTimeTitle,
                     typography: CookieTypography.title,
                   ),
                   const SizedBox(height: 20),
-                  const CookieText(
+                  CookieText(
                     text:
-                        'Escreva um consideração final dando alguma dica ou informação útil para quem estiver concluindo ou concluir a receita.',
+                        AppLocalizations.of(context)!.recipeFinalConsideration,
                   ),
                   const SizedBox(height: 10),
                   QuillToolbar.simple(
@@ -154,8 +155,8 @@ class _ServerDishPageState extends State<ServerDishPage> {
                             customStyles: defaultStyles,
                             controller: widget.ct.quillServerController,
                             minHeight: 200,
-                            placeholder:
-                                'Escreva em detalhes como servir o prato...',
+                            placeholder: AppLocalizations.of(context)!
+                                .recipeServeDetailsPlaceholder,
                           ),
                         ),
                       )

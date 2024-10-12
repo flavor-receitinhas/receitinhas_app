@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaveSheet extends StatelessWidget {
   final EditProfileController ct;
@@ -12,13 +13,12 @@ class SaveSheet extends StatelessWidget {
     return Column(
       children: [
         CookieText(
-          text:
-              'Verifique bem se tem certeza, assim podemos mostrar ao mundo o seu novo perfil!',
+          text: AppLocalizations.of(context)!.profileSaveSheetConfirmMessage,
           color: Theme.of(context).colorScheme.onSecondary,
         ),
         const SizedBox(height: 10),
         CookieButton(
-          label: 'Salvar alterações',
+          label: AppLocalizations.of(context)!.profileSaveSheetSaveChanges,
           onPressed: () async {
             ct.profile!.biography = ct.biographyController.text;
             if ((ct.image != null && ct.image!.path.isNotEmpty) ||
@@ -36,7 +36,7 @@ class SaveSheet extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         CookieButton.outline(
-          label: 'Continuar editando',
+          label: AppLocalizations.of(context)!.profileSaveSheetContinueEditing,
           onPressed: () {
             Navigator.pop(context);
           },

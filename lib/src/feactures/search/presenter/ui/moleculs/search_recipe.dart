@@ -2,9 +2,10 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/filter_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchRecipe extends StatelessWidget {
   const SearchRecipe({super.key});
@@ -20,9 +21,9 @@ class SearchRecipe extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Expanded(
+              Expanded(
                 child: CookieTextFieldSearch(
-                  hintText: 'Procure algo para cozinhar',
+                  hintText: AppLocalizations.of(context)!.searchRecipeSearchHint,
                 ),
               ),
               const SizedBox(width: 10),
@@ -53,7 +54,7 @@ class SearchRecipe extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               CookieTextButton(
-                text: 'Limpar filtros',
+                text: AppLocalizations.of(context)!.searchRecipeClearFilters,
                 typography: CookieTypography.button,
                 onPressed: () {},
               ),

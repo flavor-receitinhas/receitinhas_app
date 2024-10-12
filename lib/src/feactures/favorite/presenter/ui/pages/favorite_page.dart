@@ -11,6 +11,7 @@ import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoritePage extends StatefulWidget {
   static const route = '/favorite';
@@ -46,7 +47,7 @@ class _FavoritePageState extends State<FavoritePage> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: CustomScrollView(
             slivers: [
-              const SliverToBoxAdapter(
+              SliverToBoxAdapter(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -54,13 +55,16 @@ class _FavoritePageState extends State<FavoritePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CookieText(
-                          text: 'Lista de Favoritos',
+                          text: AppLocalizations.of(context)!.favoritePageTitle,
                           typography: CookieTypography.title,
                         ),
-                        CookieText(text: 'Gerencie suas receitas favoritas'),
+                        CookieText(
+                          text: AppLocalizations.of(context)!
+                              .favoritePageSubtitle,
+                        ),
                       ],
                     ),
-                    ContainerProfileImage()
+                    const ContainerProfileImage()
                   ],
                 ),
               ),
@@ -69,7 +73,8 @@ class _FavoritePageState extends State<FavoritePage> {
                   children: [
                     const SizedBox(height: 20),
                     CookieTextFieldSearch(
-                      hintText: 'Pesquise sua receita favorita',
+                      hintText:
+                          AppLocalizations.of(context)!.favoritePageSearchHint,
                       controller: ct.favoriteController,
                       onEditingComplete: ct.refreshPage,
                     ),
@@ -112,23 +117,26 @@ class _FavoritePageState extends State<FavoritePage> {
                 builderDelegate: PagedChildBuilderDelegate<FavoriteEntity>(
                   animateTransitions: true,
                   firstPageErrorIndicatorBuilder: (context) {
-                    return const Center(
+                    return Center(
                       child: CookieText(
-                        text: 'Erro ao carregar receitas',
+                        text: AppLocalizations.of(context)!
+                            .favoritePageErrorLoading,
                       ),
                     );
                   },
                   noItemsFoundIndicatorBuilder: (context) {
-                    return const Center(
+                    return Center(
                       child: CookieText(
-                        text: 'Nenhuma receita encontrada',
+                        text: AppLocalizations.of(context)!
+                            .favoritePageNoItemsFound,
                       ),
                     );
                   },
                   newPageErrorIndicatorBuilder: (context) {
-                    return const Center(
+                    return Center(
                       child: CookieText(
-                        text: 'Erro ao carregar receitas',
+                        text: AppLocalizations.of(context)!
+                            .favoritePageErrorLoading,
                       ),
                     );
                   },

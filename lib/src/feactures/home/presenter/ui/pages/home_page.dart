@@ -3,7 +3,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
@@ -12,6 +12,7 @@ import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:page_manager/manager_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -56,13 +57,14 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CookieText(
-                          text: 'Olá, ${Global.profile?.name}',
+                          text:
+                              '${AppLocalizations.of(context)!.homePageGreeting}, ${Global.profile?.name}',
                           maxLine: 1,
                           overflow: TextOverflow.ellipsis,
                           typography: CookieTypography.title,
                         ),
-                        const CookieText(
-                          text: 'O que vamos cozinhar hoje ?',
+                        CookieText(
+                          text: AppLocalizations.of(context)!.homePageSubtitle,
                         ),
                       ],
                     ),
@@ -72,14 +74,14 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
               ),
               const SizedBox(height: 20),
               CookieTextFieldSearch(
-                hintText: 'Procure algo para cozinhar',
+                hintText: AppLocalizations.of(context)!.homePageSearchHint,
                 onTap: () {
                   Navigator.pushNamed(context, SearchPage.route);
                 },
               ),
               const SizedBox(height: 20),
-              const CookieText(
-                text: 'Últimas receitas postadas',
+              CookieText(
+                text: AppLocalizations.of(context)!.homePageLatestRecipesTitle,
                 typography: CookieTypography.title,
               ),
               const SizedBox(height: 10),

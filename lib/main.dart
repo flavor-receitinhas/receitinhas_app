@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
           themeMode: _themeController.chooseTheme,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          locale: const Locale('pt', 'BR'),
           initialRoute: '/splash',
           onGenerateRoute: GenerateRoute().generateRoute,
         );

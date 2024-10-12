@@ -3,18 +3,14 @@ import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_re
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/container_ingredient_delete.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ListSelectIngredients extends StatefulWidget {
+class ListSelectIngredients extends StatelessWidget {
   final List<IngredientRecipeEntity> ingredients;
   final void Function(IngredientRecipeEntity indexIngredient) deleteOnPressed;
   const ListSelectIngredients(
       {super.key, required this.ingredients, required this.deleteOnPressed});
 
-  @override
-  State<ListSelectIngredients> createState() => _ListSelectIngredientsState();
-}
-
-class _ListSelectIngredientsState extends State<ListSelectIngredients> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -33,21 +29,22 @@ class _ListSelectIngredientsState extends State<ListSelectIngredients> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CookieText(
-              text: 'Ingredientes selecionados (${widget.ingredients.length})',
+              text:
+                  '${AppLocalizations.of(context)!.recipeSelectedIngredients} (${ingredients.length})',
               typography: CookieTypography.button,
             ),
             const SizedBox(height: 10),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: widget.ingredients.length,
+              itemCount: ingredients.length,
               itemBuilder: (context, index) {
-                final ingredient = widget.ingredients[index];
+                final ingredient = ingredients[index];
                 return ContainerIngredientDelete(
                   ingredient: ingredient,
                   deleteOnPressed: () {
-                    widget.deleteOnPressed(
-                      widget.ingredients[index],
+                    deleteOnPressed(
+                      ingredients[index],
                     );
                   },
                 );

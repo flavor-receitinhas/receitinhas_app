@@ -2,6 +2,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/select_image_recipe.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarouselSelectImagesRecipe extends StatefulWidget {
   final CreateRecipeController ct;
@@ -28,8 +29,9 @@ class _CarouselSelectImagesRecipeState
             widget.ct.listImagesRecipe.add(images[i]);
           } else {
             if (context.mounted) {
-              const CookieSnackBar(
-                text: 'Só é permitido 10 imagens por receita',
+              CookieSnackBar(
+                text: AppLocalizations.of(context)!
+                    .recipeCarouselSelectImagesRecipeMaxImages,
               ).show(context);
             }
             break;
@@ -48,8 +50,9 @@ class _CarouselSelectImagesRecipeState
                 widget.ct.listImagesRecipe.add(images[i]);
               } else {
                 if (context.mounted) {
-                  const CookieSnackBar(
-                    text: 'Só é permitido 10 imagens por receita',
+                  CookieSnackBar(
+                    text: AppLocalizations.of(context)!
+                        .recipeCarouselSelectImagesRecipeMaxImages,
                   ).show(context);
                 }
                 break;

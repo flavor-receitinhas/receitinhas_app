@@ -1,11 +1,12 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/icon_enum.dart';
+import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IntructionCreatePage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -76,7 +77,7 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
 
     return Scaffold(
       bottomNavigationBar: CookieButton(
-        label: 'Próximo',
+        label: AppLocalizations.of(context)!.recipeDifficultyNext,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         onPressed: () {
           if (widget.ct.quillInstructionController.document
@@ -89,8 +90,9 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
             );
           } else {
             final snackBar = SnackBar(
-              content: const CookieText(
-                  text: 'Escreva no minimo 50 caracteres para avançar.'),
+              content: CookieText(
+                text: AppLocalizations.of(context)!.recipeWriteAtLeast50Chars,
+              ),
               backgroundColor: Theme.of(context).colorScheme.secondary,
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -102,7 +104,7 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
           children: [
             const SizedBox(height: 10),
             CookieButton(
-              label: 'Voltar',
+              label: AppLocalizations.of(context)!.recipeDifficultyBack,
               onPressed: () {
                 widget.ct.pageController.previousPage(
                   duration: const Duration(milliseconds: 500),
@@ -115,8 +117,8 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CookieText(
-                    text: 'Instruções de preparo',
+                  CookieText(
+                    text: AppLocalizations.of(context)!.recipeInstructionsTitle,
                     typography: CookieTypography.title,
                   ),
                   QuillToolbar.simple(
@@ -158,7 +160,8 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
                             customStyles: defaultStyles,
                             controller: widget.ct.quillInstructionController,
                             minHeight: 200,
-                            placeholder: 'Escreva as instruções de preparo...',
+                            placeholder: AppLocalizations.of(context)!
+                                .recipeWriteInstructionsPlaceholder,
                           ),
                         ),
                       )
