@@ -21,8 +21,8 @@ class RecipeRepositoryImp implements RecipeRepository {
   String path = '/recipe';
 
   @override
-  Future<void> createRecipe(RecipeEntity recipe) async {
-    await _apiRecipes.post(path: path, body: _mapper.toMap(recipe));
+  Future<RecipeEntity> createRecipe(RecipeEntity recipe) async {
+    return await _apiRecipes.post(path: path, body: _mapper.toMap(recipe));
   }
 
   @override

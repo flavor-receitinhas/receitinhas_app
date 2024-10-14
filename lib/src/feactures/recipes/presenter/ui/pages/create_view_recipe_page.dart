@@ -14,6 +14,13 @@ class CreateViewRecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CookieButton(
+        label: AppLocalizations.of(context)!.recipeFinish,
+        onPressed: () {
+          ct.createRecipe();
+          
+        },
+      ),
       body: SafeArea(
         child: ListView(
           children: [

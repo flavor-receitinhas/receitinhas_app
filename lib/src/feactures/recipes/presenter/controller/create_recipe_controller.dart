@@ -7,9 +7,10 @@ import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_re
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:page_manager/export_manager.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
-class CreateRecipeController extends ChangeNotifier {
+class CreateRecipeController extends ManagerStore {
   final RecipeRepository _repository;
 
   CreateRecipeController(
@@ -35,9 +36,9 @@ class CreateRecipeController extends ChangeNotifier {
   final minuteController = TextEditingController();
   List<IngredientRecipeEntity> listIngredientSelect = [];
   List<File> listImagesRecipe = [];
-  
 
-  void init() {
+  @override
+  void init(Map<String, dynamic> arguments) {
     pageController = PageController(initialPage: 0);
     containerController = PageController(initialPage: 0);
   }
@@ -97,22 +98,36 @@ class CreateRecipeController extends ChangeNotifier {
   }
 
   Future<void> createRecipe() async {
-    RecipeEntity recipe = RecipeEntity(
-      title: titleController.text,
-      subTitle: subTitleController.text,
-      details: detailsController.text,
-      serveFood: QuillDeltaToHtmlConverter(
-        quillServerController.document.toDelta().toJson(),
-      ).convert(),
-      difficultyRecipe: DifficultyRecipe.easy,
-      ingredients: [],
-      instruction: QuillDeltaToHtmlConverter(
-        quillInstructionController.document.toDelta().toJson(),
-      ).convert(),
-      portion: portion,
-      timePrepared: timePreparedRecipe.inMinutes,
+    handleTry(
+      call: () async {
+        RecipeEntity recipe = RecipeEntity(
+          title: titleController.text,
+          subTitle: subTitleController.text,
+          details: detailsController.text,
+          serveFood: QuillDeltaToHtmlConverter(
+            quillServerController.document.toDelta().toJson(),
+          ).convert(),
+          difficultyRecipe: DifficultyRecipe.easy,
+          ingredients: listIngredientSelect,
+          instruction: QuillDeltaToHtmlConverter(
+            quillInstructionController.document.toDelta().toJson(),
+          ).convert(),
+          portion: portion,
+          timePrepared: timePreparedRecipe.inMinutes,
+          //TODO Ver sobre os status depois
+        );
+
+        final result = await _repository.createRecipe(recipe);
+
+        for (var image in listImagesRecipe) {
+          await _repository.createImages(
+            recipeId: result.id!,
+            filePath: image.path,
+          //TODO Adicionar se é thumb ou não
+          );
+        }
+      },
     );
-    await _repository.createRecipe(recipe);
   }
 
   String get durationRecipeString {
