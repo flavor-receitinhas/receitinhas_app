@@ -30,7 +30,6 @@ class OnboardingModule extends RegisterModule {
     di.registerFactory<OnBoardingController>(
       () => OnBoardingController(
         di(),
-        di(),
       ),
     );
   }

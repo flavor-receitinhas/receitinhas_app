@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           themeMode: _themeController.chooseTheme,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('es'),
           initialRoute: '/splash',
           onGenerateRoute: GenerateRoute().generateRoute,
         );
@@ -39,3 +40,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+ 
