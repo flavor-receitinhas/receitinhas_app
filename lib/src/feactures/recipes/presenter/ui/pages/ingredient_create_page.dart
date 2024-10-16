@@ -116,13 +116,12 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
                               );
                             },
                           ),
-                          if (widget.ct.listIngredientSelect.isEmpty)
-                            const Center(
-                              child: Icon(
-                                Icons.add_circle_outline_rounded,
-                                size: 34,
-                              ),
+                          const Center(
+                            child: Icon(
+                              Icons.add_circle_outline_rounded,
+                              size: 34,
                             ),
+                          ),
                         ],
                       ),
                     ),
