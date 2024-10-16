@@ -44,7 +44,7 @@ class InfoContainerDifficultyRecipe extends StatelessWidget {
                       },
                       isSelect: ct.difficultyRecipe == e,
                       prefix: CookieSvg(
-                        path: ImageContext().svgIconDifficulty(e),
+                        svg: ImageContext().svgIconDifficulty(e),
                       ),
                       backgroundColor:
                           Theme.of(context).colorScheme.onSecondary,

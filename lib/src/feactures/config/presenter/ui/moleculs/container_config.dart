@@ -1,9 +1,10 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:flutter/material.dart';
 
 class ContainerConfig extends StatelessWidget {
-  final String icon;
+  final IconsSvgEnum icon;
   final String text;
   final Color? textColor;
   final Widget? action;
@@ -30,7 +31,7 @@ class ContainerConfig extends StatelessWidget {
         ),
         child: Row(
           children: [
-            CookieSvg(path: icon),
+            CookieSvg(svg: icon),
             const SizedBox(width: 15),
             CookieText(
                 text: text,

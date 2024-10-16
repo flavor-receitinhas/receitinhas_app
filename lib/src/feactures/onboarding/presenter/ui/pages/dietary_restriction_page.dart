@@ -73,7 +73,7 @@ class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
                           backgroundColor:
                               Theme.of(context).colorScheme.onPrimary,
                           prefix: CookieSvg(
-                            path: ImageContext().svgIconRestriction(e),
+                            svg: ImageContext().svgIconRestriction(e),
                             color: Theme.of(context).colorScheme.onSecondary,
                           ),
                           labelColor: Theme.of(context).colorScheme.onSecondary,

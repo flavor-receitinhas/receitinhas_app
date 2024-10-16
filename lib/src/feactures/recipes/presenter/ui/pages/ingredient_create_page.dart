@@ -1,7 +1,7 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/select_ingredients_page.dart';
@@ -68,7 +68,7 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
                   const SizedBox(height: 20),
                   ContainerCreateInfo(
                     title: AppLocalizations.of(context)!.recipeIngredientsTitle,
-                    iconSvg: IconEnum.carrot.path,
+                    svg: IconsSvgEnum.carrot,
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(

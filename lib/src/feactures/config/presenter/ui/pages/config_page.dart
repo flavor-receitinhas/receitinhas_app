@@ -1,5 +1,5 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
@@ -40,7 +40,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconEnum.person.path,
+              icon: IconsSvgEnum.person,
               text: AppLocalizations.of(context)!.configEditAccount,
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -49,7 +49,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconEnum.key.path,
+              icon: IconsSvgEnum.key,
               text: AppLocalizations.of(context)!.configChangePassword,
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -67,7 +67,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconEnum.moon.path,
+              icon: IconsSvgEnum.moon,
               text: AppLocalizations.of(context)!.configNightMode,
               action: SizedBox(
                 height: 20,
@@ -102,7 +102,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconEnum.eye.path,
+              icon: IconsSvgEnum.eye,
               text: AppLocalizations.of(context)!.configPrivacyPolicy,
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -114,7 +114,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconEnum.document.path,
+              icon: IconsSvgEnum.document,
               text: AppLocalizations.of(context)!.configTermsConditions,
               onTap: () {
                 Navigator.pushNamed(
@@ -126,7 +126,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconEnum.persons.path,
+              icon: IconsSvgEnum.persons,
               text: AppLocalizations.of(context)!.configOurTeam,
               onTap: () {
                 Navigator.pushNamed(
@@ -138,7 +138,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconEnum.logOut.path,
+              icon: IconsSvgEnum.logOut,
               text: AppLocalizations.of(context)!.configLogout,
               textColor: const Color(0xffFF5757),
               action: const Icon(Icons.chevron_right),

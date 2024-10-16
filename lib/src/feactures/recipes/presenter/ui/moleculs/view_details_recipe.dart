@@ -1,6 +1,6 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class ViewDetailsRecipe extends StatelessWidget {
                     text: AppLocalizations.of(context)!.recipeIngredientsTitle,
                     typography: CookieTypography.title,
                   ),
-                  CookieSvg(path: IconEnum.carrot.path),
+                  const CookieSvg(svg: IconsSvgEnum.carrot),
                 ],
               ),
               const SizedBox(height: 10),
@@ -79,7 +79,7 @@ class ViewDetailsRecipe extends StatelessWidget {
                       typography: CookieTypography.title,
                     ),
                   ),
-                  CookieSvg(path: IconEnum.knife.path),
+                  const CookieSvg(svg: IconsSvgEnum.knife),
                 ],
               ),
               const SizedBox(height: 20),
@@ -106,7 +106,7 @@ class ViewDetailsRecipe extends StatelessWidget {
                       text: AppLocalizations.of(context)!.recipeServeFoodTitle,
                       typography: CookieTypography.title,
                     ),
-                    CookieSvg(path: IconEnum.pan.path),
+                    const CookieSvg(svg: IconsSvgEnum.pan),
                   ],
                 ),
                 const SizedBox(height: 20),
