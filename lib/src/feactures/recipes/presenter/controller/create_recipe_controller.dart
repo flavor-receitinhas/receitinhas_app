@@ -123,7 +123,13 @@ class CreateRecipeController extends ManagerStore {
           await _repository.createImages(
             recipeId: result.id!,
             filePath: image.path,
-          //TODO Adicionar se é thumb ou não
+          );
+        }
+
+        if (thumbImage != null) {
+          await _repository.createThumb(
+            recipeId: result.id!,
+            filePath: thumbImage!.path,
           );
         }
       },

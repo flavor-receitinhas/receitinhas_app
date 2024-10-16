@@ -22,7 +22,10 @@ class RecipeRepositoryImp implements RecipeRepository {
 
   @override
   Future<RecipeEntity> createRecipe(RecipeEntity recipe) async {
-    return await _apiRecipes.post(path: path, body: _mapper.toMap(recipe));
+    final result =
+        await _apiRecipes.post(path: path, body: _mapper.toMap(recipe));
+    print(result);
+    return _mapper.fromMap(result);
   }
 
   @override

@@ -18,7 +18,6 @@ class CreateViewRecipePage extends StatelessWidget {
         label: AppLocalizations.of(context)!.recipeFinish,
         onPressed: () {
           ct.createRecipe();
-          
         },
       ),
       body: SafeArea(
@@ -62,7 +61,7 @@ class CreateViewRecipePage extends StatelessWidget {
                   const SizedBox(height: 20),
                   ViewDetailsRecipe(
                     details: ct.detailsController.text,
-                    ingredients: const [],
+                    ingredients: ct.listIngredientSelect,
                     instruction: QuillDeltaToHtmlConverter(ct
                             .quillInstructionController.document
                             .toDelta()

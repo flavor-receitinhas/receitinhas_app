@@ -21,11 +21,11 @@ class RecipeMapper {
 
   RecipeEntity fromMap(Map<String, dynamic> map) {
     return RecipeEntity(
-      id: map['id'] as String,
+      id: map['id'],
       title: map['title'] as String,
       subTitle: map['subTitle'] as String?,
       details: map['details'] as String?,
-      timePrepared: map['timePrepared'] as int,
+      timePrepared: map['timePrepared'] ,
       difficultyRecipe: DifficultyRecipe.values.firstWhere(
         (e) => e.toString().split('.').last == map['difficultyRecipe'],
       ),
