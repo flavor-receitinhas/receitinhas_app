@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_button.dart';
@@ -39,7 +40,7 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
         icon: const Icon(Icons.arrow_back_ios_outlined),
       ),
       sideAppBar: MainAxisAlignment.start,
-        body: Column(
+      body: Column(
         children: [
           CookieText(
             text: AppLocalizations.of(context)!.loginTitle,
@@ -67,11 +68,24 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
             maxLines: 1,
           ),
           const SizedBox(height: 10),
-          CookieButton(
-            label: 'Google',
+          IconButton(
             onPressed: () async {
               await ct.loginGoogle();
             },
+            icon: Image.asset(
+              ImagesEnum.google.path,
+              height: 25,
+            ),
+            style: IconButton.styleFrom(
+              shape: CircleBorder(
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                ),
+              ),
+            ),
+            padding: const EdgeInsets.all(12),
+            color: Theme.of(context).colorScheme.primary,
           ),
           const SizedBox(height: 10),
           Align(
