@@ -4,6 +4,7 @@ import 'package:app_receitas/src/feactures/search/presenter/controller/research_
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/recipe_search_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ResultRecipes extends StatelessWidget {
   final ResearchController ct;
   const ResultRecipes({super.key, required this.ct});
@@ -39,7 +40,7 @@ class ResultRecipes extends StatelessWidget {
                     );
                   },
                   child: RecipeSearchContainer(
-                      image: recipe.images.first,
+                      image: 'https://via.placeholder.com/150',
                       title: recipe.title,
                       timePrepared: recipe.timePrepared),
                 ),

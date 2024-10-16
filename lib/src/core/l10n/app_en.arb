@@ -158,7 +158,7 @@
   "recipeIntroducePortionPlural": "servings",
   "recipeIntroduceTimePrepared": "min",
   "recipeLoadIngredientsError": "Error loading ingredients",
-  "recipeNoItemsFound": "No recipes found",
+  "recipeNoItemsFound": "No ingredient found",
   "recipeAddIngredient": "Add ingredient",
   "recipeIngredientNotFound": "Didn't find your ingredient?",
   "recipeEnterIngredientBelow": "Enter it in the field below",

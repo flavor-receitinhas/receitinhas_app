@@ -158,7 +158,7 @@
   "recipeIntroducePortionPlural": "porções",
   "recipeIntroduceTimePrepared": "min",
   "recipeLoadIngredientsError": "Erro ao carregar ingredientes",
-  "recipeNoItemsFound": "Nenhuma receita encontrada",
+  "recipeNoItemsFound": "Nenhuma ingrediente encontrada",
   "recipeAddIngredient": "Adicionar ingrediente",
   "recipeIngredientNotFound": "Não encontrou o seu ingrediente?",
   "recipeEnterIngredientBelow": "Introduza-o no campo abaixo",

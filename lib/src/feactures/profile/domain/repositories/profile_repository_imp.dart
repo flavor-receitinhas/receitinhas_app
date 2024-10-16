@@ -26,13 +26,13 @@ class ProfileRepositoryImp extends ProfileRepository {
   }
 
   @override
-  Future<void> updateImageProfile(String userId, String imagePath) async {
+  Future<void> updateImageProfile(String userID, String imagePath) async {
     final data = {
       "file": await MultipartFile.fromFile(imagePath,
           contentType: MediaType('image', 'jpg')),
     };
     await _apiRecipes.put(
-      path: '/$path/$userId/image',
+      path: '/$path/$userID/image',
       body: data,
     );
   }

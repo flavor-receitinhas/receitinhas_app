@@ -51,8 +51,8 @@ class _ViewRecipesPageState
                   autoPlayAnimationDuration: const Duration(milliseconds: 500),
                   padEnds: false,
                 ),
-                items: ct.recipe.images
-                    .map((e) => Image.network(e, fit: BoxFit.cover))
+                items: ct.images
+                    .map((e) => Image.network(e.link, fit: BoxFit.cover))
                     .toList()),
             const SizedBox(height: 10),
             ViewIntroduceRecipe(

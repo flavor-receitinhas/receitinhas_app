@@ -3,7 +3,9 @@ import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_en
 class IngredientMapper {
   Map<String, dynamic> toMap(IngredientEntity entity) {
     return <String, dynamic>{
-      
+      'id': entity.id,
+      'name': entity.name,
+      'description': entity.description,
     };
   }
 

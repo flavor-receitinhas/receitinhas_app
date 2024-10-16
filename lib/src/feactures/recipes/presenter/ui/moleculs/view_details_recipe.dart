@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/global/icon_enum.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewDetailsRecipe extends StatelessWidget {
   final String details;
-  final List<String> ingredients;
+  final List<IngredientRecipeEntity> ingredients;
   final String instruction;
   final String serveFood;
   const ViewDetailsRecipe({
@@ -23,6 +24,7 @@ class ViewDetailsRecipe extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CookieText(
           text: AppLocalizations.of(context)!.recipeDetailsTitle,
@@ -53,7 +55,10 @@ class ViewDetailsRecipe extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return CookieText(text: ingredients[index]);
+                  return CookieText(
+                    text:
+                        '${ingredients[index].ingredient.name} - ${ingredients[index].quantity} ${ingredients[index].unit}',
+                  );
                 },
               )
             ],
@@ -67,9 +72,12 @@ class ViewDetailsRecipe extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CookieText(
-                    text: AppLocalizations.of(context)!.recipeInstructionsTitle,
-                    typography: CookieTypography.title,
+                  Expanded(
+                    child: CookieText(
+                      text:
+                          AppLocalizations.of(context)!.recipeInstructionsTitle,
+                      typography: CookieTypography.title,
+                    ),
                   ),
                   CookieSvg(path: IconEnum.knife.path),
                 ],
