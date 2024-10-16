@@ -40,7 +40,8 @@ enum IconsSvgEnum {
 enum ImagesEnum {
   avatar('assets/images/avatar.png'),
   home('assets/images/home.png'),
-  logo('assets/images/logo.png');
+  logo('assets/images/logo.png'),
+  google('assets/images/google_logo.png');
 
   final String path;
   const ImagesEnum(this.path);
