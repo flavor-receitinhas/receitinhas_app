@@ -124,7 +124,6 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
           ],
         ),
       ),
