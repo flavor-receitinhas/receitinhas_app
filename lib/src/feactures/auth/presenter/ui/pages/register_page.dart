@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
@@ -40,7 +41,7 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
         icon: const Icon(Icons.arrow_back_ios_outlined),
       ),
       sideAppBar: MainAxisAlignment.start,
-     body: Form(
+      body: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         key: formKey,
         child: Column(
@@ -94,11 +95,21 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               },
             ),
             const SizedBox(height: 10),
-            CookieButton(
-              label: 'Google',
+            IconButton(
               onPressed: () async {
                 await ct.loginGoogle();
               },
+              icon: Image.asset(
+                ImagesEnum.google.path,
+                height: 25,
+              ),
+              style: IconButton.styleFrom(
+                shape: CircleBorder(
+                  side: BorderSide(color: color.primary, width: 2),
+                ),
+              ),
+              padding: const EdgeInsets.all(12),
+              color: color.primary,
             ),
             const SizedBox(height: 10),
             RichText(
