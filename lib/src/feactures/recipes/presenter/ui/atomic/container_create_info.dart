@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
@@ -5,10 +6,10 @@ import 'package:flutter/material.dart';
 
 class ContainerCreateInfo extends StatelessWidget {
   final String? title;
-  final String iconSvg;
+  final IconsSvgEnum svg;
   final Widget child;
   const ContainerCreateInfo(
-      {super.key, this.title, required this.iconSvg, required this.child});
+      {super.key, this.title, required this.svg, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class ContainerCreateInfo extends StatelessWidget {
                 text: title ?? '',
                 typography: CookieTypography.button,
               ),
-              CookieSvg(path: iconSvg),
+              CookieSvg(svg: svg),
             ],
           ),
           const SizedBox(height: 10),

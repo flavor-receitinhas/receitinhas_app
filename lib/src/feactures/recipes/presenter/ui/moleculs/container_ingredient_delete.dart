@@ -1,6 +1,6 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_ingredient.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/validator/number_convert.dart';
@@ -31,8 +31,8 @@ class ContainerIngredientDelete extends StatelessWidget {
           ),
         ],
       ),
-      icon: CookieSvg(
-        path: IconEnum.delete.path,
+      icon: const CookieSvg(
+        svg: IconsSvgEnum.delete,
       ),
       onTap: deleteOnPressed,
     );

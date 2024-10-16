@@ -1,6 +1,7 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
+
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +150,7 @@ class _ServerDishPageState extends State<ServerDishPage> {
                   Column(
                     children: [
                       ContainerCreateInfo(
-                        iconSvg: IconEnum.pan.path,
+                        svg: IconsSvgEnum.pan,
                         child: QuillEditor.basic(
                           configurations: QuillEditorConfigurations(
                             customStyles: defaultStyles,

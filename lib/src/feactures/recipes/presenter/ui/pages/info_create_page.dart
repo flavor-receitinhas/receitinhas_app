@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/global/icon_enum.dart';
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
@@ -66,8 +66,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                               visible: ct.timePreparedRecipe.inMinutes > 0,
                               child: Column(
                                 children: [
-                                  CookieSvg(
-                                    path: IconEnum.clock.path,
+                                  const CookieSvg(
+                                    svg: IconsSvgEnum.clock,
                                   ),
                                   const SizedBox(height: 5),
                                   CookieText(
@@ -79,8 +79,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                             const SizedBox(width: 16),
                             Column(
                               children: [
-                                CookieSvg(
-                                  path: IconEnum.fire.path,
+                                const CookieSvg(
+                                  svg: IconsSvgEnum.fire,
                                 ),
                                 const SizedBox(height: 5),
                                 CookieText(text: ct.difficultyRecipeString)
@@ -91,8 +91,8 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                               visible: ct.portion > 0,
                               child: Column(
                                 children: [
-                                  CookieSvg(
-                                    path: IconEnum.pot.path,
+                                  const CookieSvg(
+                                    svg: IconsSvgEnum.pot,
                                   ),
                                   const SizedBox(height: 5),
                                   CookieText(

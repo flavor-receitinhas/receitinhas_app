@@ -1,6 +1,6 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -45,7 +45,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      CookieSvg(path: IconEnum.clock.path),
+                      const CookieSvg(svg: IconsSvgEnum.clock),
                       const SizedBox(height: 5),
                       CookieText(
                         text:
@@ -56,8 +56,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
                   const SizedBox(width: 16),
                   Column(
                     children: [
-                      CookieSvg(
-                        path: IconEnum.fire.path,
+                      const CookieSvg(
+                        svg: IconsSvgEnum.fire,
                       ),
                       const SizedBox(height: 5),
                       CookieText(text: difficultyRecipe)
@@ -66,7 +66,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                   const SizedBox(width: 16),
                   Column(
                     children: [
-                      CookieSvg(path: IconEnum.pot.path),
+                      const CookieSvg(svg: IconsSvgEnum.pot),
                       const SizedBox(height: 5),
                       CookieText(
                         text: portion != 1

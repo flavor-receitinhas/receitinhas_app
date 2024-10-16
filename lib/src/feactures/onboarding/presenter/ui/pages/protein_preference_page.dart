@@ -61,7 +61,7 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
                         backgroundColor:
                             Theme.of(context).colorScheme.onPrimary,
                         prefix: CookieSvg(
-                          path: ImageContext().svgIconProtein(e),
+                          svg: ImageContext().svgIconProtein(e),
                           color: Theme.of(context).colorScheme.onSecondary,
                         ),
                         labelColor: Theme.of(context).colorScheme.onSecondary,
