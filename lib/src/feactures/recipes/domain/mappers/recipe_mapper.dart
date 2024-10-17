@@ -25,7 +25,7 @@ class RecipeMapper {
       title: map['title'] as String,
       subTitle: map['subTitle'] as String?,
       details: map['details'] as String?,
-      timePrepared: map['timePrepared'] ,
+      timePrepared: map['timePrepared'],
       difficultyRecipe: DifficultyRecipe.values.firstWhere(
         (e) => e.toString().split('.').last == map['difficultyRecipe'],
       ),
