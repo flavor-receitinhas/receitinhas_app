@@ -34,11 +34,16 @@ class _SearchPageState extends State<SearchPage> {
           BackButtomFloating(
             label: AppLocalizations.of(context)!.searchLabel,
           ),
-          const SliverPadding(
-              padding: EdgeInsets.only(
-                top: 10,
+          SliverPadding(
+            padding: const EdgeInsets.only(
+              top: 10,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: SearchRecipe(
+                ct: ct,
               ),
-              sliver: SliverToBoxAdapter(child: SearchRecipe())),
+            ),
+          ),
           SliverToBoxAdapter(child: ResultRecipes(ct: ct)),
         ],
       ),
