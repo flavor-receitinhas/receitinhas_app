@@ -4,8 +4,7 @@ import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_map
 class IngredientRecipeMapper {
   static IngredientRecipeEntity fromJson(Map<String, dynamic> json) {
     return IngredientRecipeEntity(
-      ingredient:
-          json['ingredient'].map((e) => IngredientMapper().toMap(e)).toList(),
+      ingredient: IngredientMapper().fromMap(json['ingredient']),
       quantity: json['quantity'],
       unit: json['unit'],
     );
@@ -13,7 +12,7 @@ class IngredientRecipeMapper {
 
   static Map<String, dynamic> toJson(IngredientRecipeEntity ingredient) {
     return {
-      'ingredient': ingredient.ingredient,
+      'ingredient': IngredientMapper().toMap(ingredient.ingredient),
       'quantity': ingredient.quantity,
       'unit': ingredient.unit,
     };
