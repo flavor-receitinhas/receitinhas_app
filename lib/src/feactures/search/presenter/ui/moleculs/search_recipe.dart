@@ -34,13 +34,17 @@ class SearchRecipe extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
+                onTap: () async {
+                  //TODO Alterar depois
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const FilterPage(),
+                      builder: (context) => FilterPage(
+                        ct: ct,
+                      ),
                     ),
                   );
+                  ct.refreshPage();
                 },
                 child: Container(
                   height: 50,
@@ -62,7 +66,7 @@ class SearchRecipe extends StatelessWidget {
               CookieTextButton(
                 text: AppLocalizations.of(context)!.searchRecipeClearFilters,
                 typography: CookieTypography.button,
-                onPressed: () {},
+                onPressed: ct.clearFilters,
               ),
             ],
           ),

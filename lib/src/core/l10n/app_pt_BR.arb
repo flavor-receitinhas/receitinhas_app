@@ -202,7 +202,12 @@
     "searchRecipeIngredients": "Ingredientes",
     "searchRecipePortions": "Porções",
     "searchRecipeFoodPreference": "Preferência alimentar",
-    "searchRecipeDifficulty": "Dificuldade",
+    "searchRecipeDifficulty": "Dificuldade",  
+    "searchRecipeOrderByAsc": "De A - Z",
+    "searchRecipeOrderByDesc": "De Z - A",
+    "searchRecipeOrderDifficultyEasy": "Fácil",
+    "searchRecipeOrderDifficultyMedium": "Médio",
+    "searchRecipeOrderDifficultyHard": "Difícil",
     "searchLabel": "Pesquisa",
     "splashLoading": "Carregando..."
 }

@@ -10,14 +10,14 @@ abstract class RecipeRepository {
   Future<List<RecipeEntity>> getUserRecipes(String userID);
   Future<List<RecipeDto>> listRecipe({
     String? search,
-    String? isDesc,
+    bool? isDesc,
     OrderRecipeEnum? orderBy,
     required int page,
     int? timePreparedTo,
     int? timePreparedFrom,
     int? portionTo,
     int? portionFrom,
-    DifficultyRecipe? difficultyRecipe,
+     List<DifficultyRecipe>? difficultyRecipe,
   });
   Future<void> createImages(
       {required String recipeId, required String filePath});

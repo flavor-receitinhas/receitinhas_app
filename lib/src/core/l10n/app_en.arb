@@ -203,6 +203,11 @@
   "searchRecipePortions": "Servings",
   "searchRecipeFoodPreference": "Food preference",
   "searchRecipeDifficulty": "Difficulty",
+  "searchRecipeOrderByAsc": "From A - Z",
+  "searchRecipeOrderByDesc": "From Z - A",
+  "searchRecipeOrderDifficultyEasy": "Easy",
+  "searchRecipeOrderDifficultyMedium": "Medium",
+  "searchRecipeOrderDifficultyHard": "Hard",
   "searchLabel": "Search",
   "splashLoading": "Loading..."
 }

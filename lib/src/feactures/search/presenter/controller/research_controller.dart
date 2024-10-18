@@ -20,13 +20,13 @@ class ResearchController extends ChangeNotifier {
   final PagingController<int, RecipeDto> pagingController =
       PagingController(firstPageKey: 0);
   final searchController = TextEditingController();
-  String? isDesc;
+  bool? isDesc;
   OrderRecipeEnum? orderBy;
   int? timePreparedTo;
   int? timePreparedFrom;
   int? portionTo;
   int? portionFrom;
-  DifficultyRecipe? difficultyRecipe;
+  List<DifficultyRecipe>? difficultyRecipe;
 
   Future<void> init() async {
     pagingController.addPageRequestListener(_fetch);
@@ -78,5 +78,16 @@ class ResearchController extends ChangeNotifier {
     pagingController.notifyListeners();
     pagingController.refresh();
     state = StateManager.done;
+  }
+
+  void clearFilters() {
+    isDesc = null;
+    orderBy = null;
+    timePreparedTo = null;
+    timePreparedFrom = null;
+    portionTo = null;
+    portionFrom = null;
+    difficultyRecipe = null;
+    refreshPage();
   }
 }

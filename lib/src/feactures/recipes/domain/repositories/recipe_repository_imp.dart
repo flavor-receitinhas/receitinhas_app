@@ -95,17 +95,17 @@ class RecipeRepositoryImp implements RecipeRepository {
   @override
   Future<List<RecipeDto>> listRecipe(
       {String? search,
-      String? isDesc,
+      bool? isDesc,
       OrderRecipeEnum? orderBy,
       required int page,
       int? timePreparedTo,
       int? timePreparedFrom,
       int? portionTo,
       int? portionFrom,
-      DifficultyRecipe? difficultyRecipe}) async {
+      List<DifficultyRecipe>? difficultyRecipe}) async {
     final result = await _apiRecipes.get(
       path:
-          '$path?search=$search&page=$page&isDesc=$isDesc&sort=${orderBy?.name}&timePreparedTo=$timePreparedTo&timePreparedFrom=$timePreparedFrom&portionTo=$portionTo&portionFrom=$portionFrom&difficultyRecipe=${difficultyRecipe?.name}',
+          '$path?search=$search&page=$page&isDesc=$isDesc&sort=${orderBy?.name}&timePreparedTo=$timePreparedTo&timePreparedFrom=$timePreparedFrom&portionTo=$portionTo&portionFrom=$portionFrom&difficultyRecipe=$difficultyRecipe',
     );
 
     return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();

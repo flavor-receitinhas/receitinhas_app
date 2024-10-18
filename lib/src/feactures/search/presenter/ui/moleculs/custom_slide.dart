@@ -1,22 +1,26 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:flutter/material.dart';
 
-class CustomSlide extends StatefulWidget {
-  const CustomSlide({super.key});
+class CustomSlide extends StatelessWidget {
+  final double minRange;
+  final double maxRange;
+  final RangeValues selectRange;
+  final void Function(RangeValues)? onChanged;
 
-  @override
-  State<CustomSlide> createState() => _CustomSlideState();
-}
-
-class _CustomSlideState extends State<CustomSlide> {
-  var selectRange = const RangeValues(5, 300);
+  const CustomSlide({
+    super.key,
+    required this.minRange,
+    required this.maxRange,
+    required this.selectRange,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        const CookieText(text: '5'),
+        CookieText(text: minRange.truncate().toString()),
         Expanded(
           child: SliderTheme(
             data: SliderTheme.of(context).copyWith(
@@ -25,22 +29,20 @@ class _CustomSlideState extends State<CustomSlide> {
             ),
             child: RangeSlider(
               inactiveColor: theme.onPrimary,
-              divisions: 295,
+              divisions: maxRange.toInt(),
               values: selectRange,
               labels: RangeLabels(
                   '${selectRange.start.round()}', '${selectRange.end.round()}'),
-              onChanged: (value) {
-                setState(() {
-                  selectRange = value;
-                });
-              },
-              min: 5,
-              max: 300,
+              onChanged: onChanged,
+              min: minRange,
+              max: maxRange,
               activeColor: theme.primary,
             ),
           ),
         ),
-        const CookieText(text: '300'),
+        CookieText(
+          text: maxRange.truncate().toString(),
+        ),
       ],
     );
   }
