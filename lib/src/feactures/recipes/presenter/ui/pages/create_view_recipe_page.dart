@@ -38,7 +38,7 @@ class CreateViewRecipePage extends StatelessWidget {
               child: Column(
                 children: [
                   FlutterCarousel(
-                      options: CarouselOptions(
+                      options: FlutterCarouselOptions (
                         height: 250,
                         showIndicator: true,
                         autoPlay: true,

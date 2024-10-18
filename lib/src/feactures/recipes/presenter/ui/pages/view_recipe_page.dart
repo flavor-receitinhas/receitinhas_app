@@ -43,7 +43,7 @@ class _ViewRecipesPageState
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
             FlutterCarousel(
-                options: CarouselOptions(
+                options: FlutterCarouselOptions(
                   height: 250,
                   showIndicator: true,
                   autoPlay: true,
