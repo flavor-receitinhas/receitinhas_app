@@ -1,18 +1,25 @@
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:flutter/material.dart';
 
-class CustomSlide extends StatelessWidget {
+class CookieSlide extends StatelessWidget {
   final double minRange;
   final double maxRange;
   final RangeValues selectRange;
+  final RangeLabels? labels;
+  final String? textLabelEnd;
+  final String? textLabelStart;
+
   final void Function(RangeValues)? onChanged;
 
-  const CustomSlide({
+  const CookieSlide({
     super.key,
     required this.minRange,
     required this.maxRange,
     required this.selectRange,
-    this.onChanged,
+    required this.onChanged,
+    required this.labels,
+    this.textLabelEnd,
+    this.textLabelStart,
   });
 
   @override
@@ -20,7 +27,7 @@ class CustomSlide extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        CookieText(text: minRange.truncate().toString()),
+        CookieText(text: textLabelStart ?? minRange.truncate().toString()),
         Expanded(
           child: SliderTheme(
             data: SliderTheme.of(context).copyWith(
@@ -31,8 +38,7 @@ class CustomSlide extends StatelessWidget {
               inactiveColor: theme.onPrimary,
               divisions: maxRange.toInt(),
               values: selectRange,
-              labels: RangeLabels(
-                  '${selectRange.start.round()}', '${selectRange.end.round()}'),
+              labels: labels,
               onChanged: onChanged,
               min: minRange,
               max: maxRange,
@@ -41,7 +47,7 @@ class CustomSlide extends StatelessWidget {
           ),
         ),
         CookieText(
-          text: maxRange.truncate().toString(),
+          text: textLabelEnd ?? maxRange.truncate().toString(),
         ),
       ],
     );

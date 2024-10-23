@@ -198,7 +198,7 @@
   "searchRecipeApplyFilter": "Apply filter",
   "searchRecipeFilterBy": "FILTER BY",
   "searchRecipeOrderBy": "Order by",
-  "searchRecipePreparationTime": "Preparation time (minutes)",
+  "searchRecipePreparationTime": "Preparation time",
   "searchRecipeIngredients": "Ingredients",
   "searchRecipePortions": "Servings",
   "searchRecipeFoodPreference": "Food preference",

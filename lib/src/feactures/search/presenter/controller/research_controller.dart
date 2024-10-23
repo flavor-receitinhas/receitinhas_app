@@ -58,6 +58,20 @@ class ResearchController extends ChangeNotifier {
     );
   }
 
+  String formatTime(double value) {
+    int totalMinutes = value.round();
+    int hours = totalMinutes ~/ 60;
+    int minutes = totalMinutes % 60;
+
+    if (hours > 0 && minutes > 0) {
+      return '${hours}h ${minutes}m';
+    } else if (hours > 0) {
+      return '${hours}h';
+    } else {
+      return '${minutes}m';
+    }
+  }
+
   Future<void> _fetch(int pageKey) async {
     if (pageKey == 0) {
       state = StateManager.loading;

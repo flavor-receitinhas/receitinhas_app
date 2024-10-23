@@ -4,7 +4,7 @@ import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_re
 import 'package:app_receitas/src/feactures/search/domain/enum/order_by_filter.dart';
 import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/atomic/container_filter.dart';
-import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/custom_slide.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -19,8 +19,8 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   List<OrderByFilter> selectOrderBy = [OrderByFilter.asc];
   List<DifficultyRecipe> selectDifficulty = DifficultyRecipe.values.toList();
-  var selectRangePreparationTime = const RangeValues(1, 999);
-  var selectRangePortion = const RangeValues(1, 99);
+  var selectRangePreparationTime = const RangeValues(1, 6000);
+  var selectRangePortion = const RangeValues(1, 999);
   bool? desc;
 
   void updateOrder(OrderByFilter order) {
@@ -85,7 +85,6 @@ class _FilterPageState extends State<FilterPage> {
                   mainAxisExtent: 50,
                 ),
                 physics: const NeverScrollableScrollPhysics(),
-                //scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: OrderByFilter.values.length,
                 itemBuilder: (context, index) {
@@ -106,29 +105,36 @@ class _FilterPageState extends State<FilterPage> {
                 text: AppLocalizations.of(context)!.searchRecipePreparationTime,
                 typography: CookieTypography.button,
               ),
-              CustomSlide(
+              CookieSlide(
                 minRange: 1,
-                maxRange: 999,
+                maxRange: 6000,
+                labels: RangeLabels(
+                    widget.ct.formatTime(selectRangePreparationTime.start),
+                    widget.ct.formatTime(selectRangePreparationTime.end)),
                 selectRange: selectRangePreparationTime,
                 onChanged: (RangeValues values) {
                   setState(() {
                     selectRangePreparationTime = values;
                   });
                 },
+                textLabelStart: widget.ct.formatTime(1),
+                textLabelEnd: widget.ct.formatTime(6000),
               ),
-              const SizedBox(height: 20),
-              CookieText(
-                text: AppLocalizations.of(context)!.searchRecipeIngredients,
-                typography: CookieTypography.button,
-              ),
+              // const SizedBox(height: 20),
+              // CookieText(
+              //   text: AppLocalizations.of(context)!.searchRecipeIngredients,
+              //   typography: CookieTypography.button,
+              // ),
               const SizedBox(height: 20),
               CookieText(
                 text: AppLocalizations.of(context)!.searchRecipePortions,
                 typography: CookieTypography.button,
               ),
-              CustomSlide(
+              CookieSlide(
                 minRange: 1,
-                maxRange: 99,
+                maxRange: 999,
+                labels: RangeLabels('${selectRangePortion.start.round()}',
+                    '${selectRangePortion.end.round()}'),
                 selectRange: selectRangePortion,
                 onChanged: (RangeValues values) {
                   setState(() {
