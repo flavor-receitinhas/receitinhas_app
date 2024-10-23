@@ -24,7 +24,7 @@ class FavoriteRepositoryImp extends FavoriteRepository {
 
   @override
   Future<List<FavoriteEntity>> getFavorites({
-    required OrderEnum orderBy,
+    required OrderFavoriteEnum orderBy,
     required int page,
     String? search,
   }) async {

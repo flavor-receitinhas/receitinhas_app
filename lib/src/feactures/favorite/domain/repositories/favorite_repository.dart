@@ -6,7 +6,7 @@ abstract class FavoriteRepository {
   Future<void> addFavorite(FavoriteDto favoriteDto);
   Future<void> removeFavorite(String userId, String recipeId);
   Future<List<FavoriteEntity>> getFavorites({
-    required OrderEnum orderBy,
+    required OrderFavoriteEnum orderBy,
     required int page,
     String? search,
   });

@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_buttom_floating.dart';
 import 'package:app_receitas/src/feactures/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/moleculs/search_recipe.dart';
@@ -19,7 +20,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    ct.init();
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init());
     ct.addListener(() {
       setState(() {});
     });
@@ -28,17 +29,23 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
+    return CookiePage(
+      state: ct.state,
+      done: () => CustomScrollView(
         slivers: [
           BackButtomFloating(
             label: AppLocalizations.of(context)!.searchLabel,
           ),
-          const SliverPadding(
-              padding: EdgeInsets.only(
-                top: 10,
+          SliverPadding(
+            padding: const EdgeInsets.only(
+              top: 10,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: SearchRecipe(
+                ct: ct,
               ),
-              sliver: SliverToBoxAdapter(child: SearchRecipe())),
+            ),
+          ),
           SliverToBoxAdapter(child: ResultRecipes(ct: ct)),
         ],
       ),

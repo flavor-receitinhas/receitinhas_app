@@ -1,5 +1,8 @@
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/image_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
@@ -40,13 +43,6 @@ class RecipeRepositoryImp implements RecipeRepository {
     final result = await _apiRecipes.get(path: '$path/$recipeId/images');
 
     return result.map<ImageEntity>((e) => _imageMapper.fromMap(e)).toList();
-  }
-
-  @override
-  Future<List<RecipeEntity>> listRecipe() async {
-    final result = await _apiRecipes.get(path: path);
-
-    return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
   }
 
   @override
@@ -94,5 +90,24 @@ class RecipeRepositoryImp implements RecipeRepository {
     await _apiRecipes.delete(
       path: '$path/$recipeId/thumbs/$thumbId',
     );
+  }
+
+  @override
+  Future<List<RecipeDto>> listRecipe(
+      {String? search,
+      bool? isDesc,
+      OrderRecipeEnum? orderBy,
+      required int page,
+      int? timePreparedTo,
+      int? timePreparedFrom,
+      int? portionTo,
+      int? portionFrom,
+      List<DifficultyRecipe>? difficultyRecipe}) async {
+    final result = await _apiRecipes.get(
+      path:
+          '$path?search=$search&page=$page&isDesc=$isDesc&sort=${orderBy?.name}&timePreparedTo=$timePreparedTo&timePreparedFrom=$timePreparedFrom&portionTo=$portionTo&portionFrom=$portionFrom&difficultyRecipe=$difficultyRecipe',
+    );
+
+    return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
   }
 }
