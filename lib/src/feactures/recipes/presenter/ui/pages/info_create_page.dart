@@ -161,18 +161,21 @@ class _InfoCreatePageState extends State<InfoCreatePage> {
                           ct.portion = int.tryParse(value) ?? 0;
                         },
                         onPressedIncrease: () {
-                          setState(() {
-                            ct.portion++;
-                            ct.portionController.text = ct.portion.toString();
-                          });
+                          if (ct.portion < 999) {
+                            setState(() {
+                              ct.portion++;
+                              ct.portionController.text = ct.portion.toString();
+                            });
+                          }
                         },
                         onPressedDecresead: () {
                           if (ct.portion > 0) {
                             ct.portion--;
+
+                            setState(() {
+                              ct.portionController.text = ct.portion.toString();
+                            });
                           }
-                          setState(() {
-                            ct.portionController.text = ct.portion.toString();
-                          });
                         },
                       ),
                     ],
