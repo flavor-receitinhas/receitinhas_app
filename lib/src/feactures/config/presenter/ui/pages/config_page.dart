@@ -114,6 +114,28 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
+              icon: IconEnum.eye.path,
+              text: 'Idioma',
+              action: const Icon(Icons.chevron_right),
+              onTap: () {
+                CookieSheetBottom(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  title: const CookieText(
+                    text: 'Mudar idioma',
+                  ),
+                  body: Column(
+                    children: ct.listLanguages.map((locale) {
+                      return ListTile(
+                        title: Text(ct.formatLang(locale)),
+                        onTap: () => ct.saveLanguagePref(locale: locale),
+                      );
+                    }).toList(),
+                  ),
+                ).show(context);
+              },
+            ),
+            const SizedBox(height: 10),
+            ContainerConfig(
               icon: IconEnum.document.path,
               text: AppLocalizations.of(context)!.configTermsConditions,
               onTap: () {

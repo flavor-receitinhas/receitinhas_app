@@ -1,3 +1,5 @@
+import 'dart:ui';
+import 'package:app_receitas/src/core/services/language/language_controller.dart';
 import 'package:app_receitas/src/core/services/preference/sembast/sembast_database.dart';
 import 'package:app_receitas/src/core/services/preference/sembast/store_sembast_enum.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
@@ -8,10 +10,15 @@ import 'package:page_manager/manager_store.dart';
 class ConfigController extends ManagerStore {
   final AuthService _authService;
   final ThemeService _theme;
+  final LanguageController _languageController;
   final PersistentDatabaseSembast _persistentDatabaseSembast;
 
   ConfigController(
-      this._authService, this._theme, this._persistentDatabaseSembast);
+    this._authService,
+    this._theme,
+    this._persistentDatabaseSembast,
+    this._languageController,
+  );
 
   bool darkTheme = false;
   PackageInfo? packageInfo;
@@ -30,6 +37,22 @@ class ConfigController extends ManagerStore {
     _persistentDatabaseSembast.deleteAll(
         store: StoreSembastEnum.userPreference);
     notifyListeners();
+  }
+
+  List<Locale> get listLanguages => _languageController.listLanguages();
+
+  Future<void> saveLanguagePref({required Locale locale}) async {
+    String lang = locale.languageCode;
+
+    if (locale.countryCode == 'BR') {
+      lang = 'pt';
+    }
+    print('$lang saved');
+    await _languageController.saveLanguagePref(lang);
+  }
+
+  String formatLang(Locale locale) {
+    return _languageController.formatLang(locale);
   }
 
   Future<void> changeTheme() async {
