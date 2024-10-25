@@ -12,7 +12,7 @@ class FavoriteController extends ChangeNotifier {
   FavoriteController(this._repository);
 
   List<FavoriteEntity> listFavorite = [];
-  var order = OrderEnum.createdAtAsc;
+  var order = OrderFavoriteEnum.createdAtAsc;
   final PagingController<int, FavoriteEntity> pagingController =
       PagingController(firstPageKey: 0);
   final favoriteController = TextEditingController();
@@ -35,7 +35,7 @@ class FavoriteController extends ChangeNotifier {
   }
 
   Future<List<FavoriteEntity>> listFavoriteRecipes(
-      {required OrderEnum orderBy, required int page, String? search}) async {
+      {required OrderFavoriteEnum orderBy, required int page, String? search}) async {
     state = StateManager.loading;
     return await _repository.getFavorites(
         orderBy: orderBy, page: page, search: search);

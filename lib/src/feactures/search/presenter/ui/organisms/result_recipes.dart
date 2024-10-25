@@ -36,13 +36,14 @@ class ResultRecipes extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       ViewRecipesPage.route,
-                      arguments: {'id': recipe.id},
+                      arguments: {'id': recipe.recipeId},
                     );
                   },
                   child: RecipeSearchContainer(
-                      image: 'https://via.placeholder.com/150',
-                      title: recipe.title,
-                      timePrepared: recipe.timePrepared),
+                    image: recipe.thumb,
+                    title: recipe.title,
+                    timePrepared: recipe.timePrepared,
+                  ),
                 ),
               );
             },

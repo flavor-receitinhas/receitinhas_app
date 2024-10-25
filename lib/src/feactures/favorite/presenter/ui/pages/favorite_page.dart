@@ -82,28 +82,28 @@ class _FavoritePageState extends State<FavoritePage> {
                     OrganizeRecipes(
                       onTapRecent: () {
                         setState(() {
-                          ct.order = OrderEnum.createdAtAsc;
+                          ct.order = OrderFavoriteEnum.createdAtAsc;
                           ct.refreshPage();
                         });
                         Navigator.pop(context);
                       },
                       onTapOld: () {
                         setState(() {
-                          ct.order = OrderEnum.createdAtDesc;
+                          ct.order = OrderFavoriteEnum.createdAtDesc;
                           ct.refreshPage();
                         });
                         Navigator.pop(context);
                       },
                       onTapAsc: () {
                         setState(() {
-                          ct.order = OrderEnum.nameAsc;
+                          ct.order = OrderFavoriteEnum.nameAsc;
                           ct.refreshPage();
                         });
                         Navigator.pop(context);
                       },
                       onTapDesc: () async {
                         setState(() {
-                          ct.order = OrderEnum.nameDesc;
+                          ct.order = OrderFavoriteEnum.nameDesc;
                           ct.refreshPage();
                         });
                         Navigator.pop(context);

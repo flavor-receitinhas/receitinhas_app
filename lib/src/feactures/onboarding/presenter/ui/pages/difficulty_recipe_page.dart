@@ -69,7 +69,7 @@ class _DifficultRecipePageState extends State<DifficultRecipePage> {
                         },
                         isSelect: ct.difficultyRecipe.contains(e),
                         prefix: CookieSvg(
-                          path: ImageContext().svgIconDifficulty(e),
+                          svg: ImageContext().svgIconDifficulty(e),
                           color: Theme.of(context).colorScheme.onSecondary,
                         ),
                         backgroundColor:

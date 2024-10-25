@@ -1,9 +1,9 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
@@ -42,7 +42,7 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
           Navigator.pushNamed(context, CreateRecipePage.route);
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
-        child: CookieSvg(path: IconEnum.edit.path),
+        child: const CookieSvg(svg: IconsSvgEnum.edit),
       ),
       done: () => SafeArea(
         child: Padding(

@@ -198,11 +198,16 @@
     "searchRecipeApplyFilter": "Aplicar filtro",
     "searchRecipeFilterBy": "FILTRAR POR",
     "searchRecipeOrderBy": "Ordernar por",
-    "searchRecipePreparationTime": "Tempo de preparo(minutos)",
+    "searchRecipePreparationTime": "Tempo de preparo",
     "searchRecipeIngredients": "Ingredientes",
     "searchRecipePortions": "Porções",
     "searchRecipeFoodPreference": "Preferência alimentar",
-    "searchRecipeDifficulty": "Dificuldade",
+    "searchRecipeDifficulty": "Dificuldade",  
+    "searchRecipeOrderByAsc": "De A - Z",
+    "searchRecipeOrderByDesc": "De Z - A",
+    "searchRecipeOrderDifficultyEasy": "Fácil",
+    "searchRecipeOrderDifficultyMedium": "Médio",
+    "searchRecipeOrderDifficultyHard": "Difícil",
     "searchLabel": "Pesquisa",
     "splashLoading": "Carregando..."
 }

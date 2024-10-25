@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/global/icon_enum.dart';
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
@@ -48,7 +48,7 @@ class InfoContainerPortion extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CookieSvg(
-                path: IconEnum.pot.path,
+                svg: IconsSvgEnum.pot,
                 height: 70,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),

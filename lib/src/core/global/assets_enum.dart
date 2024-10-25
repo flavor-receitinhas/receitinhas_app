@@ -1,4 +1,4 @@
-enum IconEnum {
+enum IconsSvgEnum {
   person(path: 'assets/icons/person.svg'),
   persons(path: 'assets/icons/persons.svg'),
   key(path: 'assets/icons/key.svg'),
@@ -34,5 +34,15 @@ enum IconEnum {
 
   final String path;
 
-  const IconEnum({required this.path});
+  const IconsSvgEnum({required this.path});
+}
+
+enum ImagesEnum {
+  avatar('assets/images/avatar.png'),
+  home('assets/images/home.png'),
+  logo('assets/images/logo.png'),
+  google('assets/images/google_logo.png');
+
+  final String path;
+  const ImagesEnum(this.path);
 }

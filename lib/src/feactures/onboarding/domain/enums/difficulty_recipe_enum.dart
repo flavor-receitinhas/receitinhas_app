@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 enum DifficultyRecipe {
   easy,
   medium,
@@ -13,6 +16,18 @@ enum DifficultyRecipe {
         return DifficultyRecipe.medium;
       default:
         return DifficultyRecipe.easy;
+    }
+  }
+
+  String titleDescription(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (this) {
+      case DifficultyRecipe.easy:
+        return localizations.searchRecipeOrderDifficultyEasy;
+      case DifficultyRecipe.medium:
+        return localizations.searchRecipeOrderDifficultyMedium;
+      case DifficultyRecipe.hard:
+        return localizations.searchRecipeOrderDifficultyHard;
     }
   }
 }

@@ -1,5 +1,5 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
-import 'package:app_receitas/src/core/global/icon_enum.dart';
 import 'package:flutter/material.dart';
 
 class BottomBarHome extends StatelessWidget {
@@ -23,35 +23,35 @@ class BottomBarHome extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: CookieSvg(
-                path: IconEnum.home.path,
+                svg: IconsSvgEnum.home,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
               label: '',
-              activeIcon: CookieSvg(
-                path: IconEnum.home.path,
+              activeIcon: const CookieSvg(
+                svg: IconsSvgEnum.home,
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
             BottomNavigationBarItem(
               icon: CookieSvg(
-                path: IconEnum.favorite.path,
+                svg: IconsSvgEnum.favorite,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: CookieSvg(
-                path: IconEnum.favorite.path,
+              activeIcon: const CookieSvg(
+                svg: IconsSvgEnum.favorite,
               ),
             ),
             BottomNavigationBarItem(
               icon: CookieSvg(
-                path: IconEnum.settings.path,
+                svg: IconsSvgEnum.settings,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: CookieSvg(
-                path: IconEnum.settings.path,
+              activeIcon: const CookieSvg(
+                svg: IconsSvgEnum.settings,
               ),
             ),
           ],
