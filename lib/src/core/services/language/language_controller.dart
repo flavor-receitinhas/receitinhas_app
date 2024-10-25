@@ -9,7 +9,7 @@ class LanguageController extends ChangeNotifier {
 
   LanguageController(this._preference);
 
-  Future<void> init(BuildContext context) async {
+  Future<void> init() async {
     final String? lang = await _preference.get<String?>(
       keyPreferences: KeyPreferences.language,
     );

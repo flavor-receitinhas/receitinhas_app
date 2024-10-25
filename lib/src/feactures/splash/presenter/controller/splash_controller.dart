@@ -25,7 +25,7 @@ class SplashController extends ChangeNotifier {
   Future<void> loadDependences(BuildContext context) async {
     await di.get<PersistentDatabaseSembast>().starting();
     await di.get<ThemeService>().init();
-    await di.get<LanguageController>().init(context);
+    await di.get<LanguageController>().init();
     if (await _authService.isLogged()) {
       await _authService.refreshToken(forceRefresh: true);
       route = CustomBottomBar.route;
