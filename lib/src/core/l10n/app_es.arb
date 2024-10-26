@@ -1,5 +1,12 @@
 {
   "welcomeTitle": "¡Déjate encantar con nuestras\nincreíbles obras culinarias!",
+  "language": "Idioma",
+  "languageChangeSuccess": "Idioma cambiado con éxito",
+  "changeLanguage": "Cambiar idioma",
+  "languageEnglish": "Inglés",
+  "languageSpanish": "Español",
+  "languagePortuguesePortugal": "Portugués-Portugal",
+  "languagePortugueseBrazil": "Portugués-Brasil",
   "welcomeBody": "Despierta tu pasión por la cocina y explora un mundo de sabores inolvidables con recetas inspiradoras.",
   "welcomeBottomAppBar": "Comenzar a cocinar",
   "chooseAuthTitle": "Antes de comenzar, queremos aclarar una duda.",

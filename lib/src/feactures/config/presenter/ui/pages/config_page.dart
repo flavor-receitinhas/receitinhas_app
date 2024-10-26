@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_snack_bar.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/config_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/introduce_config.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/moleculs/container_config.dart';
@@ -115,19 +116,27 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             const SizedBox(height: 10),
             ContainerConfig(
               icon: IconsSvgEnum.eye,
-              text: 'Idioma',
+              text: AppLocalizations.of(context)!.language,
               action: const Icon(Icons.chevron_right),
               onTap: () {
                 CookieSheetBottom(
                   backgroundColor: Theme.of(context).colorScheme.secondary,
-                  title: const CookieText(
-                    text: 'Mudar idioma',
+                  title: CookieText(
+                    text: AppLocalizations.of(context)!.changeLanguage,
                   ),
                   body: Column(
                     children: ct.listLanguages.map((locale) {
                       return ListTile(
-                        title: Text(ct.formatLang(locale)),
-                        onTap: () => ct.saveLanguagePref(locale: locale),
+                        title: Text(
+                          ct.formatLang(locale: locale, context),
+                        ),
+                        onTap: () {
+                          ct.saveLanguagePref(locale: locale);
+                          Navigator.pop(context);
+                          CookieSnackBar(
+                            text: AppLocalizations.of(context)!.languageChangeSuccess,
+                          ).show(context);
+                        },
                       );
                     }).toList(),
                   ),

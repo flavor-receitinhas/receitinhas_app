@@ -1,5 +1,12 @@
 {
   "welcomeTitle": "Delight yourself with our\namazing culinary masterpieces!",
+  "language": "Language",
+  "languageChangeSuccess": "Language changed successfully",
+  "changeLanguage": "Change Language",
+  "languageEnglish": "English",
+  "languageSpanish": "Spanish",
+  "languagePortuguesePortugal": "Portuguese-Portugal",
+  "languagePortugueseBrazil": "Portuguese-Brazilian",
   "welcomeBody": "Awaken your passion for cooking and explore a world of unforgettable flavors with inspiring recipes.",
   "welcomeBottomAppBar": "Start Cooking",
   "chooseAuthTitle": "Before starting, we have a question.",

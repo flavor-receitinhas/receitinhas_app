@@ -1,11 +1,12 @@
-import 'dart:ui';
 import 'package:app_receitas/src/core/services/language/language_controller.dart';
 import 'package:app_receitas/src/core/services/preference/sembast/sembast_database.dart';
 import 'package:app_receitas/src/core/services/preference/sembast/store_sembast_enum.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
+import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:page_manager/manager_store.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConfigController extends ManagerStore {
   final AuthService _authService;
@@ -39,20 +40,20 @@ class ConfigController extends ManagerStore {
     notifyListeners();
   }
 
-  List<Locale> get listLanguages => _languageController.listLanguages();
+  List<Locale> get listLanguages => AppLocalizations.supportedLocales;
 
   Future<void> saveLanguagePref({required Locale locale}) async {
     String lang = locale.languageCode;
 
-    if (locale.countryCode == 'BR') {
-      lang = 'pt';
+    if (locale.languageCode == 'pt' && locale.countryCode == 'BR') {
+      lang = 'pt_BR';
     }
-    print('$lang saved');
     await _languageController.saveLanguagePref(lang);
+    notifyListeners();
   }
 
-  String formatLang(Locale locale) {
-    return _languageController.formatLang(locale);
+  String formatLang(BuildContext context, {required Locale locale}) {
+    return _languageController.formatLang(locale, context);
   }
 
   Future<void> changeTheme() async {

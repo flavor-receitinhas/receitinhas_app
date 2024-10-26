@@ -17,23 +17,18 @@ class LanguageController extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Locale> listLanguages() {
-    return AppLocalizations.supportedLocales;
-  }
-
-  String formatLang(Locale locale) {
-    switch (locale.languageCode) {
+  String formatLang(Locale locale, BuildContext context) {
+    switch (locale.toString()) {
       case 'en':
-        return 'English';
+        return AppLocalizations.of(context)!.languageEnglish;
       case 'es':
-        return 'Espanish';
+        return AppLocalizations.of(context)!.languageSpanish;
+      case 'pt_BR':
+        return AppLocalizations.of(context)!.languagePortugueseBrazil;
       case 'pt':
-        if (locale.countryCode != null) {
-          return 'Português-Brasileiro';
-        }
-        return 'Português-Portugal';
+        return AppLocalizations.of(context)!.languagePortuguesePortugal;
       default:
-        return 'Português-Brasileiro';
+        return AppLocalizations.of(context)!.languagePortugueseBrazil;
     }
   }
 
@@ -46,5 +41,14 @@ class LanguageController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Locale get currentLocale => Locale(_currentLanguage ?? 'pt_BR');
+  Locale get currentLocale {
+    final languageLocaleMap = {
+      'pt_BR': Locale('pt', 'BR'),
+      'en': Locale('en', 'US'),
+      'es': Locale('es', 'ES'),
+      'pt': Locale('pt', 'PT'),
+    };
+    notifyListeners();
+    return languageLocaleMap[_currentLanguage] ?? Locale('pt', 'BR');
+  }
 }
