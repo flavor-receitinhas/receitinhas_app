@@ -1,5 +1,4 @@
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_response_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
@@ -110,7 +109,7 @@ class RecipeRepositoryImp implements RecipeRepository {
       int? timePreparedFrom,
       int? portionTo,
       int? portionFrom,
-      List<DifficultyRecipe>? difficultyRecipe}) async {
+      List<String>? difficultyRecipe}) async {
     List<String> queryParams = [];
     if (search != null) queryParams.add('search=$search');
     if (isDesc != null) queryParams.add('isDesc=$isDesc');

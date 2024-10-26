@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
@@ -18,7 +17,7 @@ abstract class RecipeRepository {
     int? timePreparedFrom,
     int? portionTo,
     int? portionFrom,
-    List<DifficultyRecipe>? difficultyRecipe,
+    List<String>? difficultyRecipe,
   });
   Future<void> createImages(
       {required String recipeId, required String filePath});
