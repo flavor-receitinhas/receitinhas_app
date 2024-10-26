@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
       setState(() {});
     });
     if (mounted) {
-      ct.init().then(
+      ct.init(context).then(
             (value) => Navigator.pushNamedAndRemoveUntil(
               context,
               ct.route,

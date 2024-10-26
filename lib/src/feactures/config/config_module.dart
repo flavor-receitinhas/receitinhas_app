@@ -23,9 +23,10 @@ class ConfigModule extends RegisterModule {
 
   @override
   void inicialize() {
-    //Controller
+    // Registrar outros controladores
     di.registerFactory<ConfigController>(
       () => ConfigController(
+        di(),
         di(),
         di(),
         di(),

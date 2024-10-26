@@ -1,6 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/inject/inject.dart';
 import 'package:app_receitas/src/core/routes/generate_route.dart';
+import 'package:app_receitas/src/core/services/language/language_controller.dart';
 import 'package:app_receitas/src/core/themes/custom_theme.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,14 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final ThemeService _themeController = di();
+  final LanguageController _languageController = di();
+
   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _themeController,
+      animation: Listenable.merge([_themeController, _languageController]),
       builder: (context, _) {
         return MaterialApp(
           title: 'App Receitas',
@@ -32,6 +35,7 @@ class MyApp extends StatelessWidget {
           themeMode: _themeController.chooseTheme,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          locale: _languageController.currentLocale,
           initialRoute: '/splash',
           onGenerateRoute: GenerateRoute().generateRoute,
         );

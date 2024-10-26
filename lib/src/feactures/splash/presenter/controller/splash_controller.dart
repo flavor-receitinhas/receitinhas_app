@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/services/language/language_controller.dart';
 import 'package:app_receitas/src/core/services/preference/sembast/sembast_database.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
@@ -24,6 +25,7 @@ class SplashController extends ChangeNotifier {
   Future<void> loadDependences() async {
     await di.get<PersistentDatabaseSembast>().starting();
     await di.get<ThemeService>().init();
+    await di.get<LanguageController>().init();
     if (await _authService.isLogged()) {
       await _authService.refreshToken(forceRefresh: true);
       route = CustomBottomBar.route;
