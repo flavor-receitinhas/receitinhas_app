@@ -46,7 +46,23 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          SliverToBoxAdapter(child: ResultRecipes(ct: ct)),
+          SliverToBoxAdapter(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Visibility(
+                  visible: ct.recipes.isNotEmpty,
+                  child: CookieText(
+                    text:
+                        '${AppLocalizations.of(context)!.searchRecipeSearchResults} (${ct.recipes.length})',
+                  ),
+                ),
+              ],
+            ),
+          )),
+          ResultRecipes(ct: ct),
         ],
       ),
     );

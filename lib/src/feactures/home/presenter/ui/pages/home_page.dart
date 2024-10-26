@@ -7,10 +7,12 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search
 import 'package:app_receitas/src/feactures/home/presenter/controller/home_controller.dart';
 import 'package:app_receitas/src/feactures/onboarding/presenter/ui/pages/onboarding_page.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/create_recipe_page.dart';
 import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:page_manager/manager_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -26,8 +28,13 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        ct.verifyOnboading().then((value) =>
-            value ? Navigator.pushNamed(context, OnBoardingPage.route) : null);
+        ct.verifyOnboading().then(
+          (value) {
+            if (value && mounted) {
+              Navigator.pushNamed(context, OnBoardingPage.route);
+            }
+          },
+        );
       },
     );
     super.initState();
@@ -45,11 +52,10 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
         child: const CookieSvg(svg: IconsSvgEnum.edit),
       ),
       done: () => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
-          child: ListView(
-            children: [
-              Row(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
@@ -72,41 +78,81 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
                   const ContainerProfileImage(),
                 ],
               ),
-              const SizedBox(height: 20),
-              CookieTextFieldSearch(
-                hintText: AppLocalizations.of(context)!.homePageSearchHint,
-                onTap: () {
-                  Navigator.pushNamed(context, SearchPage.route);
-                },
+            ),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  CookieTextFieldSearch(
+                    hintText: AppLocalizations.of(context)!.homePageSearchHint,
+                    onTap: () {
+                      Navigator.pushNamed(context, SearchPage.route);
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  CookieText(
+                    text: AppLocalizations.of(context)!
+                        .homePageLatestRecipesTitle,
+                    typography: CookieTypography.title,
+                  ),
+                  const SizedBox(height: 10),
+                ],
               ),
-              const SizedBox(height: 20),
-              CookieText(
-                text: AppLocalizations.of(context)!.homePageLatestRecipesTitle,
-                typography: CookieTypography.title,
-              ),
-              const SizedBox(height: 10),
-              MasonryGridView.builder(
-                gridDelegate:
-                    const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
-                itemCount: ct.recipes.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(2),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        Global.imageRecipeDefault,
-                      ),
+            ),
+            PagedSliverList<int, RecipeDto>(
+              pagingController: ct.pagingController,
+              builderDelegate: PagedChildBuilderDelegate<RecipeDto>(
+                animateTransitions: true,
+                firstPageErrorIndicatorBuilder: (context) {
+                  return Center(
+                    child: CookieText(
+                      text: AppLocalizations.of(context)!
+                          .favoritePageErrorLoading,
                     ),
                   );
                 },
+                noItemsFoundIndicatorBuilder: (context) {
+                  return Center(
+                    child: CookieText(
+                      text: AppLocalizations.of(context)!
+                          .favoritePageNoItemsFound,
+                    ),
+                  );
+                },
+                newPageErrorIndicatorBuilder: (context) {
+                  return Center(
+                    child: CookieText(
+                      text: AppLocalizations.of(context)!
+                          .favoritePageErrorLoading,
+                    ),
+                  );
+                },
+                itemBuilder: (context, recipe, idx) {
+                  return MasonryGridView.builder(
+                    gridDelegate:
+                        const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: ct.recipes.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            recipe.thumb ?? Global.imageRecipeDefault,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -111,12 +111,28 @@ class RecipeRepositoryImp implements RecipeRepository {
       int? portionTo,
       int? portionFrom,
       List<DifficultyRecipe>? difficultyRecipe}) async {
+    List<String> queryParams = [];
+    if (search != null) queryParams.add('search=$search');
+    if (isDesc != null) queryParams.add('isDesc=$isDesc');
+    if (orderBy != null) queryParams.add('sort=${orderBy.name}');
+    if (timePreparedTo != null) {
+      queryParams.add('timePreparedTo=$timePreparedTo');
+    }
+    if (timePreparedFrom != null) {
+      queryParams.add('timePreparedFrom=$timePreparedFrom');
+    }
+    if (portionTo != null) queryParams.add('portionTo=$portionTo');
+    if (portionFrom != null) queryParams.add('portionFrom=$portionFrom');
+    if (difficultyRecipe != null) {
+      queryParams.add('difficultyRecipe=$difficultyRecipe');
+    }
+
+    String queryString = queryParams.join('&');
     final result = await _apiRecipes.get(
-      path:
-          '$path?search=$search&page=$page&isDesc=$isDesc&sort=${orderBy?.name}&timePreparedTo=$timePreparedTo&timePreparedFrom=$timePreparedFrom&portionTo=$portionTo&portionFrom=$portionFrom&difficultyRecipe=$difficultyRecipe',
+      path: '$path?page=$page&$queryString',
     );
 
-    return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
+    return result.map<RecipeDto>((e) => RecipeDto.fromMap(e)).toList();
   }
 
   @override
