@@ -17,12 +17,12 @@ class SplashController extends ChangeNotifier {
 
   String route = WelcomePage.route;
 
-  Future<void> init(BuildContext context) async {
-    await loadDependences(context);
+  Future<void> init() async {
+    await loadDependences();
     notifyListeners();
   }
 
-  Future<void> loadDependences(BuildContext context) async {
+  Future<void> loadDependences() async {
     await di.get<PersistentDatabaseSembast>().starting();
     await di.get<ThemeService>().init();
     await di.get<LanguageController>().init();
