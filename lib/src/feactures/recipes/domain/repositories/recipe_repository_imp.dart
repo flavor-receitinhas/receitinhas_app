@@ -1,13 +1,13 @@
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_dto.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_response_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/image_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
-import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
@@ -18,14 +18,12 @@ class RecipeRepositoryImp implements RecipeRepository {
   final RecipeMapper _mapper;
   final ApiRecipes _apiRecipes;
   final ImageMapper _imageMapper;
-  final IngredientRecipeMapper _ingredientMapper;
   final IngredientRecipeDtoMapper _ingredientDtoMapper;
 
   RecipeRepositoryImp(
     this._mapper,
     this._apiRecipes,
     this._imageMapper,
-    this._ingredientMapper,
     this._ingredientDtoMapper,
   );
 
@@ -35,7 +33,7 @@ class RecipeRepositoryImp implements RecipeRepository {
   Future<RecipeEntity> createRecipe(RecipeEntity recipe) async {
     final result =
         await _apiRecipes.post(path: path, body: _mapper.toMap(recipe));
-    print(result);
+
     return _mapper.fromMap(result);
   }
 
@@ -67,9 +65,10 @@ class RecipeRepositoryImp implements RecipeRepository {
       "file": await MultipartFile.fromFile(filePath,
           contentType: MediaType('image', 'jpg')),
     };
-    await _apiRecipes.put(
+    await _apiRecipes.post(
       path: '$path/$recipeId/images',
       body: data,
+      isformData: true,
     );
   }
 
@@ -80,9 +79,10 @@ class RecipeRepositoryImp implements RecipeRepository {
       "file": await MultipartFile.fromFile(filePath,
           contentType: MediaType('image', 'jpg')),
     };
-    await _apiRecipes.put(
+    await _apiRecipes.post(
       path: '$path/$recipeId/thumbs',
       body: data,
+      isformData: true,
     );
   }
 
@@ -123,9 +123,14 @@ class RecipeRepositoryImp implements RecipeRepository {
   Future<void> insertIngredient(
       {required String recipeId,
       required List<IngredientRecipeEntity> ingredient}) async {
+    final data = ingredient
+        .map(
+          (e) => IngredientRecipeResponseDto.toDto(e).toJson(),
+        )
+        .toList();
     await _apiRecipes.post(
       path: '$path/$recipeId/ingredients',
-      body: ingredient.map((e) => _ingredientMapper.toJson(e)).toList(),
+      body: data,
     );
   }
 

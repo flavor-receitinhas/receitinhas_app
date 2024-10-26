@@ -41,7 +41,6 @@ class RecipeModule extends RegisterModule {
         di(),
         di(),
         di(),
-        di(),
       ),
     );
     di.registerFactory<IngredientRepository>(

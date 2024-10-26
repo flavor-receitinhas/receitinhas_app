@@ -44,7 +44,7 @@ class ApiRecipes {
 
   Future<dynamic> put({
     required String path,
-    Map<String, dynamic>? body,
+    dynamic body,
     bool isformData = false,
   }) async {
     final response = await _apiClient.put(

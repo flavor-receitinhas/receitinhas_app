@@ -82,7 +82,7 @@ class ApiClient {
 
   Future<ResponseRequestEntity> post<T>(
     String url, {
-    required Map<String, dynamic> body,
+    required dynamic body,
     required Map<String, dynamic> headers,
     bool isformData = false,
   }) async {
@@ -113,7 +113,7 @@ class ApiClient {
     required String method,
     required String path,
     Map<String, dynamic>? headers,
-    Map<String, dynamic>? body,
+    dynamic body,
   }) {
     log(
       '=============================== INICIO ==============================\n'
