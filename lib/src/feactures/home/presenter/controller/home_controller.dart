@@ -5,10 +5,10 @@ import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_r
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 
-class HomeController extends ManagerStore {
+class HomeController extends ChangeNotifier {
   final RecipeRepository _recipeRepository;
   final UserOmboardingRepository _userFoodPrefRepository;
   final ProfileRepository _profileRepository;
@@ -17,9 +17,9 @@ class HomeController extends ManagerStore {
       this._profileRepository);
 
   List<RecipeDto> recipes = [];
-  final _pageSize = 25;
-  final PagingController<int, RecipeDto> pagingController =
-      PagingController(firstPageKey: 0);
+  final int pageSize = 25;
+
+  final ScrollController scrollController = ScrollController();
   bool? isDesc;
   OrderRecipeEnum? orderBy;
   int? timePreparedTo;
@@ -27,30 +27,49 @@ class HomeController extends ManagerStore {
   int? portionTo;
   int? portionFrom;
   List<DifficultyRecipe>? difficultyRecipe;
+  StateManager state = StateManager.loading;
+  bool isLoadingMore = false;
+  int currentPage = 0;
+
+  void init() async {
+    await loadingProfile();
+    _setupScrollController();
+    await fetchRecipes();
+    state = StateManager.done;
+    notifyListeners();
+  }
 
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          await loadingProfile();
-          pagingController.addPageRequestListener(_fetch);
-        },
-      );
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
-  Future<List<RecipeDto>> listRecipe({
-    required int page,
-  }) async {
-    state = StateManager.loading;
+  void _setupScrollController() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          !isLoadingMore) {
+        _loadMoreItems();
+      }
+    });
+  }
 
-    return await _recipeRepository.listRecipe(
-      page: page,
-      isDesc: isDesc,
-      orderBy: orderBy,
-      timePreparedTo: timePreparedTo,
-      timePreparedFrom: timePreparedFrom,
-      portionTo: portionTo,
-      portionFrom: portionFrom,
-      difficultyRecipe: difficultyRecipe,
-    );
+  Future<void> fetchRecipes() async {
+    final newRecipes = await _recipeRepository.listRecipe(page: currentPage);
+    recipes.addAll(newRecipes);
+    notifyListeners();
+  }
+
+  Future<void> _loadMoreItems() async {
+    if (isLoadingMore) return;
+
+    isLoadingMore = true;
+    currentPage++;
+    final newRecipes = await _recipeRepository.listRecipe(page: currentPage);
+    recipes.addAll(newRecipes);
+    isLoadingMore = false;
+    notifyListeners();
   }
 
   Future<void> loadingProfile() async {
@@ -72,21 +91,5 @@ class HomeController extends ManagerStore {
       return true;
     }
     return false;
-  }
-
-  Future<void> _fetch(int pageKey) async {
-    if (pageKey == 0) {
-      state = StateManager.loading;
-    }
-    final result = await listRecipe(
-      page: pageKey,
-    );
-
-    final isLastPage = result.length < _pageSize;
-    if (isLastPage) {
-      pagingController.appendLastPage(result);
-    } else {
-      pagingController.appendPage(result, ++pageKey);
-    }
   }
 }
