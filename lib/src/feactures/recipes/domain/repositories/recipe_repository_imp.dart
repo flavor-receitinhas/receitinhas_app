@@ -1,9 +1,13 @@
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/image_mapper.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
@@ -14,11 +18,15 @@ class RecipeRepositoryImp implements RecipeRepository {
   final RecipeMapper _mapper;
   final ApiRecipes _apiRecipes;
   final ImageMapper _imageMapper;
+  final IngredientRecipeMapper _ingredientMapper;
+  final IngredientRecipeDtoMapper _ingredientDtoMapper;
 
   RecipeRepositoryImp(
     this._mapper,
     this._apiRecipes,
     this._imageMapper,
+    this._ingredientMapper,
+    this._ingredientDtoMapper,
   );
 
   String path = '/recipe';
@@ -109,5 +117,30 @@ class RecipeRepositoryImp implements RecipeRepository {
     );
 
     return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
+  }
+
+  @override
+  Future<void> insertIngredient(
+      {required String recipeId,
+      required List<IngredientRecipeEntity> ingredient}) async {
+    await _apiRecipes.post(
+      path: '$path/$recipeId/ingredients',
+      body: ingredient.map((e) => _ingredientMapper.toJson(e)).toList(),
+    );
+  }
+
+  @override
+  Future<List<IngredientRecipeEntity>> getIngredientsRecipe(
+      String recipeId) async {
+    final result = await _apiRecipes.get(
+      path: '$path/$recipeId/ingredients',
+    );
+    final List<IngredientRecipeDto> ingredients = result
+        .map<IngredientRecipeDto>((e) => _ingredientDtoMapper.fromMap(e))
+        .toList();
+
+    return ingredients
+        .map<IngredientRecipeEntity>((e) => _ingredientDtoMapper.toEntity(e))
+        .toList();
   }
 }
