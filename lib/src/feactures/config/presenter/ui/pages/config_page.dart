@@ -115,7 +115,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconsSvgEnum.eye,
+              icon: IconsSvgEnum.eye, //TODO: Mudar para ícone de idioma, quando disponível.
               text: AppLocalizations.of(context)!.language,
               action: const Icon(Icons.chevron_right),
               onTap: () {
