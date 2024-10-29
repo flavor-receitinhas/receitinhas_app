@@ -115,7 +115,7 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
             ),
             const SizedBox(height: 10),
             ContainerConfig(
-              icon: IconsSvgEnum.eye, //TODO: Mudar para ícone de idioma, quando disponível.
+              icon: IconsSvgEnum.changeLannguage,
               text: AppLocalizations.of(context)!.language,
               action: const Icon(Icons.chevron_right),
               onTap: () {
@@ -134,7 +134,8 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
                           ct.saveLanguagePref(locale: locale);
                           Navigator.pop(context);
                           CookieSnackBar(
-                            text: AppLocalizations.of(context)!.languageChangeSuccess,
+                            text: AppLocalizations.of(context)!
+                                .languageChangeSuccess,
                           ).show(context);
                         },
                       );
