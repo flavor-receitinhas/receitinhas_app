@@ -36,24 +36,34 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: Column(
         children: [
-          Row(
+          CookieText(
+            text: AppLocalizations.of(context)!.recipeTimePreparedTitle,
+            typography: CookieTypography.title,
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
+          const Spacer(),
+          Stack(
+            alignment: Alignment.topRight,
             children: [
-              const IconButton(
-                color: Colors.transparent,
-                disabledColor: Colors.transparent,
-                onPressed: null,
-                icon: Icon(
-                  Icons.access_time_rounded,
-                  size: 40,
-                ),
-              ),
-              const Spacer(),
-              CookieText(
-                text: AppLocalizations.of(context)!.recipeTimePreparedTitle,
-                typography: CookieTypography.title,
-                color: Theme.of(context).colorScheme.onSecondary,
-              ),
-              const Spacer(),
+              widget.ct.isWriteTime
+                  ? WriteTimePrepared(
+                      hourController: widget.ct.hourController,
+                      minuteController: widget.ct.minuteController,
+                      onChangedHour: widget.onChangedHour,
+                      onChangedMinute: widget.onChangedMinute,
+                    )
+                  : DurationTimePicker(
+                      size: 190,
+                      duration: widget.ct.timePreparedRecipe,
+                      labelStyle: GoogleFonts.jetBrainsMono(
+                        textStyle: TextStyle(
+                          fontSize: 45,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                      progressColor: Theme.of(context).colorScheme.primary,
+                      onChange: widget.onChange,
+                    ),
               IconButton(
                 color: Theme.of(context).colorScheme.onSecondary,
                 onPressed: () {
@@ -68,26 +78,6 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
               ),
             ],
           ),
-          const Spacer(),
-          widget.ct.isWriteTime
-              ? WriteTimePrepared(
-                  hourController: widget.ct.hourController,
-                  minuteController: widget.ct.minuteController,
-                  onChangedHour: widget.onChangedHour,
-                  onChangedMinute: widget.onChangedMinute,
-                )
-              : DurationTimePicker(
-                  size: 190,
-                  duration: widget.ct.timePreparedRecipe,
-                  labelStyle: GoogleFonts.jetBrainsMono(
-                    textStyle: TextStyle(
-                      fontSize: 45,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                  ),
-                  progressColor: Theme.of(context).colorScheme.primary,
-                  onChange: widget.onChange,
-                ),
           const Spacer(),
           CookieButton(
             label: AppLocalizations.of(context)!.recipeDifficultyNext,

@@ -113,7 +113,8 @@ class InfoContainerPortion extends StatelessWidget {
               const SizedBox(width: 20),
               Expanded(
                 child: CookieButton(
-                  label: AppLocalizations.of(context)!.recipeCreateBackEndSafeButtonSave,
+                  label: AppLocalizations.of(context)!
+                      .recipeCreateBackEndSafeButtonSave,
                   onPressed: () {
                     if (ct.portion > 0) {
                       ct.pageController.nextPage(
@@ -122,7 +123,7 @@ class InfoContainerPortion extends StatelessWidget {
                       );
                     } else {
                       final snackBar = SnackBar(
-                        content:  CookieText(
+                        content: CookieText(
                           text: AppLocalizations.of(context)!
                               .recipePortionSnackBarMessage,
                         ),
