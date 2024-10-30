@@ -18,7 +18,8 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   List<OrderByFilter> selectOrderBy = [OrderByFilter.asc];
-  List<DifficultyRecipe> selectDifficulty = DifficultyRecipe.values.toList();
+  List<DifficultyRecipe> difficulty = DifficultyRecipe.values.toList();
+  String? selectDifficulty;
   var selectRangePreparationTime = const RangeValues(1, 6000);
   var selectRangePortion = const RangeValues(1, 999);
   bool? desc;
@@ -39,10 +40,10 @@ class _FilterPageState extends State<FilterPage> {
   }
 
   void updateDifficulty(DifficultyRecipe difficulty) {
-    if (!selectDifficulty.contains(difficulty)) {
-      selectDifficulty.add(difficulty);
+    if (selectDifficulty == difficulty.name) {
+      selectDifficulty = null;
     } else {
-      selectDifficulty.remove(difficulty);
+      selectDifficulty = difficulty.name;
     }
   }
 
@@ -54,12 +55,25 @@ class _FilterPageState extends State<FilterPage> {
         label: AppLocalizations.of(context)!.searchRecipeApplyFilter,
         margin: const EdgeInsets.only(bottom: 10, left: 16, right: 16),
         onPressed: () {
-          widget.ct.timePreparedFrom = selectRangePreparationTime.start.toInt();
-          widget.ct.timePreparedTo = selectRangePreparationTime.end.toInt();
-          widget.ct.portionFrom = selectRangePortion.start.toInt();
-          widget.ct.portionTo = selectRangePortion.end.toInt();
-          widget.ct.difficultyRecipe = selectDifficulty;
-          widget.ct.isDesc = desc;
+          if (selectRangePreparationTime.start.toInt() != 1) {
+            widget.ct.timePreparedFrom =
+                selectRangePreparationTime.start.toInt();
+          }
+          if (selectRangePreparationTime.end.toInt() != 6000) {
+            widget.ct.timePreparedTo = selectRangePreparationTime.end.toInt();
+          }
+          if (selectRangePortion.start.toInt() != 1) {
+            widget.ct.portionFrom = selectRangePortion.start.toInt();
+          }
+          if (selectRangePortion.end.toInt() != 999) {
+            widget.ct.portionTo = selectRangePortion.end.toInt();
+          }
+          if (difficulty.isNotEmpty) {
+            widget.ct.difficultyRecipe = selectDifficulty;
+          }
+          if (desc != null) {
+            widget.ct.isDesc = desc;
+          }
           Navigator.pop(context);
         },
       ),
@@ -177,14 +191,13 @@ class _FilterPageState extends State<FilterPage> {
                   mainAxisExtent: 50,
                 ),
                 physics: const NeverScrollableScrollPhysics(),
-                //scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: DifficultyRecipe.values.length,
                 itemBuilder: (context, index) {
                   final order = DifficultyRecipe.values[index];
                   return ContainerFilter(
                     text: order.titleDescription(context),
-                    isSelect: selectDifficulty.contains(order),
+                    isSelect: selectDifficulty?.contains(order.name) ?? false,
                     onTap: () {
                       setState(() {
                         updateDifficulty(order);

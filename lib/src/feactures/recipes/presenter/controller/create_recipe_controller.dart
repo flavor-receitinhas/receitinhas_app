@@ -108,7 +108,6 @@ class CreateRecipeController extends ManagerStore {
             quillServerController.document.toDelta().toJson(),
           ).convert(),
           difficultyRecipe: DifficultyRecipe.easy,
-          ingredients: listIngredientSelect,
           instruction: QuillDeltaToHtmlConverter(
             quillInstructionController.document.toDelta().toJson(),
           ).convert(),
@@ -123,6 +122,13 @@ class CreateRecipeController extends ManagerStore {
           await _repository.createImages(
             recipeId: result.id!,
             filePath: image.path,
+          );
+        }
+
+        if (listIngredientSelect.isNotEmpty) {
+          await _repository.insertIngredient(
+            recipeId: result.id!,
+            ingredient: listIngredientSelect,
           );
         }
 

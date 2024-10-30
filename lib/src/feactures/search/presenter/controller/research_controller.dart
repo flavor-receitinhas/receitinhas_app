@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
@@ -26,7 +25,7 @@ class ResearchController extends ChangeNotifier {
   int? timePreparedFrom;
   int? portionTo;
   int? portionFrom;
-  List<DifficultyRecipe>? difficultyRecipe;
+  String? difficultyRecipe;
 
   Future<void> init() async {
     pagingController.addPageRequestListener(_fetch);

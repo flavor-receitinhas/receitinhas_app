@@ -1,9 +1,12 @@
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_dto.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_response_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/image_mapper.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
@@ -14,11 +17,13 @@ class RecipeRepositoryImp implements RecipeRepository {
   final RecipeMapper _mapper;
   final ApiRecipes _apiRecipes;
   final ImageMapper _imageMapper;
+  final IngredientRecipeDtoMapper _ingredientDtoMapper;
 
   RecipeRepositoryImp(
     this._mapper,
     this._apiRecipes,
     this._imageMapper,
+    this._ingredientDtoMapper,
   );
 
   String path = '/recipe';
@@ -27,7 +32,7 @@ class RecipeRepositoryImp implements RecipeRepository {
   Future<RecipeEntity> createRecipe(RecipeEntity recipe) async {
     final result =
         await _apiRecipes.post(path: path, body: _mapper.toMap(recipe));
-    print(result);
+
     return _mapper.fromMap(result);
   }
 
@@ -59,9 +64,10 @@ class RecipeRepositoryImp implements RecipeRepository {
       "file": await MultipartFile.fromFile(filePath,
           contentType: MediaType('image', 'jpg')),
     };
-    await _apiRecipes.put(
+    await _apiRecipes.post(
       path: '$path/$recipeId/images',
       body: data,
+      isformData: true,
     );
   }
 
@@ -72,9 +78,10 @@ class RecipeRepositoryImp implements RecipeRepository {
       "file": await MultipartFile.fromFile(filePath,
           contentType: MediaType('image', 'jpg')),
     };
-    await _apiRecipes.put(
+    await _apiRecipes.post(
       path: '$path/$recipeId/thumbs',
       body: data,
+      isformData: true,
     );
   }
 
@@ -102,12 +109,58 @@ class RecipeRepositoryImp implements RecipeRepository {
       int? timePreparedFrom,
       int? portionTo,
       int? portionFrom,
-      List<DifficultyRecipe>? difficultyRecipe}) async {
+      String? difficultyRecipe}) async {
+    List<String> queryParams = [];
+    if (search != null) queryParams.add('search=$search');
+    if (isDesc != null) queryParams.add('isDesc=$isDesc');
+    if (orderBy != null) queryParams.add('sort=${orderBy.name}');
+    if (timePreparedTo != null) {
+      queryParams.add('timePreparedTo=$timePreparedTo');
+    }
+    if (timePreparedFrom != null) {
+      queryParams.add('timePreparedFrom=$timePreparedFrom');
+    }
+    if (portionTo != null) queryParams.add('portionTo=$portionTo');
+    if (portionFrom != null) queryParams.add('portionFrom=$portionFrom');
+    if (difficultyRecipe != null) {
+      queryParams.add('difficultyRecipe=$difficultyRecipe');
+    }
+
+    String queryString = queryParams.join('&');
     final result = await _apiRecipes.get(
-      path:
-          '$path?search=$search&page=$page&isDesc=$isDesc&sort=${orderBy?.name}&timePreparedTo=$timePreparedTo&timePreparedFrom=$timePreparedFrom&portionTo=$portionTo&portionFrom=$portionFrom&difficultyRecipe=$difficultyRecipe',
+      path: '$path?page=$page&$queryString',
     );
 
-    return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
+    return result.map<RecipeDto>((e) => RecipeDto.fromMap(e)).toList();
+  }
+
+  @override
+  Future<void> insertIngredient(
+      {required String recipeId,
+      required List<IngredientRecipeEntity> ingredient}) async {
+    final data = ingredient
+        .map(
+          (e) => IngredientRecipeResponseDto.toDto(e).toJson(),
+        )
+        .toList();
+    await _apiRecipes.post(
+      path: '$path/$recipeId/ingredients',
+      body: data,
+    );
+  }
+
+  @override
+  Future<List<IngredientRecipeEntity>> getIngredientsRecipe(
+      String recipeId) async {
+    final result = await _apiRecipes.get(
+      path: '$path/$recipeId/ingredients',
+    );
+    final List<IngredientRecipeDto> ingredients = result
+        .map<IngredientRecipeDto>((e) => _ingredientDtoMapper.fromMap(e))
+        .toList();
+
+    return ingredients
+        .map<IngredientRecipeEntity>((e) => _ingredientDtoMapper.toEntity(e))
+        .toList();
   }
 }

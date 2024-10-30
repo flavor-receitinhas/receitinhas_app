@@ -1,6 +1,6 @@
-import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 
@@ -17,7 +17,7 @@ abstract class RecipeRepository {
     int? timePreparedFrom,
     int? portionTo,
     int? portionFrom,
-     List<DifficultyRecipe>? difficultyRecipe,
+    String? difficultyRecipe,
   });
   Future<void> createImages(
       {required String recipeId, required String filePath});
@@ -26,4 +26,8 @@ abstract class RecipeRepository {
       {required String recipeId, required String filePath});
   Future<void> deleteThumb(String recipeId, String thumbId);
   Future<List<ImageEntity>> getImages(String recipeId);
+  Future<void> insertIngredient(
+      {required String recipeId,
+      required List<IngredientRecipeEntity> ingredient});
+  Future<List<IngredientRecipeEntity>> getIngredientsRecipe(String recipeId);
 }

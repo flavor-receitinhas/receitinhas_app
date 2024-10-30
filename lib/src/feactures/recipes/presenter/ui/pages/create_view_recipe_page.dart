@@ -16,8 +16,9 @@ class CreateViewRecipePage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: CookieButton(
         label: AppLocalizations.of(context)!.recipeFinish,
-        onPressed: () {
-          ct.createRecipe();
+        onPressed: () async {
+          await ct.createRecipe();
+          Navigator.pop(context);
         },
       ),
       body: SafeArea(

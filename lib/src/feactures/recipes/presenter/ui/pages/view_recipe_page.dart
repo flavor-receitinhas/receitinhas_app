@@ -65,7 +65,7 @@ class _ViewRecipesPageState
             const SizedBox(height: 20),
             ViewDetailsRecipe(
               details: ct.recipe.details!,
-              ingredients: ct.recipe.ingredients,
+              ingredients: ct.ingredients,
               serveFood: ct.recipe.serveFood!,
               instruction: ct.recipe.instruction,
             ),
