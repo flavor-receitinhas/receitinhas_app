@@ -29,7 +29,7 @@ enum IconsSvgEnum {
   pot(path: 'assets/icons/pot.svg'),
   menu(path: 'assets/icons/menu.svg'),
   fireRounded(path: 'assets/icons/fire_rounded.svg'),
-
+  changeLannguage(path: 'assets/icons/change_language.svg'),
   search(path: 'assets/icons/search.svg');
 
   final String path;

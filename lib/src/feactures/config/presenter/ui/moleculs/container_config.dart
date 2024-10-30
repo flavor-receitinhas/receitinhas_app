@@ -31,7 +31,10 @@ class ContainerConfig extends StatelessWidget {
         ),
         child: Row(
           children: [
-            CookieSvg(svg: icon),
+            CookieSvg(
+              svg: icon,
+              height: 20,
+            ),
             const SizedBox(width: 15),
             CookieText(
                 text: text,
