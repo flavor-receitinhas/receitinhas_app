@@ -19,7 +19,7 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   List<OrderByFilter> selectOrderBy = [OrderByFilter.asc];
   List<DifficultyRecipe> difficulty = DifficultyRecipe.values.toList();
-  List<String> selectDifficulty = [];
+  String? selectDifficulty;
   var selectRangePreparationTime = const RangeValues(1, 6000);
   var selectRangePortion = const RangeValues(1, 999);
   bool? desc;
@@ -40,10 +40,10 @@ class _FilterPageState extends State<FilterPage> {
   }
 
   void updateDifficulty(DifficultyRecipe difficulty) {
-    if (!selectDifficulty.contains(difficulty.name)) {
-      selectDifficulty.add(difficulty.name);
+    if (selectDifficulty == difficulty.name) {
+      selectDifficulty = null;
     } else {
-      selectDifficulty.remove(difficulty.name);
+      selectDifficulty = difficulty.name;
     }
   }
 
@@ -197,7 +197,7 @@ class _FilterPageState extends State<FilterPage> {
                   final order = DifficultyRecipe.values[index];
                   return ContainerFilter(
                     text: order.titleDescription(context),
-                    isSelect: selectDifficulty.contains(order.name),
+                    isSelect: selectDifficulty?.contains(order.name) ?? false,
                     onTap: () {
                       setState(() {
                         updateDifficulty(order);

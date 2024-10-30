@@ -25,7 +25,7 @@ class ResearchController extends ChangeNotifier {
   int? timePreparedFrom;
   int? portionTo;
   int? portionFrom;
-  List<String>? difficultyRecipe;
+  String? difficultyRecipe;
 
   Future<void> init() async {
     pagingController.addPageRequestListener(_fetch);
@@ -53,7 +53,7 @@ class ResearchController extends ChangeNotifier {
       timePreparedFrom: timePreparedFrom,
       portionTo: portionTo,
       portionFrom: portionFrom,
-      difficultyRecipe: difficultyRecipe?.map((e) => e).toList(),
+      difficultyRecipe: difficultyRecipe,
     );
   }
 

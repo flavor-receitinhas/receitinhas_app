@@ -109,7 +109,7 @@ class RecipeRepositoryImp implements RecipeRepository {
       int? timePreparedFrom,
       int? portionTo,
       int? portionFrom,
-      List<String>? difficultyRecipe}) async {
+      String? difficultyRecipe}) async {
     List<String> queryParams = [];
     if (search != null) queryParams.add('search=$search');
     if (isDesc != null) queryParams.add('isDesc=$isDesc');

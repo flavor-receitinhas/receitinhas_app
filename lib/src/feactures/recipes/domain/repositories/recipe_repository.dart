@@ -17,7 +17,7 @@ abstract class RecipeRepository {
     int? timePreparedFrom,
     int? portionTo,
     int? portionFrom,
-    List<String>? difficultyRecipe,
+    String? difficultyRecipe,
   });
   Future<void> createImages(
       {required String recipeId, required String filePath});
