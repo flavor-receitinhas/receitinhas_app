@@ -12,12 +12,20 @@ class RecipeMapper {
       'portion': entity.portion,
       'instruction': entity.instruction,
       'serveFood': entity.serveFood,
+      'status': entity.status,
+      'userId': entity.userId,
+      'createdAt': entity.createdAt,
+      'updatedAt': entity.updatedAt,
     };
   }
 
   RecipeEntity fromMap(Map<String, dynamic> map) {
     return RecipeEntity(
       id: map['id'],
+      userId: map['userId'],
+      updatedAt: map['updatedAt'],
+      createdAt: map['createdAt'],
+      status: map['status'],
       title: map['title'] as String,
       subTitle: map['subTitle'] as String?,
       details: map['details'] as String?,
