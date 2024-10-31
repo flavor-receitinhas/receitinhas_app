@@ -10,7 +10,6 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/back_sheet.dart';
-import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/container_privacy.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/moleculs/save_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
@@ -146,63 +145,63 @@ class _EditProfilePageState
                   ),
                 ),
                 const SizedBox(height: 20),
-                CookieText(
-                  text: AppLocalizations.of(context)!
-                      .profileEditProfilePageTitleLabel,
-                ),
-                const SizedBox(height: 10),
-                DropdownButtonFormField(
-                  isExpanded: true,
-                  dropdownColor: theme.secondary,
-                  borderRadius: BorderRadius.circular(10),
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!
-                        .profileEditProfilePageTitleHint,
-                    hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary
-                              .withOpacity(0.4),
-                        ),
-                    filled: true,
-                    fillColor: Theme.of(context).colorScheme.secondary,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  items: const [
-                    DropdownMenuItem(
-                      value: 0,
-                      child: CookieText(text: 'data'),
-                    ),
-                    DropdownMenuItem(
-                      value: 1,
-                      child: CookieText(text: 'data'),
-                    ),
-                    DropdownMenuItem(
-                      value: 2,
-                      child: CookieText(text: 'data'),
-                    ),
-                  ],
-                  onChanged: (value) {},
-                ),
-                const SizedBox(height: 10),
-                Center(
-                  child: CookieText(
-                    text: AppLocalizations.of(context)!
-                        .profileEditProfilePageTitleDescription,
-                    textAlign: TextAlign.center,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onPrimary
-                        .withOpacity(0.5),
-                  ),
-                ),
-                const SizedBox(height: 20),
+                // CookieText(
+                //   text: AppLocalizations.of(context)!
+                //       .profileEditProfilePageTitleLabel,
+                // ),
+                // const SizedBox(height: 10),
+                // DropdownButtonFormField(
+                //   isExpanded: true,
+                //   dropdownColor: theme.secondary,
+                //   borderRadius: BorderRadius.circular(10),
+                //   decoration: InputDecoration(
+                //     hintText: AppLocalizations.of(context)!
+                //         .profileEditProfilePageTitleHint,
+                //     hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                //           color: Theme.of(context)
+                //               .colorScheme
+                //               .onPrimary
+                //               .withOpacity(0.4),
+                //         ),
+                //     filled: true,
+                //     fillColor: Theme.of(context).colorScheme.secondary,
+                //     border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(16),
+                //         borderSide: BorderSide.none),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide: const BorderSide(),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //   ),
+                //   items: const [
+                //     DropdownMenuItem(
+                //       value: 0,
+                //       child: CookieText(text: 'data'),
+                //     ),
+                //     DropdownMenuItem(
+                //       value: 1,
+                //       child: CookieText(text: 'data'),
+                //     ),
+                //     DropdownMenuItem(
+                //       value: 2,
+                //       child: CookieText(text: 'data'),
+                //     ),
+                //   ],
+                //   onChanged: (value) {},
+                // ),
+                // const SizedBox(height: 10),
+                // Center(
+                //   child: CookieText(
+                //     text: AppLocalizations.of(context)!
+                //         .profileEditProfilePageTitleDescription,
+                //     textAlign: TextAlign.center,
+                //     color: Theme.of(context)
+                //         .colorScheme
+                //         .onPrimary
+                //         .withOpacity(0.5),
+                //   ),
+                // ),
+                //const SizedBox(height: 20),
                 CookieText(
                   text: AppLocalizations.of(context)!
                       .profileEditProfilePageAboutMe,
@@ -216,19 +215,19 @@ class _EditProfilePageState
                   controller: ct.biographyController,
                 ),
                 const SizedBox(height: 20),
-                CookieText(
-                  text: AppLocalizations.of(context)!
-                      .profileEditProfilePagePrivacy,
-                ),
-                const SizedBox(height: 10),
-                ContainerPrivacy(
-                    text: AppLocalizations.of(context)!
-                        .profileEditProfilePageHideFollowers),
-                const SizedBox(height: 10),
-                ContainerPrivacy(
-                    text: AppLocalizations.of(context)!
-                        .profileEditProfilePageHideLikes),
-                const SizedBox(height: 20),
+                // CookieText(
+                //   text: AppLocalizations.of(context)!
+                //       .profileEditProfilePagePrivacy,
+                // ),
+                // const SizedBox(height: 10),
+                // ContainerPrivacy(
+                //     text: AppLocalizations.of(context)!
+                //         .profileEditProfilePageHideFollowers),
+                // const SizedBox(height: 10),
+                // ContainerPrivacy(
+                //     text: AppLocalizations.of(context)!
+                //         .profileEditProfilePageHideLikes),
+                // const SizedBox(height: 20),
               ],
             ),
           ),
