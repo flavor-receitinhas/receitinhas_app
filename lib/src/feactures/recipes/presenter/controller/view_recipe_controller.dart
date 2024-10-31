@@ -29,7 +29,8 @@ class ViewRecipeController extends ManagerStore {
   }
 
   Future<List<ImageEntity>> getImages() async {
-    return await _recipeRepository.getImages(id);
+    final images = await _recipeRepository.getImages(id);
+    return images.where((e) => !e.thumb).toList();
   }
 
   Future<List<IngredientRecipeEntity>> getIngredientsRecipe() async {

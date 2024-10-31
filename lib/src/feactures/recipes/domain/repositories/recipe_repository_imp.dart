@@ -102,7 +102,7 @@ class RecipeRepositoryImp implements RecipeRepository {
   @override
   Future<List<RecipeDto>> listRecipe(
       {String? search,
-      bool? isDesc,
+      bool isDesc = true,
       OrderRecipeEnum? orderBy,
       required int page,
       int? timePreparedTo,
@@ -112,7 +112,7 @@ class RecipeRepositoryImp implements RecipeRepository {
       String? difficultyRecipe}) async {
     List<String> queryParams = [];
     if (search != null) queryParams.add('search=$search');
-    if (isDesc != null) queryParams.add('isDesc=$isDesc');
+    queryParams.add('isDesc=$isDesc');
     if (orderBy != null) queryParams.add('sort=${orderBy.name}');
     if (timePreparedTo != null) {
       queryParams.add('timePreparedTo=$timePreparedTo');

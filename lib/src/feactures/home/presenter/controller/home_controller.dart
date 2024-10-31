@@ -1,9 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_omboarding_repository.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
-import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
@@ -20,13 +18,6 @@ class HomeController extends ChangeNotifier {
   final int pageSize = 25;
 
   final ScrollController scrollController = ScrollController();
-  bool? isDesc;
-  OrderRecipeEnum? orderBy;
-  int? timePreparedTo;
-  int? timePreparedFrom;
-  int? portionTo;
-  int? portionFrom;
-  List<DifficultyRecipe>? difficultyRecipe;
   StateManager state = StateManager.loading;
   bool isLoadingMore = false;
   int currentPage = 0;

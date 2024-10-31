@@ -19,7 +19,7 @@ class ResearchController extends ChangeNotifier {
   final PagingController<int, RecipeDto> pagingController =
       PagingController(firstPageKey: 0);
   final searchController = TextEditingController();
-  bool? isDesc;
+  bool isDesc = true;
   OrderRecipeEnum? orderBy;
   int? timePreparedTo;
   int? timePreparedFrom;
@@ -94,7 +94,7 @@ class ResearchController extends ChangeNotifier {
   }
 
   void clearFilters() {
-    isDesc = null;
+    isDesc = true;
     orderBy = null;
     timePreparedTo = null;
     timePreparedFrom = null;

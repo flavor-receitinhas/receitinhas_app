@@ -7,6 +7,7 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search
 import 'package:app_receitas/src/feactures/profile/presenter/controller/profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/edit_profile_page.dart';
+import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:page_manager/export_manager.dart';
@@ -127,28 +128,38 @@ class _MyProfilePageState
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(2),
-                              child: Stack(
-                                alignment: Alignment.bottomLeft,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      Global.imageRecipeDefault,
+                            final recipe = ct.recipes[index];
+                            return InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  ViewRecipesPage.route,
+                                  arguments: {'id': recipe.id},
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: Stack(
+                                  alignment: Alignment.bottomLeft,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        Global.imageRecipeDefault,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: CookieText(
-                                      text: ct.recipes[index].title,
-                                      color: Colors.white,
-                                      maxLine: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      typography: CookieTypography.button,
+                                    Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: CookieText(
+                                        text: recipe.title,
+                                        color: Colors.white,
+                                        maxLine: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        typography: CookieTypography.button,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },

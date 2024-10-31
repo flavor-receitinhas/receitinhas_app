@@ -10,7 +10,7 @@ abstract class RecipeRepository {
   Future<List<RecipeEntity>> getUserRecipes(String userID);
   Future<List<RecipeDto>> listRecipe({
     String? search,
-    bool? isDesc,
+    bool isDesc = true,
     OrderRecipeEnum? orderBy,
     required int page,
     int? timePreparedTo,

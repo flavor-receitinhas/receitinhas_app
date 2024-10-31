@@ -15,10 +15,13 @@ class CreateViewRecipePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CookieButton(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
         label: AppLocalizations.of(context)!.recipeFinish,
         onPressed: () async {
           await ct.createRecipe();
-          Navigator.pop(context);
+          if (context.mounted) {
+            Navigator.pop(context);
+          }
         },
       ),
       body: SafeArea(
