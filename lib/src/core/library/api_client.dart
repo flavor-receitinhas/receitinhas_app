@@ -89,14 +89,14 @@ class ApiClient {
     try {
       dynamic data = body;
       if (isformData) {
-        _log(method: 'post', path: url, headers: headers);
         data = FormData.fromMap(data);
+        _log(method: 'post', path: url, headers: headers);
       } else {
         _log(method: 'post', path: url, headers: headers, body: body);
       }
       final response = await _dio.post<T>(
         url,
-        data: body,
+        data: data,
         options: Options(headers: headers),
       );
       return _requestMapper.fromDio(response);

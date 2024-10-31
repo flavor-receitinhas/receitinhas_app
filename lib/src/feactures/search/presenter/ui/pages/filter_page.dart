@@ -22,7 +22,7 @@ class _FilterPageState extends State<FilterPage> {
   String? selectDifficulty;
   var selectRangePreparationTime = const RangeValues(1, 6000);
   var selectRangePortion = const RangeValues(1, 999);
-  bool? desc;
+  bool desc = true;
 
   void updateOrder(OrderByFilter order) {
     bool isAsc = order == OrderByFilter.asc;
@@ -71,9 +71,9 @@ class _FilterPageState extends State<FilterPage> {
           if (difficulty.isNotEmpty) {
             widget.ct.difficultyRecipe = selectDifficulty;
           }
-          if (desc != null) {
-            widget.ct.isDesc = desc;
-          }
+
+          widget.ct.isDesc = desc;
+
           Navigator.pop(context);
         },
       ),

@@ -42,6 +42,7 @@ class _ViewRecipesPageState
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
+            const SizedBox(height: 10),
             FlutterCarousel(
                 options: FlutterCarouselOptions(
                   height: 250,
