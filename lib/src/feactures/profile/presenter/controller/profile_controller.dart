@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/feactures/profile/domain/dtos/profile_dto.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
-import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:page_manager/export_manager.dart';
 
@@ -11,7 +11,7 @@ class ProfileController extends ManagerStore {
   ProfileController(this._repository, this._recipeRepository);
 
   late ProfileEntity profile;
-  List<RecipeEntity> recipes = [];
+  List<RecipeDto> recipes = [];
 
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
@@ -27,7 +27,7 @@ class ProfileController extends ManagerStore {
         },
       );
 
-  Future<List<RecipeEntity>> getUserRecipes(String userID) async {
+  Future<List<RecipeDto>> getUserRecipes(String userID) async {
     final result = await _recipeRepository.getUserRecipes(userID);
     return result;
   }

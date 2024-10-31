@@ -51,10 +51,10 @@ class RecipeRepositoryImp implements RecipeRepository {
   }
 
   @override
-  Future<List<RecipeEntity>> getUserRecipes(String userId) async {
+  Future<List<RecipeDto>> getUserRecipes(String userId) async {
     final result = await _apiRecipes.get(path: '$path/user/$userId');
 
-    return result.map<RecipeEntity>((e) => _mapper.fromMap(e)).toList();
+    return result.map<RecipeDto>((e) => RecipeDto.fromMap(e)).toList();
   }
 
   @override

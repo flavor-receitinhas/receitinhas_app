@@ -134,7 +134,7 @@ class _MyProfilePageState
                                 Navigator.pushNamed(
                                   context,
                                   ViewRecipesPage.route,
-                                  arguments: {'id': recipe.id},
+                                  arguments: {'id': recipe.recipeId},
                                 );
                               },
                               child: Padding(

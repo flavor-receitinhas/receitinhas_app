@@ -20,7 +20,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
     required this.timePrepared,
     required this.portion,
     required this.difficultyRecipe,
-    this.isCreate = false,
+    required this.isCreate,
   });
 
   @override

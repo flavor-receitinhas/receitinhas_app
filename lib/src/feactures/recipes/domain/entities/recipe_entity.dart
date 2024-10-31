@@ -2,6 +2,7 @@ import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_re
 
 class RecipeEntity {
   final String? id;
+  final String? userId;
   final String title;
   final String? subTitle;
   final String? details;
@@ -11,6 +12,8 @@ class RecipeEntity {
   final String instruction;
   final String? serveFood;
   final String? status;
+  final String? createdAt;
+  final String? updatedAt;
 
   RecipeEntity({
     this.id,
@@ -23,5 +26,8 @@ class RecipeEntity {
     required this.instruction,
     this.serveFood,
     this.status,
+    this.userId,
+    this.createdAt,
+    this.updatedAt,
   });
 }

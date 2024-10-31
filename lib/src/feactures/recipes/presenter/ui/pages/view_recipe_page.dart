@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
@@ -62,6 +63,7 @@ class _ViewRecipesPageState
               portion: ct.recipe.portion,
               subTitle: ct.recipe.subTitle,
               timePrepared: ct.recipe.timePrepared,
+              isCreate: ct.recipe.userId == Global.user!.id,
             ),
             const SizedBox(height: 20),
             ViewDetailsRecipe(
