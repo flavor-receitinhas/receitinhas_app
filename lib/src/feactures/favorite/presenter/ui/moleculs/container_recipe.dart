@@ -1,4 +1,6 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:flutter/material.dart';
 
@@ -52,10 +54,10 @@ class ContainerRecipe extends StatelessWidget {
           ),
           IconButton(
             onPressed: onPressedFavorite,
-            icon: Icon(
-              Icons.favorite,
+            icon: CookieSvg(
+              svg: IconsSvgEnum.heart,
               color: Theme.of(context).colorScheme.primary,
-              size: 36,
+              height: 36,
             ),
           ),
         ],
