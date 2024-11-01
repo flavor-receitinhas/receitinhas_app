@@ -1,5 +1,5 @@
 class FavoriteEntity {
-  final int id;
+  final String id;
   final String recipeId;
   final String userId;
   final String name;

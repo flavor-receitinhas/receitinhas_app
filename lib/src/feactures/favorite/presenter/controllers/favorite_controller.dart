@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_dto.dart';
-import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_entity.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_user_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository.dart';
 import 'package:flutter/material.dart';
@@ -11,17 +11,15 @@ class FavoriteController extends ChangeNotifier {
 
   FavoriteController(this._repository);
 
-  List<FavoriteEntity> listFavorite = [];
+  List<FavoriteUserDto> listFavorite = [];
   var order = OrderFavoriteEnum.createdAtAsc;
-  final PagingController<int, FavoriteEntity> pagingController =
+  final PagingController<int, FavoriteUserDto> pagingController =
       PagingController(firstPageKey: 0);
   final favoriteController = TextEditingController();
   final _pageSize = 25;
   StateManager state = StateManager.loading;
 
   void init() {
-    // await listFavoriteRecipes(orderDefault);
-    //TODO Ele primeiro pegar a ordem default da lista, ou pegar de um banco de dados local qual salvou
     pagingController.addPageRequestListener(_fetch);
 
     state = StateManager.done;
@@ -34,11 +32,16 @@ class FavoriteController extends ChangeNotifier {
     pagingController.dispose();
   }
 
-  Future<List<FavoriteEntity>> listFavoriteRecipes(
-      {required OrderFavoriteEnum orderBy, required int page, String? search}) async {
+  Future<List<FavoriteUserDto>> listFavoriteRecipes(
+      {required OrderFavoriteEnum orderBy,
+      required int page,
+      String? search}) async {
     state = StateManager.loading;
     return await _repository.getFavorites(
-        orderBy: orderBy, page: page, search: search);
+      orderBy: orderBy,
+      page: page,
+      search: search,
+    );
   }
 
   Future<void> addFavorite(FavoriteDto favorite) async {
@@ -46,8 +49,8 @@ class FavoriteController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removeFavorite(String userId, String recipeId) async {
-    await _repository.removeFavorite(userId, recipeId);
+  Future<void> removeFavorite(String favoriteId) async {
+    await _repository.removeFavorite(favoriteId);
     notifyListeners();
   }
 

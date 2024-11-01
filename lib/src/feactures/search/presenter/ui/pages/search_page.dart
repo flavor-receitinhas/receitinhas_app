@@ -48,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
           SliverToBoxAdapter(
               child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

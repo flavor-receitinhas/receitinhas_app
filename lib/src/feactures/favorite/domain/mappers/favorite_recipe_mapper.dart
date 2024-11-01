@@ -4,6 +4,7 @@ class FavoriteRecipeMapper {
   static FavoriteRecipeDto fromJson(Map<String, dynamic> json) {
     return FavoriteRecipeDto(
       exists: json['exists'],
+      favoriteId: json['favoriteId'],
     );
   }
 }

@@ -41,7 +41,7 @@ class ResultRecipes extends StatelessWidget {
         },
         itemBuilder: (context, recipe, idx) {
           return Padding(
-            padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
+            padding: const EdgeInsets.only(bottom: 10, left: 16, right: 16),
             child: GestureDetector(
               onTap: () {
                 Navigator.pushNamed(

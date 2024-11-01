@@ -95,6 +95,8 @@
     "favoritePageSearchHint": "Pesquise sua receita favorita",
     "favoritePageErrorLoading": "Erro ao carregar receitas",
     "favoritePageNoItemsFound": "Nenhuma receita encontrada",
+    "favoriteRemoveFavoritesTitle": "Remover dos favoritos",
+    "favoriteRemoveFavoritesContent": "Deseja realmente remover essa receita dos favoritos?",
     "customBottomBarExitAppTitle": "Deseja sair do app?",
     "customBottomBarCancel": "Cancelar",
     "customBottomBarExit": "Sair",

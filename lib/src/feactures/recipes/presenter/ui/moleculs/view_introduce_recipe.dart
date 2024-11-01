@@ -12,6 +12,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
   final int portion;
   final String difficultyRecipe;
   final bool isCreate;
+  final void Function()? onPressedFavorite;
+  final bool isFavorite;
 
   const ViewIntroduceRecipe({
     super.key,
@@ -21,6 +23,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
     required this.portion,
     required this.difficultyRecipe,
     required this.isCreate,
+    this.onPressedFavorite,
+    this.isFavorite = false,
   });
 
   @override
@@ -84,23 +88,24 @@ class ViewIntroduceRecipe extends StatelessWidget {
             ),
             Visibility(
               visible: !isCreate,
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    topLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(10),
+              child: InkWell(
+                onTap: onPressedFavorite,
+                child: Container(
+                  padding: const EdgeInsets.all(28),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(10),
+                    ),
                   ),
-                ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.favorite,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 30,
+                  child: CookieSvg(
+                    svg: IconsSvgEnum.heart,
+                    color: isFavorite
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               ),

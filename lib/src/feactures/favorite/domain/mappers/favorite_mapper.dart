@@ -28,8 +28,6 @@ class FavoriteMapper {
 
   Map<String, dynamic> toJsonDto(FavoriteDto favorite) {
     return {
-      'name': favorite.name,
-      'userId': favorite.userId,
       'recipeId': favorite.recipeId,
     };
   }

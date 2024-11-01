@@ -64,6 +64,10 @@ class _ViewRecipesPageState
               subTitle: ct.recipe.subTitle,
               timePrepared: ct.recipe.timePrepared,
               isCreate: ct.recipe.userId == Global.user!.id,
+              isFavorite: ct.favoriteRecipeDto!.exists,
+              onPressedFavorite: () {
+                ct.addAndRemoveFavorite();
+              },
             ),
             const SizedBox(height: 20),
             ViewDetailsRecipe(

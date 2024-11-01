@@ -94,6 +94,8 @@
   "favoritePageSearchHint": "Search your favorite recipe",
   "favoritePageErrorLoading": "Error loading recipes",
   "favoritePageNoItemsFound": "No recipes found",
+  "favoriteRemoveFavoritesTitle": "Remove from favorites",
+  "favoriteRemoveFavoritesContent": "Do you really want to remove this recipe from favorites?",
   "customBottomBarExitAppTitle": "Do you want to exit the app?",
   "customBottomBarCancel": "Cancel",
   "customBottomBarExit": "Exit",

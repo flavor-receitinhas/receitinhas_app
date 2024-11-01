@@ -1,9 +1,18 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:flutter/material.dart';
 
 class ContainerRecipe extends StatelessWidget {
   final String nameRecipe;
-  const ContainerRecipe({super.key, required this.nameRecipe});
+  final String? imageRecipe;
+  final int timePrepared;
+  final void Function() onPressedFavorite;
+  const ContainerRecipe(
+      {super.key,
+      required this.nameRecipe,
+      required this.imageRecipe,
+      required this.timePrepared,
+      required this.onPressedFavorite});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +27,7 @@ class ContainerRecipe extends StatelessWidget {
       child: Row(
         children: [
           Image.network(
-            'https://th.bing.com/th/id/R.7e56e5b04d0f210b3adcdee96586e6ba?rik=4jbCMSTYD9Dexw&pid=ImgRaw&r=0',
+            imageRecipe ?? Global.imageRecipeDefault,
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -33,15 +42,16 @@ class ContainerRecipe extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
                 CookieText(
-                  //TODO aaaaaaaaaaaaa
-                  text: '5 min',
+                  text: Global().formatTime(
+                    timePrepared.toDouble(),
+                  ),
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
               ],
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: onPressedFavorite,
             icon: Icon(
               Icons.favorite,
               color: Theme.of(context).colorScheme.primary,

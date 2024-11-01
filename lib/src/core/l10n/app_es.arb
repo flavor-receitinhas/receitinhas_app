@@ -94,6 +94,8 @@
   "favoritePageSearchHint": "Busca tu receta favorita",
   "favoritePageErrorLoading": "Error al cargar recetas",
   "favoritePageNoItemsFound": "No se encontraron recetas",
+  "favoriteRemoveFavoritesTitle": "Eliminar de favoritos",
+  "favoriteRemoveFavoritesContent": "¿Realmente desea eliminar esta receta de favoritos?",
   "customBottomBarExitAppTitle": "¿Deseas salir de la aplicación?",
   "customBottomBarCancel": "Cancelar",
   "customBottomBarExit": "Salir",
