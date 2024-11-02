@@ -6,7 +6,7 @@ import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_re
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 
-class HomeController extends ChangeNotifier {
+class HomeController extends ManagerStore {
   final RecipeRepository _recipeRepository;
   final UserOmboardingRepository _userFoodPrefRepository;
   final ProfileRepository _profileRepository;
@@ -18,17 +18,19 @@ class HomeController extends ChangeNotifier {
   final int pageSize = 25;
 
   final ScrollController scrollController = ScrollController();
-  StateManager state = StateManager.loading;
-  bool isLoadingMore = false;
-  int currentPage = 0;
 
-  void init() async {
-    await loadingProfile();
-    _setupScrollController();
-    await fetchRecipes();
-    state = StateManager.done;
-    notifyListeners();
-  }
+  bool hasMore = true;
+  bool isLoading = false;
+  int page = 0;
+
+  @override
+  void init(Map<String, dynamic> arguments) => handleTry(
+        call: () async {
+          await loadingProfile();
+          await _loadMoreItems();
+          _setupScrollController();
+        },
+      );
 
   @override
   void dispose() {
@@ -37,29 +39,34 @@ class HomeController extends ChangeNotifier {
   }
 
   void _setupScrollController() {
-    scrollController.addListener(() {
+    scrollController.addListener(() async {
       if (scrollController.position.pixels ==
               scrollController.position.maxScrollExtent &&
-          !isLoadingMore) {
-        _loadMoreItems();
+          !isLoading) {
+        await _loadMoreItems();
       }
     });
   }
 
-  Future<void> fetchRecipes() async {
-    final newRecipes = await _recipeRepository.listRecipe(page: currentPage);
-    recipes.addAll(newRecipes);
-    notifyListeners();
+  Future<List<RecipeDto>> getRecipes() async {
+    final result = await _recipeRepository.listRecipe(page: page);
+    return result;
   }
 
   Future<void> _loadMoreItems() async {
-    if (isLoadingMore) return;
+    if (!hasMore || isLoading) return;
 
-    isLoadingMore = true;
-    currentPage++;
-    final newRecipes = await _recipeRepository.listRecipe(page: currentPage);
-    recipes.addAll(newRecipes);
-    isLoadingMore = false;
+    isLoading = true;
+    final result = await getRecipes();
+    if (result.length < pageSize) {
+      hasMore = false;
+    } else {
+      page++;
+    }
+
+    recipes.addAll(result);
+
+    isLoading = false;
     notifyListeners();
   }
 
