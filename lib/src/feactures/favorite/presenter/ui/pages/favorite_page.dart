@@ -1,8 +1,6 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
-import 'package:app_receitas/src/feactures/favorite/domain/entities/favorite_entity.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
+import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_user_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/container_recipe.dart';
@@ -112,9 +110,9 @@ class _FavoritePageState extends State<FavoritePage> {
                   ],
                 ),
               ),
-              PagedSliverList<int, FavoriteEntity>(
+              PagedSliverList<int, FavoriteUserDto>(
                 pagingController: ct.pagingController,
-                builderDelegate: PagedChildBuilderDelegate<FavoriteEntity>(
+                builderDelegate: PagedChildBuilderDelegate<FavoriteUserDto>(
                   animateTransitions: true,
                   firstPageErrorIndicatorBuilder: (context) {
                     return Center(
@@ -145,10 +143,38 @@ class _FavoritePageState extends State<FavoritePage> {
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, ViewRecipesPage.route);
+                          Navigator.pushNamed(
+                            context,
+                            ViewRecipesPage.route,
+                            arguments: {
+                              'id': favorite.favorite.recipeId,
+                            },
+                          );
                         },
                         child: ContainerRecipe(
-                          nameRecipe: favorite.name,
+                          nameRecipe: favorite.favorite.name,
+                          imageRecipe: favorite.thumb,
+                          timePrepared: favorite.timePrepared,
+                          onPressedFavorite: () {
+                            CookieDialog(
+                              title: CookieText(
+                                text: AppLocalizations.of(context)!
+                                    .favoriteRemoveFavoritesTitle,
+                                typography: CookieTypography.title,
+                              ),
+                              content: CookieText(
+                                text: AppLocalizations.of(context)!
+                                    .favoriteRemoveFavoritesContent,
+                              ),
+                              onPressedConfirm: () async {
+                                await ct.removeFavorite(favorite.favorite.id);
+                                ct.refreshPage();
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+                                }
+                              },
+                            ).show(context);
+                          },
                         ),
                       ),
                     );

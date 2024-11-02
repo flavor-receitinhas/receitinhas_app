@@ -21,6 +21,8 @@ class CookieDialog extends StatelessWidget {
         return CookieDialog(
           title: title,
           content: content,
+          onPressedConfirm: onPressedConfirm,
+          onPressedRecused: onPressedRecused,
         );
       },
     );

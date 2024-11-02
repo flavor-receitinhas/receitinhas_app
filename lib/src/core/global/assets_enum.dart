@@ -30,7 +30,8 @@ enum IconsSvgEnum {
   menu(path: 'assets/icons/menu.svg'),
   fireRounded(path: 'assets/icons/fire_rounded.svg'),
   changeLannguage(path: 'assets/icons/change_language.svg'),
-  search(path: 'assets/icons/search.svg');
+  search(path: 'assets/icons/search.svg'),
+  heart(path: 'assets/icons/heart.svg'),;
 
   final String path;
 
