@@ -95,23 +95,6 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               },
             ),
             const SizedBox(height: 10),
-            IconButton(
-              onPressed: () async {
-                await ct.loginGoogle();
-              },
-              icon: Image.asset(
-                ImagesEnum.google.path,
-                height: 25,
-              ),
-              style: IconButton.styleFrom(
-                shape: CircleBorder(
-                  side: BorderSide(color: color.primary, width: 2),
-                ),
-              ),
-              padding: const EdgeInsets.all(12),
-              color: color.primary,
-            ),
-            const SizedBox(height: 10),
             RichText(
               textAlign: TextAlign.center,
               text: CookieTextSpan(
@@ -134,6 +117,23 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(height: 10),
+            IconButton(
+              onPressed: () async {
+                await ct.loginGoogle();
+              },
+              icon: Image.asset(
+                ImagesEnum.google.path,
+                height: 25,
+              ),
+              style: IconButton.styleFrom(
+                shape: CircleBorder(
+                  side: BorderSide(color: color.primary, width: 2),
+                ),
+              ),
+              padding: const EdgeInsets.all(12),
+              color: color.primary,
             ),
           ],
         ),

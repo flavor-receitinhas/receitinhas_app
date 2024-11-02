@@ -68,6 +68,17 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
             maxLines: 1,
           ),
           const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerRight,
+            child: CookieTextButton(
+              text: AppLocalizations.of(context)!.loginForgetPassword,
+              onPressed: () {
+                Navigator.pushNamed(context, ForgetPasswordPage.route);
+              },
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const SizedBox(height: 10),
           IconButton(
             onPressed: () async {
               await ct.loginGoogle();
@@ -86,17 +97,6 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
             ),
             padding: const EdgeInsets.all(12),
             color: Theme.of(context).colorScheme.primary,
-          ),
-          const SizedBox(height: 10),
-          Align(
-            alignment: Alignment.centerRight,
-            child: CookieTextButton(
-              text: AppLocalizations.of(context)!.loginForgetPassword,
-              onPressed: () {
-                Navigator.pushNamed(context, ForgetPasswordPage.route);
-              },
-              color: Theme.of(context).colorScheme.primary,
-            ),
           ),
           const SizedBox(height: 20),
         ],
