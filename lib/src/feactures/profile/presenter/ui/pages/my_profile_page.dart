@@ -29,6 +29,7 @@ class _MyProfilePageState
       state: ct.state,
       done: () => SafeArea(
         child: ListView(
+          controller: ct.scrollController,
           children: [
             AppBarProfile(
               title: AppLocalizations.of(context)!.profileMyProfilePageTitle,
@@ -111,59 +112,69 @@ class _MyProfilePageState
                         .profileMyProfilePageSearchHint,
                   ),
                   const SizedBox(height: 20),
-                  ct.recipes.isEmpty
-                      ? CookieText(
-                          text: AppLocalizations.of(context)!
-                              .profileMyProfilePageNoRecipes,
-                          typography: CookieTypography.button,
-                        )
-                      : MasonryGridView.builder(
-                          gridDelegate:
-                              const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                          ),
-                          mainAxisSpacing: 6,
-                          crossAxisSpacing: 6,
-                          itemCount: ct.recipes.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final recipe = ct.recipes[index];
-                            return InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  ViewRecipesPage.route,
-                                  arguments: {'id': recipe.recipeId},
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(2),
-                                child: Stack(
-                                  alignment: Alignment.bottomLeft,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
-                                        Global.imageRecipeDefault,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: CookieText(
-                                        text: recipe.title,
-                                        color: Colors.white,
-                                        maxLine: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        typography: CookieTypography.button,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                  if (ct.recipes.isEmpty)
+                    CookieText(
+                      text: AppLocalizations.of(context)!
+                          .profileMyProfilePageNoRecipes,
+                      typography: CookieTypography.button,
+                    ),
+                  MasonryGridView.builder(
+                    gridDelegate:
+                        const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    mainAxisSpacing: 6,
+                    crossAxisSpacing: 6,
+                    itemCount: ct.recipes.length + 1,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      if (index < ct.recipes.length) {
+                        final recipe = ct.recipes[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              ViewRecipesPage.route,
+                              arguments: {'id': recipe.recipeId},
                             );
                           },
-                        ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(2),
+                            child: Stack(
+                              alignment: Alignment.bottomLeft,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    recipe.thumb ?? Global.imageRecipeDefault,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: CookieText(
+                                    text: recipe.title,
+                                    color: Colors.white,
+                                    maxLine: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    typography: CookieTypography.button,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      if (index >= ct.recipes.length && ct.hasMore) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        );
+                      }
+                      return SizedBox.shrink();
+                    },
+                  ),
                 ],
               ),
             ),
