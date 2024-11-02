@@ -13,6 +13,7 @@ import 'package:app_receitas/src/feactures/search/presenter/ui/pages/search_page
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:page_manager/manager_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,23 +22,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final HomeController ct = di();
+class _HomePageState extends ManagerPage<HomeController, HomePage> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        ct.addListener(() {
-          setState(() {});
-        });
-        ct.init();
-        ct.verifyOnboading().then(
-          (value) {
-            if (value && mounted) {
-              Navigator.pushNamed(context, OnBoardingPage.route);
-            }
-          },
-        );
+    ct.verifyOnboading().then(
+      (value) {
+        if (value && mounted) {
+          Navigator.pushNamed(context, OnBoardingPage.route);
+        }
       },
     );
     super.initState();
@@ -58,6 +50,7 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: CustomScrollView(
+            controller: ct.scrollController,
             slivers: [
               SliverToBoxAdapter(
                 child: Row(
@@ -109,46 +102,60 @@ class _HomePageState extends State<HomePage> {
               ),
               SliverToBoxAdapter(
                 child: MasonryGridView.builder(
-                    gridDelegate:
-                        const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    controller: ct.scrollController,
-                    itemCount: ct.recipes.length + 1,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      if (index == ct.recipes.length) {
-                        return ct.isLoadingMore
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              )
-                            : SizedBox.shrink();
-                      }
+                  gridDelegate:
+                      const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemCount: ct.recipes.length + 1,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    if (index < ct.recipes.length) {
+                      final recipe = ct.recipes[index];
                       return InkWell(
                         onTap: () {
                           Navigator.pushNamed(
                             context,
                             ViewRecipesPage.route,
-                            arguments: {'id': ct.recipes[index].recipeId},
+                            arguments: {'id': recipe.recipeId},
                           );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(2),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              ct.recipes[index].thumb ??
-                                  Global.imageRecipeDefault,
-                              fit: BoxFit.cover,
-                            ),
+                          child: Stack(
+                            alignment: Alignment.bottomLeft,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  recipe.thumb ?? Global.imageRecipeDefault,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: CookieText(
+                                  text: recipe.title,
+                                  color: Colors.white,
+                                  maxLine: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  typography: CookieTypography.button,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );
-                    }),
+                    }
+                    if (index >= ct.recipes.length && ct.hasMore) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      );
+                    }
+                    return SizedBox.shrink();
+                  },
+                ),
               )
             ],
           ),
