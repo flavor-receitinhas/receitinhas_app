@@ -60,6 +60,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  icons_launcher: ^3.0.0
 
 flutter:
   generate: true
@@ -75,3 +76,11 @@ flutter_native_splash:
   android_12:
     image: "assets/images/logo.png"
     icon_background_color: "#FFFFFF"
+
+icons_launcher:
+  image_path: "assets/images/ovo.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
