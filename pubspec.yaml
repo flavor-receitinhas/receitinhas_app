@@ -26,7 +26,6 @@ dependencies:
   google_sign_in: ^6.1.5
   get_it: ^7.6.2
   flutter_native_splash: ^2.4.1
-  mocktail: ^1.0.0
   email_validator: ^3.0.0
   dio: ^5.3.3
   flutter_carousel_widget: ^3.1.0
@@ -60,6 +59,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  mocktail: ^1.0.0
   icons_launcher: ^3.0.0
 
 flutter:
