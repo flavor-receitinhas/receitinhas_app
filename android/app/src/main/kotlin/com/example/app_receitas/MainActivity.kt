@@ -1,4 +1,4 @@
-package com.example.app_receitas
+package br.com.codeventura.flavor
 
 import io.flutter.embedding.android.FlutterActivity
 
