@@ -20,7 +20,7 @@ class FavoriteRepositoryImp extends FavoriteRepository {
   @override
   Future<FavoriteEntity> addFavorite(FavoriteDto favoriteDto) async {
     final result = await _apiRecipes.post(
-      path: '/$path}',
+      path: '/$path',
       body: _mapper.toJsonDto(favoriteDto),
     );
 
@@ -37,8 +37,6 @@ class FavoriteRepositoryImp extends FavoriteRepository {
       path:
           '/$path?sort=${orderBy.name}&isDesc=${orderBy.isDesc}&page=$page${search != null && search.isNotEmpty ? '&search=$search' : ''}',
     );
-
-    print(result);
 
     return (result as List)
         .map((e) => FavoriteUserMapper().fromJson(e))
