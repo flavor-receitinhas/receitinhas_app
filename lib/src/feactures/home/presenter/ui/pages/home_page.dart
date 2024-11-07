@@ -46,7 +46,10 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const CookieSvg(svg: IconsSvgEnum.edit),
       ),
-      done: () => SafeArea(
+      done: () => RefreshIndicator(
+        onRefresh: () async {
+          await ct.refresh();
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: CustomScrollView(

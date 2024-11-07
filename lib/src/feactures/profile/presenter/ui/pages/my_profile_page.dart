@@ -27,8 +27,12 @@ class _MyProfilePageState
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
-      done: () => SafeArea(
+      done: () => RefreshIndicator(
+        onRefresh: () async {
+          await ct.refresh();
+        },
         child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
           controller: ct.scrollController,
           children: [
             AppBarProfile(
