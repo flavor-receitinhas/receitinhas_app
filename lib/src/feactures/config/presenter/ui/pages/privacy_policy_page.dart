@@ -3,7 +3,7 @@ import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/back_butto
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
-   static const route = '/privacy-policy';
+  static const route = '/privacy-policy';
   const PrivacyPolicyPage({super.key});
 
   @override
