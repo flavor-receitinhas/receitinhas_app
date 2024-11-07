@@ -5,7 +5,10 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_span.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/feactures/auth/presenter/ui/organisms/custom_screen.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/privacy_policy_page.dart';
+import 'package:app_receitas/src/feactures/config/presenter/ui/pages/term_page.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:page_manager/export_manager.dart';
@@ -106,6 +109,10 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
                   CookieTextSpan(
                     text: AppLocalizations.of(context)!.registerTerms2,
                     color: color.primary,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, TermPage.route);
+                      },
                   ),
                   CookieTextSpan(
                     text: AppLocalizations.of(context)!.registerTerms3,
@@ -114,6 +121,10 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
                   CookieTextSpan(
                     text: AppLocalizations.of(context)!.registerTerms4,
                     color: color.primary,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, PrivacyPolicyPage.route);
+                      },
                   ),
                 ],
               ),
