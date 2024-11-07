@@ -71,8 +71,18 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               hintText: AppLocalizations.of(context)!.registerPassword,
               controller: ct.passwordController,
               prefixIcon: const Icon(Icons.lock_outline_rounded),
-              obscureText: true,
+              obscureText: ct.showPassword,
               maxLines: 1,
+              suffixIcon: GestureDetector(
+                child: ct.showPassword
+                    ? const Icon(Icons.visibility_off)
+                    : const Icon(Icons.visibility),
+                onTap: () {
+                  setState(() {
+                    ct.showPassword = !ct.showPassword;
+                  });
+                },
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppLocalizations.of(context)!
