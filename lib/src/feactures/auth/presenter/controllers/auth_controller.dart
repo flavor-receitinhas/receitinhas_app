@@ -13,6 +13,8 @@ class AuthController extends ManagerStore {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  bool showPassword = false;
+
   @override
   void init(Map<String, dynamic> arguments) {
     state = StateManager.done;
