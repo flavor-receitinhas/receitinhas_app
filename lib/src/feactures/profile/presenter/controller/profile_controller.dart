@@ -77,4 +77,14 @@ class ProfileController extends ManagerStore {
       ),
     );
   }
+
+  Future<void> refresh() => handleTry(
+        call: () async {
+          page = 0;
+          hasMore = true;
+          isLoading = false;
+          recipes = [];
+          await getMoreRecipes();
+        },
+      );
 }

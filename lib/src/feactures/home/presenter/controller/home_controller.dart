@@ -90,4 +90,14 @@ class HomeController extends ManagerStore {
     }
     return false;
   }
+
+  Future<void> refresh() => handleTry(
+        call: () async {
+          recipes = [];
+          page = 0;
+          hasMore = true;
+          isLoading = false;
+          await _loadMoreItems();
+        },
+      );
 }

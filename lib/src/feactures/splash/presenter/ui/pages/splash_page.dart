@@ -42,8 +42,10 @@ class _SplashPageState extends State<SplashPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Spacer(),
           Center(
             child: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.primary,
               radius: 110,
               child: Image.asset(
                 "assets/images/logo.png",
@@ -51,6 +53,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
           ),
+          Spacer(),
           CookieText(
             text: AppLocalizations.of(context)!.splashLoading,
           ),

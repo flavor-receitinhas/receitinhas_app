@@ -10,6 +10,7 @@ class CookieTextSpan extends TextSpan {
       {this.typography = CookieTypography.body,
       this.color,
       super.text,
+      super.recognizer,
       super.children});
   @override
   TextStyle? get style => GoogleFonts.lexendDecaTextTheme().bodySmall!.copyWith(

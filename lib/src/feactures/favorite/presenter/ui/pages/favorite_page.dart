@@ -1,6 +1,4 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_user_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/container_recipe.dart';
@@ -8,8 +6,8 @@ import 'package:app_receitas/src/feactures/favorite/presenter/ui/moleculs/organi
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/container_profile_image.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:page_manager/manager_page.dart';
 
 class FavoritePage extends StatefulWidget {
   static const route = '/favorite';
@@ -19,31 +17,20 @@ class FavoritePage extends StatefulWidget {
   State<FavoritePage> createState() => _FavoritePageState();
 }
 
-class _FavoritePageState extends State<FavoritePage> {
-  final FavoriteController ct = di();
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        ct.addListener(() {
-          setState(() {});
-        });
-        ct.init();
-      },
-    );
-
-    super.initState();
-  }
-
+class _FavoritePageState extends ManagerPage<FavoriteController, FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
-      done: () => SafeArea(
+      done: () => RefreshIndicator(
+        onRefresh: () async {
+          await ct.refreshPage();
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: CustomScrollView(
+            controller: ct.scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
             slivers: [
               SliverToBoxAdapter(
                 child: Row(
@@ -74,35 +61,35 @@ class _FavoritePageState extends State<FavoritePage> {
                       hintText:
                           AppLocalizations.of(context)!.favoritePageSearchHint,
                       controller: ct.favoriteController,
-                      onEditingComplete: ct.refreshPage,
+                      onEditingComplete: ct.refreshList,
                     ),
                     const SizedBox(height: 10),
                     OrganizeRecipes(
                       onTapRecent: () {
                         setState(() {
                           ct.order = OrderFavoriteEnum.createdAtAsc;
-                          ct.refreshPage();
+                          ct.refreshList();
                         });
                         Navigator.pop(context);
                       },
                       onTapOld: () {
                         setState(() {
                           ct.order = OrderFavoriteEnum.createdAtDesc;
-                          ct.refreshPage();
+                          ct.refreshList();
                         });
                         Navigator.pop(context);
                       },
                       onTapAsc: () {
                         setState(() {
                           ct.order = OrderFavoriteEnum.nameAsc;
-                          ct.refreshPage();
+                          ct.refreshList();
                         });
                         Navigator.pop(context);
                       },
                       onTapDesc: () async {
                         setState(() {
                           ct.order = OrderFavoriteEnum.nameDesc;
-                          ct.refreshPage();
+                          ct.refreshList();
                         });
                         Navigator.pop(context);
                       },
@@ -110,74 +97,78 @@ class _FavoritePageState extends State<FavoritePage> {
                   ],
                 ),
               ),
-              PagedSliverList<int, FavoriteUserDto>(
-                pagingController: ct.pagingController,
-                builderDelegate: PagedChildBuilderDelegate<FavoriteUserDto>(
-                  animateTransitions: true,
-                  firstPageErrorIndicatorBuilder: (context) {
-                    return Center(
-                      child: CookieText(
-                        text: AppLocalizations.of(context)!
-                            .favoritePageErrorLoading,
-                      ),
-                    );
-                  },
-                  noItemsFoundIndicatorBuilder: (context) {
-                    return Center(
-                      child: CookieText(
-                        text: AppLocalizations.of(context)!
-                            .favoritePageNoItemsFound,
-                      ),
-                    );
-                  },
-                  newPageErrorIndicatorBuilder: (context) {
-                    return Center(
-                      child: CookieText(
-                        text: AppLocalizations.of(context)!
-                            .favoritePageErrorLoading,
-                      ),
-                    );
-                  },
-                  itemBuilder: (context, favorite, idx) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            ViewRecipesPage.route,
-                            arguments: {
-                              'id': favorite.favorite.recipeId,
-                            },
-                          );
-                        },
-                        child: ContainerRecipe(
-                          nameRecipe: favorite.favorite.name,
-                          imageRecipe: favorite.thumb,
-                          timePrepared: favorite.timePrepared,
-                          onPressedFavorite: () {
-                            CookieDialog(
-                              title: CookieText(
-                                text: AppLocalizations.of(context)!
-                                    .favoriteRemoveFavoritesTitle,
-                                typography: CookieTypography.title,
-                              ),
-                              content: CookieText(
-                                text: AppLocalizations.of(context)!
-                                    .favoriteRemoveFavoritesContent,
-                              ),
-                              onPressedConfirm: () async {
-                                await ct.removeFavorite(favorite.favorite.id);
-                                ct.refreshPage();
-                                if (context.mounted) {
-                                  Navigator.pop(context);
-                                }
-                              },
-                            ).show(context);
-                          },
+              if (ct.listFavorite.isEmpty && !ct.isLoadingSearch)
+                SliverToBoxAdapter(
+                  child: Center(
+                    child: CookieText(
+                      text: AppLocalizations.of(context)!
+                          .favoritePageNoItemsFound,
+                    ),
+                  ),
+                ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: ct.listFavorite.length + 1,
+                  (context, index) {
+                    if (ct.isLoadingSearch) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).colorScheme.primary,
                         ),
-                      ),
-                    );
+                      );
+                    }
+                    if (index < ct.listFavorite.length) {
+                      final favorite = ct.listFavorite[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              ViewRecipesPage.route,
+                              arguments: {
+                                'id': favorite.favorite.recipeId,
+                              },
+                            );
+                          },
+                          child: ContainerRecipe(
+                            nameRecipe: favorite.favorite.name,
+                            imageRecipe: favorite.thumb,
+                            timePrepared: favorite.timePrepared,
+                            onPressedFavorite: () {
+                              CookieDialog(
+                                title: CookieText(
+                                  text: AppLocalizations.of(context)!
+                                      .favoriteRemoveFavoritesTitle,
+                                  typography: CookieTypography.title,
+                                ),
+                                content: CookieText(
+                                  text: AppLocalizations.of(context)!
+                                      .favoriteRemoveFavoritesContent,
+                                ),
+                                onPressedConfirm: () async {
+                                  await ct.removeFavorite(favorite.favorite.id);
+                                  ct.refreshList();
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                  }
+                                },
+                              ).show(context);
+                            },
+                          ),
+                        ),
+                      );
+                    }
+                    if (index >= ct.listFavorite.length &&
+                        ct.hasMore &&
+                        ct.listFavorite.isNotEmpty) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      );
+                    }
+                    return SizedBox.shrink();
                   },
                 ),
               ),
