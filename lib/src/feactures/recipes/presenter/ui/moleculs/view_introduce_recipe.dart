@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,6 +14,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
   final bool isCreate;
   final void Function()? onPressedFavorite;
   final bool isFavorite;
+  final String userName;
+  final void Function()? onPressedUser;
 
   const ViewIntroduceRecipe({
     super.key,
@@ -25,6 +27,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
     required this.isCreate,
     this.onPressedFavorite,
     this.isFavorite = false,
+    required this.userName,
+    this.onPressedUser,
   });
 
   @override
@@ -35,6 +39,25 @@ class ViewIntroduceRecipe extends StatelessWidget {
         CookieText(
           text: title,
           typography: CookieTypography.title,
+        ),
+        InkWell(
+          onTap: onPressedUser,
+          child: RichText(
+            text: CookieTextSpan(
+              children: [
+                CookieTextSpan(
+                  text: AppLocalizations.of(context)!.recipeIntroduceBy,
+                ),
+                CookieTextSpan(
+                  text: ' ',
+                ),
+                CookieTextSpan(
+                  text: userName,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ],
+            ),
+          ),
         ),
         const SizedBox(height: 20),
         subTitle!.isNotEmpty && subTitle != null

@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
@@ -62,6 +63,7 @@ class CreateViewRecipePage extends StatelessWidget {
                     portion: ct.portion,
                     subTitle: ct.subTitleController.text,
                     timePrepared: ct.timePreparedRecipe.inMinutes,
+                    userName: Global.profile!.name,
                   ),
                   const SizedBox(height: 20),
                   ViewDetailsRecipe(

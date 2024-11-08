@@ -2,11 +2,13 @@ import 'package:app_receitas/src/core/services/api/api_recipes.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/ingredient_recipe_response_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_get_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/image_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_get_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/mappers/recipe_mapper.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
@@ -18,12 +20,14 @@ class RecipeRepositoryImp implements RecipeRepository {
   final ApiRecipes _apiRecipes;
   final ImageMapper _imageMapper;
   final IngredientRecipeDtoMapper _ingredientDtoMapper;
+  final RecipeGetMapper _recipeGetMapper;
 
   RecipeRepositoryImp(
     this._mapper,
     this._apiRecipes,
     this._imageMapper,
     this._ingredientDtoMapper,
+    this._recipeGetMapper,
   );
 
   String path = '/recipe';
@@ -37,10 +41,10 @@ class RecipeRepositoryImp implements RecipeRepository {
   }
 
   @override
-  Future<RecipeEntity> getRecipe(String id) async {
+  Future<RecipeGetDto> getRecipe(String id) async {
     final result = await _apiRecipes.get(path: '$path/$id');
 
-    return _mapper.fromMap(result);
+    return _recipeGetMapper.fromMap(result);
   }
 
   @override

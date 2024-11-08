@@ -13,16 +13,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:page_manager/export_manager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MyProfilePage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   static const route = '/my-perfil';
-  const MyProfilePage({super.key});
+  const ProfilePage({super.key});
 
   @override
-  State<MyProfilePage> createState() => _MyProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _MyProfilePageState
-    extends ManagerPage<ProfileController, MyProfilePage> {
+class _ProfilePageState
+    extends ManagerPage<ProfileController, ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
@@ -35,11 +35,19 @@ class _MyProfilePageState
           physics: const AlwaysScrollableScrollPhysics(),
           controller: ct.scrollController,
           children: [
-            AppBarProfile(
-              title: AppLocalizations.of(context)!.profileMyProfilePageTitle,
-              subTitle:
-                  AppLocalizations.of(context)!.profileMyProfilePageSubtitle,
-            ),
+            ct.id == null
+                ? AppBarProfile(
+                    title:
+                        AppLocalizations.of(context)!.profileMyProfilePageTitle,
+                    subTitle: AppLocalizations.of(context)!
+                        .profileMyProfilePageSubtitle,
+                  )
+                : AppBarProfile(
+                    title: AppLocalizations.of(context)!
+                        .profileViewProfilePageTitle,
+                    subTitle: AppLocalizations.of(context)!
+                        .profileViewProfilePageSubtitle,
+                  ),
             CookieButton(
               label: AppLocalizations.of(context)!.profileMyProfilePageBack,
               onPressed: () {
@@ -63,11 +71,6 @@ class _MyProfilePageState
                               text: ct.profile.name,
                               typography: CookieTypography.title,
                             ),
-                            // CookieText(
-                            //   text: 'mestre-cuca',
-                            //   color: theme.primary,
-                            //   typography: CookieTypography.button,
-                            // ),
                             const SizedBox(height: 10),
                             CookieText(
                               text: ct.profile.biography,
@@ -88,28 +91,29 @@ class _MyProfilePageState
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CookieButton(
-                          label: AppLocalizations.of(context)!
-                              .profileMyProfilePageEditProfile,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              EditProfilePage.route,
-                              arguments: {'profile': ct.profile},
-                            ).then((value) {
-                              if (value == true) {
-                                ct.getProfile(Global.user!.id);
-                              }
-                            });
-                          },
-                        ),
-                      )
-                    ],
-                  ),
+                  if (ct.id == null)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CookieButton(
+                            label: AppLocalizations.of(context)!
+                                .profileMyProfilePageEditProfile,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                EditProfilePage.route,
+                                arguments: {'profile': ct.profile},
+                              ).then((value) {
+                                if (value == true) {
+                                  ct.getProfile(Global.user!.id);
+                                }
+                              });
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   const SizedBox(height: 20),
                   CookieTextFieldSearch(
                     hintText: AppLocalizations.of(context)!
