@@ -46,10 +46,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
             text: CookieTextSpan(
               children: [
                 CookieTextSpan(
-                  text: AppLocalizations.of(context)!.recipeIntroduceBy,
-                ),
-                CookieTextSpan(
-                  text: ' ',
+                  text: '${AppLocalizations.of(context)!.recipeIntroduceBy} ',
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 CookieTextSpan(
                   text: userName,
@@ -76,7 +74,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      const CookieSvg(svg: IconsSvgEnum.clock),
+                      const CookieSvg(svg: IconsSvgEnum.clock, height: 20),
                       const SizedBox(height: 5),
                       CookieText(
                         text:
@@ -87,9 +85,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                   const SizedBox(width: 16),
                   Column(
                     children: [
-                      const CookieSvg(
-                        svg: IconsSvgEnum.fire,
-                      ),
+                      const CookieSvg(svg: IconsSvgEnum.fire, height: 20),
                       const SizedBox(height: 5),
                       CookieText(text: difficultyRecipe)
                     ],
@@ -97,7 +93,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                   const SizedBox(width: 16),
                   Column(
                     children: [
-                      const CookieSvg(svg: IconsSvgEnum.pot),
+                      const CookieSvg(svg: IconsSvgEnum.pot, height: 20),
                       const SizedBox(height: 5),
                       CookieText(
                         text: portion != 1
@@ -114,6 +110,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
               child: InkWell(
                 onTap: onPressedFavorite,
                 child: Container(
+                  width: 80,
                   padding: const EdgeInsets.all(28),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondary,
