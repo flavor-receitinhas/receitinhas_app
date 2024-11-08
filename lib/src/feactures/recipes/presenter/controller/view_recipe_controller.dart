@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/dtos/favorite_recipe_dto.dart';
 import 'package:app_receitas/src/feactures/favorite/domain/repositories/favorite_repository.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_get_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
-import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
 import 'package:page_manager/export_manager.dart';
 
@@ -14,7 +14,7 @@ class ViewRecipeController extends ManagerStore {
   ViewRecipeController(this._recipeRepository, this._favoriteRepository);
 
   String id = '';
-  late RecipeEntity recipe;
+  late RecipeGetDto recipe;
   List<ImageEntity> images = [];
   List<IngredientRecipeEntity> ingredients = [];
   FavoriteRecipeDto? favoriteRecipeDto;
@@ -30,7 +30,7 @@ class ViewRecipeController extends ManagerStore {
         },
       );
 
-  Future<RecipeEntity> getRecipe() async {
+  Future<RecipeGetDto> getRecipe() async {
     return await _recipeRepository.getRecipe(id);
   }
 

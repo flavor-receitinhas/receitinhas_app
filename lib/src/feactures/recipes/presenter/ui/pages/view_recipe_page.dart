@@ -1,6 +1,8 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/view_profile_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
@@ -58,23 +60,37 @@ class _ViewRecipesPageState
                     .toList()),
             const SizedBox(height: 10),
             ViewIntroduceRecipe(
-              title: ct.recipe.title,
-              difficultyRecipe: ct.recipe.difficultyRecipe.name,
-              portion: ct.recipe.portion,
-              subTitle: ct.recipe.subTitle,
-              timePrepared: ct.recipe.timePrepared,
-              isCreate: ct.recipe.userId == Global.user!.id,
+              title: ct.recipe.recipe.title,
+              difficultyRecipe: ct.recipe.recipe.difficultyRecipe.name,
+              portion: ct.recipe.recipe.portion,
+              subTitle: ct.recipe.recipe.subTitle,
+              timePrepared: ct.recipe.recipe.timePrepared,
+              isCreate: ct.recipe.recipe.userId == Global.user!.id,
               isFavorite: ct.favoriteRecipeDto!.exists,
+              userName: ct.recipe.authorName,
+              onPressedUser: () {
+                ct.recipe.recipe.userId == Global.user!.id
+                    ? Navigator.pushNamed(
+                        context,
+                        MyProfilePage.route,
+                        arguments: {'profile': Global.profile},
+                      )
+                    : Navigator.pushNamed(
+                        context,
+                        ViewProfilePage.route,
+                        arguments: {'id': ct.recipe.recipe.userId},
+                      );
+              },
               onPressedFavorite: () {
                 ct.addAndRemoveFavorite();
               },
             ),
             const SizedBox(height: 20),
             ViewDetailsRecipe(
-              details: ct.recipe.details!,
+              details: ct.recipe.recipe.details!,
               ingredients: ct.ingredients,
-              serveFood: ct.recipe.serveFood!,
-              instruction: ct.recipe.instruction,
+              serveFood: ct.recipe.recipe.serveFood!,
+              instruction: ct.recipe.recipe.instruction,
             ),
             const SizedBox(height: 10),
           ],

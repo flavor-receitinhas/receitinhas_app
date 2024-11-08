@@ -1,4 +1,5 @@
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
+import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_get_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/entities/recipe_entity.dart';
@@ -6,7 +7,7 @@ import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum
 
 abstract class RecipeRepository {
   Future<RecipeEntity> createRecipe(RecipeEntity recipe);
-  Future<RecipeEntity> getRecipe(String id);
+  Future<RecipeGetDto> getRecipe(String id);
   Future<List<RecipeDto>> getUserRecipes({required String userID, int page, bool isDesc = true});
   Future<List<RecipeDto>> listRecipe({
     String? search,
