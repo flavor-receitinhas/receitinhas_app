@@ -1,8 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
-import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/my_profile_page.dart';
-import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/view_profile_page.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/profile_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/controller/view_recipe_controller.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
@@ -72,12 +71,12 @@ class _ViewRecipesPageState
                 ct.recipe.recipe.userId == Global.user!.id
                     ? Navigator.pushNamed(
                         context,
-                        MyProfilePage.route,
+                        ProfilePage.route,
                         arguments: {'profile': Global.profile},
                       )
                     : Navigator.pushNamed(
                         context,
-                        ViewProfilePage.route,
+                        ProfilePage.route,
                         arguments: {'id': ct.recipe.recipe.userId},
                       );
               },

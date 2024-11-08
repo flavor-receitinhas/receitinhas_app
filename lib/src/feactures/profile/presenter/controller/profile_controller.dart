@@ -12,6 +12,7 @@ class ProfileController extends ManagerStore {
   ProfileController(this._repository, this._recipeRepository);
 
   late ProfileEntity profile;
+  String? id;
   List<RecipeDto> recipes = [];
   final ScrollController scrollController = ScrollController();
   int page = 0;
@@ -22,26 +23,34 @@ class ProfileController extends ManagerStore {
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
-          profile = arguments['profile'] as ProfileEntity;
+          if (arguments['profile'] is ProfileEntity) {
+            profile = arguments['profile'] as ProfileEntity;
+          }
+          if (arguments['id'] is String) {
+            id = arguments['id'] as String;
+          }
+
+          if (id != null) {
+            profile = await getProfile(id!);
+          }
 
           await getMoreRecipes();
-
-          scrollController.addListener(() async {
-            if (scrollController.position.pixels ==
-                    scrollController.position.maxScrollExtent &&
-                hasMore &&
-                !isLoading) {
-              await getMoreRecipes();
-            }
-          });
+          _setupScrollController();
         },
       );
 
-  Future<void> getProfile(String id) => handleTry(
-        call: () async {
-          profile = await _repository.getProfile(id);
-        },
-      );
+  Future<ProfileEntity> getProfile(String id) async =>
+      await _repository.getProfile(id);
+
+  void _setupScrollController() {
+    scrollController.addListener(() async {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          !isLoading) {
+        await getMoreRecipes();
+      }
+    });
+  }
 
   Future<List<RecipeDto>> getUserRecipes(int page) async {
     final result = await _recipeRepository.getUserRecipes(

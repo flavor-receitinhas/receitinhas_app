@@ -4,39 +4,56 @@ import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field_search.dart';
-import 'package:app_receitas/src/feactures/profile/presenter/controller/my_profile_controller.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/controller/profile_controller.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/ui/atomic/appbar_profile.dart';
+import 'package:app_receitas/src/feactures/profile/presenter/ui/pages/edit_profile_page.dart';
 import 'package:app_receitas/src/feactures/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:page_manager/manager_page.dart';
+import 'package:page_manager/export_manager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ViewProfilePage extends StatefulWidget {
-  static const route = '/view-profile';
-  const ViewProfilePage({super.key});
+class ProfilePage extends StatefulWidget {
+  static const route = '/my-perfil';
+  const ProfilePage({super.key});
 
   @override
-  State<ViewProfilePage> createState() => _ViewProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ViewProfilePageState
-    extends ManagerPage<MyProfileController, ViewProfilePage> {
+class _ProfilePageState
+    extends ManagerPage<ProfileController, ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
-      done: () => SafeArea(
+      done: () => RefreshIndicator(
+        onRefresh: () async {
+          await ct.refresh();
+        },
         child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
           controller: ct.scrollController,
           children: [
-            AppBarProfile(
-              title: AppLocalizations.of(context)!.profileViewProfilePageTitle,
-              subTitle:
-                  AppLocalizations.of(context)!.profileViewProfilePageSubtitle,
-            ),
+            ct.id == null
+                ? AppBarProfile(
+                    title:
+                        AppLocalizations.of(context)!.profileMyProfilePageTitle,
+                    subTitle: AppLocalizations.of(context)!
+                        .profileMyProfilePageSubtitle,
+                  )
+                : AppBarProfile(
+                    title: AppLocalizations.of(context)!
+                        .profileViewProfilePageTitle,
+                    subTitle: AppLocalizations.of(context)!
+                        .profileViewProfilePageSubtitle,
+                  ),
             CookieButton(
-              label: AppLocalizations.of(context)!.profileViewProfilePageBack,
+              label: AppLocalizations.of(context)!.profileMyProfilePageBack,
+              onPressed: () {
+                Global.profile = ct.profile;
+                Navigator.pop(context);
+              },
             ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -51,32 +68,56 @@ class _ViewProfilePageState
                           children: [
                             const SizedBox(height: 10),
                             CookieText(
-                              text: ct.profile!.name,
+                              text: ct.profile.name,
                               typography: CookieTypography.title,
                             ),
                             const SizedBox(height: 10),
                             CookieText(
-                              text: ct.profile!.biography,
+                              text: ct.profile.biography,
                             ),
                           ],
                         ),
                       ),
+                      const SizedBox(width: 10),
                       CircleAvatar(
                         radius: 45,
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
-                        backgroundImage: ct.profile!.image != null &&
-                                ct.profile!.image!.isNotEmpty
-                            ? NetworkImage(ct.profile!.image!)
+                        backgroundImage: ct.profile.image != null
+                            ? NetworkImage(ct.profile.image!)
                             : AssetImage(ImageProfileEnum.avatar.path)
                                 as ImageProvider,
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
+                  if (ct.id == null)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CookieButton(
+                            label: AppLocalizations.of(context)!
+                                .profileMyProfilePageEditProfile,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                EditProfilePage.route,
+                                arguments: {'profile': ct.profile},
+                              ).then((value) {
+                                if (value == true) {
+                                  ct.getProfile(Global.user!.id);
+                                }
+                              });
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  const SizedBox(height: 20),
                   CookieTextFieldSearch(
                     hintText: AppLocalizations.of(context)!
-                        .profileViewProfilePageSearchHint,
+                        .profileMyProfilePageSearchHint,
                   ),
                   const SizedBox(height: 20),
                   if (ct.recipes.isEmpty)
