@@ -55,9 +55,12 @@ class ViewDetailsRecipe extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
+                  var quantity = ingredients[index].quantity;
+                  var formattedQuantity =
+                      quantity % 1 == 0 ? quantity.toInt() : quantity;
                   return CookieText(
                     text:
-                        '${ingredients[index].ingredient.name} - ${ingredients[index].quantity} ${ingredients[index].unit}',
+                        '${ingredients[index].ingredient.name} - $formattedQuantity ${ingredients[index].unit}',
                   );
                 },
               )
