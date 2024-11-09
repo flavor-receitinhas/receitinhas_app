@@ -21,8 +21,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState
-    extends ManagerPage<ProfileController, ProfilePage> {
+class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
@@ -118,6 +117,8 @@ class _ProfilePageState
                   CookieTextFieldSearch(
                     hintText: AppLocalizations.of(context)!
                         .profileMyProfilePageSearchHint,
+                    controller: ct.searchController,
+                    onEditingComplete: ct.refresh,
                   ),
                   const SizedBox(height: 20),
                   if (ct.recipes.isEmpty)

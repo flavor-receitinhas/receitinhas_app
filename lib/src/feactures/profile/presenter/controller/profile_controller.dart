@@ -19,6 +19,7 @@ class ProfileController extends ManagerStore {
   final int limit = 25;
   bool hasMore = true;
   bool isLoading = false;
+  TextEditingController searchController = TextEditingController();
 
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
@@ -56,6 +57,7 @@ class ProfileController extends ManagerStore {
     final result = await _recipeRepository.getUserRecipes(
       userID: profile.userId,
       page: page,
+      search: searchController.text,
     );
     return result;
   }
