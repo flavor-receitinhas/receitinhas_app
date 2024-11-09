@@ -39,6 +39,7 @@ class ProfileModule extends RegisterModule {
     di.registerFactory<EditProfileController>(
       () => EditProfileController(
         di(),
+        di(),
       ),
     );
   }

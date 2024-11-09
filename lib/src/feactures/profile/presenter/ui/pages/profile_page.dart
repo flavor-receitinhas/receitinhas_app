@@ -24,7 +24,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    print(Global.profile!.image);
     return CookiePage(
       state: ct.state,
       done: () => RefreshIndicator(
@@ -80,7 +79,8 @@ class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         backgroundImage: ct.profile.image != null
-                            ? NetworkImage('${ct.profile.image!}?${DateTime.now().millisecondsSinceEpoch}')
+                            ? NetworkImage(
+                                '${ct.profile.image!}?${DateTime.now().millisecondsSinceEpoch}')
                             : AssetImage(ImageProfileEnum.avatar.path)
                                 as ImageProvider,
                       ),

@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
 import 'package:app_receitas/src/feactures/profile/presenter/controller/edit_profile_controller.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaveSheet extends StatelessWidget {
   final EditProfileController ct;
-  const SaveSheet({super.key, required this.ct});
+  final GlobalKey<FormState> formKey;
+  const SaveSheet({super.key, required this.ct, required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,9 @@ class SaveSheet extends StatelessWidget {
         CookieButton(
           label: AppLocalizations.of(context)!.profileSaveSheetSaveChanges,
           onPressed: () async {
+            if (!formKey.currentState!.validate()) {
+              return;
+            }
             ct.profile!.biography = ct.biographyController.text;
             if ((ct.image != null && ct.image!.path.isNotEmpty) ||
                 ct.isRemoveImage) {
@@ -27,6 +32,9 @@ class SaveSheet extends StatelessWidget {
             }
             if (ct.profile!.biography != ct.biographyController.text) {
               await ct.updateProfile(ct.profile!);
+            }
+            if (ct.userNameController.text != Global.profile!.name) {
+              await ct.updateNameProfile();
             }
             if (context.mounted) {
               Navigator.pop(context, true);

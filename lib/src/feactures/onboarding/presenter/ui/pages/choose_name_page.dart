@@ -73,6 +73,9 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                     label:
                         AppLocalizations.of(context)!.difficultyRecipesConfirm,
                     onPressed: () async {
+                      if (!formKey.currentState!.validate()) {
+                        return;
+                      }
                       await widget.ct.updateFoodPref();
                       await widget.ct.updateNameProfile();
                       if (context.mounted) {
