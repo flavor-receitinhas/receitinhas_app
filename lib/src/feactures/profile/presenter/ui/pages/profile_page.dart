@@ -24,6 +24,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    print(Global.profile!.image);
     return CookiePage(
       state: ct.state,
       done: () => RefreshIndicator(
@@ -49,10 +50,6 @@ class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
                   ),
             CookieButton(
               label: AppLocalizations.of(context)!.profileMyProfilePageBack,
-              onPressed: () {
-                Global.profile = ct.profile;
-                Navigator.pop(context);
-              },
             ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -83,7 +80,7 @@ class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         backgroundImage: ct.profile.image != null
-                            ? NetworkImage(ct.profile.image!)
+                            ? NetworkImage('${ct.profile.image!}?${DateTime.now().millisecondsSinceEpoch}')
                             : AssetImage(ImageProfileEnum.avatar.path)
                                 as ImageProvider,
                       ),
@@ -103,11 +100,15 @@ class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
                                 context,
                                 EditProfilePage.route,
                                 arguments: {'profile': ct.profile},
-                              ).then((value) {
-                                if (value == true) {
-                                  ct.getProfile(Global.user!.id);
-                                }
-                              });
+                              ).then(
+                                (value) async {
+                                  if (value == true) {
+                                    final profile =
+                                        (await ct.getProfile(Global.user!.id))!;
+                                    ct.profile = profile;
+                                  }
+                                },
+                              );
                             },
                           ),
                         )

@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/feactures/profile/domain/dtos/profile_dto.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
@@ -24,15 +25,14 @@ class ProfileController extends ManagerStore {
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
-          if (arguments['profile'] is ProfileEntity) {
-            profile = arguments['profile'] as ProfileEntity;
-          }
           if (arguments['id'] is String) {
             id = arguments['id'] as String;
           }
 
           if (id != null) {
-            profile = await getProfile(id!);
+            profile = (await getProfile(id!))!;
+          } else {
+            profile = await _repository.getProfile(Global.user!.id);
           }
 
           await getMoreRecipes();
@@ -40,8 +40,13 @@ class ProfileController extends ManagerStore {
         },
       );
 
-  Future<ProfileEntity> getProfile(String id) async =>
-      await _repository.getProfile(id);
+  Future<ProfileEntity?> getProfile(String id) async => await handleTry(
+        call: () async {
+          final profile = await _repository.getProfile(id);
+          Global.profile = profile;
+          return profile;
+        },
+      );
 
   void _setupScrollController() {
     scrollController.addListener(() async {

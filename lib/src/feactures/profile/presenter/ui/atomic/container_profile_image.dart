@@ -18,7 +18,6 @@ class _ContainerProfileImageState extends State<ContainerProfileImage> {
           Navigator.pushNamed(
             context,
             ProfilePage.route,
-            arguments: {'profile': Global.profile},
           ).then((value) => setState(() {}));
         },
         child: Container(
@@ -31,7 +30,7 @@ class _ContainerProfileImageState extends State<ContainerProfileImage> {
               image: Global.profile?.image != null &&
                       Global.profile!.image!.isNotEmpty
                   ? NetworkImage(
-                      Global.profile!.image!,
+                      '${Global.profile!.image!}?${DateTime.now().millisecondsSinceEpoch}',
                     )
                   : AssetImage(ImageProfileEnum.avatar.path)
                       as ImageProvider<Object>,

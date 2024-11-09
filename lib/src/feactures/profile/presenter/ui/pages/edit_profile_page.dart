@@ -93,7 +93,9 @@ class _EditProfilePageState
                             ct.profile!.image!.isNotEmpty) {
                           return CircleAvatar(
                             radius: 60,
-                            backgroundImage: NetworkImage(ct.profile!.image!),
+                            backgroundImage: NetworkImage(
+                              '${ct.profile!.image!}?${DateTime.now().millisecondsSinceEpoch}',
+                            ),
                           );
                         }
                         return CircleAvatar(
