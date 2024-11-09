@@ -47,7 +47,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
               children: [
                 CookieTextSpan(
                   text: '${AppLocalizations.of(context)!.recipeIntroduceBy} ',
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 CookieTextSpan(
                   text: userName,
