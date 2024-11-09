@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
 import 'package:app_receitas/src/feactures/onboarding/data/mappers/user_food_pref_mapper.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/entities/user_food_pref_entity.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_omboarding_repository.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_onboarding_repository.dart';
 
-class UserOmboardingRepositoryImp implements UserOmboardingRepository {
+class UserOmboardingRepositoryImp implements UserOnboardingRepository {
   final UserFoodPrefMapper _mapper;
   final ApiRecipes _apiRecipes;
 

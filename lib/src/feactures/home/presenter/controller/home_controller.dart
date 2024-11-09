@@ -1,5 +1,5 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_omboarding_repository.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_onboarding_repository.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/feactures/recipes/domain/repositories/recipe_repository.dart';
@@ -8,7 +8,7 @@ import 'package:page_manager/export_manager.dart';
 
 class HomeController extends ManagerStore {
   final RecipeRepository _recipeRepository;
-  final UserOmboardingRepository _userFoodPrefRepository;
+  final UserOnboardingRepository _userFoodPrefRepository;
   final ProfileRepository _profileRepository;
 
   HomeController(this._recipeRepository, this._userFoodPrefRepository,

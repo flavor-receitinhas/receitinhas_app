@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_onboarding_repository.dart';
 import 'package:app_receitas/src/feactures/profile/domain/dtos/profile_dto.dart';
 import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
 import 'package:app_receitas/src/feactures/profile/domain/repositories/profile_repository.dart';
@@ -8,21 +10,32 @@ import 'package:page_manager/export_manager.dart';
 
 class EditProfileController extends ManagerStore {
   final ProfileRepository _repository;
+  final UserOnboardingRepository _onBoardingRepository;
 
-  EditProfileController(this._repository);
+  EditProfileController(this._repository, this._onBoardingRepository);
 
   File? image;
   ProfileEntity? profile;
   TextEditingController biographyController = TextEditingController();
   bool isRemoveImage = false;
+  TextEditingController userNameController = TextEditingController();
 
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
+          userNameController.text = Global.profile?.name ?? '';
           profile = arguments['profile'] as ProfileEntity;
           biographyController.text = profile!.biography;
         },
       );
+
+  Future<void> updateNameProfile() => handleTry(call: () async {
+        await _onBoardingRepository.updateUserName(
+          userId: Global.user!.id,
+          name: userNameController.text,
+        );
+        Global.profile?.name = userNameController.text;
+      });
 
   Future<void> updateImageProfile() async {
     if (image == null) return;

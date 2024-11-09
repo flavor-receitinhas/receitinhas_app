@@ -3,11 +3,11 @@ import 'package:app_receitas/src/feactures/onboarding/domain/entities/user_food_
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/proteins_enum.dart';
-import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_omboarding_repository.dart';
+import 'package:app_receitas/src/feactures/onboarding/domain/repositories/user_onboarding_repository.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingController extends ChangeNotifier {
-  final UserOmboardingRepository _repository;
+  final UserOnboardingRepository _repository;
   OnBoardingController(this._repository);
 
   PageController pageController = PageController();

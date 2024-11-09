@@ -21,8 +21,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState
-    extends ManagerPage<ProfileController, ProfilePage> {
+class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
@@ -50,10 +49,6 @@ class _ProfilePageState
                   ),
             CookieButton(
               label: AppLocalizations.of(context)!.profileMyProfilePageBack,
-              onPressed: () {
-                Global.profile = ct.profile;
-                Navigator.pop(context);
-              },
             ).back(context),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -84,7 +79,8 @@ class _ProfilePageState
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         backgroundImage: ct.profile.image != null
-                            ? NetworkImage(ct.profile.image!)
+                            ? NetworkImage(
+                                '${ct.profile.image!}?${DateTime.now().millisecondsSinceEpoch}')
                             : AssetImage(ImageProfileEnum.avatar.path)
                                 as ImageProvider,
                       ),
@@ -104,11 +100,16 @@ class _ProfilePageState
                                 context,
                                 EditProfilePage.route,
                                 arguments: {'profile': ct.profile},
-                              ).then((value) {
-                                if (value == true) {
-                                  ct.getProfile(Global.user!.id);
-                                }
-                              });
+                              ).then(
+                                (value) async {
+                                  if (value == true) {
+                                    final profile =
+                                        (await ct.getProfile(Global.user!.id))!;
+                                    ct.profile = profile;
+                                    Global.profile = profile;
+                                  }
+                                },
+                              );
                             },
                           ),
                         )
@@ -118,6 +119,8 @@ class _ProfilePageState
                   CookieTextFieldSearch(
                     hintText: AppLocalizations.of(context)!
                         .profileMyProfilePageSearchHint,
+                    controller: ct.searchController,
+                    onEditingComplete: ct.refresh,
                   ),
                   const SizedBox(height: 20),
                   if (ct.recipes.isEmpty)

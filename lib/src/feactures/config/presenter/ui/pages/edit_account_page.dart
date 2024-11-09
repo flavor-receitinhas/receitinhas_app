@@ -1,10 +1,8 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/feactures/cookie_text.dart';
-import 'package:app_receitas/src/core/widgets/feactures/cookie_text_field.dart';
 import 'package:app_receitas/src/feactures/config/presenter/controllers/edit_account_controller.dart';
 import 'package:app_receitas/src/feactures/config/presenter/ui/atomic/select_container_preference.dart';
 import 'package:app_receitas/src/feactures/onboarding/domain/enums/dietary_restriction_enum.dart';
@@ -46,9 +44,6 @@ class _EditAccountPageState
               ct.selectRestriction != ct.userPref!.dietaryRestriction) {
             await ct.updateOnBoarding();
           }
-          if (ct.userNameController.text != Global.profile!.name) {
-            await ct.updateNameProfile();
-          }
           if (context.mounted) {
             Navigator.pop(context);
           }
@@ -71,17 +66,6 @@ class _EditAccountPageState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
-                      CookieText(
-                        text: AppLocalizations.of(context)!.configName,
-                        typography: CookieTypography.button,
-                      ),
-                      const SizedBox(height: 10),
-                      CookieTextField.outline(
-                        hintText: AppLocalizations.of(context)!.configNameHint,
-                        controller: ct.userNameController,
-                        validator: ValidatorOnboarding.validateName,
-                      ),
                       const SizedBox(height: 20),
                       CookieText(
                         text:

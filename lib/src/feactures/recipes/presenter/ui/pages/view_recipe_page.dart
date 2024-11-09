@@ -72,7 +72,6 @@ class _ViewRecipesPageState
                     ? Navigator.pushNamed(
                         context,
                         ProfilePage.route,
-                        arguments: {'profile': Global.profile},
                       )
                     : Navigator.pushNamed(
                         context,

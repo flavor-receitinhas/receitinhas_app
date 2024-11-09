@@ -8,7 +8,12 @@ import 'package:app_receitas/src/feactures/recipes/domain/enum/order_recipe_enum
 abstract class RecipeRepository {
   Future<RecipeEntity> createRecipe(RecipeEntity recipe);
   Future<RecipeGetDto> getRecipe(String id);
-  Future<List<RecipeDto>> getUserRecipes({required String userID, int page, bool isDesc = true});
+  Future<List<RecipeDto>> getUserRecipes({
+    required String userID,
+    int page,
+    bool isDesc = true,
+    String? search,
+  });
   Future<List<RecipeDto>> listRecipe({
     String? search,
     bool isDesc = true,
