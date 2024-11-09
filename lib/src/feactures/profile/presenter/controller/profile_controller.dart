@@ -43,7 +43,6 @@ class ProfileController extends ManagerStore {
   Future<ProfileEntity?> getProfile(String id) async => await handleTry(
         call: () async {
           final profile = await _repository.getProfile(id);
-          Global.profile = profile;
           return profile;
         },
       );

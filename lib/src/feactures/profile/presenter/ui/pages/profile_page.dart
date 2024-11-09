@@ -106,6 +106,7 @@ class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
                                     final profile =
                                         (await ct.getProfile(Global.user!.id))!;
                                     ct.profile = profile;
+                                    Global.profile = profile;
                                   }
                                 },
                               );
