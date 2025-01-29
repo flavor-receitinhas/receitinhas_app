@@ -1,17 +1,17 @@
 import 'package:app_receitas/src/core/global/register_module.dart';
-import 'package:app_receitas/src/feactures/auth/auth_module.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/choose_auth_page.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/login_page.dart';
-import 'package:app_receitas/src/feactures/auth/presenter/ui/pages/register_page.dart';
+import 'package:app_receitas/src/features/auth/auth_module.dart';
+import 'package:app_receitas/src/features/auth/presenter/ui/pages/choose_auth_page.dart';
+import 'package:app_receitas/src/features/auth/presenter/ui/pages/login_page.dart';
+import 'package:app_receitas/src/features/auth/presenter/ui/pages/register_page.dart';
 
-import 'package:app_receitas/src/feactures/config/config_module.dart';
-import 'package:app_receitas/src/feactures/favorite/presenter/favorite_module.dart';
-import 'package:app_receitas/src/feactures/home/home_module.dart';
-import 'package:app_receitas/src/feactures/onboarding/onboarding_module.dart';
-import 'package:app_receitas/src/feactures/profile/perfil_module.dart';
-import 'package:app_receitas/src/feactures/recipes/recipe_module.dart';
-import 'package:app_receitas/src/feactures/search/search_module.dart';
-import 'package:app_receitas/src/feactures/splash/splash_module.dart';
+import 'package:app_receitas/src/features/config/config_module.dart';
+import 'package:app_receitas/src/features/favorite/presenter/favorite_module.dart';
+import 'package:app_receitas/src/features/home/home_module.dart';
+import 'package:app_receitas/src/features/onboarding/onboarding_module.dart';
+import 'package:app_receitas/src/features/profile/perfil_module.dart';
+import 'package:app_receitas/src/features/recipes/recipe_module.dart';
+import 'package:app_receitas/src/features/search/search_module.dart';
+import 'package:app_receitas/src/features/splash/splash_module.dart';
 import 'package:flutter/material.dart';
 
 class GenerateRoute {

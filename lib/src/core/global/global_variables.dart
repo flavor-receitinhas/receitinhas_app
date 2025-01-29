@@ -1,5 +1,5 @@
-import 'package:app_receitas/src/feactures/auth/domain/entities/user_entity.dart';
-import 'package:app_receitas/src/feactures/profile/domain/entities/profile_entity.dart';
+import 'package:app_receitas/src/features/auth/domain/entities/user_entity.dart';
+import 'package:app_receitas/src/features/profile/domain/entities/profile_entity.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt di = GetIt.instance;
