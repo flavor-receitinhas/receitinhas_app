@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/library/api_client.dart';
 import 'package:app_receitas/src/core/services/api/api_response.dart';
-import 'package:app_receitas/src/feactures/auth/domain/services/auth_serivce.dart';
+import 'package:app_receitas/src/features/auth/domain/services/auth_serivce.dart';
 
 class ApiRecipes {
   final ApiClient _apiClient;
