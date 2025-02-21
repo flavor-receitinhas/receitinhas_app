@@ -218,5 +218,9 @@
   "searchRecipeOrderDifficultyMedium": "Medio",
   "searchRecipeOrderDifficultyHard": "Difícil",
   "searchLabel": "Buscar",
-  "splashLoading": "Cargando..."
+  "splashLoading": "Cargando...",
+  "dialogUnexpectedError": "¡Ocurrió un error inesperado!",
+  "dialogOk": "Ok",
+  "dialogYes": "Sí",
+  "dialogNo": "No"
 }

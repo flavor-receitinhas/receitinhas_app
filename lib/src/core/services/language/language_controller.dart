@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +17,8 @@ class LanguageController extends ChangeNotifier {
       keyPreferences: KeyPreferences.language,
     );
     _currentLanguage = lang;
+    Global.language = lang ?? 'pt_BR';
+    log('LanguageController: $lang');
     notifyListeners();
   }
 
@@ -38,6 +43,7 @@ class LanguageController extends ChangeNotifier {
       value: lang,
       keyPreferences: KeyPreferences.language,
     );
+    Global.language = lang;
     notifyListeners();
   }
 
