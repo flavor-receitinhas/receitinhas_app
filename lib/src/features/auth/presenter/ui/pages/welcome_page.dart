@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/global/global_variables.dart'; 
 import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';

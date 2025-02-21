@@ -7,6 +7,7 @@ GetIt di = GetIt.instance;
 class Global {
   static const String dnsApi = 'https://api.codeventura.com.br';
   static String token = '';
+  static String language = 'pt';
   static UserEntity? user;
   static ProfileEntity? profile;
   static const imageRecipeDefault =
