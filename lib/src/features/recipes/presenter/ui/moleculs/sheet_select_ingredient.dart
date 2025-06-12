@@ -11,8 +11,11 @@ import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 class SheetSelectIngredient extends StatefulWidget {
   final IngredientSelectController ct;
   final IngredientEntity ingredient;
-  const SheetSelectIngredient(
-      {super.key, required this.ct, required this.ingredient});
+  const SheetSelectIngredient({
+    super.key,
+    required this.ct,
+    required this.ingredient,
+  });
 
   @override
   State<SheetSelectIngredient> createState() => _SheetSelectIngredientState();
@@ -30,10 +33,7 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
             IconButton(
               onPressed: widget.ct.decreaseQuantity,
               color: Theme.of(context).colorScheme.onSecondary,
-              icon: const Icon(
-                Icons.remove_circle_rounded,
-                size: 30,
-              ),
+              icon: const Icon(Icons.remove_circle_rounded, size: 30),
             ),
             SizedBox(
               width: 100,
@@ -63,22 +63,17 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
             IconButton(
               onPressed: widget.ct.increaseQuantity,
               color: Theme.of(context).colorScheme.onSecondary,
-              icon: const Icon(
-                Icons.add_circle_rounded,
-                size: 30,
-              ),
+              icon: const Icon(Icons.add_circle_rounded, size: 30),
             ),
           ],
         ),
         const SizedBox(height: 10),
         DottedBorder(
-          dashPattern: const [4, 5],
-          borderType: BorderType.RRect,
-          radius: const Radius.circular(10),
-          color: Theme.of(context).colorScheme.onSecondary,
-          strokeWidth: 1,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
+          options: RectDottedBorderOptions(
+            dashPattern: const [4, 5],
+            color: Theme.of(context).colorScheme.onSecondary,
+            strokeWidth: 1,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
           ),
           child: DropdownButton<UnitEnum>(
             iconEnabledColor: Theme.of(context).colorScheme.onSecondary,
@@ -95,22 +90,26 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
                 widget.ct.unit = newValue!;
               });
             },
-            items: UnitEnum.values
-                .map<DropdownMenuItem<UnitEnum>>((UnitEnum value) {
-              return DropdownMenuItem<UnitEnum>(
-                value: value,
-                child: CookieText(
-                  text: value.name,
-                  color: Theme.of(context).colorScheme.onSecondary,
-                ),
-              );
-            }).toList(),
+            items:
+                UnitEnum.values.map<DropdownMenuItem<UnitEnum>>((
+                  UnitEnum value,
+                ) {
+                  return DropdownMenuItem<UnitEnum>(
+                    value: value,
+                    child: CookieText(
+                      text: value.name,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
+                  );
+                }).toList(),
           ),
         ),
         if (isFieldsEmpty)
           CookieText(
-            text: AppLocalizations.of(context)!
-                .recipeSelectIngredientRequiredFields,
+            text:
+                AppLocalizations.of(
+                  context,
+                )!.recipeSelectIngredientRequiredFields,
             color: Colors.red,
           ),
         const SizedBox(height: 20),
@@ -131,7 +130,7 @@ class _SheetSelectIngredientState extends State<SheetSelectIngredient> {
             });
             Navigator.pop(context);
           },
-        )
+        ),
       ],
     );
   }

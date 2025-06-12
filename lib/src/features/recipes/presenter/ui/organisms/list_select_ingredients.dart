@@ -19,16 +19,16 @@ class ListSelectIngredients extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: DottedBorder(
-        dashPattern: const [4, 5],
-        borderPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 5,
+        options: RectDottedBorderOptions(
+          dashPattern: const [4, 5],
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+          color: Theme.of(context).colorScheme.onPrimary,
+          strokeWidth: 1,
+          borderPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 5,
+          ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(10),
-        color: Theme.of(context).colorScheme.onPrimary,
-        strokeWidth: 1,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,9 +47,7 @@ class ListSelectIngredients extends StatelessWidget {
                 return ContainerIngredientDelete(
                   ingredient: ingredient,
                   deleteOnPressed: () {
-                    deleteOnPressed(
-                      ingredients[index],
-                    );
+                    deleteOnPressed(ingredients[index]);
                   },
                 );
               },

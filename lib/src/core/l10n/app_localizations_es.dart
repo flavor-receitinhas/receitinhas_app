@@ -147,16 +147,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String proteinPreferenceOptions(String choice) {
-    String _temp0 = intl.Intl.selectLogic(
-      choice,
-      {
-        'vegetarian': 'Vegetariano',
-        'vegan': 'Vegano',
-        'meat': 'Carne',
-        'fish': 'Pescado',
-        'other': 'Error',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(choice, {
+      'vegetarian': 'Vegetariano',
+      'vegan': 'Vegano',
+      'meat': 'Carne',
+      'fish': 'Pescado',
+      'other': 'Error',
+    });
     return '$_temp0';
   }
 
@@ -172,15 +169,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String dietaryRestrictionOptions(String choice) {
-    String _temp0 = intl.Intl.selectLogic(
-      choice,
-      {
-        'gluten': 'Gluten',
-        'lactose': 'Lactosa',
-        'noRestriction': 'Sin restricción',
-        'other': 'Error',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(choice, {
+      'gluten': 'Gluten',
+      'lactose': 'Lactosa',
+      'noRestriction': 'Sin restricción',
+      'other': 'Error',
+    });
     return '$_temp0';
   }
 
@@ -195,15 +189,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String difficultyRecipesOptions(String choice) {
-    String _temp0 = intl.Intl.selectLogic(
-      choice,
-      {
-        'easy': 'Fácil y rápido',
-        'medium': 'Moderado o casual',
-        'hard': 'Desafiante, una pesadilla',
-        'other': 'Error',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(choice, {
+      'easy': 'Fácil y rápido',
+      'medium': 'Moderado o casual',
+      'hard': 'Desafiante, una pesadilla',
+      'other': 'Error',
+    });
     return '$_temp0';
   }
 
