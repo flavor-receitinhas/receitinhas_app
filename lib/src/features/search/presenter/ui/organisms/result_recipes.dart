@@ -5,7 +5,7 @@ import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe
 import 'package:app_receitas/src/features/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/features/search/presenter/ui/moleculs/recipe_search_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ResultRecipes extends StatelessWidget {

@@ -6,7 +6,7 @@ import 'package:app_receitas/src/features/auth/domain/services/auth_serivce.dart
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:page_manager/manager_store.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ConfigController extends ManagerStore {
   final AuthService _authService;

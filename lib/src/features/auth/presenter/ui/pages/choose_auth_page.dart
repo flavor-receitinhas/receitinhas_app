@@ -6,7 +6,7 @@ import 'package:app_receitas/src/features/auth/presenter/ui/organisms/custom_scr
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/login_page.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ChooseAuthPage extends StatefulWidget {
   static const route = '/choose-auth';

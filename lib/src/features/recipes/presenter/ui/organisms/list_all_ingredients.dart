@@ -5,7 +5,7 @@ import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/container_
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/sheet_select_ingredient.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ListAllIngredients extends StatelessWidget {
   final IngredientSelectController ct;
@@ -18,7 +18,7 @@ class ListAllIngredients extends StatelessWidget {
       builderDelegate: PagedChildBuilderDelegate<IngredientEntity>(
         animateTransitions: true,
         firstPageErrorIndicatorBuilder: (context) {
-          return  Center(
+          return Center(
             child: CookieText(
               text: AppLocalizations.of(context)!.recipeLoadIngredientsError,
             ),

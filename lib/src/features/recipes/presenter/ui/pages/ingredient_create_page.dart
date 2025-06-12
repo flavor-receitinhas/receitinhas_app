@@ -7,7 +7,7 @@ import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/container_
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/select_ingredients_page.dart';
 import 'package:app_receitas/src/features/recipes/presenter/validator/number_convert.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class IngredientCreatePage extends StatefulWidget {
   final CreateRecipeController ct;

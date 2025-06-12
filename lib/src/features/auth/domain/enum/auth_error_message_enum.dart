@@ -215,6 +215,7 @@ enum AuthErrorMessageEnum {
   });
 }
 
+
 String getErrorMessageFirebase(AuthErrorMessageEnum error) {
   switch (Global.language) {
     case 'pt_BR':
@@ -227,3 +228,4 @@ String getErrorMessageFirebase(AuthErrorMessageEnum error) {
       return error.en;
   }
 }
+

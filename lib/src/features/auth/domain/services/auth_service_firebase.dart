@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/features/auth/domain/entities/user_entity.dart';
 import 'package:app_receitas/src/features/auth/domain/enum/auth_error_message_enum.dart';
@@ -139,7 +141,9 @@ class AuthServiceFirebase implements AuthService {
       Global.token = await userResult.getIdToken() ?? '';
       Global.user = user;
       return user;
-    } catch (e) {
+    } catch (e, s) {
+      log('Error signing in with Google: $e');
+      log('Stack trace: $s');
       _handleError(e);
       rethrow;
     }

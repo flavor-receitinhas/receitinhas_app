@@ -6,7 +6,7 @@ import 'package:app_receitas/src/features/search/presenter/controller/research_c
 import 'package:app_receitas/src/features/search/presenter/ui/atomic/container_filter.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_slide.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class FilterPage extends StatefulWidget {
   final ResearchController ct;

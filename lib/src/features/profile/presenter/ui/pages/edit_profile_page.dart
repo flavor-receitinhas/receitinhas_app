@@ -14,7 +14,7 @@ import 'package:app_receitas/src/features/profile/presenter/ui/moleculs/back_she
 import 'package:app_receitas/src/features/profile/presenter/ui/moleculs/save_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const route = '/edit-perfil';

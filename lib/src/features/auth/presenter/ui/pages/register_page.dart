@@ -10,7 +10,7 @@ import 'package:app_receitas/src/features/config/presenter/ui/pages/term_page.da
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:page_manager/export_manager.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -83,26 +83,31 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
                   });
                 },
               ),
+              errorMaxLines: 10,
               validator: (value) {
+                String validators = '';
                 if (value == null || value.isEmpty) {
                   return AppLocalizations.of(context)!
                       .registerValidatorPassword1;
                 }
                 if (value.length < 8) {
-                  return AppLocalizations.of(context)!
-                      .registerValidatorPassword2;
+                  validators +=
+                      '${AppLocalizations.of(context)!.registerValidatorPassword2}\n';
                 }
                 if (!RegExp(r'[A-Z]').hasMatch(value)) {
-                  return AppLocalizations.of(context)!
-                      .registerValidatorPassword3;
+                  validators +=
+                      '${AppLocalizations.of(context)!.registerValidatorPassword3}\n';
                 }
                 if (!RegExp(r'[a-z]').hasMatch(value)) {
-                  return AppLocalizations.of(context)!
-                      .registerValidatorPassword4;
+                  validators +=
+                      '${AppLocalizations.of(context)!.registerValidatorPassword4}\n';
                 }
                 if (!RegExp(r'[0-9]').hasMatch(value)) {
-                  return AppLocalizations.of(context)!
-                      .registerValidatorPassword5;
+                  validators +=
+                      AppLocalizations.of(context)!.registerValidatorPassword5;
+                }
+                if (validators.isNotEmpty) {
+                  return validators;
                 }
                 return null;
               },

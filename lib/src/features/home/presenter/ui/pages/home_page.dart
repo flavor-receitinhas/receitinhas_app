@@ -12,7 +12,7 @@ import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe
 import 'package:app_receitas/src/features/search/presenter/ui/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:page_manager/manager_page.dart';
 
 class HomePage extends StatefulWidget {
