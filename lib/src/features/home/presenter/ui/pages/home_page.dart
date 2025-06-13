@@ -25,13 +25,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ManagerPage<HomeController, HomePage> {
   @override
   void initState() {
-    ct.verifyOnboading().then(
-      (value) {
-        if (value && mounted) {
-          Navigator.pushNamed(context, OnBoardingPage.route);
-        }
-      },
-    );
+    ct.verifyOnboading().then((value) {
+      if (value && mounted) {
+        Navigator.pushNamed(context, OnBoardingPage.route);
+      }
+    });
     super.initState();
   }
 
@@ -46,124 +44,137 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const CookieSvg(svg: IconsSvgEnum.edit),
       ),
-      done: () => RefreshIndicator(
-        onRefresh: () async {
-          await ct.refresh();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: CustomScrollView(
-            controller: ct.scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+      done:
+          () => SafeArea(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await ct.refresh();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
+                child: CustomScrollView(
+                  controller: ct.scrollController,
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CookieText(
-                            text:
-                                '${AppLocalizations.of(context)!.homePageGreeting}, ${Global.profile?.name}',
-                            maxLine: 1,
-                            overflow: TextOverflow.ellipsis,
-                            typography: CookieTypography.title,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CookieText(
+                                  text:
+                                      '${AppLocalizations.of(context)!.homePageGreeting}, ${Global.profile?.name}',
+                                  maxLine: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  typography: CookieTypography.title,
+                                ),
+                                CookieText(
+                                  text:
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.homePageSubtitle,
+                                ),
+                              ],
+                            ),
                           ),
-                          CookieText(
-                            text:
-                                AppLocalizations.of(context)!.homePageSubtitle,
-                          ),
+                          const ContainerProfileImage(),
                         ],
                       ),
                     ),
-                    const ContainerProfileImage(),
-                  ],
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20),
-                    CookieTextFieldSearch(
-                      hintText:
-                          AppLocalizations.of(context)!.homePageSearchHint,
-                      onTap: () {
-                        Navigator.pushNamed(context, SearchPage.route);
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    CookieText(
-                      text: AppLocalizations.of(context)!
-                          .homePageLatestRecipesTitle,
-                      typography: CookieTypography.title,
-                    ),
-                    const SizedBox(height: 10),
-                  ],
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: MasonryGridView.builder(
-                  gridDelegate:
-                      const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                  itemCount: ct.recipes.length + 1,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    if (index < ct.recipes.length) {
-                      final recipe = ct.recipes[index];
-                      return InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            ViewRecipesPage.route,
-                            arguments: {'id': recipe.recipeId},
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: Stack(
-                            alignment: Alignment.bottomLeft,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  recipe.thumb ?? Global.imageRecipeDefault,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: CookieText(
-                                  text: recipe.title,
-                                  color: Colors.white,
-                                  maxLine: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  typography: CookieTypography.button,
-                                ),
-                              ),
-                            ],
+                    SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+                          CookieTextFieldSearch(
+                            hintText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.homePageSearchHint,
+                            onTap: () {
+                              Navigator.pushNamed(context, SearchPage.route);
+                            },
                           ),
-                        ),
-                      );
-                    }
-                    if (index >= ct.recipes.length && ct.hasMore) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      );
-                    }
-                    return SizedBox.shrink();
-                  },
+                          const SizedBox(height: 20),
+                          CookieText(
+                            text:
+                                AppLocalizations.of(
+                                  context,
+                                )!.homePageLatestRecipesTitle,
+                            typography: CookieTypography.title,
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: MasonryGridView.builder(
+                        gridDelegate:
+                            const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                            ),
+                        itemCount: ct.recipes.length + 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          if (index < ct.recipes.length) {
+                            final recipe = ct.recipes[index];
+                            return InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  ViewRecipesPage.route,
+                                  arguments: {'id': recipe.recipeId},
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: Stack(
+                                  alignment: Alignment.bottomLeft,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        recipe.thumb ??
+                                            Global.imageRecipeDefault,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: CookieText(
+                                        text: recipe.title,
+                                        color: Colors.white,
+                                        maxLine: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        typography: CookieTypography.button,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                          if (index >= ct.recipes.length && ct.hasMore) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            );
+                          }
+                          return SizedBox.shrink();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
     );
   }
 }
