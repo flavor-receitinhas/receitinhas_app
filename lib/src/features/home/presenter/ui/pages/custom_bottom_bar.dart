@@ -35,46 +35,52 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomBarHome(
-        currentIndex: indexPage,
-        onTap: changePage,
+      bottomNavigationBar: SafeArea(
+        child: BottomBarHome(currentIndex: indexPage, onTap: changePage),
       ),
-      body: PopScope(
-        canPop: false,
-        onPopInvokedWithResult: (didPop, result) {
-          if (didPop) {
-            return;
-          }
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: CookieText(
-                text: AppLocalizations.of(context)!.customBottomBarExitAppTitle,
-              ),
-              actions: [
-                CookieTextButton(
-                  text: AppLocalizations.of(context)!.customBottomBarCancel,
-                  color: Theme.of(context).colorScheme.primary,
-                  onPressed: () {
-                    Navigator.of(context).pop(context);
-                  },
-                ),
-                const SizedBox(width: 10),
-                CookieTextButton(
-                  text: AppLocalizations.of(context)!.customBottomBarExit,
-                  color: Theme.of(context).colorScheme.primary,
-                  onPressed: () {
-                    SystemNavigator.pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-        child: PageView(
-          controller: pageController,
-          onPageChanged: changePage,
-          children: pages,
+      body: SafeArea(
+        child: PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result) {
+            if (didPop) {
+              return;
+            }
+            showDialog(
+              context: context,
+              builder:
+                  (context) => AlertDialog(
+                    title: CookieText(
+                      text:
+                          AppLocalizations.of(
+                            context,
+                          )!.customBottomBarExitAppTitle,
+                    ),
+                    actions: [
+                      CookieTextButton(
+                        text:
+                            AppLocalizations.of(context)!.customBottomBarCancel,
+                        color: Theme.of(context).colorScheme.primary,
+                        onPressed: () {
+                          Navigator.of(context).pop(context);
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      CookieTextButton(
+                        text: AppLocalizations.of(context)!.customBottomBarExit,
+                        color: Theme.of(context).colorScheme.primary,
+                        onPressed: () {
+                          SystemNavigator.pop();
+                        },
+                      ),
+                    ],
+                  ),
+            );
+          },
+          child: PageView(
+            controller: pageController,
+            onPageChanged: changePage,
+            children: pages,
+          ),
         ),
       ),
     );

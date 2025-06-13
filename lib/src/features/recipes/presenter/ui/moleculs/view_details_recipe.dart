@@ -20,6 +20,15 @@ class ViewDetailsRecipe extends StatelessWidget {
     required this.serveFood,
   });
 
+  bool _isHtmlEmpty(String html) {
+    if (html.isEmpty) return true;
+
+    final RegExp htmlTagRegex = RegExp(r'<[^>]*>');
+    final String textOnly = html.replaceAll(htmlTagRegex, '').trim();
+
+    return textOnly.isEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
@@ -31,9 +40,7 @@ class ViewDetailsRecipe extends StatelessWidget {
           typography: CookieTypography.title,
         ),
         const SizedBox(height: 20),
-        CookieText(
-          text: details,
-        ),
+        CookieText(text: details),
         const SizedBox(height: 20),
         CustomContainer(
           child: Column(
@@ -63,7 +70,7 @@ class ViewDetailsRecipe extends StatelessWidget {
                         '${ingredients[index].ingredient.name} - $formattedQuantity ${ingredients[index].unit}',
                   );
                 },
-              )
+              ),
             ],
           ),
         ),
@@ -86,10 +93,11 @@ class ViewDetailsRecipe extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              HtmlWidget(
-                instruction,
-                textStyle: TextStyle(
-                  color: theme.onPrimary,
+              Visibility(
+                visible: !_isHtmlEmpty(instruction),
+                child: HtmlWidget(
+                  instruction,
+                  textStyle: TextStyle(color: theme.onPrimary),
                 ),
               ),
             ],
@@ -97,7 +105,7 @@ class ViewDetailsRecipe extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Visibility(
-          visible: serveFood.isNotEmpty,
+          visible: !_isHtmlEmpty(serveFood),
           child: CustomContainer(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,9 +123,7 @@ class ViewDetailsRecipe extends StatelessWidget {
                 const SizedBox(height: 20),
                 HtmlWidget(
                   serveFood,
-                  textStyle: TextStyle(
-                    color: theme.onPrimary,
-                  ),
+                  textStyle: TextStyle(color: theme.onPrimary),
                 ),
               ],
             ),

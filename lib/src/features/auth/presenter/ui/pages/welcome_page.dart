@@ -21,7 +21,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     _themeController.addListener(() {
-      setState(() {});
+      if (mounted) setState(() {});
     });
     super.initState();
   }

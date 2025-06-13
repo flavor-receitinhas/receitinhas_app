@@ -22,160 +22,181 @@ class _FavoritePageState extends ManagerPage<FavoriteController, FavoritePage> {
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
-      done: () => RefreshIndicator(
-        onRefresh: () async {
-          await ct.refreshPage();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: CustomScrollView(
-            controller: ct.scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
-            slivers: [
-              SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CookieText(
-                          text: AppLocalizations.of(context)!.favoritePageTitle,
-                          typography: CookieTypography.title,
-                        ),
-                        CookieText(
-                          text: AppLocalizations.of(context)!
-                              .favoritePageSubtitle,
-                        ),
-                      ],
-                    ),
-                    const ContainerProfileImage()
-                  ],
+      done:
+          () => SafeArea(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await ct.refreshPage();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    CookieTextFieldSearch(
-                      hintText:
-                          AppLocalizations.of(context)!.favoritePageSearchHint,
-                      controller: ct.favoriteController,
-                      onEditingComplete: ct.refreshList,
+                child: CustomScrollView(
+                  controller: ct.scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CookieText(
+                                text:
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.favoritePageTitle,
+                                typography: CookieTypography.title,
+                              ),
+                              CookieText(
+                                text:
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.favoritePageSubtitle,
+                              ),
+                            ],
+                          ),
+                          const ContainerProfileImage(),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 10),
-                    OrganizeRecipes(
-                      onTapRecent: () {
-                        setState(() {
-                          ct.order = OrderFavoriteEnum.createdAtAsc;
-                          ct.refreshList();
-                        });
-                        Navigator.pop(context);
-                      },
-                      onTapOld: () {
-                        setState(() {
-                          ct.order = OrderFavoriteEnum.createdAtDesc;
-                          ct.refreshList();
-                        });
-                        Navigator.pop(context);
-                      },
-                      onTapAsc: () {
-                        setState(() {
-                          ct.order = OrderFavoriteEnum.nameAsc;
-                          ct.refreshList();
-                        });
-                        Navigator.pop(context);
-                      },
-                      onTapDesc: () async {
-                        setState(() {
-                          ct.order = OrderFavoriteEnum.nameDesc;
-                          ct.refreshList();
-                        });
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              if (ct.listFavorite.isEmpty && !ct.isLoadingSearch)
-                SliverToBoxAdapter(
-                  child: Center(
-                    child: CookieText(
-                      text: AppLocalizations.of(context)!
-                          .favoritePageNoItemsFound,
-                    ),
-                  ),
-                ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: ct.listFavorite.length + 1,
-                  (context, index) {
-                    if (ct.isLoadingSearch) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      );
-                    }
-                    if (index < ct.listFavorite.length) {
-                      final favorite = ct.listFavorite[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              ViewRecipesPage.route,
-                              arguments: {
-                                'id': favorite.favorite.recipeId,
-                              },
-                            );
-                          },
-                          child: ContainerRecipe(
-                            nameRecipe: favorite.favorite.name,
-                            imageRecipe: favorite.thumb,
-                            timePrepared: favorite.timePrepared,
-                            onPressedFavorite: () {
-                              CookieDialog(
-                                title: CookieText(
-                                  text: AppLocalizations.of(context)!
-                                      .favoriteRemoveFavoritesTitle,
-                                  typography: CookieTypography.title,
-                                ),
-                                content: CookieText(
-                                  text: AppLocalizations.of(context)!
-                                      .favoriteRemoveFavoritesContent,
-                                ),
-                                onPressedConfirm: () async {
-                                  await ct.removeFavorite(favorite.favorite.id);
-                                  ct.refreshList();
-                                  if (context.mounted) {
-                                    Navigator.pop(context);
-                                  }
-                                },
-                              ).show(context);
+                    SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20),
+                          CookieTextFieldSearch(
+                            hintText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.favoritePageSearchHint,
+                            controller: ct.favoriteController,
+                            onEditingComplete: ct.refreshList,
+                          ),
+                          const SizedBox(height: 10),
+                          OrganizeRecipes(
+                            onTapRecent: () {
+                              setState(() {
+                                ct.order = OrderFavoriteEnum.createdAtAsc;
+                                ct.refreshList();
+                              });
+                              Navigator.pop(context);
+                            },
+                            onTapOld: () {
+                              setState(() {
+                                ct.order = OrderFavoriteEnum.createdAtDesc;
+                                ct.refreshList();
+                              });
+                              Navigator.pop(context);
+                            },
+                            onTapAsc: () {
+                              setState(() {
+                                ct.order = OrderFavoriteEnum.nameAsc;
+                                ct.refreshList();
+                              });
+                              Navigator.pop(context);
+                            },
+                            onTapDesc: () async {
+                              setState(() {
+                                ct.order = OrderFavoriteEnum.nameDesc;
+                                ct.refreshList();
+                              });
+                              Navigator.pop(context);
                             },
                           ),
+                        ],
+                      ),
+                    ),
+                    if (ct.listFavorite.isEmpty && !ct.isLoadingSearch)
+                      SliverToBoxAdapter(
+                        child: Center(
+                          child: CookieText(
+                            text:
+                                AppLocalizations.of(
+                                  context,
+                                )!.favoritePageNoItemsFound,
+                          ),
                         ),
-                      );
-                    }
-                    if (index >= ct.listFavorite.length &&
-                        ct.hasMore &&
-                        ct.listFavorite.isNotEmpty) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      );
-                    }
-                    return SizedBox.shrink();
-                  },
+                      ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: ct.listFavorite.length + 1,
+                        (context, index) {
+                          if (ct.isLoadingSearch) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            );
+                          }
+                          if (index < ct.listFavorite.length) {
+                            final favorite = ct.listFavorite[index];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    ViewRecipesPage.route,
+                                    arguments: {
+                                      'id': favorite.favorite.recipeId,
+                                    },
+                                  );
+                                },
+                                child: ContainerRecipe(
+                                  nameRecipe: favorite.favorite.name,
+                                  imageRecipe: favorite.thumb,
+                                  timePrepared: favorite.timePrepared,
+                                  onPressedFavorite: () {
+                                    CookieDialog(
+                                      title: CookieText(
+                                        text:
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.favoriteRemoveFavoritesTitle,
+                                        typography: CookieTypography.title,
+                                      ),
+                                      content: CookieText(
+                                        text:
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.favoriteRemoveFavoritesContent,
+                                      ),
+                                      onPressedConfirm: () async {
+                                        await ct.removeFavorite(
+                                          favorite.favorite.id,
+                                        );
+                                        ct.refreshList();
+                                        if (context.mounted) {
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                    ).show(context);
+                                  },
+                                ),
+                              ),
+                            );
+                          }
+                          if (index >= ct.listFavorite.length &&
+                              ct.hasMore &&
+                              ct.listFavorite.isNotEmpty) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            );
+                          }
+                          return SizedBox.shrink();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
-      ),
     );
   }
 }

@@ -24,7 +24,9 @@ class CookieSheetBottom extends StatelessWidget {
           backgroundColor ?? Theme.of(context).colorScheme.onPrimary,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
       builder: build,
     );
@@ -32,22 +34,24 @@ class CookieSheetBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: MediaQuery.of(context).viewInsets,
+    return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Align(
-              alignment: alignmentTitle ?? Alignment.topLeft,
-              child: title,
-            ),
-            const SizedBox(height: 10),
-            body,
-            const SizedBox(height: 10),
-          ],
+        padding: MediaQuery.of(context).viewInsets,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Align(
+                alignment: alignmentTitle ?? Alignment.topLeft,
+                child: title,
+              ),
+              const SizedBox(height: 10),
+              body,
+              const SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );

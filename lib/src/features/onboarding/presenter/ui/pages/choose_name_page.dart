@@ -25,72 +25,75 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
         title: const LinearProgressIndicator(
           value: 4 / 4,
           minHeight: 10,
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            IconButton(
-              onPressed: () {
-                widget.ct.pageController.animateToPage(
-                  2,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.ease,
-                );
-              },
-              icon: const Icon(Icons.arrow_back_ios_new),
-            ),
-            Form(
-              key: formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CookieText(
-                    text: AppLocalizations.of(context)!.chooseNameTitle,
-                    typography: CookieTypography.title,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 10),
-                  CookieText(
-                    text: AppLocalizations.of(context)!.chooseNameBody,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 10),
-                  CookieTextField(
-                    hintText: AppLocalizations.of(context)!.chooseNameHintText,
-                    controller: widget.ct.userNameController,
-                    validator: ValidatorOnboarding.validateName,
-                  ),
-                  const SizedBox(height: 20),
-                  CookieButton(
-                    label:
-                        AppLocalizations.of(context)!.difficultyRecipesConfirm,
-                    onPressed: () async {
-                      if (!formKey.currentState!.validate()) {
-                        return;
-                      }
-                      await widget.ct.updateFoodPref();
-                      await widget.ct.updateNameProfile();
-                      if (context.mounted) {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          CustomBottomBar.route,
-                          (route) => false,
-                        );
-                      }
-                    },
-                  ),
-                ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(
+                onPressed: () {
+                  widget.ct.pageController.animateToPage(
+                    2,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.ease,
+                  );
+                },
+                icon: const Icon(Icons.arrow_back_ios_new),
               ),
-            ),
-          ],
+              Form(
+                key: formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CookieText(
+                      text: AppLocalizations.of(context)!.chooseNameTitle,
+                      typography: CookieTypography.title,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 10),
+                    CookieText(
+                      text: AppLocalizations.of(context)!.chooseNameBody,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 10),
+                    CookieTextField(
+                      hintText:
+                          AppLocalizations.of(context)!.chooseNameHintText,
+                      controller: widget.ct.userNameController,
+                      validator: ValidatorOnboarding.validateName,
+                    ),
+                    const SizedBox(height: 20),
+                    CookieButton(
+                      label:
+                          AppLocalizations.of(
+                            context,
+                          )!.difficultyRecipesConfirm,
+                      onPressed: () async {
+                        if (!formKey.currentState!.validate()) {
+                          return;
+                        }
+                        await widget.ct.updateFoodPref();
+                        await widget.ct.updateNameProfile();
+                        if (context.mounted) {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            CustomBottomBar.route,
+                            (route) => false,
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

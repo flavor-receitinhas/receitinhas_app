@@ -23,7 +23,7 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
   @override
   void initState() {
     _themeController.addListener(() {
-      setState(() {});
+      if (mounted) setState(() {});
     });
     super.initState();
   }
@@ -66,7 +66,7 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
           onPressed: () => Navigator.pushNamed(context, LoginPage.route),
           width: MediaQuery.sizeOf(context).width,
         ),
-        const SizedBox(height: 5)
+        const SizedBox(height: 5),
       ],
     );
   }
