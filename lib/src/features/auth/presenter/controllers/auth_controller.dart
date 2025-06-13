@@ -6,14 +6,12 @@ import 'package:page_manager/export_manager.dart';
 class AuthController extends ManagerStore {
   final AuthService _authService;
 
-  AuthController(
-    this._authService,
-  );
+  AuthController(this._authService);
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  bool showPassword = false;
+  bool showPassword = true;
 
   @override
   void init(Map<String, dynamic> arguments) {
@@ -28,41 +26,39 @@ class AuthController extends ManagerStore {
   }
 
   Future<void> registerFirebase() => handleTry(
-        call: () async {
-          await _authService.signUp(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim(),
-          );
-          emitNavigation(CustomBottomBar.route);
-        },
-        showDialogError: true,
+    call: () async {
+      await _authService.signUp(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
+      emitNavigation(CustomBottomBar.route);
+    },
+    showDialogError: true,
+  );
 
   Future<void> loginFirebase() => handleTry(
-        call: () async {
-          await _authService.signIn(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim(),
-          );
-
-          emitNavigation(CustomBottomBar.route);
-        },
-        showDialogError: true,
+    call: () async {
+      await _authService.signIn(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
+
+      emitNavigation(CustomBottomBar.route);
+    },
+    showDialogError: true,
+  );
 
   Future<void> forgetPassword() => handleTry(
-        call: () async {
-          await _authService.forgetPassword(
-            email: emailController.text.trim(),
-          );
-        },
-        showDialogError: true,
-      );
+    call: () async {
+      await _authService.forgetPassword(email: emailController.text.trim());
+    },
+    showDialogError: true,
+  );
 
   Future<void> loginGoogle() => handleTry(
-        call: () async {
-          await _authService.signInGoogle();
-          emitNavigation(CustomBottomBar.route);
-        },
-      );
+    call: () async {
+      await _authService.signInGoogle();
+      emitNavigation(CustomBottomBar.route);
+    },
+  );
 }
