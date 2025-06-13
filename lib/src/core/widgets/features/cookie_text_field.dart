@@ -17,7 +17,8 @@ class CookieTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextStyle? style;
   final TextAlign? textAlign;
-final void Function(String)? onChanged;
+  final int? errorMaxLines;
+  final void Function(String)? onChanged;
 
   const CookieTextField(
       {super.key,
@@ -32,7 +33,11 @@ final void Function(String)? onChanged;
       this.maxLength,
       this.minLines,
       this.keyboardType,
-      this.inputFormatters, this.style,  this.textAlign, this.onChanged})
+      this.inputFormatters,
+      this.style,
+      this.textAlign,
+      this.onChanged,
+      this.errorMaxLines})
       : border = true;
 
   const CookieTextField.outline({
@@ -48,7 +53,11 @@ final void Function(String)? onChanged;
     this.maxLength,
     this.minLines,
     this.keyboardType,
-    this.inputFormatters, this.style,  this.textAlign, this.onChanged,
+    this.inputFormatters,
+    this.style,
+    this.textAlign,
+    this.onChanged,
+    this.errorMaxLines,
   }) : border = false;
 
   @override
@@ -59,15 +68,16 @@ final void Function(String)? onChanged;
       onChanged: onChanged,
       obscureText: obscureText,
       maxLines: maxLines,
-      textAlign:  textAlign ?? TextAlign.start,
+      textAlign: textAlign ?? TextAlign.start,
       minLines: minLines,
       maxLength: maxLength,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      style: style ?? Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
+      style: style ??
+          Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: const EdgeInsets.all(16),
@@ -76,6 +86,7 @@ final void Function(String)? onChanged;
             ),
         filled: true,
         fillColor: Theme.of(context).colorScheme.secondary,
+        errorMaxLines: errorMaxLines,
         focusedBorder: OutlineInputBorder(
           borderSide: border
               ? BorderSide(

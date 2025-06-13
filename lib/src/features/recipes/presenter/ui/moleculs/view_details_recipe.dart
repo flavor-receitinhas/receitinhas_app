@@ -5,7 +5,7 @@ import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_rec
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ViewDetailsRecipe extends StatelessWidget {
   final String details;

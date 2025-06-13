@@ -12,7 +12,7 @@ import 'package:app_receitas/src/features/config/presenter/ui/pages/privacy_poli
 import 'package:app_receitas/src/features/config/presenter/ui/pages/term_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ConfigPage extends StatefulWidget {
   static const route = 'config';

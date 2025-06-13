@@ -1,13 +1,12 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
-
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ServerDishPage extends StatefulWidget {
   final CreateRecipeController ct;

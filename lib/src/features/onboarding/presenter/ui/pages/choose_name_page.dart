@@ -5,7 +5,7 @@ import 'package:app_receitas/src/features/home/presenter/ui/pages/custom_bottom_
 import 'package:app_receitas/src/features/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/validator_onboarding.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ChooseNamePage extends StatefulWidget {
   final OnBoardingController ct;

@@ -6,7 +6,7 @@ import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/leave_reci
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/select_image_recipe.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/carousel_select_images_recipe.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class IntroduceCreatePage extends StatefulWidget {
   final CreateRecipeController ct;

@@ -4,7 +4,7 @@ import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ChangedPasswordPage extends StatelessWidget {
   static const route = '/changed-password';

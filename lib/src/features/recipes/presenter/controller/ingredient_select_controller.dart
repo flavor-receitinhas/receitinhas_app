@@ -3,7 +3,6 @@ import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_rec
 import 'package:app_receitas/src/features/recipes/domain/enum/unit_enum.dart';
 import 'package:app_receitas/src/features/recipes/domain/repositories/ingredient_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:page_manager/export_manager.dart';
 
 class IngredientSelectController extends ManagerStore {
@@ -11,13 +10,22 @@ class IngredientSelectController extends ManagerStore {
 
   IngredientSelectController(this._ingredientRepository);
 
-  final PagingController<int, IngredientEntity> pagingController =
-      PagingController(firstPageKey: 0);
+  List<IngredientEntity> ingredients = [];
   final _pageSize = 25;
+  int _currentPage = 0;
+  bool _hasReachedMax = false;
+  bool _isLoadingMore = false;
+  bool _hasError = false;
+
   final ingredientController = TextEditingController();
   List<IngredientRecipeEntity> listIngredientSelect = [];
   final TextEditingController quantityController = TextEditingController();
   UnitEnum? unit;
+
+  bool get isLoading => state == StateManager.loading;
+  bool get isLoadingMore => _isLoadingMore;
+  bool get hasError => _hasError;
+  bool get hasReachedMax => _hasReachedMax;
 
   @override
   void init(Map<String, dynamic> arguments) {
@@ -26,14 +34,65 @@ class IngredientSelectController extends ManagerStore {
         arguments['ingredients'] != null
             ? listIngredientSelect = arguments['ingredients']
             : listIngredientSelect = [];
-        pagingController.addPageRequestListener(_fetch);
+        await loadIngredients();
       },
     );
   }
 
-  Future<List<IngredientEntity>> ingredients(
-      {required int page, String? name}) async {
-    return await _ingredientRepository.listIngredient(name: name, page: page);
+  Future<void> loadIngredients({bool refresh = false}) async {
+    if (refresh) {
+      _currentPage = 0;
+      _hasReachedMax = false;
+      ingredients.clear();
+      state = StateManager.loading;
+      _hasError = false;
+    }
+
+    try {
+      final result = await _ingredientRepository.listIngredient(
+        name: ingredientController.text,
+        page: _currentPage,
+      );
+
+      if (refresh) {
+        ingredients = result;
+      } else {
+        ingredients.addAll(result);
+      }
+
+      _hasReachedMax = result.length < _pageSize;
+      _currentPage++;
+      state = StateManager.done;
+      _hasError = false;
+    } catch (e) {
+      _hasError = true;
+      state = StateManager.done;
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> loadMoreIngredients() async {
+    if (_isLoadingMore || _hasReachedMax || _hasError) return;
+
+    _isLoadingMore = true;
+    notifyListeners();
+
+    try {
+      final result = await _ingredientRepository.listIngredient(
+        name: ingredientController.text,
+        page: _currentPage,
+      );
+      ingredients.addAll(result);
+      _hasReachedMax = result.length < _pageSize;
+      _currentPage++;
+      _hasError = false;
+    } catch (e) {
+      _hasError = true;
+    }
+
+    _isLoadingMore = false;
+    notifyListeners();
   }
 
   Future<void> addIngredient() async {
@@ -46,34 +105,8 @@ class IngredientSelectController extends ManagerStore {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    pagingController.dispose();
-  }
-
-  Future<void> _fetch(int pageKey) async {
-    if (pageKey == 0) {
-      //state = StateManager.loading;
-    }
-    final result = await ingredients(
-      page: pageKey,
-      name: ingredientController.text,
-    );
-
-    final isLastPage = result.length < _pageSize;
-    if (isLastPage) {
-      pagingController.appendLastPage(result);
-    } else {
-      pagingController.appendPage(result, ++pageKey);
-    }
-    notifyListeners();
-  }
-
   void refreshPage() {
-    pagingController.notifyListeners();
-    pagingController.refresh();
-    state = StateManager.done;
+    loadIngredients(refresh: true);
   }
 
   void decreaseQuantity() {

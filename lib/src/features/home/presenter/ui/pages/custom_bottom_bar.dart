@@ -6,7 +6,7 @@ import 'package:app_receitas/src/features/home/presenter/ui/atomic/bottom_bar_ho
 import 'package:app_receitas/src/features/home/presenter/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class CustomBottomBar extends StatefulWidget {
   static const route = '/home';

@@ -5,7 +5,7 @@ import 'package:app_receitas/src/features/search/presenter/controller/research_c
 import 'package:app_receitas/src/features/search/presenter/ui/moleculs/search_recipe.dart';
 import 'package:app_receitas/src/features/search/presenter/ui/organisms/result_recipes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class SearchPage extends StatefulWidget {
   static const route = '/search';

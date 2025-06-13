@@ -2,7 +2,7 @@ import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/welcome_page.dart';
 import 'package:app_receitas/src/features/config/presenter/controllers/config_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class LeaveAlertDialog extends StatelessWidget {
   final ConfigController ct;

@@ -1,11 +1,11 @@
-import 'package:app_receitas/src/core/global/global_variables.dart'; 
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/organisms/custom_screen.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/choose_auth_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class WelcomePage extends StatefulWidget {
   static const route = '/welcome';
