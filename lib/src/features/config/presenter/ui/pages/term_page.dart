@@ -9,13 +9,16 @@ class TermPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          BackButtomFloating(label: 'Termos e condições'),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              child: CookieText(textAlign: TextAlign.start, text: '''
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            BackButtomFloating(label: 'Termos e condições'),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                child: CookieText(
+                  textAlign: TextAlign.start,
+                  text: '''
 Termos e Condições Temporários
 
 Estes Termos e Condições temporários ("Termos") regem o uso do aplicativo. Ao utilizar o Aplicativo, você concorda com estes Termos.
@@ -66,10 +69,12 @@ Estes Termos são regidos e interpretados de acordo com as leis do Brasil. Qualq
 Para entrar em contato conosco sobre estes Termos, utilize as informações de contato fornecidas no Aplicativo.
 
 Última atualização: 08/01/2024
-          '''),
+            ''',
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
