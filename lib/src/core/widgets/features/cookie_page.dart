@@ -9,6 +9,8 @@ class CookiePage extends StatelessWidget {
   final Object? error;
   final PreferredSizeWidget? appBar;
   final Widget? floatingActionButton;
+  final Widget? bottomNavigationBar;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
   const CookiePage({
     super.key,
     required this.state,
@@ -17,6 +19,8 @@ class CookiePage extends StatelessWidget {
     this.loading,
     this.appBar,
     this.floatingActionButton,
+    this.bottomNavigationBar,
+    this.floatingActionButtonLocation,
   });
 
   @override
@@ -24,17 +28,29 @@ class CookiePage extends StatelessWidget {
     return ManagerPageBuilder(
       state: state,
       error: error,
+      bottomNavigationBar: SafeArea(
+        child: bottomNavigationBar ?? const SizedBox.shrink(),
+      ),
       floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
       appBar: appBar,
       pageDone: done,
-      pageInitial: () => Center(
-        child: loading != null ? loading!() : const CircularProgressIndicator(),
-      ),
+      pageInitial:
+          () => Center(
+            child:
+                loading != null
+                    ? loading!()
+                    : const CircularProgressIndicator(),
+          ),
       pageError: (_) => const CookiePageError(),
       pageDisconnected: () => const CookiePageError(),
-      pageLoading: () => Center(
-        child: loading != null ? loading!() : const CircularProgressIndicator(),
-      ),
+      pageLoading:
+          () => Center(
+            child:
+                loading != null
+                    ? loading!()
+                    : const CircularProgressIndicator(),
+          ),
       pageLoggedOut: () => const CookiePageError(),
       pageMaintenance: () => const CookiePageError(),
     );

@@ -11,12 +11,13 @@ class InfoContainerTimePrepared extends StatefulWidget {
   final void Function(Duration) onChange;
   final void Function(String) onChangedHour;
   final void Function(String) onChangedMinute;
-  const InfoContainerTimePrepared(
-      {super.key,
-      required this.ct,
-      required this.onChange,
-      required this.onChangedHour,
-      required this.onChangedMinute});
+  const InfoContainerTimePrepared({
+    super.key,
+    required this.ct,
+    required this.onChange,
+    required this.onChangedHour,
+    required this.onChangedMinute,
+  });
 
   @override
   State<InfoContainerTimePrepared> createState() =>
@@ -31,28 +32,32 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-      child: Column(
-        children: [
-          CookieText(
-            text: AppLocalizations.of(context)!.recipeTimePreparedTitle,
-            typography: CookieTypography.title,
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
-          const Spacer(),
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              widget.ct.isWriteTime
-                  ? WriteTimePrepared(
+      child: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            CookieText(
+              text: AppLocalizations.of(context)!.recipeTimePreparedTitle,
+              typography: CookieTypography.title,
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+            const Spacer(),
+            Stack(
+              alignment: Alignment.topRight,
+              children: [
+                widget.ct.isWriteTime
+                    ? WriteTimePrepared(
                       hourController: widget.ct.hourController,
                       minuteController: widget.ct.minuteController,
                       onChangedHour: widget.onChangedHour,
                       onChangedMinute: widget.onChangedMinute,
                     )
-                  : DurationTimePicker(
+                    : DurationTimePicker(
                       size: 190,
                       duration: widget.ct.timePreparedRecipe,
                       labelStyle: GoogleFonts.jetBrainsMono(
@@ -64,41 +69,42 @@ class _InfoContainerTimePreparedState extends State<InfoContainerTimePrepared> {
                       progressColor: Theme.of(context).colorScheme.primary,
                       onChange: widget.onChange,
                     ),
-              IconButton(
-                color: Theme.of(context).colorScheme.onSecondary,
-                onPressed: () {
-                  setState(() {
-                    widget.ct.isWriteTime = !widget.ct.isWriteTime;
-                  });
-                },
-                icon: const Icon(
-                  Icons.change_circle,
-                  size: 40,
+                IconButton(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  onPressed: () {
+                    setState(() {
+                      widget.ct.isWriteTime = !widget.ct.isWriteTime;
+                    });
+                  },
+                  icon: const Icon(Icons.change_circle, size: 40),
                 ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          CookieButton(
-            label: AppLocalizations.of(context)!.recipeDifficultyNext,
-            onPressed: () {
-              if (widget.ct.timePreparedRecipe.inMinutes > 0) {
-                widget.ct.containerController.nextPage(
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                );
-              } else {
-                final snackBar = SnackBar(
-                  content: CookieText(
-                      text: AppLocalizations.of(context)!
-                          .recipeTimePreparedSnackBarMessage),
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
-            },
-          ),
-        ],
+              ],
+            ),
+            const Spacer(),
+            CookieButton(
+              label: AppLocalizations.of(context)!.recipeDifficultyNext,
+              onPressed: () {
+                if (widget.ct.timePreparedRecipe.inMinutes > 0) {
+                  widget.ct.containerController.nextPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease,
+                  );
+                } else {
+                  final snackBar = SnackBar(
+                    content: CookieText(
+                      text:
+                          AppLocalizations.of(
+                            context,
+                          )!.recipeTimePreparedSnackBarMessage,
+                    ),
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -51,10 +51,7 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
                 await ct.refresh();
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 10,
-                ),
+                padding: const EdgeInsets.only(left: 16, top: 10, right: 16),
                 child: CustomScrollView(
                   controller: ct.scrollController,
                   slivers: [
@@ -170,6 +167,7 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
                         },
                       ),
                     ),
+                    SliverPadding(padding: const EdgeInsets.only(bottom: 10)),
                   ],
                 ),
               ),
