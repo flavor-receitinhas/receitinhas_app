@@ -30,36 +30,38 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CookieButton(
-        label: AppLocalizations.of(context)!.recipeDifficultyNext,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        onPressed: () {
-          if (formKey.currentState!.validate() &&
-              ct.listImagesRecipe.isNotEmpty) {
-            ct.pageController.nextPage(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.ease,
-            );
-          }
-          if (ct.listImagesRecipe.isEmpty) {
-            CookieSnackBar(
-              text: AppLocalizations.of(context)!.recipeAddImage,
-            ).show(context);
-            return;
-          }
-          if (ct.thumbImage == null) {
-            CookieSnackBar(
-              text: AppLocalizations.of(context)!.recipeAddCoverImage,
-            ).show(context);
-            return;
-          }
-          if (!formKey.currentState!.validate()) {
-            CookieSnackBar(
-              text: AppLocalizations.of(context)!.recipeFillAllFields,
-            ).show(context);
-            return;
-          }
-        },
+      bottomNavigationBar: SafeArea(
+        child: CookieButton(
+          label: AppLocalizations.of(context)!.recipeDifficultyNext,
+          margin: const EdgeInsets.only(left: 16, bottom: 10, right: 16),
+          onPressed: () {
+            if (formKey.currentState!.validate() &&
+                ct.listImagesRecipe.isNotEmpty) {
+              ct.pageController.nextPage(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
+            }
+            if (ct.listImagesRecipe.isEmpty) {
+              CookieSnackBar(
+                text: AppLocalizations.of(context)!.recipeAddImage,
+              ).show(context);
+              return;
+            }
+            if (ct.thumbImage == null) {
+              CookieSnackBar(
+                text: AppLocalizations.of(context)!.recipeAddCoverImage,
+              ).show(context);
+              return;
+            }
+            if (!formKey.currentState!.validate()) {
+              CookieSnackBar(
+                text: AppLocalizations.of(context)!.recipeFillAllFields,
+              ).show(context);
+              return;
+            }
+          },
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -76,24 +78,28 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                   onPressed: () {
                     ct.showDialogDiscard()
                         ? CookieSheetBottom(
-                            title: CookieText(
-                              text: AppLocalizations.of(context)!
-                                  .recipeDiscardPrompt,
-                              color: Theme.of(context).colorScheme.onSecondary,
-                              typography: CookieTypography.title,
-                            ),
-                            body: const LeaveRecipeSheet(),
-                          ).show(context)
+                          title: CookieText(
+                            text:
+                                AppLocalizations.of(
+                                  context,
+                                )!.recipeDiscardPrompt,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            typography: CookieTypography.title,
+                          ),
+                          body: const LeaveRecipeSheet(),
+                        ).show(context)
                         : Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            CustomBottomBar.route,
-                            (route) => false,
-                          );
+                          context,
+                          CustomBottomBar.route,
+                          (route) => false,
+                        );
                   },
                 ).back(context),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -103,7 +109,9 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                       ),
                       const SizedBox(height: 10),
                       CarouselSelectImagesRecipe(
-                          ct: ct, carouselController: _carouselController),
+                        ct: ct,
+                        carouselController: _carouselController,
+                      ),
                       const SizedBox(height: 20),
                       CookieText(
                         text: AppLocalizations.of(context)!.recipeCoverTitle,
@@ -111,20 +119,19 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                       ),
                       const SizedBox(height: 10),
                       SelectImageRecipe(
-                          hasImage: ct.thumbImage != null,
-                          onTap: () async {
-                            await ct.pickThumb();
-                            setState(() {});
-                          },
-                          image: ct.thumbImage,
-                          child: Center(
-                            child: ct.thumbImage != null
-                                ? Image.file(
-                                    ct.thumbImage!,
-                                    height: 250,
-                                  )
-                                : const SizedBox.shrink(),
-                          )),
+                        hasImage: ct.thumbImage != null,
+                        onTap: () async {
+                          await ct.pickThumb();
+                          setState(() {});
+                        },
+                        image: ct.thumbImage,
+                        child: Center(
+                          child:
+                              ct.thumbImage != null
+                                  ? Image.file(ct.thumbImage!, height: 250)
+                                  : const SizedBox.shrink(),
+                        ),
+                      ),
                       const SizedBox(height: 20),
                       CookieTextField.outline(
                         hintText: AppLocalizations.of(context)!.recipeTitleHint,
@@ -139,8 +146,9 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         controller: ct.titleController,
                         validator: (value) {
                           if (value!.isEmpty || value.length < 3) {
-                            return AppLocalizations.of(context)!
-                                .recipeTitleValidation;
+                            return AppLocalizations.of(
+                              context,
+                            )!.recipeTitleValidation;
                           }
                           return null;
                         },
@@ -172,8 +180,9 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         maxLines: 10,
                         validator: (value) {
                           if (value!.isEmpty || value.length < 10) {
-                            return AppLocalizations.of(context)!
-                                .recipeAboutValidation;
+                            return AppLocalizations.of(
+                              context,
+                            )!.recipeAboutValidation;
                           }
                           return null;
                         },
