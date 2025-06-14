@@ -34,8 +34,10 @@ class RecipeRepositoryImp implements RecipeRepository {
 
   @override
   Future<RecipeEntity> createRecipe(RecipeEntity recipe) async {
-    final result =
-        await _apiRecipes.post(path: path, body: _mapper.toMap(recipe));
+    final result = await _apiRecipes.post(
+      path: path,
+      body: _mapper.toMap(recipe),
+    );
 
     return _mapper.fromMap(result);
   }
@@ -62,17 +64,22 @@ class RecipeRepositoryImp implements RecipeRepository {
     String? search,
   }) async {
     final result = await _apiRecipes.get(
-        path: '$path/user/$userID?page=$page&isDesc=$isDesc&search=$search');
+      path: '$path/user/$userID?page=$page&isDesc=$isDesc&search=$search',
+    );
 
     return result.map<RecipeDto>((e) => RecipeDto.fromMap(e)).toList();
   }
 
   @override
-  Future<void> createImages(
-      {required String recipeId, required String filePath}) async {
+  Future<void> createImages({
+    required String recipeId,
+    required String filePath,
+  }) async {
     final data = {
-      "file": await MultipartFile.fromFile(filePath,
-          contentType: MediaType('image', 'jpg')),
+      "file": await MultipartFile.fromFile(
+        filePath,
+        contentType: MediaType('image', 'jpg'),
+      ),
     };
     await _apiRecipes.post(
       path: '$path/$recipeId/images',
@@ -82,11 +89,15 @@ class RecipeRepositoryImp implements RecipeRepository {
   }
 
   @override
-  Future<void> createThumb(
-      {required String recipeId, required String filePath}) async {
+  Future<void> createThumb({
+    required String recipeId,
+    required String filePath,
+  }) async {
     final data = {
-      "file": await MultipartFile.fromFile(filePath,
-          contentType: MediaType('image', 'jpg')),
+      "file": await MultipartFile.fromFile(
+        filePath,
+        contentType: MediaType('image', 'jpg'),
+      ),
     };
     await _apiRecipes.post(
       path: '$path/$recipeId/thumbs',
@@ -97,29 +108,26 @@ class RecipeRepositoryImp implements RecipeRepository {
 
   @override
   Future<void> deleteImages(String recipeId, String imageId) async {
-    await _apiRecipes.delete(
-      path: '$path/$recipeId/images/$imageId',
-    );
+    await _apiRecipes.delete(path: '$path/$recipeId/images/$imageId');
   }
 
   @override
   Future<void> deleteThumb(String recipeId, String thumbId) async {
-    await _apiRecipes.delete(
-      path: '$path/$recipeId/thumbs/$thumbId',
-    );
+    await _apiRecipes.delete(path: '$path/$recipeId/thumbs/$thumbId');
   }
 
   @override
-  Future<List<RecipeDto>> listRecipe(
-      {String? search,
-      bool isDesc = true,
-      OrderRecipeEnum? orderBy,
-      required int page,
-      int? timePreparedTo,
-      int? timePreparedFrom,
-      int? portionTo,
-      int? portionFrom,
-      String? difficultyRecipe}) async {
+  Future<List<RecipeDto>> listRecipe({
+    String? search,
+    bool isDesc = true,
+    OrderRecipeEnum? orderBy,
+    required int page,
+    int? timePreparedTo,
+    int? timePreparedFrom,
+    int? portionTo,
+    int? portionFrom,
+    String? difficultyRecipe,
+  }) async {
     List<String> queryParams = [];
     if (search != null) queryParams.add('search=$search');
     queryParams.add('isDesc=$isDesc');
@@ -137,40 +145,40 @@ class RecipeRepositoryImp implements RecipeRepository {
     }
 
     String queryString = queryParams.join('&');
-    final result = await _apiRecipes.get(
-      path: '$path?page=$page&$queryString',
-    );
+    final result = await _apiRecipes.get(path: '$path?page=$page&$queryString');
 
     return result.map<RecipeDto>((e) => RecipeDto.fromMap(e)).toList();
   }
 
   @override
-  Future<void> insertIngredient(
-      {required String recipeId,
-      required List<IngredientRecipeEntity> ingredient}) async {
-    final data = ingredient
-        .map(
-          (e) => IngredientRecipeResponseDto.toDto(e).toJson(),
-        )
-        .toList();
-    await _apiRecipes.post(
-      path: '$path/$recipeId/ingredients',
-      body: data,
-    );
+  Future<void> insertIngredient({
+    required String recipeId,
+    required List<IngredientRecipeEntity> ingredient,
+  }) async {
+    final data =
+        ingredient
+            .map((e) => IngredientRecipeResponseDto.toDto(e).toJson())
+            .toList();
+    await _apiRecipes.post(path: '$path/$recipeId/ingredients', body: data);
   }
 
   @override
   Future<List<IngredientRecipeEntity>> getIngredientsRecipe(
-      String recipeId) async {
-    final result = await _apiRecipes.get(
-      path: '$path/$recipeId/ingredients',
-    );
-    final List<IngredientRecipeDto> ingredients = result
-        .map<IngredientRecipeDto>((e) => _ingredientDtoMapper.fromMap(e))
-        .toList();
+    String recipeId,
+  ) async {
+    final result = await _apiRecipes.get(path: '$path/$recipeId/ingredients');
+    final List<IngredientRecipeDto> ingredients =
+        result
+            .map<IngredientRecipeDto>((e) => _ingredientDtoMapper.fromMap(e))
+            .toList();
 
     return ingredients
         .map<IngredientRecipeEntity>((e) => _ingredientDtoMapper.toEntity(e))
         .toList();
+  }
+
+  @override
+  Future<void> viewRecipe(String recipeId) async {
+    return await _apiRecipes.post(path: '$path/$recipeId/view/1');
   }
 }
