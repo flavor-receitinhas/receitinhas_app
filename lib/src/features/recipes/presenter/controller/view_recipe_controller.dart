@@ -21,14 +21,15 @@ class ViewRecipeController extends ManagerStore {
 
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          id = arguments['id'] as String;
-          recipe = await getRecipe();
-          images = await getImages();
-          ingredients = await getIngredientsRecipe();
-          favoriteRecipeDto = await getFavoriteRecipe();
-        },
-      );
+    call: () async {
+      id = arguments['id'] as String;
+      recipe = await getRecipe();
+      images = await getImages();
+      ingredients = await getIngredientsRecipe();
+      favoriteRecipeDto = await getFavoriteRecipe();
+      await viewRecipe();
+    },
+  );
 
   Future<RecipeGetDto> getRecipe() async {
     return await _recipeRepository.getRecipe(id);
@@ -48,24 +49,29 @@ class ViewRecipeController extends ManagerStore {
   }
 
   Future<void> addAndRemoveFavorite() => handleTry(
-        call: () async {
-          if (favoriteRecipeDto!.exists) {
-            await _favoriteRepository
-                .removeFavorite(favoriteRecipeDto!.favoriteId!);
-            favoriteRecipeDto = favoriteRecipeDto!.copyWith(
-              exists: false,
-              favoriteId: null,
-            );
-          } else {
-            final favoriteResult = await _favoriteRepository.addFavorite(
-              FavoriteDto(recipeId: id),
-            );
-            favoriteRecipeDto = favoriteRecipeDto!.copyWith(
-              exists: true,
-              favoriteId: favoriteResult.id,
-            );
-          }
-          notifyListeners();
-        },
-      );
+    call: () async {
+      if (favoriteRecipeDto!.exists) {
+        await _favoriteRepository.removeFavorite(
+          favoriteRecipeDto!.favoriteId!,
+        );
+        favoriteRecipeDto = favoriteRecipeDto!.copyWith(
+          exists: false,
+          favoriteId: null,
+        );
+      } else {
+        final favoriteResult = await _favoriteRepository.addFavorite(
+          FavoriteDto(recipeId: id),
+        );
+        favoriteRecipeDto = favoriteRecipeDto!.copyWith(
+          exists: true,
+          favoriteId: favoriteResult.id,
+        );
+      }
+      notifyListeners();
+    },
+  );
+
+  Future<void> viewRecipe() async {
+    await _recipeRepository.viewRecipe(id);
+  }
 }

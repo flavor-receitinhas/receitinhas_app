@@ -25,15 +25,21 @@ abstract class RecipeRepository {
     int? portionFrom,
     String? difficultyRecipe,
   });
-  Future<void> createImages(
-      {required String recipeId, required String filePath});
+  Future<void> createImages({
+    required String recipeId,
+    required String filePath,
+  });
   Future<void> deleteImages(String recipeId, String imageId);
-  Future<void> createThumb(
-      {required String recipeId, required String filePath});
+  Future<void> createThumb({
+    required String recipeId,
+    required String filePath,
+  });
   Future<void> deleteThumb(String recipeId, String thumbId);
   Future<List<ImageEntity>> getImages(String recipeId);
-  Future<void> insertIngredient(
-      {required String recipeId,
-      required List<IngredientRecipeEntity> ingredient});
+  Future<void> insertIngredient({
+    required String recipeId,
+    required List<IngredientRecipeEntity> ingredient,
+  });
   Future<List<IngredientRecipeEntity>> getIngredientsRecipe(String recipeId);
+  Future<void> viewRecipe(String recipeId);
 }
