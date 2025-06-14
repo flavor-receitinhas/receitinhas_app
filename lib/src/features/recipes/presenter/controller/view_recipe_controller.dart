@@ -27,7 +27,7 @@ class ViewRecipeController extends ManagerStore {
       images = await getImages();
       ingredients = await getIngredientsRecipe();
       favoriteRecipeDto = await getFavoriteRecipe();
-      await viewRecipe();
+      viewRecipe();
     },
   );
 
