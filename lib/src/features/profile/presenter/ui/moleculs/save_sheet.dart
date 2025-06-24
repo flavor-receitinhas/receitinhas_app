@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
+import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/features/profile/presenter/controller/edit_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
+import 'package:page_manager/entities/state_manager.dart';
 
 class SaveSheet extends StatelessWidget {
   final EditProfileController ct;
@@ -25,13 +25,21 @@ class SaveSheet extends StatelessWidget {
             if (!formKey.currentState!.validate()) {
               return;
             }
-            ct.profile!.biography = ct.biographyController.text;
             if ((ct.image != null && ct.image!.path.isNotEmpty) ||
                 ct.isRemoveImage) {
               await ct.updateImageProfile();
             }
             if (ct.profile!.biography != ct.biographyController.text) {
               await ct.updateProfile(ct.profile!);
+              if (ct.stateUpdateProfile == StateManager.error &&
+                  context.mounted) {
+                CookieDialog(
+                  title: CookieText(
+                    text: AppLocalizations.of(context)!.dialogUnexpectedError,
+                  ),
+                  content: CookieText(text: ct.errorUpdateMessage),
+                ).show(context);
+              }
             }
             if (ct.userNameController.text != Global.profile!.name) {
               await ct.updateNameProfile();

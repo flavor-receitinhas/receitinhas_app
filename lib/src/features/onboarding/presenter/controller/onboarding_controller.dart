@@ -47,7 +47,7 @@ class OnBoardingController extends ChangeNotifier {
   Future<void> updateNameProfile() {
     return _repository.updateUserName(
       userId: Global.user!.id,
-      name: userNameController.text,
+      name: userNameController.text.trim(),
     );
   }
 }

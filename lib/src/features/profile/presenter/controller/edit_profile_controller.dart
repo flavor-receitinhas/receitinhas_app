@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:api_manager/api/handler/api_error.dart';
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/features/onboarding/data/mappers/validate_user_entity.dart';
 import 'package:app_receitas/src/features/onboarding/domain/repositories/user_onboarding_repository.dart';
 import 'package:app_receitas/src/features/profile/domain/dtos/profile_dto.dart';
 import 'package:app_receitas/src/features/profile/domain/entities/profile_entity.dart';
@@ -19,23 +21,29 @@ class EditProfileController extends ManagerStore {
   TextEditingController biographyController = TextEditingController();
   bool isRemoveImage = false;
   TextEditingController userNameController = TextEditingController();
-
+  StateManager stateUpdateImage = StateManager.initial;
+  StateManager stateUpdateProfile = StateManager.initial;
+  StateManager stateValidateName = StateManager.initial;
+  String errorUpdateMessage = '';
+  ValidateUserEntity? validateUserEntity;
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          userNameController.text = Global.profile?.name ?? '';
-          profile = arguments['profile'] as ProfileEntity;
-          biographyController.text = profile!.biography;
-        },
-      );
+    call: () async {
+      userNameController.text = Global.profile?.name ?? '';
+      profile = arguments['profile'] as ProfileEntity;
+      biographyController.text = profile!.biography;
+    },
+  );
 
-  Future<void> updateNameProfile() => handleTry(call: () async {
-        await _onBoardingRepository.updateUserName(
-          userId: Global.user!.id,
-          name: userNameController.text,
-        );
-        Global.profile?.name = userNameController.text;
-      });
+  Future<void> updateNameProfile() => handleTry(
+    call: () async {
+      await _onBoardingRepository.updateUserName(
+        userId: Global.user!.id,
+        name: userNameController.text.trim(),
+      );
+      Global.profile?.name = userNameController.text.trim();
+    },
+  );
 
   Future<void> updateImageProfile() async {
     if (image == null) return;
@@ -43,8 +51,9 @@ class EditProfileController extends ManagerStore {
   }
 
   Future<void> pickImageLogo() async {
-    final fileImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final fileImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
 
     if (fileImage == null) {
       return;
@@ -54,14 +63,40 @@ class EditProfileController extends ManagerStore {
     notifyListeners();
   }
 
-  Future<void> updateProfile(ProfileEntity profile) async =>
+  Future<void> updateProfile(ProfileEntity profile) async {
+    try {
+      stateUpdateProfile = StateManager.loading;
       await _repository.updateProfile(
         userId: profile.userId,
         profileDto: ProfileDto(
           name: profile.name,
-          biography: profile.biography,
+          biography: biographyController.text.trim(),
         ),
       );
+      stateUpdateProfile = StateManager.done;
+    } catch (e) {
+      if (e is ApiError) {
+        errorUpdateMessage = e.message;
+      } else {
+        errorUpdateMessage = 'An unexpected error occurred: $e';
+      }
+      stateUpdateProfile = StateManager.error;
+    }
+  }
+
+  Future<void> validateUser() async {
+    try {
+      stateValidateName = StateManager.loading;
+      validateUserEntity = await _onBoardingRepository.validateUser(
+        userID: profile!.userId,
+        name: userNameController.text.trim(),
+      );
+      stateValidateName = StateManager.done;
+    } catch (e) {
+      stateValidateName = StateManager.error;
+    }
+    notifyListeners();
+  }
 
   void removeImage() {
     image = File('');
