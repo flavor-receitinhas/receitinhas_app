@@ -29,21 +29,20 @@ class SaveSheet extends StatelessWidget {
                 ct.isRemoveImage) {
               await ct.updateImageProfile();
             }
-            if (ct.profile!.biography != ct.biographyController.text) {
+            if (ct.profile!.biography != ct.biographyController.text ||
+                ct.userNameController.text != Global.profile!.name) {
               await ct.updateProfile(ct.profile!);
-              if (ct.stateUpdateProfile == StateManager.error &&
-                  context.mounted) {
-                CookieDialog(
-                  title: CookieText(
-                    text: AppLocalizations.of(context)!.dialogUnexpectedError,
-                  ),
-                  content: CookieText(text: ct.errorUpdateMessage),
-                ).show(context);
-              }
             }
-            if (ct.userNameController.text != Global.profile!.name) {
-              await ct.updateNameProfile();
+
+            if (ct.stateUpdateProfile == StateManager.error &&
+                    context.mounted ||
+                ct.stateUpdateImage == StateManager.error && context.mounted) {
+              CookieDialog(
+                title: CookieText(text: ct.errorUpdateMessage),
+              ).show(context);
+              return;
             }
+
             if (context.mounted) {
               Navigator.pop(context, true);
               Navigator.pop(context, true);

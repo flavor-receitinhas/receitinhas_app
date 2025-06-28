@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 enum CookieTypography {
   title(22, true),
   button(14, true),
-  body(14, false);
+  body(14, false),
+  tiny(12, false);
 
   final double size;
   final bool isBold;
@@ -18,14 +19,15 @@ class CookieText extends StatelessWidget {
   final Color? color;
   final TextOverflow? overflow;
   final int? maxLine;
-  const CookieText(
-      {super.key,
-      required this.text,
-      this.typography = CookieTypography.body,
-      this.color,
-      this.textAlign,
-      this.overflow,
-      this.maxLine});
+  const CookieText({
+    super.key,
+    required this.text,
+    this.typography = CookieTypography.body,
+    this.color,
+    this.textAlign,
+    this.overflow,
+    this.maxLine,
+  });
 
   @override
   Widget build(BuildContext context) {

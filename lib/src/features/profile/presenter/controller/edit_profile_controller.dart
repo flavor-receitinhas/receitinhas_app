@@ -35,19 +35,20 @@ class EditProfileController extends ManagerStore {
     },
   );
 
-  Future<void> updateNameProfile() => handleTry(
-    call: () async {
-      await _onBoardingRepository.updateUserName(
-        userId: Global.user!.id,
-        name: userNameController.text.trim(),
-      );
-      Global.profile?.name = userNameController.text.trim();
-    },
-  );
-
   Future<void> updateImageProfile() async {
     if (image == null) return;
-    await _repository.updateImageProfile(profile!.userId, image!.path);
+    try {
+      stateUpdateImage = StateManager.loading;
+      await _repository.updateImageProfile(profile!.userId, image!.path);
+      stateUpdateImage = StateManager.done;
+    } catch (e) {
+      if (e is ApiError) {
+        errorUpdateMessage = e.message;
+      } else {
+        errorUpdateMessage = 'An unexpected error occurred: $e';
+      }
+      stateUpdateImage = StateManager.error;
+    }
   }
 
   Future<void> pickImageLogo() async {
@@ -69,10 +70,11 @@ class EditProfileController extends ManagerStore {
       await _repository.updateProfile(
         userId: profile.userId,
         profileDto: ProfileDto(
-          name: profile.name,
+          name: userNameController.text.trim(),
           biography: biographyController.text.trim(),
         ),
       );
+      Global.profile?.name = userNameController.text.trim();
       stateUpdateProfile = StateManager.done;
     } catch (e) {
       if (e is ApiError) {

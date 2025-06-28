@@ -164,7 +164,7 @@ class _EditProfilePageState
                               )!.profileEditProfilePageImageRequirement,
                           color: Theme.of(
                             context,
-                          ).colorScheme.onPrimary.withOpacity(0.5),
+                          ).colorScheme.onPrimary.withValues(alpha: 0.5),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -272,6 +272,7 @@ class _EditProfilePageState
                         CookieText(
                           text: ct.validateUserEntity!.message,
                           color: Colors.red,
+                          typography: CookieTypography.tiny,
                         ),
                       ],
                       const SizedBox(height: 20),
