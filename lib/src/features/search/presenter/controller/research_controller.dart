@@ -1,3 +1,4 @@
+import 'package:api_manager/api/handler/api_error.dart';
 import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/features/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
@@ -7,9 +8,7 @@ import 'package:page_manager/entities/state_manager.dart';
 class ResearchController extends ChangeNotifier {
   final RecipeRepository _recipeRepository;
 
-  ResearchController(
-    this._recipeRepository,
-  );
+  ResearchController(this._recipeRepository);
 
   List<RecipeDto> recipes = [];
   final _pageSize = 25;
@@ -32,6 +31,8 @@ class ResearchController extends ChangeNotifier {
   bool get isLoadingMore => _isLoadingMore;
   bool get hasError => _hasError;
   bool get hasReachedMax => _hasReachedMax;
+
+  String errorMessage = '';
 
   Future<void> init() async {
     await loadRecipes();
@@ -60,8 +61,13 @@ class ResearchController extends ChangeNotifier {
       state = StateManager.done;
       _hasError = false;
     } catch (e) {
+      if (e is ApiError) {
+        errorMessage = e.message;
+      } else {
+        errorMessage = 'An unexpected error occurred: $e';
+      }
       _hasError = true;
-      state = StateManager.done;
+      state = StateManager.error;
     }
 
     notifyListeners();
@@ -80,16 +86,20 @@ class ResearchController extends ChangeNotifier {
       _currentPage++;
       _hasError = false;
     } catch (e) {
+      if (e is ApiError) {
+        errorMessage = e.message;
+      } else {
+        errorMessage = 'An unexpected error occurred: $e';
+      }
       _hasError = true;
+      state = StateManager.error;
     }
 
     _isLoadingMore = false;
     notifyListeners();
   }
 
-  Future<List<RecipeDto>> listRecipe({
-    required int page,
-  }) async {
+  Future<List<RecipeDto>> listRecipe({required int page}) async {
     return await _recipeRepository.listRecipe(
       search: searchController.text,
       page: page,

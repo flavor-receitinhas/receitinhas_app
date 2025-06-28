@@ -1,4 +1,4 @@
-import 'package:app_receitas/src/core/global/global_variables.dart'; 
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/features/onboarding/domain/entities/user_food_pref_entity.dart';
 import 'package:app_receitas/src/features/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/features/onboarding/domain/enums/proteins_enum.dart';
@@ -16,13 +16,16 @@ class EditAccountController extends ManagerStore {
   final List<DietaryRestrictions> selectRestriction = [];
   UserFoodPrefEntity? userPref;
 
+  Map<String, dynamic> currentArguments = {};
+
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          userNameController.text = Global.profile?.name ?? '';
-          await loadingOnBoardingPrefs();
-        },
-      );
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
+    call: () async {
+      currentArguments = arguments;
+      userNameController.text = Global.profile?.name ?? '';
+      await loadingOnBoardingPrefs();
+    },
+  );
 
   Future<void> loadingOnBoardingPrefs() async {
     userPref = await _onBoardingRepository.getUserPref(userId: Global.user!.id);

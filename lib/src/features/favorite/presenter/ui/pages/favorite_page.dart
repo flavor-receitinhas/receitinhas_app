@@ -22,6 +22,8 @@ class _FavoritePageState extends ManagerPage<FavoriteController, FavoritePage> {
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
+      error: ct.error.toString(),
+      errorReload: () async => await ct.init({}),
       done:
           () => SafeArea(
             child: RefreshIndicator(

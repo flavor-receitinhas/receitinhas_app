@@ -26,9 +26,13 @@ class EditProfileController extends ManagerStore {
   StateManager stateValidateName = StateManager.initial;
   String errorUpdateMessage = '';
   ValidateUserEntity? validateUserEntity;
+
+  Map<String, dynamic> argumentsMap = {};
+
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
     call: () async {
+      argumentsMap = arguments;
       userNameController.text = Global.profile?.name ?? '';
       profile = arguments['profile'] as ProfileEntity;
       biographyController.text = profile!.biography;

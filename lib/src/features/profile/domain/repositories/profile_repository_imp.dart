@@ -1,5 +1,3 @@
-import 'package:api_manager/api/handler/api_bad_request_error.dart';
-import 'package:api_manager/api/handler/api_internal_server_error.dart';
 import 'package:app_receitas/src/core/services/api/api_recipes.dart';
 import 'package:app_receitas/src/features/profile/domain/dtos/profile_dto.dart';
 import 'package:app_receitas/src/features/profile/domain/entities/profile_entity.dart';

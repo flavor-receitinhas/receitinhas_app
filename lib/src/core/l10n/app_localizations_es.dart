@@ -750,4 +750,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get dialogNo => 'No';
+
+  @override
+  String get errorPageReload => 'Recargar';
 }

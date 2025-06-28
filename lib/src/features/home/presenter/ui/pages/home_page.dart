@@ -36,6 +36,8 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
+      error: ct.error.toString(),
+      errorReload: () async => await ct.init({}),
       state: ct.state,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

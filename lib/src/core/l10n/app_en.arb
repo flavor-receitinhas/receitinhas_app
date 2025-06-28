@@ -222,5 +222,6 @@
   "dialogUnexpectedError": "An unexpected error occurred!",
   "dialogOk": "Ok",
   "dialogYes": "Yes",
-  "dialogNo": "No"
+  "dialogNo": "No",
+  "errorPageReload": "Reload"
 }

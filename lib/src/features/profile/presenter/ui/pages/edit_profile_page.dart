@@ -31,6 +31,8 @@ class _EditProfilePageState
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return CookiePage(
+      error: ct.error.toString(),
+      errorReload: () async => await ct.init(ct.argumentsMap),
       state: ct.state,
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primary,

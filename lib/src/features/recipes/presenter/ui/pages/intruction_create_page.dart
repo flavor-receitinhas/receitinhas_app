@@ -76,6 +76,8 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
 
     return CookiePage(
       state: StateManager.done,
+      error: widget.ct.error.toString(),
+      errorReload: () => widget.ct.init({}),
       bottomNavigationBar: CookieButton(
         label: AppLocalizations.of(context)!.recipeDifficultyNext,
         margin: const EdgeInsets.only(left: 16, bottom: 10, right: 16),

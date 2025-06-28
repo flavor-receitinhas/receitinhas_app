@@ -748,6 +748,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dialogNo => 'Não';
+
+  @override
+  String get errorPageReload => 'Recarregar';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1491,4 +1494,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get dialogNo => 'Não';
+
+  @override
+  String get errorPageReload => 'Recarregar';
 }

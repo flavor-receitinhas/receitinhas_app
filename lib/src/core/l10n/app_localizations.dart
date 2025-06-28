@@ -1444,6 +1444,12 @@ abstract class AppLocalizations {
   /// In pt_BR, this message translates to:
   /// **'Não'**
   String get dialogNo;
+
+  /// No description provided for @errorPageReload.
+  ///
+  /// In pt_BR, this message translates to:
+  /// **'Recarregar'**
+  String get errorPageReload;
 }
 
 class _AppLocalizationsDelegate

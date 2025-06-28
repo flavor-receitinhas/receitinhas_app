@@ -19,6 +19,8 @@ class _SelectIngredientsPageState
   @override
   Widget build(BuildContext context) {
     return CookiePage(
+      error: ct.error.toString(),
+      errorReload: () async => await ct.init(ct.argumentsMap),
       state: ct.state,
       done: () => SafeArea(
         child: CustomScrollView(

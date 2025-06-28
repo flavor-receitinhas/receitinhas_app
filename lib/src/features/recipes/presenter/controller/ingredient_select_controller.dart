@@ -27,10 +27,13 @@ class IngredientSelectController extends ManagerStore {
   bool get hasError => _hasError;
   bool get hasReachedMax => _hasReachedMax;
 
+  Map<String, dynamic> argumentsMap = {};
+
   @override
-  void init(Map<String, dynamic> arguments) {
+  Future<void> init(Map<String, dynamic> arguments) async {
     handleTry(
       call: () async {
+        argumentsMap = arguments;
         arguments['ingredients'] != null
             ? listIngredientSelect = arguments['ingredients']
             : listIngredientSelect = [];
