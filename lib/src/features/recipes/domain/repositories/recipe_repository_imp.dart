@@ -179,6 +179,6 @@ class RecipeRepositoryImp implements RecipeRepository {
 
   @override
   Future<void> viewRecipe(String recipeId) async {
-    return await _apiRecipes.post(path: '$path/$recipeId/view');
+    return await _apiRecipes.post(path: '$path/$recipeId/views');
   }
 }
