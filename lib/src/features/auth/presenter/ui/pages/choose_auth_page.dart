@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
@@ -40,6 +41,8 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
       ),
       body: Column(
         children: [
+          Image.asset(ImagesEnum.eggDuvida.path),
+          Spacer(),
           CookieText(
             text: AppLocalizations.of(context)!.chooseAuthTitle,
             typography: CookieTypography.title,
@@ -54,19 +57,17 @@ class _ChooseAuthPageState extends State<ChooseAuthPage> {
       ),
       bottomBar: [
         CookieButton.outline(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
           label: AppLocalizations.of(context)!.chooseAuthRegisterButton,
           labelColor: Theme.of(context).colorScheme.primary,
           onPressed: () => Navigator.pushNamed(context, RegisterPage.route),
         ),
-        const SizedBox(height: 10),
         CookieButton(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
           label: AppLocalizations.of(context)!.chooseAuthLoginButton,
           onPressed: () => Navigator.pushNamed(context, LoginPage.route),
           width: MediaQuery.sizeOf(context).width,
         ),
-        const SizedBox(height: 5),
       ],
     );
   }

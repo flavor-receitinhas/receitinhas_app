@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text_field.dart';
@@ -25,24 +26,27 @@ class _ForgetPasswordPageState
     final theme = Theme.of(context).colorScheme;
     final snack = ScaffoldMessenger.of(context);
     return CustomScreen(
-      iconAppBar: IconButton(
+      leading: IconButton(
         onPressed: () => Navigator.pop(context),
         icon: const Icon(Icons.arrow_back_ios_outlined),
       ),
-      sideAppBar: MainAxisAlignment.start,
       body: Form(
         key: formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
+            Spacer(),
+            Image.asset(
+              ImagesEnum.eggEspadachim.path,
+              height: MediaQuery.sizeOf(context).height * 0.33,
+            ),
+            Spacer(),
             CookieText(
               text: AppLocalizations.of(context)!.forgetPasswordTitle,
               typography: CookieTypography.title,
             ),
             const SizedBox(height: 10),
-            CookieText(
-              text: AppLocalizations.of(context)!.forgetPasswordBody,
-            ),
+            CookieText(text: AppLocalizations.of(context)!.forgetPasswordBody),
             const SizedBox(height: 20),
             CookieTextField(
               hintText: AppLocalizations.of(context)!.forgetPasswordHintFild,
@@ -50,8 +54,9 @@ class _ForgetPasswordPageState
               prefixIcon: const Icon(Icons.person),
               validator: (value) {
                 if (value != null && !EmailValidator.validate(value)) {
-                  return AppLocalizations.of(context)!
-                      .forgetPasswordValidatorEmail;
+                  return AppLocalizations.of(
+                    context,
+                  )!.forgetPasswordValidatorEmail;
                 }
                 return null;
               },
@@ -61,7 +66,7 @@ class _ForgetPasswordPageState
       ),
       bottomBar: [
         CookieButton(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
           label: AppLocalizations.of(context)!.forgetPasswordButton,
           onPressed: () async {
             if (formKey.currentState!.validate()) {
@@ -84,7 +89,7 @@ class _ForgetPasswordPageState
             }
           },
         ),
-        const SizedBox(height: 5)
+        const SizedBox(height: 5),
       ],
     );
   }

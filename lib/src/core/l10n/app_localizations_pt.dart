@@ -102,10 +102,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'A palavra-passe deve conter pelo menos um número';
 
   @override
-  String get loginTitle => 'Ora Ora... Se não é a grande lenda voltando...';
+  String get loginTitle => 'Ficamos felizes com o seu regresso!';
 
   @override
-  String get loginBody => 'Estávamos com saudades :)';
+  String get loginBody => 'Pronto(a) para criar novas receitas?';
 
   @override
   String get loginEmail => 'Inserir e-mail';
@@ -850,10 +850,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A senha deve conter pelo menos um número';
 
   @override
-  String get loginTitle => 'Ora Ora... Se não é a grande lenda voltando...';
+  String get loginTitle => 'Ficamos felizes com seu retorno!';
 
   @override
-  String get loginBody => 'Estavamos com saudades :)';
+  String get loginBody => 'Pronto(a) para criar novas receitas?';
 
   @override
   String get loginEmail => 'Inserir e-mail';

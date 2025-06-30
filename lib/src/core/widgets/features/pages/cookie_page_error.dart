@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,11 @@ class CookiePageError extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            const CookieText(text: '404', typography: CookieTypography.title),
+            Image.asset(
+              ImagesEnum.eggError.path,
+              height: MediaQuery.sizeOf(context).height * 0.33,
+            ),
+            const SizedBox(height: 10),
             CookieText(text: errorMessage),
             const SizedBox(height: 10),
             CookieButton(

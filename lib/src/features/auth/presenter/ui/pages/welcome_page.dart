@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
@@ -40,6 +41,8 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
         body: Column(
           children: [
+            Image.asset(ImagesEnum.eggCooking.path),
+            Spacer(),
             CookieText(
               text: AppLocalizations.of(context)!.welcomeTitle,
               typography: CookieTypography.title,
@@ -54,10 +57,10 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
         bottomBar: [
           CookieButton(
+            margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
             label: AppLocalizations.of(context)!.welcomeBottomAppBar,
             onPressed: () => Navigator.pushNamed(context, ChooseAuthPage.route),
           ),
-          const SizedBox(height: 5),
         ],
       ),
     );
