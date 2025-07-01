@@ -47,18 +47,18 @@ class _CreateRecipePageState
         }
         ct.showDialogDiscard()
             ? CookieSheetBottom(
-                title: CookieText(
-                  text: AppLocalizations.of(context)!.recipeDiscardPrompt,
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  typography: CookieTypography.title,
-                ),
-                body: const LeaveRecipeSheet(),
-              ).show(context)
+              title: CookieText(
+                text: AppLocalizations.of(context)!.recipeDiscardPrompt,
+                color: Theme.of(context).colorScheme.onSecondary,
+                typography: CookieTypography.title,
+              ),
+              body: const LeaveRecipeSheet(),
+            ).show(context)
             : Navigator.pushNamedAndRemoveUntil(
-                context,
-                CustomBottomBar.route,
-                (route) => false,
-              );
+              context,
+              CustomBottomBar.route,
+              (route) => false,
+            );
       },
       child: PageView(
         onPageChanged: ct.onChangedPage,

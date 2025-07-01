@@ -36,10 +36,7 @@ class _ForgetPasswordPageState
         child: Column(
           children: [
             Spacer(),
-            Image.asset(
-              ImagesEnum.eggEspadachim.path,
-              height: MediaQuery.sizeOf(context).height * 0.33,
-            ),
+            Image.asset(ImagesEnum.eggForget.path),
             Spacer(),
             CookieText(
               text: AppLocalizations.of(context)!.forgetPasswordTitle,

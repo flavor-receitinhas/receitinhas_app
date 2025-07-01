@@ -570,7 +570,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get recipeLoadIngredientsError => 'Erro ao carregar ingredientes';
 
   @override
-  String get recipeNoItemsFound => 'Nenhuma ingrediente encontrada';
+  String get recipeNoItemsFound => 'Nenhum ingrediente encontrado';
 
   @override
   String get recipeAddIngredient => 'Adicionar ingrediente';

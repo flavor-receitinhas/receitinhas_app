@@ -16,22 +16,25 @@ class CookiePageError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const Spacer(),
-            Image.asset(
-              ImagesEnum.eggError.path,
-              height: MediaQuery.sizeOf(context).height * 0.33,
-            ),
-            const SizedBox(height: 10),
-            CookieText(text: errorMessage),
-            const SizedBox(height: 10),
-            CookieButton(
-              label: AppLocalizations.of(context)!.errorPageReload,
-              onPressed: onReload,
-            ),
-            const Spacer(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const Spacer(),
+              Image.asset(
+                ImagesEnum.eggError.path,
+                height: MediaQuery.sizeOf(context).height * 0.33,
+              ),
+              const SizedBox(height: 10),
+              CookieText(text: errorMessage),
+              const SizedBox(height: 10),
+              CookieButton(
+                label: AppLocalizations.of(context)!.errorPageReload,
+                onPressed: onReload,
+              ),
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );

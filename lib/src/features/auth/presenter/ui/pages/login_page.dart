@@ -40,7 +40,7 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
         children: [
           Spacer(),
           Image.asset(
-            ImagesEnum.eggEspadachim.path,
+            ImagesEnum.eggHello.path,
             height: MediaQuery.sizeOf(context).height * 0.33,
           ),
           Spacer(),

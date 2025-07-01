@@ -22,69 +22,79 @@ class _SelectIngredientsPageState
       error: ct.error.toString(),
       errorReload: () async => await ct.init(ct.argumentsMap),
       state: ct.state,
-      done: () => SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 10),
-                  CookieButton(
-                    label: AppLocalizations.of(context)!.recipeDifficultyBack,
-                    onPressed: () => Navigator.pop(context),
-                  ).back(context),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 10),
-                        CookieText(
-                          text: AppLocalizations.of(context)!
-                              .recipeSelectIngredientsTitle,
-                          typography: CookieTypography.title,
+      done:
+          () => SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      CookieButton(
+                        label:
+                            AppLocalizations.of(context)!.recipeDifficultyBack,
+                        onPressed: () => Navigator.pop(context),
+                      ).back(context),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10),
+                            CookieText(
+                              text:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.recipeSelectIngredientsTitle,
+                              typography: CookieTypography.title,
+                            ),
+                            const SizedBox(height: 10),
+                            CookieTextFieldSearch(
+                              hintText:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.recipeSearchIngredientsHint,
+                              controller: ct.ingredientController,
+                              onEditingComplete: ct.refreshPage,
+                            ),
+                            const SizedBox(height: 10),
+                          ],
                         ),
-                        const SizedBox(height: 10),
-                        CookieTextFieldSearch(
-                          hintText: AppLocalizations.of(context)!
-                              .recipeSearchIngredientsHint,
-                          controller: ct.ingredientController,
-                          onEditingComplete: ct.refreshPage,
-                        ),
-                        const SizedBox(height: 10),
-                      ],
+                      ),
+                    ],
+                  ),
+                ),
+                SliverVisibility(
+                  visible: ct.listIngredientSelect.isNotEmpty,
+                  sliver: SliverPadding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    sliver: ListSelectIngredients(
+                      ingredients: ct.listIngredientSelect,
+                      deleteOnPressed: (ingredient) {
+                        ct.deleteIngredientSelect(ingredient);
+                      },
                     ),
                   ),
-                ],
-              ),
-            ),
-            SliverVisibility(
-              visible: ct.listIngredientSelect.isNotEmpty,
-              sliver: SliverPadding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                sliver: ListSelectIngredients(
-                  ingredients: ct.listIngredientSelect,
-                  deleteOnPressed: (ingredient) {
-                    ct.deleteIngredientSelect(ingredient);
-                  },
                 ),
-              ),
+
+                if (ct.ingredients.isNotEmpty)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                      child: CookieText(
+                        text:
+                            AppLocalizations.of(
+                              context,
+                            )!.recipeChooseOtherIngredients,
+                        typography: CookieTypography.button,
+                      ),
+                    ),
+                  ),
+                ListAllIngredients(ct: ct),
+              ],
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-                child: CookieText(
-                  text: AppLocalizations.of(context)!
-                      .recipeChooseOtherIngredients,
-                  typography: CookieTypography.button,
-                ),
-              ),
-            ),
-            ListAllIngredients(ct: ct),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }
