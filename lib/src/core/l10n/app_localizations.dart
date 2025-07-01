@@ -272,13 +272,13 @@ abstract class AppLocalizations {
   /// No description provided for @loginTitle.
   ///
   /// In pt_BR, this message translates to:
-  /// **'Ora Ora... Se não é a grande lenda voltando...'**
+  /// **'Ficamos felizes com seu retorno!'**
   String get loginTitle;
 
   /// No description provided for @loginBody.
   ///
   /// In pt_BR, this message translates to:
-  /// **'Estavamos com saudades :)'**
+  /// **'Pronto(a) para criar novas receitas?'**
   String get loginBody;
 
   /// No description provided for @loginEmail.
@@ -1444,6 +1444,12 @@ abstract class AppLocalizations {
   /// In pt_BR, this message translates to:
   /// **'Não'**
   String get dialogNo;
+
+  /// No description provided for @errorPageReload.
+  ///
+  /// In pt_BR, this message translates to:
+  /// **'Recarregar'**
+  String get errorPageReload;
 }
 
 class _AppLocalizationsDelegate

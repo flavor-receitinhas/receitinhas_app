@@ -26,11 +26,8 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
   @override
   void initState() {
     ct.onNavigation(
-      (event) => Navigator.pushNamedAndRemoveUntil(
-        context,
-        event,
-        (route) => false,
-      ),
+      (event) =>
+          Navigator.pushNamedAndRemoveUntil(context, event, (route) => false),
     );
     super.initState();
   }
@@ -39,16 +36,21 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
   Widget build(BuildContext context) {
     ColorScheme color = Theme.of(context).colorScheme;
     return CustomScreen(
-      iconAppBar: IconButton(
+      leading: IconButton(
         onPressed: () => Navigator.pop(context),
         icon: const Icon(Icons.arrow_back_ios_outlined),
       ),
-      sideAppBar: MainAxisAlignment.start,
       body: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         key: formKey,
         child: Column(
           children: [
+            Spacer(),
+            Image.asset(
+              ImagesEnum.eggEspadachim.path,
+              height: MediaQuery.sizeOf(context).height * 0.33,
+            ),
+            Spacer(),
             CookieText(
               text: AppLocalizations.of(context)!.registerTitle,
               typography: CookieTypography.title,
@@ -74,9 +76,10 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               obscureText: ct.showPassword,
               maxLines: 1,
               suffixIcon: GestureDetector(
-                child: ct.showPassword
-                    ? const Icon(Icons.visibility_off)
-                    : const Icon(Icons.visibility),
+                child:
+                    ct.showPassword
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
                 onTap: () {
                   setState(() {
                     ct.showPassword = !ct.showPassword;
@@ -87,8 +90,9 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               validator: (value) {
                 String validators = '';
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!
-                      .registerValidatorPassword1;
+                  return AppLocalizations.of(
+                    context,
+                  )!.registerValidatorPassword1;
                 }
                 if (value.length < 8) {
                   validators +=
@@ -124,10 +128,11 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
                   CookieTextSpan(
                     text: AppLocalizations.of(context)!.registerTerms2,
                     color: color.primary,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.pushNamed(context, TermPage.route);
-                      },
+                    recognizer:
+                        TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(context, TermPage.route);
+                          },
                   ),
                   CookieTextSpan(
                     text: AppLocalizations.of(context)!.registerTerms3,
@@ -136,10 +141,14 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
                   CookieTextSpan(
                     text: AppLocalizations.of(context)!.registerTerms4,
                     color: color.primary,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.pushNamed(context, PrivacyPolicyPage.route);
-                      },
+                    recognizer:
+                        TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(
+                              context,
+                              PrivacyPolicyPage.route,
+                            );
+                          },
                   ),
                 ],
               ),
@@ -149,10 +158,7 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
               onPressed: () async {
                 await ct.loginGoogle();
               },
-              icon: Image.asset(
-                ImagesEnum.google.path,
-                height: 25,
-              ),
+              icon: Image.asset(ImagesEnum.google.path, height: 25),
               style: IconButton.styleFrom(
                 shape: CircleBorder(
                   side: BorderSide(color: color.primary, width: 2),
@@ -166,7 +172,7 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
       ),
       bottomBar: [
         CookieButton(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
           label: AppLocalizations.of(context)!.registerButton,
           onPressed: () async {
             if (formKey.currentState!.validate()) {
@@ -175,7 +181,7 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
           },
           isLoading: ct.state == StateManager.loading,
         ),
-        const SizedBox(height: 5)
+        const SizedBox(height: 5),
       ],
     );
   }

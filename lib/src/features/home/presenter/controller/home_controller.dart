@@ -11,8 +11,11 @@ class HomeController extends ManagerStore {
   final UserOnboardingRepository _userFoodPrefRepository;
   final ProfileRepository _profileRepository;
 
-  HomeController(this._recipeRepository, this._userFoodPrefRepository,
-      this._profileRepository);
+  HomeController(
+    this._recipeRepository,
+    this._userFoodPrefRepository,
+    this._profileRepository,
+  );
 
   List<RecipeDto> recipes = [];
   final int pageSize = 25;
@@ -24,13 +27,13 @@ class HomeController extends ManagerStore {
   int page = 0;
 
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          await loadingProfile();
-          await _loadMoreItems();
-          _setupScrollController();
-        },
-      );
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
+    call: () async {
+      await loadingProfile();
+      await _loadMoreItems();
+      _setupScrollController();
+    },
+  );
 
   @override
   void dispose() {
@@ -92,12 +95,12 @@ class HomeController extends ManagerStore {
   }
 
   Future<void> refresh() => handleTry(
-        call: () async {
-          recipes = [];
-          page = 0;
-          hasMore = true;
-          isLoading = false;
-          await _loadMoreItems();
-        },
-      );
+    call: () async {
+      recipes = [];
+      page = 0;
+      hasMore = true;
+      isLoading = false;
+      await _loadMoreItems();
+    },
+  );
 }

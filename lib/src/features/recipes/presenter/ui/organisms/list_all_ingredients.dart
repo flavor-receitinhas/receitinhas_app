@@ -16,9 +16,7 @@ class ListAllIngredients extends StatelessWidget {
       builder: (context, child) {
         if (ct.ingredients.isEmpty && ct.isLoading) {
           return const SliverToBoxAdapter(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
+            child: Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -34,54 +32,68 @@ class ListAllIngredients extends StatelessWidget {
 
         if (ct.ingredients.isEmpty) {
           return SliverToBoxAdapter(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CookieText(
-                  text: AppLocalizations.of(context)!.recipeNoItemsFound,
-                ),
-                CookieTextButton(
-                  text: AppLocalizations.of(context)!.recipeAddIngredient,
-                  color: Theme.of(context).colorScheme.primary,
-                  onPressed: () {
-                    CookieSheetBottom(
-                      alignmentTitle: Alignment.center,
-                      title: CookieText(
-                        text: AppLocalizations.of(context)!
-                            .recipeIngredientNotFound,
-                        typography: CookieTypography.title,
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
-                      body: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CookieText(
-                            text: AppLocalizations.of(context)!
-                                .recipeEnterIngredientBelow,
-                            color: Theme.of(context).colorScheme.onSecondary,
-                          ),
-                          const SizedBox(height: 10),
-                          CookieTextField.outline(
-                            hintText: AppLocalizations.of(context)!
-                                .recipeEnterIngredientHint,
-                            maxLength: 50,
-                            controller: ct.ingredientController,
-                          ),
-                          const SizedBox(height: 20),
-                          CookieButton(
-                            label: AppLocalizations.of(context)!.recipeConfirm,
-                            onPressed: () {
-                              ct.addIngredient();
-                              ct.refreshPage();
-                              Navigator.pop(context);
-                            },
-                          )
-                        ],
-                      ),
-                    ).show(context);
-                  },
-                )
-              ],
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.sizeOf(context).height * 0.25,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CookieText(
+                    text: AppLocalizations.of(context)!.recipeNoItemsFound,
+                    typography: CookieTypography.title,
+                  ),
+                  CookieTextButton(
+                    text: AppLocalizations.of(context)!.recipeAddIngredient,
+                    color: Theme.of(context).colorScheme.primary,
+                    typography: CookieTypography.button,
+                    onPressed: () {
+                      CookieSheetBottom(
+                        alignmentTitle: Alignment.center,
+                        title: CookieText(
+                          text:
+                              AppLocalizations.of(
+                                context,
+                              )!.recipeIngredientNotFound,
+                          typography: CookieTypography.title,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                        body: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CookieText(
+                              text:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.recipeEnterIngredientBelow,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                            ),
+                            const SizedBox(height: 10),
+                            CookieTextField.outline(
+                              hintText:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.recipeEnterIngredientHint,
+                              maxLength: 50,
+                              controller: ct.ingredientController,
+                            ),
+                            const SizedBox(height: 20),
+                            CookieButton(
+                              label:
+                                  AppLocalizations.of(context)!.recipeConfirm,
+                              onPressed: () {
+                                ct.addIngredient();
+                                ct.refreshPage();
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      ).show(context);
+                    },
+                  ),
+                ],
+              ),
             ),
           );
         }
@@ -135,15 +147,18 @@ class ListAllIngredients extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: CookieText(
-                      text: AppLocalizations.of(context)!
-                          .recipeLoadIngredientsError,
+                      text:
+                          AppLocalizations.of(
+                            context,
+                          )!.recipeLoadIngredientsError,
                     ),
                   ),
                 );
               }
               return const SizedBox.shrink();
             },
-            childCount: ct.ingredients.length +
+            childCount:
+                ct.ingredients.length +
                 (ct.isLoadingMore || ct.hasError ? 1 : 0),
           ),
         );

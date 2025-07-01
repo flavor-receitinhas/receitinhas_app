@@ -26,6 +26,8 @@ class _ViewRecipesPageState
   @override
   Widget build(BuildContext context) {
     return CookiePage(
+      error: ct.error.toString(),
+      errorReload: () async => await ct.init(ct.argumentsMap),
       state: ct.state,
       appBar: AppBar(
         surfaceTintColor: Theme.of(context).colorScheme.surface,

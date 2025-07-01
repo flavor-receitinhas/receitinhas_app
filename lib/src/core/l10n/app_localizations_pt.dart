@@ -102,10 +102,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'A palavra-passe deve conter pelo menos um número';
 
   @override
-  String get loginTitle => 'Ora Ora... Se não é a grande lenda voltando...';
+  String get loginTitle => 'Ficamos felizes com o seu regresso!';
 
   @override
-  String get loginBody => 'Estávamos com saudades :)';
+  String get loginBody => 'Pronto(a) para criar novas receitas?';
 
   @override
   String get loginEmail => 'Inserir e-mail';
@@ -570,7 +570,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get recipeLoadIngredientsError => 'Erro ao carregar ingredientes';
 
   @override
-  String get recipeNoItemsFound => 'Nenhuma ingrediente encontrada';
+  String get recipeNoItemsFound => 'Nenhum ingrediente encontrado';
 
   @override
   String get recipeAddIngredient => 'Adicionar ingrediente';
@@ -748,6 +748,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dialogNo => 'Não';
+
+  @override
+  String get errorPageReload => 'Recarregar';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -847,10 +850,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A senha deve conter pelo menos um número';
 
   @override
-  String get loginTitle => 'Ora Ora... Se não é a grande lenda voltando...';
+  String get loginTitle => 'Ficamos felizes com seu retorno!';
 
   @override
-  String get loginBody => 'Estavamos com saudades :)';
+  String get loginBody => 'Pronto(a) para criar novas receitas?';
 
   @override
   String get loginEmail => 'Inserir e-mail';
@@ -1491,4 +1494,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get dialogNo => 'Não';
+
+  @override
+  String get errorPageReload => 'Recarregar';
 }

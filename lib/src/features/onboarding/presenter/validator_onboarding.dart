@@ -4,31 +4,28 @@ import 'package:app_receitas/src/features/onboarding/domain/enums/proteins_enum.
 
 class ValidatorOnboarding {
   static String? validateName(String? value) {
-    if (value == null || value.length < 3) {
+    if (value == null || value.trim().length < 3) {
       return 'O nome deve ter no minimo 3 letras';
     }
-    if (value.length > 30) {
+    if (value.trim().length > 30) {
       return 'O nome deve ter no maximo 30 letras';
     }
-    RegExp usernameRegex =
-        RegExp(r'^(?!.*\.\.)(?![_\.])(?!.*\.$)[a-zA-Z0-9._]{1,30}$');
-    if (!usernameRegex.hasMatch(value)) {
+    RegExp usernameRegex = RegExp(
+      r'^(?!.*\.\.)(?![_\.])(?!.*\.$)[a-zA-Z0-9._ ]{1,30}$',
+    );
+    if (!usernameRegex.hasMatch(value.trim())) {
       return 'Nome de usuário inválido';
     }
     return null;
   }
 
   static void validateTapDietaryRestriction(
-      List<DietaryRestrictions> listDietary, DietaryRestrictions dietary) {
-    listDietary.contains(
-      dietary,
-    )
-        ? listDietary.remove(
-            dietary,
-          )
-        : listDietary.add(
-            dietary,
-          );
+    List<DietaryRestrictions> listDietary,
+    DietaryRestrictions dietary,
+  ) {
+    listDietary.contains(dietary)
+        ? listDietary.remove(dietary)
+        : listDietary.add(dietary);
     if (listDietary.contains(DietaryRestrictions.noRestriction) &&
         dietary == DietaryRestrictions.noRestriction) {
       listDietary.remove(DietaryRestrictions.gluten);
@@ -40,14 +37,18 @@ class ValidatorOnboarding {
   }
 
   static void validateTapProtein(
-      List<Proteins> listProteins, Proteins proteins) {
+    List<Proteins> listProteins,
+    Proteins proteins,
+  ) {
     listProteins.contains(proteins)
         ? listProteins.remove(proteins)
         : listProteins.add(proteins);
   }
 
-  static void validateTapDifficulty(List<DifficultyRecipe> listDifficulty,
-      DifficultyRecipe difficultyRecipe) {
+  static void validateTapDifficulty(
+    List<DifficultyRecipe> listDifficulty,
+    DifficultyRecipe difficultyRecipe,
+  ) {
     listDifficulty.contains(difficultyRecipe)
         ? listDifficulty.remove(difficultyRecipe)
         : listDifficulty.add(difficultyRecipe);

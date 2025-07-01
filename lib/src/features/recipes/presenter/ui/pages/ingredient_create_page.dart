@@ -1,5 +1,6 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
+import 'package:app_receitas/src/core/widgets/features/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_snack_bar.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
@@ -8,6 +9,7 @@ import 'package:app_receitas/src/features/recipes/presenter/ui/pages/select_ingr
 import 'package:app_receitas/src/features/recipes/presenter/validator/number_convert.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
+import 'package:page_manager/entities/state_manager.dart';
 
 class IngredientCreatePage extends StatefulWidget {
   final CreateRecipeController ct;
@@ -20,10 +22,13 @@ class IngredientCreatePage extends StatefulWidget {
 class _IngredientCreatePageState extends State<IngredientCreatePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CookiePage(
+      state: StateManager.done,
+      error: widget.ct.error.toString(),
+      errorReload: () => widget.ct.init({}),
       bottomNavigationBar: CookieButton(
         label: AppLocalizations.of(context)!.recipeDifficultyNext,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        margin: const EdgeInsets.only(left: 16, bottom: 10, right: 16),
         onPressed: () {
           if (widget.ct.listIngredientSelect.isEmpty) {
             CookieSnackBar(
@@ -37,96 +42,113 @@ class _IngredientCreatePageState extends State<IngredientCreatePage> {
           );
         },
       ),
-      body: SafeArea(
-        child: ListView(
-          children: [
-            const SizedBox(height: 10),
-            CookieButton(
-              label: AppLocalizations.of(context)!.recipeDifficultyBack,
-              onPressed: () {
-                widget.ct.pageController.previousPage(
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                );
-              },
-            ).back(context),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 10),
-                  CookieText(
-                    text: AppLocalizations.of(context)!.recipeIngredientsTitle,
-                    typography: CookieTypography.title,
+      done:
+          () => SafeArea(
+            child: ListView(
+              children: [
+                const SizedBox(height: 10),
+                CookieButton(
+                  label: AppLocalizations.of(context)!.recipeDifficultyBack,
+                  onPressed: () {
+                    widget.ct.pageController.previousPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  },
+                ).back(context),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
                   ),
-                  const SizedBox(height: 20),
-                  CookieText(
-                    text: AppLocalizations.of(context)!
-                        .recipeBasicInfoDescription,
-                  ),
-                  const SizedBox(height: 20),
-                  ContainerCreateInfo(
-                    title: AppLocalizations.of(context)!.recipeIngredientsTitle,
-                    svg: IconsSvgEnum.carrot,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, SelectIngredientsPage.route,
-                            arguments: {
-                              'ingredients': widget.ct.listIngredientSelect,
-                            }).then((value) {
-                          setState(() {});
-                        });
-                      },
-                      child: Column(
-                        children: [
-                          ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: widget.ct.listIngredientSelect.length,
-                            itemBuilder: (context, index) {
-                              final ingredient =
-                                  widget.ct.listIngredientSelect[index];
-                              return Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CookieText(
-                                      text: ingredient.ingredient.name,
-                                      typography: CookieTypography.button,
-                                    ),
-                                    CookieText(
-                                      text:
-                                          '${formatDouble(ingredient.quantity)} ${ingredient.unit}',
-                                      typography: CookieTypography.body,
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                          const Center(
-                            child: Icon(
-                              Icons.add_circle_outline_rounded,
-                              size: 34,
-                            ),
-                          ),
-                        ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      CookieText(
+                        text:
+                            AppLocalizations.of(
+                              context,
+                            )!.recipeIngredientsTitle,
+                        typography: CookieTypography.title,
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      CookieText(
+                        text:
+                            AppLocalizations.of(
+                              context,
+                            )!.recipeBasicInfoDescription,
+                      ),
+                      const SizedBox(height: 20),
+                      ContainerCreateInfo(
+                        title:
+                            AppLocalizations.of(
+                              context,
+                            )!.recipeIngredientsTitle,
+                        svg: IconsSvgEnum.carrot,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              SelectIngredientsPage.route,
+                              arguments: {
+                                'ingredients': widget.ct.listIngredientSelect,
+                              },
+                            ).then((value) {
+                              setState(() {});
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount:
+                                    widget.ct.listIngredientSelect.length,
+                                itemBuilder: (context, index) {
+                                  final ingredient =
+                                      widget.ct.listIngredientSelect[index];
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 5,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CookieText(
+                                          text: ingredient.ingredient.name,
+                                          typography: CookieTypography.button,
+                                        ),
+                                        CookieText(
+                                          text:
+                                              '${formatDouble(ingredient.quantity)} ${ingredient.unit}',
+                                          typography: CookieTypography.body,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                              const Center(
+                                child: Icon(
+                                  Icons.add_circle_outline_rounded,
+                                  size: 34,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

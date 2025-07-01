@@ -101,11 +101,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'La contraseña debe contener al menos un número';
 
   @override
-  String get loginTitle =>
-      'Vaya, vaya... Si no es la gran leyenda regresando...';
+  String get loginTitle => '¡Nos alegra tenerte de vuelta!';
 
   @override
-  String get loginBody => 'Te extrañamos :)';
+  String get loginBody => '¿Listo(a) para crear nuevas recetas?';
 
   @override
   String get loginEmail => 'Introducir correo electrónico';
@@ -750,4 +749,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get dialogNo => 'No';
+
+  @override
+  String get errorPageReload => 'Recargar';
 }

@@ -22,30 +22,33 @@ class ProfileController extends ManagerStore {
   bool isLoading = false;
   TextEditingController searchController = TextEditingController();
 
+  Map<String, dynamic> currentArguments = {};
+
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          if (arguments['id'] is String) {
-            id = arguments['id'] as String;
-          }
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
+    call: () async {
+      currentArguments = arguments;
+      if (arguments['id'] is String) {
+        id = arguments['id'] as String;
+      }
 
-          if (id != null) {
-            profile = (await getProfile(id!))!;
-          } else {
-            profile = await _repository.getProfile(Global.user!.id);
-          }
+      if (id != null) {
+        profile = (await getProfile(id!))!;
+      } else {
+        profile = await _repository.getProfile(Global.user!.id);
+      }
 
-          await getMoreRecipes();
-          _setupScrollController();
-        },
-      );
+      await getMoreRecipes();
+      _setupScrollController();
+    },
+  );
 
   Future<ProfileEntity?> getProfile(String id) async => await handleTry(
-        call: () async {
-          final profile = await _repository.getProfile(id);
-          return profile;
-        },
-      );
+    call: () async {
+      final profile = await _repository.getProfile(id);
+      return profile;
+    },
+  );
 
   void _setupScrollController() {
     scrollController.addListener(() async {
@@ -86,20 +89,17 @@ class ProfileController extends ManagerStore {
   Future<void> updateProfile(ProfileEntity profile) async {
     await _repository.updateProfile(
       userId: profile.userId,
-      profileDto: ProfileDto(
-        name: profile.name,
-        biography: profile.biography,
-      ),
+      profileDto: ProfileDto(name: profile.name, biography: profile.biography),
     );
   }
 
   Future<void> refresh() => handleTry(
-        call: () async {
-          page = 0;
-          hasMore = true;
-          isLoading = false;
-          recipes = [];
-          await getMoreRecipes();
-        },
-      );
+    call: () async {
+      page = 0;
+      hasMore = true;
+      isLoading = false;
+      recipes = [];
+      await getMoreRecipes();
+    },
+  );
 }

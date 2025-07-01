@@ -20,15 +20,18 @@ class ViewRecipeController extends ManagerStore {
   List<IngredientRecipeEntity> ingredients = [];
   FavoriteRecipeDto? favoriteRecipeDto;
 
+  Map<String, dynamic> argumentsMap = {};
+
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
     call: () async {
+      argumentsMap = arguments;
       id = arguments['id'] as String;
       recipe = await getRecipe();
       images = await getImages();
       ingredients = await getIngredientsRecipe();
       favoriteRecipeDto = await getFavoriteRecipe();
-      notifyListeners();
+      viewRecipe();
     },
   );
 
@@ -90,4 +93,8 @@ class ViewRecipeController extends ManagerStore {
       notifyListeners();
     },
   );
+
+  Future<void> viewRecipe() async {
+    await _recipeRepository.viewRecipe(id);
+  }
 }

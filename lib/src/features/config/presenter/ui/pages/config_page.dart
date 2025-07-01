@@ -28,173 +28,167 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
     final theme = Theme.of(context).colorScheme;
     return CookiePage(
       state: ct.state,
-      done: () => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: ListView(
-          children: [
-            const IntroduceConfig(),
-            const SizedBox(height: 20),
-            CookieText(
-              text: AppLocalizations.of(context)!.configAccount,
-              typography: CookieTypography.button,
-              color: theme.onPrimary,
-            ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.person,
-              text: AppLocalizations.of(context)!.configEditAccount,
-              action: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.pushNamed(context, EditAccountPage.route);
-              },
-            ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.key,
-              text: AppLocalizations.of(context)!.configChangePassword,
-              action: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  ChangedPasswordPage.route,
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            CookieText(
-              text: AppLocalizations.of(context)!.configCustomization,
-              typography: CookieTypography.button,
-              color: theme.onPrimary,
-            ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.moon,
-              text: AppLocalizations.of(context)!.configNightMode,
-              action: SizedBox(
-                height: 20,
-                child: Transform.scale(
-                  scale: 0.8,
-                  child: Switch(
-                    thumbIcon: WidgetStateProperty.all(
-                      ct.darkTheme
-                          ? const Icon(
-                              Icons.light_mode,
-                              color: Colors.white,
-                            )
-                          : const Icon(
-                              Icons.dark_mode,
-                              color: Colors.white,
-                            ),
+      errorReload: () async => await ct.init({}),
+      error: ct.error.toString(),
+      done:
+          () => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: ListView(
+              children: [
+                const IntroduceConfig(),
+                const SizedBox(height: 20),
+                CookieText(
+                  text: AppLocalizations.of(context)!.configAccount,
+                  typography: CookieTypography.button,
+                  color: theme.onPrimary,
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.person,
+                  text: AppLocalizations.of(context)!.configEditAccount,
+                  action: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.pushNamed(context, EditAccountPage.route);
+                  },
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.key,
+                  text: AppLocalizations.of(context)!.configChangePassword,
+                  action: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.pushNamed(context, ChangedPasswordPage.route);
+                  },
+                ),
+                const SizedBox(height: 20),
+                CookieText(
+                  text: AppLocalizations.of(context)!.configCustomization,
+                  typography: CookieTypography.button,
+                  color: theme.onPrimary,
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.moon,
+                  text: AppLocalizations.of(context)!.configNightMode,
+                  action: SizedBox(
+                    height: 20,
+                    child: Transform.scale(
+                      scale: 0.8,
+                      child: Switch(
+                        thumbIcon: WidgetStateProperty.all(
+                          ct.darkTheme
+                              ? const Icon(
+                                Icons.light_mode,
+                                color: Colors.white,
+                              )
+                              : const Icon(
+                                Icons.dark_mode,
+                                color: Colors.white,
+                              ),
+                        ),
+                        activeColor: theme.primary,
+                        value: ct.darkTheme,
+                        onChanged: (value) {
+                          ct.changeTheme();
+                        },
+                      ),
                     ),
-                    activeColor: theme.primary,
-                    value: ct.darkTheme,
-                    onChanged: (value) {
-                      ct.changeTheme();
-                    },
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            CookieText(
-              text: AppLocalizations.of(context)!.configCustomization,
-              typography: CookieTypography.button,
-              color: theme.onPrimary,
-            ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.eye,
-              text: AppLocalizations.of(context)!.configPrivacyPolicy,
-              action: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  PrivacyPolicyPage.route,
-                );
-              },
-            ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.changeLannguage,
-              text: AppLocalizations.of(context)!.language,
-              action: const Icon(Icons.chevron_right),
-              onTap: () {
-                CookieSheetBottom(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  title: CookieText(
-                    text: AppLocalizations.of(context)!.changeLanguage,
+                const SizedBox(height: 20),
+                CookieText(
+                  text: AppLocalizations.of(context)!.configCustomization,
+                  typography: CookieTypography.button,
+                  color: theme.onPrimary,
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.eye,
+                  text: AppLocalizations.of(context)!.configPrivacyPolicy,
+                  action: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.pushNamed(context, PrivacyPolicyPage.route);
+                  },
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.changeLannguage,
+                  text: AppLocalizations.of(context)!.language,
+                  action: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    CookieSheetBottom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      title: CookieText(
+                        text: AppLocalizations.of(context)!.changeLanguage,
+                      ),
+                      body: Column(
+                        children:
+                            ct.listLanguages.map((locale) {
+                              return ListTile(
+                                title: Text(
+                                  ct.formatLang(locale: locale, context),
+                                ),
+                                onTap: () {
+                                  ct.saveLanguagePref(locale: locale);
+                                  Navigator.pop(context);
+                                  CookieSnackBar(
+                                    text:
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.languageChangeSuccess,
+                                  ).show(context);
+                                },
+                              );
+                            }).toList(),
+                      ),
+                    ).show(context);
+                  },
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.document,
+                  text: AppLocalizations.of(context)!.configTermsConditions,
+                  onTap: () {
+                    Navigator.pushNamed(context, TermPage.route);
+                  },
+                  action: const Icon(Icons.chevron_right),
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.persons,
+                  text: AppLocalizations.of(context)!.configOurTeam,
+                  onTap: () {
+                    Navigator.pushNamed(context, AboutTeamPage.route);
+                  },
+                  action: const Icon(Icons.chevron_right),
+                ),
+                const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.logOut,
+                  text: AppLocalizations.of(context)!.configLogout,
+                  textColor: const Color(0xffFF5757),
+                  action: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    LeaveAlertDialog(ct: ct).show(context);
+                  },
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: CookieText(
+                    text: AppLocalizations.of(context)!.configAppVersion,
+                    color: theme.onPrimary.withOpacity(0.5),
                   ),
-                  body: Column(
-                    children: ct.listLanguages.map((locale) {
-                      return ListTile(
-                        title: Text(
-                          ct.formatLang(locale: locale, context),
-                        ),
-                        onTap: () {
-                          ct.saveLanguagePref(locale: locale);
-                          Navigator.pop(context);
-                          CookieSnackBar(
-                            text: AppLocalizations.of(context)!
-                                .languageChangeSuccess,
-                          ).show(context);
-                        },
-                      );
-                    }).toList(),
+                ),
+                Center(
+                  child: CookieText(
+                    text:
+                        '${ct.packageInfo?.version} (${ct.packageInfo?.buildNumber})',
+                    color: theme.onPrimary.withOpacity(0.5),
                   ),
-                ).show(context);
-              },
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.document,
-              text: AppLocalizations.of(context)!.configTermsConditions,
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  TermPage.route,
-                );
-              },
-              action: const Icon(Icons.chevron_right),
-            ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.persons,
-              text: AppLocalizations.of(context)!.configOurTeam,
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  AboutTeamPage.route,
-                );
-              },
-              action: const Icon(Icons.chevron_right),
-            ),
-            const SizedBox(height: 10),
-            ContainerConfig(
-              icon: IconsSvgEnum.logOut,
-              text: AppLocalizations.of(context)!.configLogout,
-              textColor: const Color(0xffFF5757),
-              action: const Icon(Icons.chevron_right),
-              onTap: () {
-                LeaveAlertDialog(ct: ct).show(context);
-              },
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: CookieText(
-                text: AppLocalizations.of(context)!.configAppVersion,
-                color: theme.onPrimary.withOpacity(0.5),
-              ),
-            ),
-            Center(
-              child: CookieText(
-                text:
-                    '${ct.packageInfo?.version} (${ct.packageInfo?.buildNumber})',
-                color: theme.onPrimary.withOpacity(0.5),
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

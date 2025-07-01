@@ -25,6 +25,8 @@ class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return CookiePage(
+      error: ct.error.toString(),
+      errorReload: () async => await ct.init(ct.currentArguments),
       state: ct.state,
       done: () => RefreshIndicator(
         onRefresh: () async {

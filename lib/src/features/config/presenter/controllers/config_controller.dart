@@ -25,18 +25,19 @@ class ConfigController extends ManagerStore {
   PackageInfo? packageInfo;
 
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          await _theme.init();
-          packageInfo = await PackageInfo.fromPlatform();
-          darkTheme = _theme.isThemeLight;
-        },
-      );
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
+    call: () async {
+      await _theme.init();
+      packageInfo = await PackageInfo.fromPlatform();
+      darkTheme = _theme.isThemeLight;
+    },
+  );
 
   Future<void> logout() async {
     await _authService.logout();
     _persistentDatabaseSembast.deleteAll(
-        store: StoreSembastEnum.userPreference);
+      store: StoreSembastEnum.userPreference,
+    );
     notifyListeners();
   }
 

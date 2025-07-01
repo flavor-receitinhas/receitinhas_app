@@ -67,7 +67,17 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                           AppLocalizations.of(context)!.chooseNameHintText,
                       controller: widget.ct.userNameController,
                       validator: ValidatorOnboarding.validateName,
+                      
                     ),
+                    if (widget.ct.validateUserEntity != null &&
+                        !widget.ct.validateUserEntity!.valid) ...[
+                      const SizedBox(height: 4),
+                      CookieText(
+                        text: widget.ct.validateUserEntity!.message,
+                        color: Colors.red,
+                        typography: CookieTypography.tiny,
+                      ),
+                    ],
                     const SizedBox(height: 20),
                     CookieButton(
                       label:

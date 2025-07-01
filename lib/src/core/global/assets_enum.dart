@@ -31,7 +31,7 @@ enum IconsSvgEnum {
   fireRounded(path: 'assets/icons/fire_rounded.svg'),
   changeLannguage(path: 'assets/icons/change_language.svg'),
   search(path: 'assets/icons/search.svg'),
-  heart(path: 'assets/icons/heart.svg'),;
+  heart(path: 'assets/icons/heart.svg');
 
   final String path;
 
@@ -39,6 +39,12 @@ enum IconsSvgEnum {
 }
 
 enum ImagesEnum {
+  eggCooking('assets/images/egg_cooking.png'),
+  eggDuvida('assets/images/egg_duvida.png'),
+  eggEspadachim('assets/images/egg_espadachim.png'),
+  eggError('assets/images/egg_error.png'),
+  eggForget('assets/images/egg_forget.png'),
+  eggHello('assets/images/egg_hello.png'),
   avatar('assets/images/avatar.png'),
   home('assets/images/home.png'),
   logo('assets/images/logo.png'),

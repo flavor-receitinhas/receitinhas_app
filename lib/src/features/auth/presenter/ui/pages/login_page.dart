@@ -23,11 +23,8 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
   @override
   void initState() {
     ct.onNavigation(
-      (event) => Navigator.pushNamedAndRemoveUntil(
-        context,
-        event,
-        (route) => false,
-      ),
+      (event) =>
+          Navigator.pushNamedAndRemoveUntil(context, event, (route) => false),
     );
     super.initState();
   }
@@ -35,13 +32,18 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScreen(
-      iconAppBar: IconButton(
+      leading: IconButton(
         onPressed: () => Navigator.pop(context),
         icon: const Icon(Icons.arrow_back_ios_outlined),
       ),
-      sideAppBar: MainAxisAlignment.start,
       body: Column(
         children: [
+          Spacer(),
+          Image.asset(
+            ImagesEnum.eggHello.path,
+            height: MediaQuery.sizeOf(context).height * 0.33,
+          ),
+          Spacer(),
           CookieText(
             text: AppLocalizations.of(context)!.loginTitle,
             typography: CookieTypography.title,
@@ -67,9 +69,10 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
             obscureText: ct.showPassword,
             maxLines: 1,
             suffixIcon: GestureDetector(
-              child: ct.showPassword
-                  ? const Icon(Icons.visibility_off)
-                  : const Icon(Icons.visibility),
+              child:
+                  ct.showPassword
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
               onTap: () {
                 setState(() {
                   ct.showPassword = !ct.showPassword;
@@ -93,10 +96,7 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
             onPressed: () async {
               await ct.loginGoogle();
             },
-            icon: Image.asset(
-              ImagesEnum.google.path,
-              height: 25,
-            ),
+            icon: Image.asset(ImagesEnum.google.path, height: 25),
             style: IconButton.styleFrom(
               shape: CircleBorder(
                 side: BorderSide(
@@ -108,19 +108,19 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
             padding: const EdgeInsets.all(12),
             color: Theme.of(context).colorScheme.primary,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
         ],
       ),
       bottomBar: [
         CookieButton(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
           label: AppLocalizations.of(context)!.loginButton,
           onPressed: () async {
             await ct.loginFirebase();
           },
           isLoading: ct.state == StateManager.loading,
         ),
-        const SizedBox(height: 5)
+        const SizedBox(height: 5),
       ],
     );
   }
