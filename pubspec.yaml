@@ -36,10 +36,11 @@ dependencies:
     git: 
       url: https://github.com/cledsonv/duration_time_picker.git
   google_fonts: ^6.2.1
-  flutter_quill:
-    git: 
-      url: https://github.com/cledsonv/flutter-quill.git
-      ref: 1.0.0
+  # flutter_quill:
+  #   git: 
+  #     url: https://github.com/cledsonv/flutter-quill.git
+  #     ref: 1.0.0
+  flutter_quill: ^11.4.1
   vsc_quill_delta_to_html: ^1.0.5
   flutter_widget_from_html_core: ^0.16.0
   dotted_border: ^3.0.1
@@ -56,6 +57,7 @@ dependencies:
       ref: 1.0.1
   cached_network_image: ^3.4.1
   shimmer: ^3.0.0
+  flutter_quill_delta_from_html: ^1.5.2
 
 dependency_overrides:
   intl: ^0.19.0

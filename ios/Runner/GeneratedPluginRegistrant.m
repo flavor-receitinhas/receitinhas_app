@@ -66,10 +66,10 @@
 @import path_provider_foundation;
 #endif
 
-#if __has_include(<quill_native_bridge/QuillNativeBridgePlugin.h>)
-#import <quill_native_bridge/QuillNativeBridgePlugin.h>
+#if __has_include(<quill_native_bridge_ios/QuillNativeBridgePlugin.h>)
+#import <quill_native_bridge_ios/QuillNativeBridgePlugin.h>
 #else
-@import quill_native_bridge;
+@import quill_native_bridge_ios;
 #endif
 
 #if __has_include(<sqflite_darwin/SqflitePlugin.h>)

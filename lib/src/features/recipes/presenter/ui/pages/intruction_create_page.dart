@@ -1,7 +1,5 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/container_create_info.dart';
 import 'package:flutter/material.dart';
@@ -130,8 +128,9 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
                             )!.recipeInstructionsTitle,
                         typography: CookieTypography.title,
                       ),
-                      QuillToolbar.simple(
-                        configurations: QuillSimpleToolbarConfigurations(
+                      QuillSimpleToolbar(
+                        controller: widget.ct.quillInstructionController,
+                        config: QuillSimpleToolbarConfig(
                           buttonOptions: QuillSimpleToolbarButtonOptions(
                             selectHeaderStyleDropdownButton:
                                 QuillToolbarSelectHeaderStyleDropdownButtonOptions(
@@ -142,7 +141,6 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
                             color: Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          controller: widget.ct.quillInstructionController,
                           showAlignmentButtons: false,
                           showCodeBlock: false,
                           showDividers: false,
@@ -165,10 +163,9 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
                           ContainerCreateInfo(
                             svg: IconsSvgEnum.knife,
                             child: QuillEditor.basic(
-                              configurations: QuillEditorConfigurations(
+                              controller: widget.ct.quillInstructionController,
+                              config: QuillEditorConfig(
                                 customStyles: defaultStyles,
-                                controller:
-                                    widget.ct.quillInstructionController,
                                 minHeight: 200,
                                 placeholder:
                                     AppLocalizations.of(

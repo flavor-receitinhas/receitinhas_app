@@ -40,20 +40,22 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(),
-          Center(
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              radius: 110,
-              child: Image.asset(ImagesEnum.logo.path, scale: 3),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            Center(
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                radius: 110,
+                child: Image.asset(ImagesEnum.logo.path, scale: 3),
+              ),
             ),
-          ),
-          Spacer(),
-          CookieText(text: AppLocalizations.of(context)!.splashLoading),
-        ],
+            Spacer(),
+            CookieText(text: AppLocalizations.of(context)!.splashLoading),
+          ],
+        ),
       ),
     );
   }

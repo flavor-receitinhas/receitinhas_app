@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
@@ -8,6 +9,7 @@ import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_rep
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
+import 'package:flutter_quill_delta_from_html/parser/html_to_delta.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_manager/export_manager.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
@@ -123,15 +125,13 @@ class CreateRecipeController extends ManagerStore {
           title: titleController.text,
           subTitle: subTitleController.text,
           details: detailsController.text,
-          serveFood:
-              QuillDeltaToHtmlConverter(
-                quillServerController.document.toDelta().toJson(),
-              ).convert(),
+          serveFood: jsonEncode(
+            quillServerController.document.toDelta().toJson(),
+          ),
           difficultyRecipe: DifficultyRecipe.easy,
-          instruction:
-              QuillDeltaToHtmlConverter(
-                quillInstructionController.document.toDelta().toJson(),
-              ).convert(),
+          instruction: jsonEncode(
+            quillInstructionController.document.toDelta().toJson(),
+          ),
           portion: portion,
           timePrepared: timePreparedRecipe.inMinutes,
           //TODO Ver sobre os status depois
@@ -174,10 +174,9 @@ class CreateRecipeController extends ManagerStore {
             quillServerController.document.toDelta().toJson(),
           ).convert(),
       difficultyRecipe: difficultyRecipe,
-      instruction:
-          QuillDeltaToHtmlConverter(
-            quillInstructionController.document.toDelta().toJson(),
-          ).convert(),
+      instruction: jsonEncode(
+        quillInstructionController.document.toDelta().toJson(),
+      ),
       portion: portion,
       timePrepared: timePreparedRecipe.inMinutes,
       userId: recipe!.userId,
@@ -217,6 +216,26 @@ class CreateRecipeController extends ManagerStore {
     notifyListeners();
   }
 
+  bool _isValidJson(String str) {
+    if (str.isEmpty) return false;
+    try {
+      jsonDecode(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Document _createDocumentFromContent(String content) {
+    if (_isValidJson(content)) {
+      final delta = jsonDecode(content);
+      return Document.fromDelta(Delta.fromJson(delta));
+    } else {
+      final deltaFromHtml = HtmlToDelta().convert(content);
+      return Document.fromDelta(deltaFromHtml);
+    }
+  }
+
   Future<void> _initializeWithRecipe(RecipeEntity r) async {
     titleController.text = r.title;
     subTitleController.text = r.subTitle ?? '';
@@ -227,11 +246,15 @@ class CreateRecipeController extends ManagerStore {
     difficultyRecipe = r.difficultyRecipe;
     portionController.text = r.portion.toString();
     listIngredientSelect = await _getIngredient(r.id!);
-    final delta = Delta()..insert('${r.instruction}\n');
-    quillInstructionController = QuillController(
-      document: Document.fromDelta(delta),
-      selection: const TextSelection.collapsed(offset: 0),
+    quillInstructionController.document = _createDocumentFromContent(
+      r.instruction,
     );
+
+    // Inicializar serveFood
+    if (r.serveFood != null && r.serveFood!.isNotEmpty) {
+      quillServerController.document = _createDocumentFromContent(r.serveFood!);
+    }
+
     notifyListeners();
   }
 
@@ -250,5 +273,4 @@ class CreateRecipeController extends ManagerStore {
   Future<List<IngredientRecipeEntity>> _getIngredient(String id) async {
     return await _repository.getIngredientsRecipe(id);
   }
-
 }

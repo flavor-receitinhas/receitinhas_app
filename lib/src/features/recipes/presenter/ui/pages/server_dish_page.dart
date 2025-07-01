@@ -123,8 +123,9 @@ class _ServerDishPageState extends State<ServerDishPage> {
                             )!.recipeFinalConsideration,
                       ),
                       const SizedBox(height: 10),
-                      QuillToolbar.simple(
-                        configurations: QuillSimpleToolbarConfigurations(
+                      QuillSimpleToolbar(
+                        controller: widget.ct.quillServerController,
+                        config: QuillSimpleToolbarConfig(
                           buttonOptions: QuillSimpleToolbarButtonOptions(
                             selectHeaderStyleDropdownButton:
                                 QuillToolbarSelectHeaderStyleDropdownButtonOptions(
@@ -135,7 +136,6 @@ class _ServerDishPageState extends State<ServerDishPage> {
                             color: Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          controller: widget.ct.quillServerController,
                           showAlignmentButtons: false,
                           showCodeBlock: false,
                           showDividers: false,
@@ -158,9 +158,9 @@ class _ServerDishPageState extends State<ServerDishPage> {
                           ContainerCreateInfo(
                             svg: IconsSvgEnum.pan,
                             child: QuillEditor.basic(
-                              configurations: QuillEditorConfigurations(
+                              controller: widget.ct.quillServerController,
+                              config: QuillEditorConfig(
                                 customStyles: defaultStyles,
-                                controller: widget.ct.quillServerController,
                                 minHeight: 200,
                                 placeholder:
                                     AppLocalizations.of(
