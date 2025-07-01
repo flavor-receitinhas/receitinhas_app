@@ -27,8 +27,8 @@
   "registerValidatorPassword3": "Password must contain at least one uppercase letter",
   "registerValidatorPassword4": "Password must contain at least one lowercase letter",
   "registerValidatorPassword5": "Password must contain at least one number",
-  "loginTitle": "Well, well... If it isn't the great legend returning...",
-  "loginBody": "We missed you :)",
+  "loginTitle": "We're happy to have you back!",
+  "loginBody": "Ready to create new recipes?",
   "loginEmail": "Enter email",
   "loginPassword": "Enter password",
   "loginForgetPassword": "Forgot password?",
@@ -222,5 +222,6 @@
   "dialogUnexpectedError": "An unexpected error occurred!",
   "dialogOk": "Ok",
   "dialogYes": "Yes",
-  "dialogNo": "No"
+  "dialogNo": "No",
+  "errorPageReload": "Reload"
 }

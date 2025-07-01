@@ -23,17 +23,18 @@ class FavoriteController extends ManagerStore {
   int page = 0;
 
   @override
-  void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          await _loadMoreItems();
-          _setupScrollController();
-        },
-      );
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
+    call: () async {
+      await _loadMoreItems();
+      _setupScrollController();
+    },
+  );
 
-  Future<List<FavoriteUserDto>> listFavoriteRecipes(
-      {required OrderFavoriteEnum orderBy,
-      required int page,
-      String? search}) async {
+  Future<List<FavoriteUserDto>> listFavoriteRecipes({
+    required OrderFavoriteEnum orderBy,
+    required int page,
+    String? search,
+  }) async {
     return await _repository.getFavorites(
       orderBy: orderBy,
       page: page,
@@ -94,16 +95,16 @@ class FavoriteController extends ManagerStore {
   }
 
   Future<void> refreshPage() => handleTry(
-        call: () async {
-          isLoadingSearch = true;
-          page = 0;
-          order = OrderFavoriteEnum.createdAtAsc;
-          favoriteController.clear();
-          hasMore = true;
-          isLoading = false;
-          listFavorite.clear();
-          await _loadMoreItems();
-          isLoadingSearch = false;
-        },
-      );
+    call: () async {
+      isLoadingSearch = true;
+      page = 0;
+      order = OrderFavoriteEnum.createdAtAsc;
+      favoriteController.clear();
+      hasMore = true;
+      isLoading = false;
+      listFavorite.clear();
+      await _loadMoreItems();
+      isLoadingSearch = false;
+    },
+  );
 }

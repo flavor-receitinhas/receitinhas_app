@@ -31,40 +31,41 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return CookiePage(
       state: ct.state,
-      done: () => CustomScrollView(
-        slivers: [
-          BackButtomFloating(
-            label: AppLocalizations.of(context)!.searchLabel,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(
-              top: 10,
-            ),
-            sliver: SliverToBoxAdapter(
-              child: SearchRecipe(
-                ct: ct,
+      error: ct.errorMessage,
+      errorReload: () async => await ct.init(),
+      done:
+          () => CustomScrollView(
+            slivers: [
+              BackButtomFloating(
+                label: AppLocalizations.of(context)!.searchLabel,
               ),
-            ),
-          ),
-          SliverToBoxAdapter(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Visibility(
-                  visible: ct.recipes.isNotEmpty,
-                  child: CookieText(
-                    text:
-                        '${AppLocalizations.of(context)!.searchRecipeSearchResults} (${ct.recipes.length})',
+              SliverPadding(
+                padding: const EdgeInsets.only(top: 10),
+                sliver: SliverToBoxAdapter(child: SearchRecipe(ct: ct)),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 5,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Visibility(
+                        visible: ct.recipes.isNotEmpty,
+                        child: CookieText(
+                          text:
+                              '${AppLocalizations.of(context)!.searchRecipeSearchResults} (${ct.recipes.length})',
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          )),
-          ResultRecipes(ct: ct),
-        ],
-      ),
+              ),
+              ResultRecipes(ct: ct),
+            ],
+          ),
     );
   }
 }

@@ -28,12 +28,12 @@ class _EditAccountPageState
     final formKey = GlobalKey<FormState>();
     return CookiePage(
       state: ct.state,
+      errorReload: () async => await ct.init(ct.currentArguments),
+      error: ct.error.toString(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primary,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: const CookieSvg(svg: IconsSvgEnum.save),
         onPressed: () async {
@@ -49,102 +49,110 @@ class _EditAccountPageState
           }
         },
       ),
-      done: () => SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-              CookieButton(
-                label: AppLocalizations.of(context)!.configEditAccount,
-              ).back(context),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Form(
-                  key: formKey,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      CookieText(
-                        text:
-                            AppLocalizations.of(context)!.configFoodPreference,
-                        typography: CookieTypography.button,
-                      ),
-                      const SizedBox(height: 10),
-                      GridView.builder(
-                        itemCount: Proteins.values.length,
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 0,
-                          mainAxisExtent: 50,
-                        ),
-                        itemBuilder: (context, idx) {
-                          return SelectContainerPreference(
-                            title: AppLocalizations.of(context)!
-                                .proteinPreferenceOptions(
-                                    Proteins.values[idx].name),
-                            listPreference: ct.selectProteins,
-                            preference: Proteins.values[idx],
-                            onTap: () {
-                              setState(() {
-                                ValidatorOnboarding.validateTapProtein(
-                                  ct.selectProteins,
-                                  Proteins.values[idx],
-                                );
-                              });
+      done:
+          () => SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  CookieButton(
+                    label: AppLocalizations.of(context)!.configEditAccount,
+                  ).back(context),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Form(
+                      key: formKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+                          CookieText(
+                            text:
+                                AppLocalizations.of(
+                                  context,
+                                )!.configFoodPreference,
+                            typography: CookieTypography.button,
+                          ),
+                          const SizedBox(height: 10),
+                          GridView.builder(
+                            itemCount: Proteins.values.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 0,
+                                  mainAxisExtent: 50,
+                                ),
+                            itemBuilder: (context, idx) {
+                              return SelectContainerPreference(
+                                title: AppLocalizations.of(
+                                  context,
+                                )!.proteinPreferenceOptions(
+                                  Proteins.values[idx].name,
+                                ),
+                                listPreference: ct.selectProteins,
+                                preference: Proteins.values[idx],
+                                onTap: () {
+                                  setState(() {
+                                    ValidatorOnboarding.validateTapProtein(
+                                      ct.selectProteins,
+                                      Proteins.values[idx],
+                                    );
+                                  });
+                                },
+                              );
                             },
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      CookieText(
-                        text: AppLocalizations.of(context)!
-                            .configDietaryRestriction,
-                        typography: CookieTypography.button,
-                      ),
-                      const SizedBox(height: 10),
-                      GridView.builder(
-                        itemCount: DietaryRestrictions.values.length,
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 0,
-                          mainAxisExtent: 50,
-                        ),
-                        itemBuilder: (context, idx) {
-                          return SelectContainerPreference(
-                            title: AppLocalizations.of(context)!
-                                .dietaryRestrictionOptions(
-                                    DietaryRestrictions.values[idx].name),
-                            listPreference: ct.selectRestriction,
-                            preference: DietaryRestrictions.values[idx],
-                            onTap: () {
-                              setState(() {
-                                ValidatorOnboarding
-                                    .validateTapDietaryRestriction(
-                                  ct.selectRestriction,
-                                  DietaryRestrictions.values[idx],
-                                );
-                              });
+                          ),
+                          const SizedBox(height: 20),
+                          CookieText(
+                            text:
+                                AppLocalizations.of(
+                                  context,
+                                )!.configDietaryRestriction,
+                            typography: CookieTypography.button,
+                          ),
+                          const SizedBox(height: 10),
+                          GridView.builder(
+                            itemCount: DietaryRestrictions.values.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 0,
+                                  mainAxisExtent: 50,
+                                ),
+                            itemBuilder: (context, idx) {
+                              return SelectContainerPreference(
+                                title: AppLocalizations.of(
+                                  context,
+                                )!.dietaryRestrictionOptions(
+                                  DietaryRestrictions.values[idx].name,
+                                ),
+                                listPreference: ct.selectRestriction,
+                                preference: DietaryRestrictions.values[idx],
+                                onTap: () {
+                                  setState(() {
+                                    ValidatorOnboarding.validateTapDietaryRestriction(
+                                      ct.selectRestriction,
+                                      DietaryRestrictions.values[idx],
+                                    );
+                                  });
+                                },
+                              );
                             },
-                          );
-                        },
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
     );
   }
 }

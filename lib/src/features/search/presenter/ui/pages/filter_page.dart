@@ -1,6 +1,4 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/features/search/domain/enum/order_by_filter.dart';
 import 'package:app_receitas/src/features/search/presenter/controller/research_controller.dart';
@@ -54,6 +52,8 @@ class _FilterPageState extends State<FilterPage> {
     final theme = Theme.of(context).colorScheme;
     return CookiePage(
       state: StateManager.done,
+      error: widget.ct.errorMessage,
+      errorReload: () async => await widget.ct.init(),
       bottomNavigationBar: CookieButton(
         label: AppLocalizations.of(context)!.searchRecipeApplyFilter,
         margin: const EdgeInsets.only(bottom: 10, left: 16, right: 16),

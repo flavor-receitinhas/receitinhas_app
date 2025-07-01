@@ -16,7 +16,7 @@ class IntroduceCreatePage extends StatefulWidget {
   State<IntroduceCreatePage> createState() => _IntroduceCreatePageState();
 }
 
-class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
+class _IntroduceCreatePageState extends State<IntroduceCreatePage > {
   CreateRecipeController get ct => widget.ct;
   final formKey = GlobalKey<FormState>();
   final _carouselController = CarouselController();

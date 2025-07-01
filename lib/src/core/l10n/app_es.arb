@@ -27,8 +27,8 @@
   "registerValidatorPassword3": "La contraseña debe contener al menos una letra mayúscula",
   "registerValidatorPassword4": "La contraseña debe contener al menos una letra minúscula",
   "registerValidatorPassword5": "La contraseña debe contener al menos un número",
-  "loginTitle": "Vaya, vaya... Si no es la gran leyenda regresando...",
-  "loginBody": "Te extrañamos :)",
+  "loginTitle": "¡Nos alegra tenerte de vuelta!",
+  "loginBody": "¿Listo(a) para crear nuevas recetas?",
   "loginEmail": "Introducir correo electrónico",
   "loginPassword": "Introducir contraseña",
   "loginForgetPassword": "¿Olvidaste tu contraseña?",
@@ -222,5 +222,6 @@
   "dialogUnexpectedError": "¡Ocurrió un error inesperado!",
   "dialogOk": "Ok",
   "dialogYes": "Sí",
-  "dialogNo": "No"
+  "dialogNo": "No",
+  "errorPageReload": "Recargar"
 }

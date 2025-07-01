@@ -18,9 +18,7 @@ import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const route = '/edit-perfil';
-  const EditProfilePage({
-    super.key,
-  });
+  const EditProfilePage({super.key});
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -33,230 +31,289 @@ class _EditProfilePageState
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return CookiePage(
+      error: ct.error.toString(),
+      errorReload: () async => await ct.init(ct.argumentsMap),
       state: ct.state,
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primary,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: const CookieSvg(svg: IconsSvgEnum.save),
         onPressed: () {
           CookieSheetBottom(
             title: CookieText(
-              text: AppLocalizations.of(context)!
-                  .profileEditProfilePageSaveChanges,
+              text:
+                  AppLocalizations.of(
+                    context,
+                  )!.profileEditProfilePageSaveChanges,
               color: Theme.of(context).colorScheme.onSecondary,
               typography: CookieTypography.title,
             ),
-            body: SaveSheet(
-              ct: ct,
-              formKey: formKey,
-            ),
+            body: SaveSheet(ct: ct, formKey: formKey),
           ).show(context);
         },
       ),
-      done: () => ListView(
-        children: [
-          AppBarProfile(
-            title: AppLocalizations.of(context)!.profileEditProfilePageTitle,
-            subTitle:
-                AppLocalizations.of(context)!.profileEditProfilePageSubtitle,
-          ),
-          CookieButton(
-            label: AppLocalizations.of(context)!.profileEditProfilePageBack,
-            onPressed: () {
-              CookieSheetBottom(
-                title: CookieText(
-                  text: AppLocalizations.of(context)!
-                      .profileEditProfilePageConfirmExit,
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  typography: CookieTypography.title,
+      done:
+          () => ListView(
+            children: [
+              AppBarProfile(
+                title:
+                    AppLocalizations.of(context)!.profileEditProfilePageTitle,
+                subTitle:
+                    AppLocalizations.of(
+                      context,
+                    )!.profileEditProfilePageSubtitle,
+              ),
+              CookieButton(
+                label: AppLocalizations.of(context)!.profileEditProfilePageBack,
+                onPressed: () {
+                  CookieSheetBottom(
+                    title: CookieText(
+                      text:
+                          AppLocalizations.of(
+                            context,
+                          )!.profileEditProfilePageConfirmExit,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      typography: CookieTypography.title,
+                    ),
+                    body: const BackSheet(),
+                  ).show(context);
+                },
+              ).back(context),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
                 ),
-                body: const BackSheet(),
-              ).show(context);
-            },
-          ).back(context),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Form(
-              key: formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+                child: Form(
+                  key: formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Builder(
-                        builder: (context) {
-                          if (ct.image != null && ct.image!.path.isNotEmpty) {
-                            return CircleAvatar(
-                              radius: 60,
-                              backgroundImage: FileImage(ct.image!),
-                            );
-                          }
-                          if (ct.profile?.image != null &&
-                              ct.profile!.image!.isNotEmpty) {
-                            return CircleAvatar(
-                              radius: 60,
-                              backgroundImage: NetworkImage(
-                                '${ct.profile!.image!}?${DateTime.now().millisecondsSinceEpoch}',
-                              ),
-                            );
-                          }
-                          return CircleAvatar(
-                            radius: 60,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            backgroundImage:
-                                AssetImage(ImageProfileEnum.avatar.path),
-                          );
-                        },
+                      Row(
+                        children: [
+                          Builder(
+                            builder: (context) {
+                              if (ct.image != null &&
+                                  ct.image!.path.isNotEmpty) {
+                                return CircleAvatar(
+                                  radius: 60,
+                                  backgroundImage: FileImage(ct.image!),
+                                );
+                              }
+                              if (ct.profile?.image != null &&
+                                  ct.profile!.image!.isNotEmpty) {
+                                return CircleAvatar(
+                                  radius: 60,
+                                  backgroundImage: NetworkImage(
+                                    '${ct.profile!.image!}?${DateTime.now().millisecondsSinceEpoch}',
+                                  ),
+                                );
+                              }
+                              return CircleAvatar(
+                                radius: 60,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
+                                backgroundImage: AssetImage(
+                                  ImageProfileEnum.avatar.path,
+                                ),
+                              );
+                            },
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                CookieButton(
+                                  label:
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.profileEditProfilePageChangeProfilePicture,
+                                  margin: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      ct.pickImageLogo();
+                                    });
+                                  },
+                                ),
+                                const SizedBox(height: 10),
+                                CookieTextButton(
+                                  text:
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.profileEditProfilePageRemoveProfilePicture,
+                                  onPressed: () {
+                                    setState(() {
+                                      ct.removeImage();
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            CookieButton(
-                              label: AppLocalizations.of(context)!
-                                  .profileEditProfilePageChangeProfilePicture,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              onPressed: () {
-                                setState(() {
-                                  ct.pickImageLogo();
-                                });
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            CookieTextButton(
-                              text: AppLocalizations.of(context)!
-                                  .profileEditProfilePageRemoveProfilePicture,
-                              onPressed: () {
-                                setState(() {
-                                  ct.removeImage();
-                                });
-                              },
-                            ),
-                          ],
+                      const SizedBox(height: 10),
+                      Center(
+                        child: CookieText(
+                          text:
+                              AppLocalizations.of(
+                                context,
+                              )!.profileEditProfilePageImageRequirement,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onPrimary.withValues(alpha: 0.5),
                         ),
                       ),
+                      const SizedBox(height: 20),
+                      // CookieText(
+                      //   text: AppLocalizations.of(context)!
+                      //       .profileEditProfilePageTitleLabel,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // DropdownButtonFormField(
+                      //   isExpanded: true,
+                      //   dropdownColor: theme.secondary,
+                      //   borderRadius: BorderRadius.circular(10),
+                      //   decoration: InputDecoration(
+                      //     hintText: AppLocalizations.of(context)!
+                      //         .profileEditProfilePageTitleHint,
+                      //     hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      //           color: Theme.of(context)
+                      //               .colorScheme
+                      //               .onPrimary
+                      //               .withOpacity(0.4),
+                      //         ),
+                      //     filled: true,
+                      //     fillColor: Theme.of(context).colorScheme.secondary,
+                      //     border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(16),
+                      //         borderSide: BorderSide.none),
+                      //     enabledBorder: OutlineInputBorder(
+                      //       borderSide: const BorderSide(),
+                      //       borderRadius: BorderRadius.circular(16),
+                      //     ),
+                      //   ),
+                      //   items: const [
+                      //     DropdownMenuItem(
+                      //       value: 0,
+                      //       child: CookieText(text: 'data'),
+                      //     ),
+                      //     DropdownMenuItem(
+                      //       value: 1,
+                      //       child: CookieText(text: 'data'),
+                      //     ),
+                      //     DropdownMenuItem(
+                      //       value: 2,
+                      //       child: CookieText(text: 'data'),
+                      //     ),
+                      //   ],
+                      //   onChanged: (value) {},
+                      // ),
+                      // const SizedBox(height: 10),
+                      // Center(
+                      //   child: CookieText(
+                      //     text: AppLocalizations.of(context)!
+                      //         .profileEditProfilePageTitleDescription,
+                      //     textAlign: TextAlign.center,
+                      //     color: Theme.of(context)
+                      //         .colorScheme
+                      //         .onPrimary
+                      //         .withOpacity(0.5),
+                      //   ),
+                      // ),
+                      //const SizedBox(height: 20),
+                      CookieText(
+                        text: AppLocalizations.of(context)!.configName,
+                        typography: CookieTypography.button,
+                      ),
+                      const SizedBox(height: 10),
+                      CookieTextField.outline(
+                        hintText: AppLocalizations.of(context)!.configNameHint,
+                        controller: ct.userNameController,
+                        validator: ValidatorOnboarding.validateName,
+                        onChanged: (value) {
+                          if (value.isNotEmpty) {
+                            ct.validateUser();
+                          }
+                        },
+                        suffixIcon: () {
+                          switch (ct.stateValidateName) {
+                            case StateManager.loading:
+                              return const CircularProgressIndicator();
+                            case StateManager.done:
+                              if (ct.validateUserEntity != null &&
+                                  ct.validateUserEntity!.valid) {
+                                return const Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                );
+                              }
+                              return const Icon(Icons.error, color: Colors.red);
+                            case StateManager.error:
+                              return const Icon(Icons.error, color: Colors.red);
+                            default:
+                              if (ct.validateUserEntity != null &&
+                                  !ct.validateUserEntity!.valid) {
+                                return const Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                );
+                              }
+                              return null;
+                          }
+                        }(),
+                      ),
+                      if (ct.validateUserEntity != null &&
+                          !ct.validateUserEntity!.valid) ...[
+                        const SizedBox(height: 4),
+                        CookieText(
+                          text: ct.validateUserEntity!.message,
+                          color: Colors.red,
+                          typography: CookieTypography.tiny,
+                        ),
+                      ],
+                      const SizedBox(height: 20),
+                      CookieText(
+                        text:
+                            AppLocalizations.of(
+                              context,
+                            )!.profileEditProfilePageAboutMe,
+                      ),
+                      const SizedBox(height: 10),
+                      CookieTextField.outline(
+                        hintText:
+                            AppLocalizations.of(
+                              context,
+                            )!.profileEditProfilePageAboutMeHint,
+                        maxLines: 6,
+                        maxLength: 400,
+                        controller: ct.biographyController,
+                      ),
+                      const SizedBox(height: 20),
+                      // CookieText(
+                      //   text: AppLocalizations.of(context)!
+                      //       .profileEditProfilePagePrivacy,
+                      // ),
+                      // const SizedBox(height: 10),
+                      // ContainerPrivacy(
+                      //     text: AppLocalizations.of(context)!
+                      //         .profileEditProfilePageHideFollowers),
+                      // const SizedBox(height: 10),
+                      // ContainerPrivacy(
+                      //     text: AppLocalizations.of(context)!
+                      //         .profileEditProfilePageHideLikes),
+                      // const SizedBox(height: 20),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  Center(
-                    child: CookieText(
-                      text: AppLocalizations.of(context)!
-                          .profileEditProfilePageImageRequirement,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withOpacity(0.5),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  // CookieText(
-                  //   text: AppLocalizations.of(context)!
-                  //       .profileEditProfilePageTitleLabel,
-                  // ),
-                  // const SizedBox(height: 10),
-                  // DropdownButtonFormField(
-                  //   isExpanded: true,
-                  //   dropdownColor: theme.secondary,
-                  //   borderRadius: BorderRadius.circular(10),
-                  //   decoration: InputDecoration(
-                  //     hintText: AppLocalizations.of(context)!
-                  //         .profileEditProfilePageTitleHint,
-                  //     hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  //           color: Theme.of(context)
-                  //               .colorScheme
-                  //               .onPrimary
-                  //               .withOpacity(0.4),
-                  //         ),
-                  //     filled: true,
-                  //     fillColor: Theme.of(context).colorScheme.secondary,
-                  //     border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(16),
-                  //         borderSide: BorderSide.none),
-                  //     enabledBorder: OutlineInputBorder(
-                  //       borderSide: const BorderSide(),
-                  //       borderRadius: BorderRadius.circular(16),
-                  //     ),
-                  //   ),
-                  //   items: const [
-                  //     DropdownMenuItem(
-                  //       value: 0,
-                  //       child: CookieText(text: 'data'),
-                  //     ),
-                  //     DropdownMenuItem(
-                  //       value: 1,
-                  //       child: CookieText(text: 'data'),
-                  //     ),
-                  //     DropdownMenuItem(
-                  //       value: 2,
-                  //       child: CookieText(text: 'data'),
-                  //     ),
-                  //   ],
-                  //   onChanged: (value) {},
-                  // ),
-                  // const SizedBox(height: 10),
-                  // Center(
-                  //   child: CookieText(
-                  //     text: AppLocalizations.of(context)!
-                  //         .profileEditProfilePageTitleDescription,
-                  //     textAlign: TextAlign.center,
-                  //     color: Theme.of(context)
-                  //         .colorScheme
-                  //         .onPrimary
-                  //         .withOpacity(0.5),
-                  //   ),
-                  // ),
-                  //const SizedBox(height: 20),
-                  CookieText(
-                    text: AppLocalizations.of(context)!.configName,
-                    typography: CookieTypography.button,
-                  ),
-                  const SizedBox(height: 10),
-                  CookieTextField.outline(
-                    hintText: AppLocalizations.of(context)!.configNameHint,
-                    controller: ct.userNameController,
-                    validator: ValidatorOnboarding.validateName,
-                  ),
-                  const SizedBox(height: 20),
-
-                  CookieText(
-                    text: AppLocalizations.of(context)!
-                        .profileEditProfilePageAboutMe,
-                  ),
-                  const SizedBox(height: 10),
-                  CookieTextField.outline(
-                    hintText: AppLocalizations.of(context)!
-                        .profileEditProfilePageAboutMeHint,
-                    maxLines: 6,
-                    maxLength: 400,
-                    controller: ct.biographyController,
-                  ),
-                  const SizedBox(height: 20),
-                  // CookieText(
-                  //   text: AppLocalizations.of(context)!
-                  //       .profileEditProfilePagePrivacy,
-                  // ),
-                  // const SizedBox(height: 10),
-                  // ContainerPrivacy(
-                  //     text: AppLocalizations.of(context)!
-                  //         .profileEditProfilePageHideFollowers),
-                  // const SizedBox(height: 10),
-                  // ContainerPrivacy(
-                  //     text: AppLocalizations.of(context)!
-                  //         .profileEditProfilePageHideLikes),
-                  // const SizedBox(height: 20),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }

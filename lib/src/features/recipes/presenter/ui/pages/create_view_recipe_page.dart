@@ -18,6 +18,8 @@ class CreateViewRecipePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CookiePage(
       state: StateManager.done,
+      error: ct.error.toString(),
+      errorReload: () => ct.init({}),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CookieButton(
         margin: const EdgeInsets.symmetric(horizontal: 16),

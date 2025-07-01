@@ -1,39 +1,34 @@
 import 'package:flutter/material.dart';
 
 class CustomScreen extends StatelessWidget {
-  final IconButton iconAppBar;
-  final MainAxisAlignment? sideAppBar;
+  final IconButton? iconAppBar;
+  final Widget? leading;
 
   final Widget body;
   final List<Widget>? bottomBar;
 
   const CustomScreen({
     super.key,
-    required this.iconAppBar,
-    this.sideAppBar,
+    this.iconAppBar,
     required this.body,
     this.bottomBar,
+    this.leading,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       persistentFooterButtons: bottomBar ?? [],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: leading,
+        actions: [iconAppBar ?? const SizedBox.shrink()],
+      ),
+
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: sideAppBar ?? MainAxisAlignment.end,
-                children: [
-                  iconAppBar,
-                ],
-              ),
-              const Spacer(),
-              body,
-            ],
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: body,
         ),
       ),
     );
