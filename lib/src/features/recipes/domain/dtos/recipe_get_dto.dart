@@ -5,4 +5,9 @@ class RecipeGetDto {
   final RecipeEntity recipe;
 
   RecipeGetDto({required this.authorName, required this.recipe});
+
+  static final empty = RecipeGetDto(
+    authorName: '',
+    recipe: RecipeEntity.empty(),
+  );
 }

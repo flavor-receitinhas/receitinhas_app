@@ -19,9 +19,16 @@ class CreateViewRecipePage extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 16),
         label: AppLocalizations.of(context)!.recipeFinish,
         onPressed: () async {
-          await ct.createRecipe();
-          if (context.mounted) {
-            Navigator.pop(context);
+          if (ct.isEditRecipe) {
+            await ct.updateRecipe();
+            if (context.mounted) {
+              Navigator.pop(context, true);
+            }
+          } else {
+            await ct.createRecipe();
+            if (context.mounted) {
+              Navigator.pop(context);
+            }
           }
         },
       ),
@@ -43,18 +50,25 @@ class CreateViewRecipePage extends StatelessWidget {
               child: Column(
                 children: [
                   FlutterCarousel(
-                      options: FlutterCarouselOptions(
-                        height: 250,
-                        showIndicator: true,
-                        autoPlay: true,
-                        viewportFraction: 1,
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 500),
-                        padEnds: false,
+                    options: FlutterCarouselOptions(
+                      height: 250,
+                      showIndicator: true,
+                      autoPlay: true,
+                      viewportFraction: 1,
+                      autoPlayAnimationDuration: const Duration(
+                        milliseconds: 500,
                       ),
-                      items: ct.listImagesRecipe
-                          .map((e) => Image.file(e, fit: BoxFit.cover))
-                          .toList()),
+                      padEnds: false,
+                    ),
+                    items:
+                        ct.isEditRecipe
+                            ? ct.listImagesRecipeSelected
+                                .map((e) => Image.network(e.link))
+                                .toList()
+                            : ct.listImagesRecipe
+                                .map((e) => Image.file(e, fit: BoxFit.cover))
+                                .toList(),
+                  ),
                   const SizedBox(height: 10),
                   ViewIntroduceRecipe(
                     isCreate: true,
@@ -69,21 +83,23 @@ class CreateViewRecipePage extends StatelessWidget {
                   ViewDetailsRecipe(
                     details: ct.detailsController.text,
                     ingredients: ct.listIngredientSelect,
-                    instruction: QuillDeltaToHtmlConverter(ct
-                            .quillInstructionController.document
-                            .toDelta()
-                            .toJson())
-                        .convert(),
-                    serveFood: ct.quillServerController.document
-                            .toPlainText()
-                            .trim()
-                            .isEmpty
-                        ? ''
-                        : QuillDeltaToHtmlConverter(ct
-                                .quillServerController.document
-                                .toDelta()
-                                .toJson())
-                            .convert(),
+                    instruction:
+                        QuillDeltaToHtmlConverter(
+                          ct.quillInstructionController.document
+                              .toDelta()
+                              .toJson(),
+                        ).convert(),
+                    serveFood:
+                        ct.quillServerController.document
+                                .toPlainText()
+                                .trim()
+                                .isEmpty
+                            ? ''
+                            : QuillDeltaToHtmlConverter(
+                              ct.quillServerController.document
+                                  .toDelta()
+                                  .toJson(),
+                            ).convert(),
                   ),
                   const SizedBox(height: 10),
                 ],

@@ -12,16 +12,16 @@ import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
-class CreateRecipePage extends StatefulWidget {
+class CreateAndEditRecipePage extends StatefulWidget {
   static const route = '/create-recipe';
-  const CreateRecipePage({super.key});
+  const CreateAndEditRecipePage({super.key,});
 
   @override
-  State<CreateRecipePage> createState() => _CreateRecipePageState();
+  State<CreateAndEditRecipePage> createState() => _CreateAndEditRecipePageState();
 }
 
-class _CreateRecipePageState
-    extends ManagerPage<CreateRecipeController, CreateRecipePage> {
+class _CreateAndEditRecipePageState
+    extends ManagerPage<CreateRecipeController, CreateAndEditRecipePage> {
   final List<Widget> routes = [];
 
   @override
@@ -47,18 +47,18 @@ class _CreateRecipePageState
         }
         ct.showDialogDiscard()
             ? CookieSheetBottom(
-                title: CookieText(
-                  text: AppLocalizations.of(context)!.recipeDiscardPrompt,
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  typography: CookieTypography.title,
-                ),
-                body: const LeaveRecipeSheet(),
-              ).show(context)
+              title: CookieText(
+                text: AppLocalizations.of(context)!.recipeDiscardPrompt,
+                color: Theme.of(context).colorScheme.onSecondary,
+                typography: CookieTypography.title,
+              ),
+              body: const LeaveRecipeSheet(),
+            ).show(context)
             : Navigator.pushNamedAndRemoveUntil(
-                context,
-                CustomBottomBar.route,
-                (route) => false,
-              );
+              context,
+              CustomBottomBar.route,
+              (route) => false,
+            );
       },
       child: PageView(
         onPageChanged: ct.onChangedPage,

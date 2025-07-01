@@ -36,4 +36,6 @@ abstract class RecipeRepository {
       {required String recipeId,
       required List<IngredientRecipeEntity> ingredient});
   Future<List<IngredientRecipeEntity>> getIngredientsRecipe(String recipeId);
+  Future<void> deleteRecipe(String recipeId);
+  Future<void> updateRecipe(RecipeEntity recipe);
 }

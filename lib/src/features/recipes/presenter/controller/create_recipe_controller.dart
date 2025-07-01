@@ -1,47 +1,65 @@
 import 'dart:io';
 import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_manager/export_manager.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
 class CreateRecipeController extends ManagerStore {
   final RecipeRepository _repository;
-
-  CreateRecipeController(
-    this._repository,
-  );
+  CreateRecipeController(this._repository);
 
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   TextEditingController portionController = TextEditingController();
-  List<IngredientEntity> listIngredient = [];
+
   PageController pageController = PageController();
   PageController containerController = PageController();
+
   int currentPage = 0;
   Duration timePreparedRecipe = const Duration(hours: 0, minutes: 0);
   DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
   int portion = 0;
-  final quillInstructionController = QuillController.basic();
+
+  QuillController quillInstructionController = QuillController.basic();
   final quillServerController = QuillController.basic();
   File? thumbImage;
   bool isWriteTime = false;
   final hourController = TextEditingController();
   final minuteController = TextEditingController();
+
+  List<IngredientEntity> listIngredient = [];
   List<IngredientRecipeEntity> listIngredientSelect = [];
   List<File> listImagesRecipe = [];
+  List<ImageEntity> listImagesRecipeSelected = [];
+  RecipeEntity? recipe;
 
   @override
   void init(Map<String, dynamic> arguments) {
+    _initialize(arguments);
+  }
+
+  Future<void> _initialize(Map<String, dynamic> arguments) async {
+    if (arguments['recipe'] != null) {
+      recipe = arguments['recipe'] as RecipeEntity;
+      if (recipe?.id != null) {
+        await _initializeWithRecipe(recipe!);
+      }
+    }
     pageController = PageController(initialPage: 0);
     containerController = PageController(initialPage: 0);
+    notifyListeners();
   }
+
+  bool get isEditRecipe => recipe != null;
 
   void onChangedPage(int value) {
     currentPage = value;
@@ -49,8 +67,9 @@ class CreateRecipeController extends ManagerStore {
   }
 
   Future<void> pickThumb() async {
-    final XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final XFile? image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     if (image != null) {
       thumbImage = File(image.path);
     }
@@ -104,13 +123,15 @@ class CreateRecipeController extends ManagerStore {
           title: titleController.text,
           subTitle: subTitleController.text,
           details: detailsController.text,
-          serveFood: QuillDeltaToHtmlConverter(
-            quillServerController.document.toDelta().toJson(),
-          ).convert(),
+          serveFood:
+              QuillDeltaToHtmlConverter(
+                quillServerController.document.toDelta().toJson(),
+              ).convert(),
           difficultyRecipe: DifficultyRecipe.easy,
-          instruction: QuillDeltaToHtmlConverter(
-            quillInstructionController.document.toDelta().toJson(),
-          ).convert(),
+          instruction:
+              QuillDeltaToHtmlConverter(
+                quillInstructionController.document.toDelta().toJson(),
+              ).convert(),
           portion: portion,
           timePrepared: timePreparedRecipe.inMinutes,
           //TODO Ver sobre os status depois
@@ -142,6 +163,34 @@ class CreateRecipeController extends ManagerStore {
     );
   }
 
+  Future<void> updateRecipe() async {
+    final updatedRecipe = RecipeEntity(
+      id: recipe!.id,
+      title: titleController.text,
+      subTitle: subTitleController.text,
+      details: detailsController.text,
+      serveFood:
+          QuillDeltaToHtmlConverter(
+            quillServerController.document.toDelta().toJson(),
+          ).convert(),
+      difficultyRecipe: difficultyRecipe,
+      instruction:
+          QuillDeltaToHtmlConverter(
+            quillInstructionController.document.toDelta().toJson(),
+          ).convert(),
+      portion: portion,
+      timePrepared: timePreparedRecipe.inMinutes,
+      userId: recipe!.userId,
+      status: recipe!.status,
+      createdAt: recipe!.createdAt,
+      updatedAt: recipe!.updatedAt,
+    );
+    recipe = updatedRecipe;
+    notifyListeners();
+
+    await _repository.updateRecipe(updatedRecipe);
+  }
+
   String get durationRecipeString {
     if (timePreparedRecipe.inMinutes == 0) {
       return '';
@@ -167,4 +216,39 @@ class CreateRecipeController extends ManagerStore {
     listIngredientSelect.remove(ingredient);
     notifyListeners();
   }
+
+  Future<void> _initializeWithRecipe(RecipeEntity r) async {
+    titleController.text = r.title;
+    subTitleController.text = r.subTitle ?? '';
+    detailsController.text = r.details ?? '';
+    portion = r.portion;
+    listImagesRecipeSelected = await _getImages(r.id!);
+    timePreparedRecipe = Duration(minutes: r.timePrepared);
+    difficultyRecipe = r.difficultyRecipe;
+    portionController.text = r.portion.toString();
+    listIngredientSelect = await _getIngredient(r.id!);
+    final delta = Delta()..insert('${r.instruction}\n');
+    quillInstructionController = QuillController(
+      document: Document.fromDelta(delta),
+      selection: const TextSelection.collapsed(offset: 0),
+    );
+    notifyListeners();
+  }
+
+  Future<List<ImageEntity>> _getImages(String recipeId) async {
+    final images = await _repository.getImages(recipeId);
+    return images.where((e) => !e.thumb).toList();
+  }
+
+  Future<void> deleteImage(String recipeId, int index) async {
+    await _repository.deleteImages(
+      recipeId,
+      listImagesRecipeSelected[index].id,
+    );
+  }
+
+  Future<List<IngredientRecipeEntity>> _getIngredient(String id) async {
+    return await _repository.getIngredientsRecipe(id);
+  }
+
 }

@@ -76,7 +76,7 @@ class InfoContainerPortion extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSecondary,
                   ),
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     counterText: '',
                     hintStyle: TextStyle(
                       fontSize: 30,

@@ -54,6 +54,7 @@ class RecipeRepositoryImp implements RecipeRepository {
     return result.map<ImageEntity>((e) => _imageMapper.fromMap(e)).toList();
   }
 
+
   @override
   Future<List<RecipeDto>> getUserRecipes({
     required String userID,
@@ -172,5 +173,15 @@ class RecipeRepositoryImp implements RecipeRepository {
     return ingredients
         .map<IngredientRecipeEntity>((e) => _ingredientDtoMapper.toEntity(e))
         .toList();
+  }
+
+  @override
+  Future<void> deleteRecipe(String id) async {
+    await _apiRecipes.delete(path: '$path/$id');
+  }
+
+  @override
+  Future<void> updateRecipe(RecipeEntity recipe) async {
+    await _apiRecipes.put(path: '$path/${recipe.id}', body: recipe.toMap());
   }
 }

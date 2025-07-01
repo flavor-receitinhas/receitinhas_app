@@ -7,8 +7,11 @@ import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 class CarouselSelectImagesRecipe extends StatefulWidget {
   final CreateRecipeController ct;
   final CarouselController carouselController;
-  const CarouselSelectImagesRecipe(
-      {super.key, required this.ct, required this.carouselController});
+  const CarouselSelectImagesRecipe({
+    super.key,
+    required this.ct,
+    required this.carouselController,
+  });
 
   @override
   State<CarouselSelectImagesRecipe> createState() =>
@@ -18,20 +21,43 @@ class CarouselSelectImagesRecipe extends StatefulWidget {
 class _CarouselSelectImagesRecipeState
     extends State<CarouselSelectImagesRecipe> {
   @override
+  void initState() {
+    super.initState();
+    widget.ct.addListener(_listener);
+  }
+
+  void _listener() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    widget.ct.removeListener(_listener);
+    super.dispose();
+  }
+
+  CreateRecipeController get ct => widget.ct;
+  @override
   Widget build(BuildContext context) {
+    final List<ImageProvider<Object>> images = [
+      ...ct.listImagesRecipeSelected.map((e) => NetworkImage(e.link)),
+      ...ct.listImagesRecipe.map((e) => FileImage(e)),
+    ];
     return SelectImageRecipe(
-      hasImage: widget.ct.listImagesRecipe.isNotEmpty,
-      image: widget.ct.listImagesRecipe,
+      hasImage: images.isNotEmpty,
+      image: images,
       onTap: () async {
-        final images = await widget.ct.pickMultiImagesRecipe();
-        for (var i = 0; i < images.length; i++) {
-          if (widget.ct.listImagesRecipe.length < 10) {
-            widget.ct.listImagesRecipe.add(images[i]);
+        final picked = await ct.pickMultiImagesRecipe();
+        for (var i = 0; i < picked.length; i++) {
+          if (ct.listImagesRecipe.length < 10) {
+            ct.listImagesRecipe.add(picked[i]);
           } else {
             if (context.mounted) {
               CookieSnackBar(
-                text: AppLocalizations.of(context)!
-                    .recipeCarouselSelectImagesRecipeMaxImages,
+                text:
+                    AppLocalizations.of(
+                      context,
+                    )!.recipeCarouselSelectImagesRecipeMaxImages,
               ).show(context);
             }
             break;
@@ -44,15 +70,17 @@ class _CarouselSelectImagesRecipeState
         child: CarouselView(
           controller: widget.carouselController,
           onTap: (value) async {
-            final images = await widget.ct.pickMultiImagesRecipe();
-            for (var i = 0; i < images.length; i++) {
-              if (widget.ct.listImagesRecipe.length < 10) {
-                widget.ct.listImagesRecipe.add(images[i]);
+            final picked = await ct.pickMultiImagesRecipe();
+            for (var i = 0; i < picked.length; i++) {
+              if (ct.listImagesRecipe.length < 10) {
+                ct.listImagesRecipe.add(picked[i]);
               } else {
                 if (context.mounted) {
                   CookieSnackBar(
-                    text: AppLocalizations.of(context)!
-                        .recipeCarouselSelectImagesRecipeMaxImages,
+                    text:
+                        AppLocalizations.of(
+                          context,
+                        )!.recipeCarouselSelectImagesRecipeMaxImages,
                   ).show(context);
                 }
                 break;
@@ -62,22 +90,35 @@ class _CarouselSelectImagesRecipeState
           },
           itemExtent: 500,
           itemSnapping: true,
-          children: widget.ct.listImagesRecipe
-              .map(
-                (e) => Stack(
+          children:
+              images.asMap().entries.map((entry) {
+                final index = entry.key;
+                final provider = entry.value;
+                return Stack(
                   alignment: Alignment.topRight,
                   children: [
-                    Center(child: Image.file(e)),
-                    IconButton(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      onPressed: () {
-                        setState(() {
-                          widget.ct.removeImage(e);
-                        });
-                      },
-                      icon: const Icon(Icons.delete),
-                    ),
-                    if (e != widget.ct.listImagesRecipe.last)
+                    Center(child: Image(image: provider)),
+                    if (provider is FileImage)
+                      IconButton(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        onPressed: () {
+                          setState(() {
+                            ct.removeImage(provider.file);
+                          });
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+                    if (ct.isEditRecipe && provider is NetworkImage)
+                      IconButton(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        onPressed: () {
+                          setState(() {
+                            ct.deleteImage(ct.recipe!.id!, index);
+                          });
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+                    if (index != images.length - 1)
                       Align(
                         alignment: Alignment.centerRight,
                         child: Icon(
@@ -86,7 +127,7 @@ class _CarouselSelectImagesRecipeState
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
-                    if (e != widget.ct.listImagesRecipe.first)
+                    if (index != 0)
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Icon(
@@ -96,9 +137,8 @@ class _CarouselSelectImagesRecipeState
                         ),
                       ),
                   ],
-                ),
-              )
-              .toList(),
+                );
+              }).toList(),
         ),
       ),
     );

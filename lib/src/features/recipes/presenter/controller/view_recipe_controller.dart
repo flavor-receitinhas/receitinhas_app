@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_dto.dart';
 import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_recipe_dto.dart';
 import 'package:app_receitas/src/features/favorite/domain/repositories/favorite_repository.dart';
@@ -14,21 +15,22 @@ class ViewRecipeController extends ManagerStore {
   ViewRecipeController(this._recipeRepository, this._favoriteRepository);
 
   String id = '';
-  late RecipeGetDto recipe;
+  RecipeGetDto recipe = RecipeGetDto.empty;
   List<ImageEntity> images = [];
   List<IngredientRecipeEntity> ingredients = [];
   FavoriteRecipeDto? favoriteRecipeDto;
 
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
-        call: () async {
-          id = arguments['id'] as String;
-          recipe = await getRecipe();
-          images = await getImages();
-          ingredients = await getIngredientsRecipe();
-          favoriteRecipeDto = await getFavoriteRecipe();
-        },
-      );
+    call: () async {
+      id = arguments['id'] as String;
+      recipe = await getRecipe();
+      images = await getImages();
+      ingredients = await getIngredientsRecipe();
+      favoriteRecipeDto = await getFavoriteRecipe();
+      notifyListeners();
+    },
+  );
 
   Future<RecipeGetDto> getRecipe() async {
     return await _recipeRepository.getRecipe(id);
@@ -47,25 +49,45 @@ class ViewRecipeController extends ManagerStore {
     return await _favoriteRepository.getFavoriteRecipe(id);
   }
 
+  Future<void> deleteRecipe(String recipeId) => handleTry(
+    call: () async {
+      await _recipeRepository.deleteRecipe(recipeId);
+      notifyListeners();
+    },
+  );
+
+  Future<void> refresh() => handleTry(
+    call: () async {
+      recipe = await getRecipe();
+      images = await getImages();
+      ingredients = await getIngredientsRecipe();
+      favoriteRecipeDto = await getFavoriteRecipe();
+      notifyListeners();
+    },
+  );
+
+  bool get isEditRecipe => recipe.recipe.userId == Global.user!.id;
+
   Future<void> addAndRemoveFavorite() => handleTry(
-        call: () async {
-          if (favoriteRecipeDto!.exists) {
-            await _favoriteRepository
-                .removeFavorite(favoriteRecipeDto!.favoriteId!);
-            favoriteRecipeDto = favoriteRecipeDto!.copyWith(
-              exists: false,
-              favoriteId: null,
-            );
-          } else {
-            final favoriteResult = await _favoriteRepository.addFavorite(
-              FavoriteDto(recipeId: id),
-            );
-            favoriteRecipeDto = favoriteRecipeDto!.copyWith(
-              exists: true,
-              favoriteId: favoriteResult.id,
-            );
-          }
-          notifyListeners();
-        },
-      );
+    call: () async {
+      if (favoriteRecipeDto!.exists) {
+        await _favoriteRepository.removeFavorite(
+          favoriteRecipeDto!.favoriteId!,
+        );
+        favoriteRecipeDto = favoriteRecipeDto!.copyWith(
+          exists: false,
+          favoriteId: null,
+        );
+      } else {
+        final favoriteResult = await _favoriteRepository.addFavorite(
+          FavoriteDto(recipeId: id),
+        );
+        favoriteRecipeDto = favoriteRecipeDto!.copyWith(
+          exists: true,
+          favoriteId: favoriteResult.id,
+        );
+      }
+      notifyListeners();
+    },
+  );
 }
