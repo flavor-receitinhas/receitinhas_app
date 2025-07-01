@@ -1,3 +1,4 @@
+import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/features/splash/presenter/controller/splash_controller.dart';
@@ -21,12 +22,12 @@ class _SplashPageState extends State<SplashPage> {
     });
     if (mounted) {
       ct.init().then(
-            (value) => Navigator.pushNamedAndRemoveUntil(
-              context,
-              ct.route,
-              (route) => false,
-            ),
-          );
+        (value) => Navigator.pushNamedAndRemoveUntil(
+          context,
+          ct.route,
+          (route) => false,
+        ),
+      );
     }
     super.initState();
   }
@@ -47,16 +48,11 @@ class _SplashPageState extends State<SplashPage> {
             child: CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primary,
               radius: 110,
-              child: Image.asset(
-                "assets/images/logo.png",
-                scale: 3,
-              ),
+              child: Image.asset(ImagesEnum.logo.path, scale: 3),
             ),
           ),
           Spacer(),
-          CookieText(
-            text: AppLocalizations.of(context)!.splashLoading,
-          ),
+          CookieText(text: AppLocalizations.of(context)!.splashLoading),
         ],
       ),
     );
