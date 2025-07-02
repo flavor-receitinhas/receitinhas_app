@@ -35,24 +35,10 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
           label: AppLocalizations.of(context)!.recipeDifficultyNext,
           margin: const EdgeInsets.only(left: 16, bottom: 10, right: 16),
           onPressed: () {
-            if (formKey.currentState!.validate() &&
-                    ct.listImagesRecipe.isNotEmpty ||
-                ct.listImagesRecipeSelected.isNotEmpty) {
-              ct.pageController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
-              );
-            }
             if (ct.listImagesRecipe.isEmpty &&
                 ct.listImagesRecipeSelected.isEmpty) {
               CookieSnackBar(
                 text: AppLocalizations.of(context)!.recipeAddImage,
-              ).show(context);
-              return;
-            }
-            if (ct.thumbImage == null) {
-              CookieSnackBar(
-                text: AppLocalizations.of(context)!.recipeAddCoverImage,
               ).show(context);
               return;
             }
@@ -61,6 +47,14 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                 text: AppLocalizations.of(context)!.recipeFillAllFields,
               ).show(context);
               return;
+            }
+            if (formKey.currentState!.validate() &&
+                    ct.listImagesRecipe.isNotEmpty ||
+                ct.listImagesRecipeSelected.isNotEmpty) {
+              ct.pageController.nextPage(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
             }
           },
         ),
