@@ -43,11 +43,15 @@ class CreateRecipeController extends ManagerStore {
   List<File> listImagesRecipe = [];
   List<ImageEntity> listImagesRecipeSelected = [];
   RecipeEntity? recipe;
+  Map<String, dynamic> argumentsMap = {};
 
   @override
-  void init(Map<String, dynamic> arguments) {
-    _initialize(arguments);
-  }
+  void init(Map<String, dynamic> arguments) => handleTry(
+    call: () async {
+      argumentsMap = arguments;
+      await _initialize(arguments);
+    },
+  );
 
   Future<void> _initialize(Map<String, dynamic> arguments) async {
     if (arguments['recipe'] != null) {
@@ -58,7 +62,6 @@ class CreateRecipeController extends ManagerStore {
     }
     pageController = PageController(initialPage: 0);
     containerController = PageController(initialPage: 0);
-    notifyListeners();
   }
 
   bool get isEditRecipe => recipe != null;

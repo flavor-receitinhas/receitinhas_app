@@ -14,10 +14,11 @@ import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class CreateAndEditRecipePage extends StatefulWidget {
   static const route = '/create-recipe';
-  const CreateAndEditRecipePage({super.key,});
+  const CreateAndEditRecipePage({super.key});
 
   @override
-  State<CreateAndEditRecipePage> createState() => _CreateAndEditRecipePageState();
+  State<CreateAndEditRecipePage> createState() =>
+      _CreateAndEditRecipePageState();
 }
 
 class _CreateAndEditRecipePageState
@@ -39,33 +40,39 @@ class _CreateAndEditRecipePageState
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (didPop) {
-          return;
-        }
-        ct.showDialogDiscard()
-            ? CookieSheetBottom(
-              title: CookieText(
-                text: AppLocalizations.of(context)!.recipeDiscardPrompt,
-                color: Theme.of(context).colorScheme.onSecondary,
-                typography: CookieTypography.title,
-              ),
-              body: const LeaveRecipeSheet(),
-            ).show(context)
-            : Navigator.pushNamedAndRemoveUntil(
-              context,
-              CustomBottomBar.route,
-              (route) => false,
-            );
-      },
-      child: PageView(
-        onPageChanged: ct.onChangedPage,
-        controller: ct.pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: routes,
-      ),
+    return CookiePage(
+      state: ct.state,
+      error: ct.error.toString(),
+      errorReload: () => ct.init(ct.argumentsMap),
+      done:
+          () => PopScope(
+            canPop: false,
+            onPopInvokedWithResult: (didPop, result) {
+              if (didPop) {
+                return;
+              }
+              ct.showDialogDiscard()
+                  ? CookieSheetBottom(
+                    title: CookieText(
+                      text: AppLocalizations.of(context)!.recipeDiscardPrompt,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      typography: CookieTypography.title,
+                    ),
+                    body: const LeaveRecipeSheet(),
+                  ).show(context)
+                  : Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    CustomBottomBar.route,
+                    (route) => false,
+                  );
+            },
+            child: PageView(
+              onPageChanged: ct.onChangedPage,
+              controller: ct.pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: routes,
+            ),
+          ),
     );
   }
 }
