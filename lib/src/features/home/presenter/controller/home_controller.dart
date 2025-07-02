@@ -30,7 +30,7 @@ class HomeController extends ManagerStore {
   Future<void> init(Map<String, dynamic> arguments) => handleTry(
     call: () async {
       await loadingProfile();
-      await _loadMoreItems();
+      await _loadMoreItems(true);
       _setupScrollController();
     },
   );
@@ -56,7 +56,14 @@ class HomeController extends ManagerStore {
     return result;
   }
 
-  Future<void> _loadMoreItems() async {
+  Future<void> _loadMoreItems([bool refresh = false]) async {
+    if (refresh == true) {
+      recipes = [];
+      page = 0;
+      hasMore = true;
+      isLoading = false;
+    }
+
     if (!hasMore || isLoading) return;
 
     isLoading = true;
