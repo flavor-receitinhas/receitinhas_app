@@ -70,6 +70,14 @@ class _IntructionCreatePageState extends State<IntructionCreatePage> {
         null,
         null,
       ),
+      leading: DefaultListBlockStyle(
+        baseStyle.copyWith(color: colorText, fontSize: 16),
+        const HorizontalSpacing(0, 0),
+        const VerticalSpacing(0, 0),
+        const VerticalSpacing(0, 0),
+        null,
+        null,
+      ),
     );
 
     return CookiePage(

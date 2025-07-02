@@ -70,10 +70,16 @@ class _ServerDishPageState extends State<ServerDishPage> {
         null,
         null,
       ),
+      leading: DefaultListBlockStyle(
+        baseStyle.copyWith(color: colorText, fontSize: 16),
+        const HorizontalSpacing(0, 0),
+        const VerticalSpacing(0, 0),
+        const VerticalSpacing(0, 0),
+        null,
+        null,
+      ),
     );
-    // print(QuillDeltaToHtmlConverter(
-    //         widget.ct.quillServerController.document.toDelta().toJson())
-    //     .convert());
+
     return CookiePage(
       state: StateManager.done,
       error: widget.ct.error.toString(),
