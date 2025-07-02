@@ -33,7 +33,7 @@ class CreateRecipeController extends ManagerStore {
 
   QuillController quillInstructionController = QuillController.basic();
   final quillServerController = QuillController.basic();
-  File? thumbImage;
+  String? thumbImage;
   bool isWriteTime = false;
   final hourController = TextEditingController();
   final minuteController = TextEditingController();
@@ -42,6 +42,8 @@ class CreateRecipeController extends ManagerStore {
   List<IngredientRecipeEntity> listIngredientSelect = [];
   List<File> listImagesRecipe = [];
   List<ImageEntity> listImagesRecipeSelected = [];
+  List<ImageProvider<Object>> images = [];
+
   RecipeEntity? recipe;
   Map<String, dynamic> argumentsMap = {};
 
@@ -60,6 +62,10 @@ class CreateRecipeController extends ManagerStore {
         await _initializeWithRecipe(recipe!);
       }
     }
+    images = [
+      ...listImagesRecipeSelected.map((e) => NetworkImage(e.link)),
+      ...listImagesRecipe.map((e) => FileImage(e)),
+    ];
     pageController = PageController(initialPage: 0);
     containerController = PageController(initialPage: 0);
   }
@@ -76,7 +82,7 @@ class CreateRecipeController extends ManagerStore {
       source: ImageSource.gallery,
     );
     if (image != null) {
-      thumbImage = File(image.path);
+      thumbImage = image.path;
     }
     notifyListeners();
   }
@@ -131,6 +137,7 @@ class CreateRecipeController extends ManagerStore {
           serveFood: jsonEncode(
             quillServerController.document.toDelta().toJson(),
           ),
+
           difficultyRecipe: DifficultyRecipe.easy,
           instruction: jsonEncode(
             quillInstructionController.document.toDelta().toJson(),
@@ -159,7 +166,7 @@ class CreateRecipeController extends ManagerStore {
         if (thumbImage != null) {
           await _repository.createThumb(
             recipeId: result.id!,
-            filePath: thumbImage!.path,
+            filePath: File(thumbImage!).path,
           );
         }
       },
@@ -240,11 +247,16 @@ class CreateRecipeController extends ManagerStore {
   }
 
   Future<void> _initializeWithRecipe(RecipeEntity r) async {
+    final images = await _getImages(r.id!);
     titleController.text = r.title;
     subTitleController.text = r.subTitle ?? '';
     detailsController.text = r.details ?? '';
     portion = r.portion;
-    listImagesRecipeSelected = await _getImages(r.id!);
+    listImagesRecipeSelected = images.where((e) => !e.thumb).toList();
+    thumbImage =
+        images.any((e) => e.thumb)
+            ? images.firstWhere((e) => e.thumb).link
+            : null;
     timePreparedRecipe = Duration(minutes: r.timePrepared);
     difficultyRecipe = r.difficultyRecipe;
     portionController.text = r.portion.toString();
@@ -263,7 +275,7 @@ class CreateRecipeController extends ManagerStore {
 
   Future<List<ImageEntity>> _getImages(String recipeId) async {
     final images = await _repository.getImages(recipeId);
-    return images.where((e) => !e.thumb).toList();
+    return images;
   }
 
   Future<void> deleteImage(String recipeId, int index) async {
@@ -275,5 +287,11 @@ class CreateRecipeController extends ManagerStore {
 
   Future<List<IngredientRecipeEntity>> _getIngredient(String id) async {
     return await _repository.getIngredientsRecipe(id);
+  }
+
+  bool validateStringIsUrl(String path) {
+    final uri = Uri.tryParse(path);
+    if (uri == null) return false;
+    return uri.isAbsolute && (uri.scheme == 'http' || uri.scheme == 'https');
   }
 }

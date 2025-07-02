@@ -3,10 +3,11 @@ import 'package:app_receitas/src/features/recipes/presenter/controller/create_re
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/select_image_recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselSelectImagesRecipe extends StatefulWidget {
   final CreateRecipeController ct;
-  final CarouselController carouselController;
+  final CarouselSliderController carouselController;
   const CarouselSelectImagesRecipe({
     super.key,
     required this.ct,
@@ -20,6 +21,8 @@ class CarouselSelectImagesRecipe extends StatefulWidget {
 
 class _CarouselSelectImagesRecipeState
     extends State<CarouselSelectImagesRecipe> {
+  int _currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -67,78 +70,117 @@ class _CarouselSelectImagesRecipeState
       },
       child: SizedBox(
         height: 250,
-        child: CarouselView(
-          controller: widget.carouselController,
-          onTap: (value) async {
-            final picked = await ct.pickMultiImagesRecipe();
-            for (var i = 0; i < picked.length; i++) {
-              if (ct.listImagesRecipe.length < 10) {
-                ct.listImagesRecipe.add(picked[i]);
-              } else {
-                if (context.mounted) {
-                  CookieSnackBar(
-                    text:
-                        AppLocalizations.of(
-                          context,
-                        )!.recipeCarouselSelectImagesRecipeMaxImages,
-                  ).show(context);
-                }
-                break;
-              }
-            }
-            setState(() {});
-          },
-          itemExtent: 500,
-          itemSnapping: true,
-          children:
-              images.asMap().entries.map((entry) {
-                final index = entry.key;
-                final provider = entry.value;
-                return Stack(
-                  alignment: Alignment.topRight,
-                  children: [
-                    Center(child: Image(image: provider)),
-                    if (provider is FileImage)
-                      IconButton(
+        child: Stack(
+          children: [
+            CarouselSlider(
+              carouselController: widget.carouselController,
+              options: CarouselOptions(
+                height: 250,
+                viewportFraction: 1.0,
+                enableInfiniteScroll: false,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+              items:
+                  images.asMap().entries.map((entry) {
+                    final provider = entry.value;
+                    return GestureDetector(
+                      onTap: () async {
+                        final picked = await ct.pickMultiImagesRecipe();
+                        for (var i = 0; i < picked.length; i++) {
+                          if (ct.listImagesRecipe.length < 10) {
+                            ct.listImagesRecipe.add(picked[i]);
+                          } else {
+                            if (context.mounted) {
+                              CookieSnackBar(
+                                text:
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.recipeCarouselSelectImagesRecipeMaxImages,
+                              ).show(context);
+                            }
+                            break;
+                          }
+                        }
+                        setState(() {});
+                      },
+                      child: Center(child: Image(image: provider)),
+                    );
+                  }).toList(),
+            ),
+            if (_currentIndex != images.length - 1)
+              Align(
+                alignment: Alignment.centerRight,
+                child: Icon(
+                  size: 35,
+                  Icons.keyboard_arrow_right,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            if (_currentIndex != 0)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Icon(
+                  size: 35,
+                  Icons.keyboard_arrow_left,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            if (images.isNotEmpty)
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Builder(
+                  builder: (context) {
+                    final currentProvider = images[_currentIndex];
+                    if (currentProvider is FileImage) {
+                      return IconButton(
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.black54,
+                        ),
                         color: Theme.of(context).colorScheme.onPrimary,
                         onPressed: () {
                           setState(() {
-                            ct.removeImage(provider.file);
+                            ct.removeImage(currentProvider.file);
+                            if (_currentIndex >= images.length - 1) {
+                              _currentIndex = (images.length - 2).clamp(
+                                0,
+                                images.length - 1,
+                              );
+                            }
                           });
                         },
                         icon: const Icon(Icons.delete),
-                      ),
-                    if (ct.isEditRecipe && provider is NetworkImage)
-                      IconButton(
+                      );
+                    }
+                    if (ct.isEditRecipe && currentProvider is NetworkImage) {
+                      return IconButton(
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.black54,
+                        ),
                         color: Theme.of(context).colorScheme.onPrimary,
                         onPressed: () {
                           setState(() {
-                            ct.deleteImage(ct.recipe!.id!, index);
+                            ct.deleteImage(ct.recipe!.id!, _currentIndex);
+                            if (_currentIndex >= images.length - 1) {
+                              _currentIndex = (images.length - 2).clamp(
+                                0,
+                                images.length - 1,
+                              );
+                            }
                           });
                         },
                         icon: const Icon(Icons.delete),
-                      ),
-                    if (index != images.length - 1)
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Icon(
-                          size: 35,
-                          Icons.keyboard_arrow_right,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                      ),
-                    if (index != 0)
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(
-                          size: 35,
-                          Icons.keyboard_arrow_left,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                      ),
-                  ],
-                );
-              }).toList(),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
+              ),
+          ],
         ),
       ),
     );
