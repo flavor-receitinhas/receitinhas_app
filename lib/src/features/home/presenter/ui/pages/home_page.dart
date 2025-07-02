@@ -150,6 +150,15 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
                                         maxLine: 2,
                                         overflow: TextOverflow.ellipsis,
                                         typography: CookieTypography.button,
+                                        shadows: [
+                                          Shadow(
+                                            color: Colors.black.withValues(
+                                              alpha: 0.3,
+                                            ),
+                                            offset: Offset(1, 1),
+                                            blurRadius: 10,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],

@@ -28,172 +28,202 @@ class _ProfilePageState extends ManagerPage<ProfileController, ProfilePage> {
       error: ct.error.toString(),
       errorReload: () async => await ct.init(ct.currentArguments),
       state: ct.state,
-      done: () => RefreshIndicator(
-        onRefresh: () async {
-          await ct.refresh();
-        },
-        child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          controller: ct.scrollController,
-          children: [
-            ct.id == null
-                ? AppBarProfile(
-                    title:
-                        AppLocalizations.of(context)!.profileMyProfilePageTitle,
-                    subTitle: AppLocalizations.of(context)!
-                        .profileMyProfilePageSubtitle,
-                  )
-                : AppBarProfile(
-                    title: AppLocalizations.of(context)!
-                        .profileViewProfilePageTitle,
-                    subTitle: AppLocalizations.of(context)!
-                        .profileViewProfilePageSubtitle,
+      done:
+          () => RefreshIndicator(
+            onRefresh: () async {
+              await ct.refresh();
+            },
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              controller: ct.scrollController,
+              children: [
+                ct.id == null
+                    ? AppBarProfile(
+                      title:
+                          AppLocalizations.of(
+                            context,
+                          )!.profileMyProfilePageTitle,
+                      subTitle:
+                          AppLocalizations.of(
+                            context,
+                          )!.profileMyProfilePageSubtitle,
+                    )
+                    : AppBarProfile(
+                      title:
+                          AppLocalizations.of(
+                            context,
+                          )!.profileViewProfilePageTitle,
+                      subTitle:
+                          AppLocalizations.of(
+                            context,
+                          )!.profileViewProfilePageSubtitle,
+                    ),
+                CookieButton(
+                  label: AppLocalizations.of(context)!.profileMyProfilePageBack,
+                ).back(context),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
                   ),
-            CookieButton(
-              label: AppLocalizations.of(context)!.profileMyProfilePageBack,
-            ).back(context),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 10),
-                            CookieText(
-                              text: ct.profile.name,
-                              typography: CookieTypography.title,
-                            ),
-                            const SizedBox(height: 10),
-                            CookieText(
-                              text: ct.profile.biography,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      CircleAvatar(
-                        radius: 45,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
-                        backgroundImage: ct.profile.image != null
-                            ? NetworkImage(
-                                '${ct.profile.image!}?${DateTime.now().millisecondsSinceEpoch}')
-                            : AssetImage(ImageProfileEnum.avatar.path)
-                                as ImageProvider,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  if (ct.id == null)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CookieButton(
-                            label: AppLocalizations.of(context)!
-                                .profileMyProfilePageEditProfile,
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                EditProfilePage.route,
-                                arguments: {'profile': ct.profile},
-                              ).then(
-                                (value) async {
-                                  if (value == true) {
-                                    final profile =
-                                        (await ct.getProfile(Global.user!.id))!;
-                                    ct.profile = profile;
-                                    Global.profile = profile;
-                                  }
-                                },
-                              );
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  const SizedBox(height: 20),
-                  CookieTextFieldSearch(
-                    hintText: AppLocalizations.of(context)!
-                        .profileMyProfilePageSearchHint,
-                    controller: ct.searchController,
-                    onEditingComplete: ct.refresh,
-                  ),
-                  const SizedBox(height: 20),
-                  if (ct.recipes.isEmpty)
-                    CookieText(
-                      text: AppLocalizations.of(context)!
-                          .profileMyProfilePageNoRecipes,
-                      typography: CookieTypography.button,
-                    ),
-                  MasonryGridView.builder(
-                    gridDelegate:
-                        const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    mainAxisSpacing: 6,
-                    crossAxisSpacing: 6,
-                    itemCount: ct.recipes.length + 1,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      if (index < ct.recipes.length) {
-                        final recipe = ct.recipes[index];
-                        return InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              ViewRecipesPage.route,
-                              arguments: {'id': recipe.recipeId},
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(2),
-                            child: Stack(
-                              alignment: Alignment.bottomLeft,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    recipe.thumb ?? Global.imageRecipeDefault,
-                                  ),
+                                const SizedBox(height: 10),
+                                CookieText(
+                                  text: ct.profile.name,
+                                  typography: CookieTypography.title,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: CookieText(
-                                    text: recipe.title,
-                                    color: Colors.white,
-                                    maxLine: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    typography: CookieTypography.button,
-                                  ),
-                                ),
+                                const SizedBox(height: 10),
+                                CookieText(text: ct.profile.biography),
                               ],
                             ),
                           ),
-                        );
-                      }
-                      if (index >= ct.recipes.length && ct.hasMore) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            color: Theme.of(context).colorScheme.primary,
+                          const SizedBox(width: 10),
+                          CircleAvatar(
+                            radius: 45,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            backgroundImage:
+                                ct.profile.image != null
+                                    ? NetworkImage(
+                                      '${ct.profile.image!}?${DateTime.now().millisecondsSinceEpoch}',
+                                    )
+                                    : AssetImage(ImageProfileEnum.avatar.path)
+                                        as ImageProvider,
                           ),
-                        );
-                      }
-                      return SizedBox.shrink();
-                    },
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      if (ct.id == null)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CookieButton(
+                                label:
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.profileMyProfilePageEditProfile,
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    EditProfilePage.route,
+                                    arguments: {'profile': ct.profile},
+                                  ).then((value) async {
+                                    if (value == true) {
+                                      final profile =
+                                          (await ct.getProfile(
+                                            Global.user!.id,
+                                          ))!;
+                                      ct.profile = profile;
+                                      Global.profile = profile;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      const SizedBox(height: 20),
+                      CookieTextFieldSearch(
+                        hintText:
+                            AppLocalizations.of(
+                              context,
+                            )!.profileMyProfilePageSearchHint,
+                        controller: ct.searchController,
+                        onEditingComplete: ct.refresh,
+                      ),
+                      const SizedBox(height: 20),
+                      if (ct.recipes.isEmpty)
+                        CookieText(
+                          text:
+                              AppLocalizations.of(
+                                context,
+                              )!.profileMyProfilePageNoRecipes,
+                          typography: CookieTypography.button,
+                        ),
+                      MasonryGridView.builder(
+                        gridDelegate:
+                            const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                            ),
+                        mainAxisSpacing: 6,
+                        crossAxisSpacing: 6,
+                        itemCount: ct.recipes.length + 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          if (index < ct.recipes.length) {
+                            final recipe = ct.recipes[index];
+                            return InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  ViewRecipesPage.route,
+                                  arguments: {'id': recipe.recipeId},
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: Stack(
+                                  alignment: Alignment.bottomLeft,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        recipe.thumb ??
+                                            Global.imageRecipeDefault,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: CookieText(
+                                        text: recipe.title,
+                                        color: Colors.white,
+                                        maxLine: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        typography: CookieTypography.button,
+                                        shadows: [
+                                          Shadow(
+                                            color: Colors.black.withValues(
+                                              alpha: 0.3,
+                                            ),
+                                            offset: Offset(1, 1),
+                                            blurRadius: 10,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                          if (index >= ct.recipes.length && ct.hasMore) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            );
+                          }
+                          return SizedBox.shrink();
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }
