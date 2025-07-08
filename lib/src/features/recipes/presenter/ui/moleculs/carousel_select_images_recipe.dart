@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_receitas/src/core/widgets/features/cookie_snack_bar.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/select_image_recipe.dart';
@@ -42,18 +44,14 @@ class _CarouselSelectImagesRecipeState
   CreateRecipeController get ct => widget.ct;
   @override
   Widget build(BuildContext context) {
-    final List<ImageProvider<Object>> images = [
-      ...ct.listImagesRecipeSelected.map((e) => NetworkImage(e.link)),
-      ...ct.listImagesRecipe.map((e) => FileImage(e)),
-    ];
     return SelectImageRecipe(
-      hasImage: images.isNotEmpty,
-      image: images,
+      hasImage: ct.listImagesRecipe.isNotEmpty,
+      image: ct.listImagesRecipe,
       onTap: () async {
         final picked = await ct.pickMultiImagesRecipe();
         for (var i = 0; i < picked.length; i++) {
           if (ct.listImagesRecipe.length < 10) {
-            ct.listImagesRecipe.add(picked[i]);
+            ct.listImagesRecipe.add(picked[i].path);
           } else {
             if (context.mounted) {
               CookieSnackBar(
@@ -85,14 +83,13 @@ class _CarouselSelectImagesRecipeState
                 },
               ),
               items:
-                  images.asMap().entries.map((entry) {
-                    final provider = entry.value;
+                  ct.listImagesRecipe.map((entry) {
                     return GestureDetector(
                       onTap: () async {
                         final picked = await ct.pickMultiImagesRecipe();
                         for (var i = 0; i < picked.length; i++) {
                           if (ct.listImagesRecipe.length < 10) {
-                            ct.listImagesRecipe.add(picked[i]);
+                            ct.listImagesRecipe.add(picked[i].path);
                           } else {
                             if (context.mounted) {
                               CookieSnackBar(
@@ -107,11 +104,16 @@ class _CarouselSelectImagesRecipeState
                         }
                         setState(() {});
                       },
-                      child: Center(child: Image(image: provider)),
+                      child: Center(
+                        child:
+                            ct.validateStringIsUrl(entry)
+                                ? Image.network(entry, fit: BoxFit.cover)
+                                : Image.file(File(entry), fit: BoxFit.cover),
+                      ),
                     );
                   }).toList(),
             ),
-            if (_currentIndex != images.length - 1)
+            if (_currentIndex != ct.listImagesRecipe.length - 1)
               Align(
                 alignment: Alignment.centerRight,
                 child: Icon(
@@ -129,54 +131,34 @@ class _CarouselSelectImagesRecipeState
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
-            if (images.isNotEmpty)
+            if (ct.listImagesRecipe.isNotEmpty)
               Positioned(
                 top: 8,
                 right: 8,
                 child: Builder(
                   builder: (context) {
-                    final currentProvider = images[_currentIndex];
-                    if (currentProvider is FileImage) {
-                      return IconButton(
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.black54,
-                        ),
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        onPressed: () {
-                          setState(() {
-                            ct.removeImage(currentProvider.file);
-                            if (_currentIndex >= images.length - 1) {
-                              _currentIndex = (images.length - 2).clamp(
-                                0,
-                                images.length - 1,
+                    return IconButton(
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.black54,
+                      ),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      onPressed: () {
+                        setState(() {
+                          ct.validateStringIsUrl(
+                                ct.listImagesRecipe[_currentIndex],
+                              )
+                              ? ct.listImagesRecipe.removeAt(_currentIndex)
+                              : ct.removeImage(
+                                ct.listImagesRecipe[_currentIndex],
                               );
-                            }
-                          });
-                        },
-                        icon: const Icon(Icons.delete),
-                      );
-                    }
-                    if (ct.isEditRecipe && currentProvider is NetworkImage) {
-                      return IconButton(
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.black54,
-                        ),
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        onPressed: () {
-                          setState(() {
-                            ct.deleteImage(ct.recipe!.id!, _currentIndex);
-                            if (_currentIndex >= images.length - 1) {
-                              _currentIndex = (images.length - 2).clamp(
-                                0,
-                                images.length - 1,
-                              );
-                            }
-                          });
-                        },
-                        icon: const Icon(Icons.delete),
-                      );
-                    }
-                    return const SizedBox.shrink();
+                          if (_currentIndex >= ct.listImagesRecipe.length - 1) {
+                            _currentIndex = (ct.listImagesRecipe.length - 2)
+                                .clamp(0, ct.listImagesRecipe.length - 1);
+                          }
+                        });
+                      },
+                      icon: const Icon(Icons.delete),
+                    );
                   },
                 ),
               ),

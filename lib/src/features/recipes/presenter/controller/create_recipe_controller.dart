@@ -40,9 +40,8 @@ class CreateRecipeController extends ManagerStore {
 
   List<IngredientEntity> listIngredient = [];
   List<IngredientRecipeEntity> listIngredientSelect = [];
-  List<File> listImagesRecipe = [];
-  List<ImageEntity> listImagesRecipeSelected = [];
-  List<ImageProvider<Object>> images = [];
+  List<String> listImagesRecipe = [];
+  List<ImageEntity> listImageRecipeEntity = [];
 
   RecipeEntity? recipe;
   Map<String, dynamic> argumentsMap = {};
@@ -62,10 +61,7 @@ class CreateRecipeController extends ManagerStore {
         await _initializeWithRecipe(recipe!);
       }
     }
-    images = [
-      ...listImagesRecipeSelected.map((e) => NetworkImage(e.link)),
-      ...listImagesRecipe.map((e) => FileImage(e)),
-    ];
+
     pageController = PageController(initialPage: 0);
     containerController = PageController(initialPage: 0);
   }
@@ -104,7 +100,7 @@ class CreateRecipeController extends ManagerStore {
         listImagesRecipe.isNotEmpty;
   }
 
-  void removeImage(File image) {
+  void removeImage(String image) {
     listImagesRecipe.removeWhere((e) => e == image);
     notifyListeners();
   }
@@ -152,7 +148,7 @@ class CreateRecipeController extends ManagerStore {
         for (var image in listImagesRecipe) {
           await _repository.createImages(
             recipeId: result.id!,
-            filePath: image.path,
+            filePath: File(image).path,
           );
         }
 
@@ -195,9 +191,26 @@ class CreateRecipeController extends ManagerStore {
       updatedAt: recipe!.updatedAt,
     );
     recipe = updatedRecipe;
-    notifyListeners();
 
     await _repository.updateRecipe(updatedRecipe);
+
+    for (var image in listImagesRecipe) {
+      if (!validateStringIsUrl(image)) {
+        await _repository.createImages(
+          recipeId: recipe!.id!,
+          filePath: File(image).path,
+        );
+      } else {
+        listImageRecipeEntity.any((e) => e.link == image)
+            ? null
+            : await _repository.deleteImages(
+              recipe!.id!,
+              listImageRecipeEntity.firstWhere((e) => e.link == image).id,
+            );
+      }
+    }
+
+    notifyListeners();
   }
 
   String get durationRecipeString {
@@ -247,15 +260,20 @@ class CreateRecipeController extends ManagerStore {
   }
 
   Future<void> _initializeWithRecipe(RecipeEntity r) async {
-    final images = await _getImages(r.id!);
+    listImageRecipeEntity = await _getImages(r.id!);
+
     titleController.text = r.title;
     subTitleController.text = r.subTitle ?? '';
     detailsController.text = r.details ?? '';
     portion = r.portion;
-    listImagesRecipeSelected = images.where((e) => !e.thumb).toList();
+
+    listImagesRecipe =
+        (listImageRecipeEntity.where((e) => !e.thumb).toList())
+            .map((e) => e.link)
+            .toList();
     thumbImage =
-        images.any((e) => e.thumb)
-            ? images.firstWhere((e) => e.thumb).link
+        listImageRecipeEntity.any((e) => e.thumb)
+            ? listImageRecipeEntity.firstWhere((e) => e.thumb).link
             : null;
     timePreparedRecipe = Duration(minutes: r.timePrepared);
     difficultyRecipe = r.difficultyRecipe;
@@ -279,10 +297,10 @@ class CreateRecipeController extends ManagerStore {
   }
 
   Future<void> deleteImage(String recipeId, int index) async {
-    await _repository.deleteImages(
-      recipeId,
-      listImagesRecipeSelected[index].id,
-    );
+    // await _repository.deleteImages(
+    //   recipeId,
+    //   listImagesRecipeSelected[index].id,
+    // );
   }
 
   Future<List<IngredientRecipeEntity>> _getIngredient(String id) async {

@@ -2,9 +2,11 @@ import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_dto.dart';
 import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_recipe_dto.dart';
 import 'package:app_receitas/src/features/favorite/domain/repositories/favorite_repository.dart';
+import 'package:app_receitas/src/features/recipes/domain/dtos/ingredient_recipe_dto.dart';
 import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_get_dto.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:app_receitas/src/features/recipes/domain/entities/recipe_detail_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:page_manager/export_manager.dart';
 
@@ -17,7 +19,7 @@ class ViewRecipeController extends ManagerStore {
   String id = '';
   RecipeGetDto recipe = RecipeGetDto.empty;
   List<ImageEntity> images = [];
-  List<IngredientRecipeEntity> ingredients = [];
+  List<IngredientRecipeDto> ingredients = [];
   FavoriteRecipeDto? favoriteRecipeDto;
 
   Map<String, dynamic> argumentsMap = {};
@@ -27,13 +29,18 @@ class ViewRecipeController extends ManagerStore {
     call: () async {
       argumentsMap = arguments;
       id = arguments['id'] as String;
-      recipe = await getRecipe();
-      images = await getImages();
-      ingredients = await getIngredientsRecipe();
-      favoriteRecipeDto = await getFavoriteRecipe();
+      final recipeDetail = await getRecipeDetail();
+      recipe = recipeDetail.recipe;
+      images = recipeDetail.images;
+      ingredients = recipeDetail.ingredients;
+      favoriteRecipeDto = recipeDetail.favorite;
       viewRecipe();
     },
   );
+
+  Future<RecipeDetailEntity> getRecipeDetail() async {
+    return await _recipeRepository.getRecipeDetail(id);
+  }
 
   Future<RecipeGetDto> getRecipe() async {
     return await _recipeRepository.getRecipe(id);
@@ -55,16 +62,16 @@ class ViewRecipeController extends ManagerStore {
   Future<void> deleteRecipe(String recipeId) => handleTry(
     call: () async {
       await _recipeRepository.deleteRecipe(recipeId);
-      notifyListeners();
     },
   );
 
   Future<void> refresh() => handleTry(
     call: () async {
-      recipe = await getRecipe();
-      images = await getImages();
-      ingredients = await getIngredientsRecipe();
-      favoriteRecipeDto = await getFavoriteRecipe();
+      final recipeDetail = await getRecipeDetail();
+      recipe = recipeDetail.recipe;
+      images = recipeDetail.images;
+      ingredients = recipeDetail.ingredients;
+      favoriteRecipeDto = recipeDetail.favorite;
       notifyListeners();
     },
   );

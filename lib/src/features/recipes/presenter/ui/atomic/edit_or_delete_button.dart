@@ -44,23 +44,23 @@ class EditOrDeleteButton extends StatelessWidget {
           },
           itemBuilder:
               (context) => [
-                PopupMenuItem(
-                  value: 'edit',
-                  child: Row(
-                    children: const [
-                      Icon(Icons.edit, size: 18),
-                      SizedBox(width: 8),
-                      Text('Editar'),
-                    ],
-                  ),
-                ),
+                // PopupMenuItem(
+                //   value: 'edit',
+                //   child: Row(
+                //     children: const [
+                //       Icon(Icons.edit, size: 18),
+                //       SizedBox(width: 8),
+                //       Text('Editar'),
+                //     ],
+                //   ),
+                // ),
                 PopupMenuItem(
                   value: 'delete',
                   child: Row(
                     children: const [
                       Icon(Icons.delete_outline, size: 18),
                       SizedBox(width: 8),
-                      Text('Apagar'),
+                      CookieText(text: 'Apagar'),
                     ],
                   ),
                 ),

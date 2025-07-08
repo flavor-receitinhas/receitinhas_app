@@ -32,8 +32,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
           label: AppLocalizations.of(context)!.recipeDifficultyNext,
           margin: const EdgeInsets.only(left: 16, bottom: 10, right: 16),
           onPressed: () {
-            if (ct.listImagesRecipe.isEmpty &&
-                ct.listImagesRecipeSelected.isEmpty) {
+            if (ct.listImagesRecipe.isEmpty) {
               CookieSnackBar(
                 text: AppLocalizations.of(context)!.recipeAddImage,
               ).show(context);
@@ -46,8 +45,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
               return;
             }
             if (formKey.currentState!.validate() &&
-                    ct.listImagesRecipe.isNotEmpty ||
-                ct.listImagesRecipeSelected.isNotEmpty) {
+                ct.listImagesRecipe.isNotEmpty) {
               ct.pageController.nextPage(
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.ease,

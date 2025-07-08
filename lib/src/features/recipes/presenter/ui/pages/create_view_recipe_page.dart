@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
+import 'package:app_receitas/src/features/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
@@ -73,7 +75,15 @@ class CreateViewRecipePage extends StatelessWidget {
                         ),
                         items:
                             ct.listImagesRecipe
-                                .map((e) => Image.file(e, fit: BoxFit.cover))
+                                .map(
+                                  (e) =>
+                                      ct.validateStringIsUrl(e)
+                                          ? Image.network(e, fit: BoxFit.cover)
+                                          : Image.file(
+                                            File(e),
+                                            fit: BoxFit.cover,
+                                          ),
+                                )
                                 .toList(),
                       ),
                       const SizedBox(height: 10),
@@ -89,7 +99,12 @@ class CreateViewRecipePage extends StatelessWidget {
                       const SizedBox(height: 20),
                       ViewDetailsRecipe(
                         details: ct.detailsController.text,
-                        ingredients: ct.listIngredientSelect,
+                        ingredients:
+                            ct.listIngredientSelect
+                                .map(
+                                  (e) => IngredientRecipeDtoMapper().toDto(e),
+                                )
+                                .toList(),
                         instruction:
                             QuillDeltaToHtmlConverter(
                               ct.quillInstructionController.document
