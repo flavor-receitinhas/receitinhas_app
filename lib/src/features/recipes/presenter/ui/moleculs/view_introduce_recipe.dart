@@ -16,6 +16,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
   final bool isFavorite;
   final String userName;
   final void Function()? onPressedUser;
+  final bool ownsTheRecipe;
 
   const ViewIntroduceRecipe({
     super.key,
@@ -29,6 +30,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
     this.isFavorite = false,
     required this.userName,
     this.onPressedUser,
+    this.ownsTheRecipe = false,
   });
 
   @override
@@ -36,9 +38,10 @@ class ViewIntroduceRecipe extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CookieText(
-          text: title,
-          typography: CookieTypography.title,
+        Row(
+          children: [
+            CookieText(text: title, typography: CookieTypography.title),
+          ],
         ),
         InkWell(
           onTap: onPressedUser,
@@ -59,9 +62,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         subTitle!.isNotEmpty && subTitle != null
-            ? CookieText(
-                text: subTitle!,
-              )
+            ? CookieText(text: subTitle!)
             : const SizedBox.shrink(),
         subTitle!.isNotEmpty && subTitle != null
             ? const SizedBox(height: 20)
@@ -87,7 +88,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
                     children: [
                       const CookieSvg(svg: IconsSvgEnum.fire, height: 20),
                       const SizedBox(height: 5),
-                      CookieText(text: difficultyRecipe)
+                      CookieText(text: difficultyRecipe),
                     ],
                   ),
                   const SizedBox(width: 16),
@@ -96,10 +97,11 @@ class ViewIntroduceRecipe extends StatelessWidget {
                       const CookieSvg(svg: IconsSvgEnum.pot, height: 20),
                       const SizedBox(height: 5),
                       CookieText(
-                        text: portion != 1
-                            ? '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionPlural}'
-                            : '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionSingular}',
-                      )
+                        text:
+                            portion != 1
+                                ? '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionPlural}'
+                                : '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionSingular}',
+                      ),
                     ],
                   ),
                 ],
@@ -123,9 +125,10 @@ class ViewIntroduceRecipe extends StatelessWidget {
                   ),
                   child: CookieSvg(
                     svg: IconsSvgEnum.heart,
-                    color: isFavorite
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onPrimary,
+                    color:
+                        isFavorite
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               ),

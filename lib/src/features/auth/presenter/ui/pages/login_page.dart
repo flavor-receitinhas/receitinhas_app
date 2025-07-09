@@ -36,80 +36,82 @@ class _LoginPageState extends ManagerPage<AuthController, LoginPage> {
         onPressed: () => Navigator.pop(context),
         icon: const Icon(Icons.arrow_back_ios_outlined),
       ),
-      body: Column(
-        children: [
-          Spacer(),
-          Image.asset(
-            ImagesEnum.eggHello.path,
-            height: MediaQuery.sizeOf(context).height * 0.33,
-          ),
-          Spacer(),
-          CookieText(
-            text: AppLocalizations.of(context)!.loginTitle,
-            typography: CookieTypography.title,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 10),
-          CookieText(
-            text: AppLocalizations.of(context)!.loginBody,
-            typography: CookieTypography.body,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20),
-          CookieTextField(
-            hintText: AppLocalizations.of(context)!.loginEmail,
-            controller: ct.emailController,
-            prefixIcon: const Icon(Icons.person),
-          ),
-          const SizedBox(height: 10),
-          CookieTextField(
-            hintText: AppLocalizations.of(context)!.loginPassword,
-            prefixIcon: const Icon(Icons.lock_outline_rounded),
-            controller: ct.passwordController,
-            obscureText: ct.showPassword,
-            maxLines: 1,
-            suffixIcon: GestureDetector(
-              child:
-                  ct.showPassword
-                      ? const Icon(Icons.visibility_off)
-                      : const Icon(Icons.visibility),
-              onTap: () {
-                setState(() {
-                  ct.showPassword = !ct.showPassword;
-                });
-              },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Image.asset(
+              ImagesEnum.eggHello.path,
+              height: MediaQuery.sizeOf(context).height * 0.33,
             ),
-          ),
-          const SizedBox(height: 10),
-          Align(
-            alignment: Alignment.centerRight,
-            child: CookieTextButton(
-              text: AppLocalizations.of(context)!.loginForgetPassword,
-              onPressed: () {
-                Navigator.pushNamed(context, ForgetPasswordPage.route);
-              },
-              color: Theme.of(context).colorScheme.primary,
+            const SizedBox(height: 24),
+            CookieText(
+              text: AppLocalizations.of(context)!.loginTitle,
+              typography: CookieTypography.title,
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 10),
-          IconButton(
-            onPressed: () async {
-              await ct.loginGoogle();
-            },
-            icon: Image.asset(ImagesEnum.google.path, height: 25),
-            style: IconButton.styleFrom(
-              shape: CircleBorder(
-                side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 2,
-                ),
+            const SizedBox(height: 10),
+            CookieText(
+              text: AppLocalizations.of(context)!.loginBody,
+              typography: CookieTypography.body,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            CookieTextField(
+              hintText: AppLocalizations.of(context)!.loginEmail,
+              controller: ct.emailController,
+              prefixIcon: const Icon(Icons.person),
+            ),
+            const SizedBox(height: 10),
+            CookieTextField(
+              hintText: AppLocalizations.of(context)!.loginPassword,
+              prefixIcon: const Icon(Icons.lock_outline_rounded),
+              controller: ct.passwordController,
+              obscureText: ct.showPassword,
+              maxLines: 1,
+              suffixIcon: GestureDetector(
+                child:
+                    ct.showPassword
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
+                onTap: () {
+                  setState(() {
+                    ct.showPassword = !ct.showPassword;
+                  });
+                },
               ),
             ),
-            padding: const EdgeInsets.all(12),
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          const SizedBox(height: 10),
-        ],
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerRight,
+              child: CookieTextButton(
+                text: AppLocalizations.of(context)!.loginForgetPassword,
+                onPressed: () {
+                  Navigator.pushNamed(context, ForgetPasswordPage.route);
+                },
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            const SizedBox(height: 10),
+            IconButton(
+              onPressed: () async {
+                await ct.loginGoogle();
+              },
+              icon: Image.asset(ImagesEnum.google.path, height: 25),
+              style: IconButton.styleFrom(
+                shape: CircleBorder(
+                  side: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 2,
+                  ),
+                ),
+              ),
+              padding: const EdgeInsets.all(12),
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
       ),
       bottomBar: [
         CookieButton(

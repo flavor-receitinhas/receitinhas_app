@@ -13,7 +13,7 @@ import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_rep
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/ingredient_select_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/view_recipe_controller.dart';
-import 'package:app_receitas/src/features/recipes/presenter/ui/pages/create_recipe_page.dart';
+import 'package:app_receitas/src/features/recipes/presenter/ui/pages/create_and_edit_recipe_page.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/select_ingredients_page.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:flutter/widgets.dart';
@@ -22,7 +22,7 @@ class RecipeModule extends RegisterModule {
   @override
   Map<String, Widget> routers = {
     ViewRecipesPage.route: const ViewRecipesPage(),
-    CreateRecipePage.route: const CreateRecipePage(),
+    CreateAndEditRecipePage.route: const CreateAndEditRecipePage(),
     SelectIngredientsPage.route: const SelectIngredientsPage(),
   };
 

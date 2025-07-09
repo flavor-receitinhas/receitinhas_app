@@ -70,10 +70,16 @@ class _ServerDishPageState extends State<ServerDishPage> {
         null,
         null,
       ),
+      leading: DefaultListBlockStyle(
+        baseStyle.copyWith(color: colorText, fontSize: 16),
+        const HorizontalSpacing(0, 0),
+        const VerticalSpacing(0, 0),
+        const VerticalSpacing(0, 0),
+        null,
+        null,
+      ),
     );
-    // print(QuillDeltaToHtmlConverter(
-    //         widget.ct.quillServerController.document.toDelta().toJson())
-    //     .convert());
+
     return CookiePage(
       state: StateManager.done,
       error: widget.ct.error.toString(),
@@ -123,8 +129,9 @@ class _ServerDishPageState extends State<ServerDishPage> {
                             )!.recipeFinalConsideration,
                       ),
                       const SizedBox(height: 10),
-                      QuillToolbar.simple(
-                        configurations: QuillSimpleToolbarConfigurations(
+                      QuillSimpleToolbar(
+                        controller: widget.ct.quillServerController,
+                        config: QuillSimpleToolbarConfig(
                           buttonOptions: QuillSimpleToolbarButtonOptions(
                             selectHeaderStyleDropdownButton:
                                 QuillToolbarSelectHeaderStyleDropdownButtonOptions(
@@ -135,7 +142,6 @@ class _ServerDishPageState extends State<ServerDishPage> {
                             color: Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          controller: widget.ct.quillServerController,
                           showAlignmentButtons: false,
                           showCodeBlock: false,
                           showDividers: false,
@@ -158,9 +164,9 @@ class _ServerDishPageState extends State<ServerDishPage> {
                           ContainerCreateInfo(
                             svg: IconsSvgEnum.pan,
                             child: QuillEditor.basic(
-                              configurations: QuillEditorConfigurations(
+                              controller: widget.ct.quillServerController,
+                              config: QuillEditorConfig(
                                 customStyles: defaultStyles,
-                                controller: widget.ct.quillServerController,
                                 minHeight: 200,
                                 placeholder:
                                     AppLocalizations.of(

@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
+import 'package:app_receitas/src/features/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
@@ -25,9 +27,16 @@ class CreateViewRecipePage extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 16),
         label: AppLocalizations.of(context)!.recipeFinish,
         onPressed: () async {
-          await ct.createRecipe();
-          if (context.mounted) {
-            Navigator.pop(context);
+          if (ct.isEditRecipe) {
+            await ct.updateRecipe();
+            if (context.mounted) {
+              Navigator.pop(context, true);
+            }
+          } else {
+            await ct.createRecipe();
+            if (context.mounted) {
+              Navigator.pop(context);
+            }
           }
         },
       ),
@@ -66,7 +75,15 @@ class CreateViewRecipePage extends StatelessWidget {
                         ),
                         items:
                             ct.listImagesRecipe
-                                .map((e) => Image.file(e, fit: BoxFit.cover))
+                                .map(
+                                  (e) =>
+                                      ct.validateStringIsUrl(e)
+                                          ? Image.network(e, fit: BoxFit.cover)
+                                          : Image.file(
+                                            File(e),
+                                            fit: BoxFit.cover,
+                                          ),
+                                )
                                 .toList(),
                       ),
                       const SizedBox(height: 10),
@@ -82,7 +99,12 @@ class CreateViewRecipePage extends StatelessWidget {
                       const SizedBox(height: 20),
                       ViewDetailsRecipe(
                         details: ct.detailsController.text,
-                        ingredients: ct.listIngredientSelect,
+                        ingredients:
+                            ct.listIngredientSelect
+                                .map(
+                                  (e) => IngredientRecipeDtoMapper().toDto(e),
+                                )
+                                .toList(),
                         instruction:
                             QuillDeltaToHtmlConverter(
                               ct.quillInstructionController.document
@@ -101,11 +123,11 @@ class CreateViewRecipePage extends StatelessWidget {
                                       .toJson(),
                                 ).convert(),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).padding.bottom + 10),
+                SizedBox(height: MediaQuery.of(context).padding.bottom + 50),
               ],
             ),
           ),

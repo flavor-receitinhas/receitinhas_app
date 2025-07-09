@@ -19,6 +19,7 @@ class CookieText extends StatelessWidget {
   final Color? color;
   final TextOverflow? overflow;
   final int? maxLine;
+  final List<Shadow>? shadows;
   const CookieText({
     super.key,
     required this.text,
@@ -27,6 +28,7 @@ class CookieText extends StatelessWidget {
     this.textAlign,
     this.overflow,
     this.maxLine,
+    this.shadows,
   });
 
   @override
@@ -40,6 +42,7 @@ class CookieText extends StatelessWidget {
         fontSize: typography.size,
         fontWeight: typography.isBold ? FontWeight.bold : FontWeight.normal,
         color: color ?? Theme.of(context).colorScheme.onPrimary,
+        shadows: shadows,
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_get_dto.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:app_receitas/src/features/recipes/domain/entities/recipe_detail_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/enum/order_recipe_enum.dart';
 import 'package:app_receitas/src/features/recipes/domain/mappers/image_mapper.dart';
 import 'package:app_receitas/src/features/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
@@ -180,5 +181,22 @@ class RecipeRepositoryImp implements RecipeRepository {
   @override
   Future<void> viewRecipe(String recipeId) async {
     return await _apiRecipes.post(path: '$path/$recipeId/views');
+  }
+
+  @override
+  Future<void> deleteRecipe(String id) async {
+    await _apiRecipes.delete(path: '$path/$id');
+  }
+
+  @override
+  Future<void> updateRecipe(RecipeEntity recipe) async {
+    await _apiRecipes.put(path: '$path/${recipe.id}', body: recipe.toMap());
+  }
+
+  @override
+  Future<RecipeDetailEntity> getRecipeDetail(String recipeId) async {
+    final result = await _apiRecipes.get(path: '$path/$recipeId/details');
+
+    return RecipeDetailEntity.fromMap(result);
   }
 }

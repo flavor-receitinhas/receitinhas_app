@@ -2,6 +2,7 @@ import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_dto.dart';
 import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_get_dto.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:app_receitas/src/features/recipes/domain/entities/recipe_detail_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/enum/order_recipe_enum.dart';
 
@@ -42,4 +43,7 @@ abstract class RecipeRepository {
   });
   Future<List<IngredientRecipeEntity>> getIngredientsRecipe(String recipeId);
   Future<void> viewRecipe(String recipeId);
+  Future<void> deleteRecipe(String recipeId);
+  Future<void> updateRecipe(RecipeEntity recipe);
+  Future<RecipeDetailEntity> getRecipeDetail(String recipeId);
 }

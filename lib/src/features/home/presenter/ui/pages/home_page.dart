@@ -7,7 +7,7 @@ import 'package:app_receitas/src/core/widgets/features/cookie_text_field_search.
 import 'package:app_receitas/src/features/home/presenter/controller/home_controller.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/ui/pages/onboarding_page.dart';
 import 'package:app_receitas/src/features/profile/presenter/ui/atomic/container_profile_image.dart';
-import 'package:app_receitas/src/features/recipes/presenter/ui/pages/create_recipe_page.dart';
+import 'package:app_receitas/src/features/recipes/presenter/ui/pages/create_and_edit_recipe_page.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:app_receitas/src/features/search/presenter/ui/pages/search_page.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +40,8 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
       errorReload: () async => await ct.init({}),
       state: ct.state,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, CreateRecipePage.route);
-        },
+        onPressed:
+            () => Navigator.pushNamed(context, CreateAndEditRecipePage.route),
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const CookieSvg(svg: IconsSvgEnum.edit),
       ),
@@ -151,6 +150,15 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
                                         maxLine: 2,
                                         overflow: TextOverflow.ellipsis,
                                         typography: CookieTypography.button,
+                                        shadows: [
+                                          Shadow(
+                                            color: Colors.black.withValues(
+                                              alpha: 0.3,
+                                            ),
+                                            offset: Offset(1, 1),
+                                            blurRadius: 10,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],

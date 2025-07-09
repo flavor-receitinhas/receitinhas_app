@@ -43,131 +43,135 @@ class _RegisterPageState extends ManagerPage<AuthController, RegisterPage> {
       body: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         key: formKey,
-        child: Column(
-          children: [
-            Spacer(),
-            Image.asset(
-              ImagesEnum.eggEspadachim.path,
-              height: MediaQuery.sizeOf(context).height * 0.33,
-            ),
-            Spacer(),
-            CookieText(
-              text: AppLocalizations.of(context)!.registerTitle,
-              typography: CookieTypography.title,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            CookieTextField(
-              hintText: AppLocalizations.of(context)!.registerEmail,
-              controller: ct.emailController,
-              prefixIcon: const Icon(Icons.person),
-              validator: (value) {
-                if (value != null && !EmailValidator.validate(value)) {
-                  return AppLocalizations.of(context)!.registerValidatorEmail;
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 10),
-            CookieTextField(
-              hintText: AppLocalizations.of(context)!.registerPassword,
-              controller: ct.passwordController,
-              prefixIcon: const Icon(Icons.lock_outline_rounded),
-              obscureText: ct.showPassword,
-              maxLines: 1,
-              suffixIcon: GestureDetector(
-                child:
-                    ct.showPassword
-                        ? const Icon(Icons.visibility_off)
-                        : const Icon(Icons.visibility),
-                onTap: () {
-                  setState(() {
-                    ct.showPassword = !ct.showPassword;
-                  });
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Image.asset(
+                ImagesEnum.eggEspadachim.path,
+                height: MediaQuery.sizeOf(context).height * 0.33,
+              ),
+              const SizedBox(height: 24),
+              CookieText(
+                text: AppLocalizations.of(context)!.registerTitle,
+                typography: CookieTypography.title,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              CookieTextField(
+                hintText: AppLocalizations.of(context)!.registerEmail,
+                controller: ct.emailController,
+                prefixIcon: const Icon(Icons.person),
+                validator: (value) {
+                  if (value != null && !EmailValidator.validate(value)) {
+                    return AppLocalizations.of(context)!.registerValidatorEmail;
+                  }
+                  return null;
                 },
               ),
-              errorMaxLines: 10,
-              validator: (value) {
-                String validators = '';
-                if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(
-                    context,
-                  )!.registerValidatorPassword1;
-                }
-                if (value.length < 8) {
-                  validators +=
-                      '${AppLocalizations.of(context)!.registerValidatorPassword2}\n';
-                }
-                if (!RegExp(r'[A-Z]').hasMatch(value)) {
-                  validators +=
-                      '${AppLocalizations.of(context)!.registerValidatorPassword3}\n';
-                }
-                if (!RegExp(r'[a-z]').hasMatch(value)) {
-                  validators +=
-                      '${AppLocalizations.of(context)!.registerValidatorPassword4}\n';
-                }
-                if (!RegExp(r'[0-9]').hasMatch(value)) {
-                  validators +=
-                      AppLocalizations.of(context)!.registerValidatorPassword5;
-                }
-                if (validators.isNotEmpty) {
-                  return validators;
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 10),
-            RichText(
-              textAlign: TextAlign.center,
-              text: CookieTextSpan(
-                children: [
-                  CookieTextSpan(
-                    text: AppLocalizations.of(context)!.registerTerms1,
-                    color: color.onPrimary,
-                  ),
-                  CookieTextSpan(
-                    text: AppLocalizations.of(context)!.registerTerms2,
-                    color: color.primary,
-                    recognizer:
-                        TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushNamed(context, TermPage.route);
-                          },
-                  ),
-                  CookieTextSpan(
-                    text: AppLocalizations.of(context)!.registerTerms3,
-                    color: color.onPrimary,
-                  ),
-                  CookieTextSpan(
-                    text: AppLocalizations.of(context)!.registerTerms4,
-                    color: color.primary,
-                    recognizer:
-                        TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushNamed(
-                              context,
-                              PrivacyPolicyPage.route,
-                            );
-                          },
-                  ),
-                ],
+              const SizedBox(height: 10),
+              CookieTextField(
+                hintText: AppLocalizations.of(context)!.registerPassword,
+                controller: ct.passwordController,
+                prefixIcon: const Icon(Icons.lock_outline_rounded),
+                obscureText: ct.showPassword,
+                maxLines: 1,
+                suffixIcon: GestureDetector(
+                  child:
+                      ct.showPassword
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
+                  onTap: () {
+                    setState(() {
+                      ct.showPassword = !ct.showPassword;
+                    });
+                  },
+                ),
+                errorMaxLines: 10,
+                validator: (value) {
+                  String validators = '';
+                  if (value == null || value.isEmpty) {
+                    return AppLocalizations.of(
+                      context,
+                    )!.registerValidatorPassword1;
+                  }
+                  if (value.length < 8) {
+                    validators +=
+                        '${AppLocalizations.of(context)!.registerValidatorPassword2}\n';
+                  }
+                  if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                    validators +=
+                        '${AppLocalizations.of(context)!.registerValidatorPassword3}\n';
+                  }
+                  if (!RegExp(r'[a-z]').hasMatch(value)) {
+                    validators +=
+                        '${AppLocalizations.of(context)!.registerValidatorPassword4}\n';
+                  }
+                  if (!RegExp(r'[0-9]').hasMatch(value)) {
+                    validators +=
+                        AppLocalizations.of(
+                          context,
+                        )!.registerValidatorPassword5;
+                  }
+                  if (validators.isNotEmpty) {
+                    return validators;
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 10),
-            IconButton(
-              onPressed: () async {
-                await ct.loginGoogle();
-              },
-              icon: Image.asset(ImagesEnum.google.path, height: 25),
-              style: IconButton.styleFrom(
-                shape: CircleBorder(
-                  side: BorderSide(color: color.primary, width: 2),
+              const SizedBox(height: 10),
+              RichText(
+                textAlign: TextAlign.center,
+                text: CookieTextSpan(
+                  children: [
+                    CookieTextSpan(
+                      text: AppLocalizations.of(context)!.registerTerms1,
+                      color: color.onPrimary,
+                    ),
+                    CookieTextSpan(
+                      text: AppLocalizations.of(context)!.registerTerms2,
+                      color: color.primary,
+                      recognizer:
+                          TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, TermPage.route);
+                            },
+                    ),
+                    CookieTextSpan(
+                      text: AppLocalizations.of(context)!.registerTerms3,
+                      color: color.onPrimary,
+                    ),
+                    CookieTextSpan(
+                      text: AppLocalizations.of(context)!.registerTerms4,
+                      color: color.primary,
+                      recognizer:
+                          TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(
+                                context,
+                                PrivacyPolicyPage.route,
+                              );
+                            },
+                    ),
+                  ],
                 ),
               ),
-              padding: const EdgeInsets.all(12),
-              color: color.primary,
-            ),
-          ],
+              const SizedBox(height: 10),
+              IconButton(
+                onPressed: () async {
+                  await ct.loginGoogle();
+                },
+                icon: Image.asset(ImagesEnum.google.path, height: 25),
+                style: IconButton.styleFrom(
+                  shape: CircleBorder(
+                    side: BorderSide(color: color.primary, width: 2),
+                  ),
+                ),
+                padding: const EdgeInsets.all(12),
+                color: color.primary,
+              ),
+            ],
+          ),
         ),
       ),
       bottomBar: [

@@ -1,15 +1,20 @@
+import 'dart:convert';
+
 import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:app_receitas/src/features/recipes/domain/dtos/ingredient_recipe_dto.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart'
+    hide DefaultStyles;
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class ViewDetailsRecipe extends StatelessWidget {
   final String details;
-  final List<IngredientRecipeEntity> ingredients;
+  final List<IngredientRecipeDto> ingredients;
   final String instruction;
   final String serveFood;
   const ViewDetailsRecipe({
@@ -26,7 +31,39 @@ class ViewDetailsRecipe extends StatelessWidget {
     final RegExp htmlTagRegex = RegExp(r'<[^>]*>');
     final String textOnly = html.replaceAll(htmlTagRegex, '').trim();
 
-    return textOnly.isEmpty;
+    final String cleanText = textOnly.replaceAll(RegExp(r'\s+'), '');
+
+    return cleanText.isEmpty;
+  }
+
+  bool _isValidJson(String str) {
+    try {
+      jsonDecode(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool _isQuillContentEmpty(String jsonStr) {
+    if (!_isValidJson(jsonStr)) return false;
+
+    try {
+      final List<dynamic> delta = jsonDecode(jsonStr);
+
+      for (var operation in delta) {
+        if (operation is Map<String, dynamic> && operation['insert'] != null) {
+          final String insert = operation['insert'].toString();
+          final String cleanInsert = insert.replaceAll(RegExp(r'\s+'), '');
+          if (cleanInsert.isNotEmpty) {
+            return false;
+          }
+        }
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   @override
@@ -67,7 +104,7 @@ class ViewDetailsRecipe extends StatelessWidget {
                       quantity % 1 == 0 ? quantity.toInt() : quantity;
                   return CookieText(
                     text:
-                        '${ingredients[index].ingredient.name} - $formattedQuantity ${ingredients[index].unit}',
+                        '${ingredients[index].ingredientName} - $formattedQuantity ${ingredients[index].unit}',
                   );
                 },
               ),
@@ -94,18 +131,47 @@ class ViewDetailsRecipe extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Visibility(
-                visible: !_isHtmlEmpty(instruction),
-                child: HtmlWidget(
-                  instruction,
-                  textStyle: TextStyle(color: theme.onPrimary),
-                ),
+                visible:
+                    !_isHtmlEmpty(instruction) &&
+                    !(_isValidJson(instruction) &&
+                        _isQuillContentEmpty(instruction)),
+                child:
+                    _isValidJson(instruction)
+                        ? QuillEditor.basic(
+                          controller: QuillController(
+                            document: Document.fromDelta(
+                              Delta.fromJson(jsonDecode(instruction)),
+                            ),
+                            selection: const TextSelection.collapsed(offset: 0),
+                          ),
+                          config: QuillEditorConfig(
+                            enableScribble: false,
+                            enableInteractiveSelection: false,
+                            padding: EdgeInsets.zero,
+                            customStyles: DefaultStyles(
+                              paragraph: DefaultTextBlockStyle(
+                                TextStyle(color: theme.onPrimary),
+                                HorizontalSpacing.zero,
+                                VerticalSpacing.zero,
+                                VerticalSpacing.zero,
+                                null,
+                              ),
+                            ),
+                          ),
+                        )
+                        : HtmlWidget(
+                          instruction,
+                          textStyle: TextStyle(color: theme.onPrimary),
+                        ),
               ),
             ],
           ),
         ),
         const SizedBox(height: 20),
         Visibility(
-          visible: !_isHtmlEmpty(serveFood),
+          visible:
+              !_isHtmlEmpty(serveFood) &&
+              !(_isValidJson(serveFood) && _isQuillContentEmpty(serveFood)),
           child: CustomContainer(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,10 +187,33 @@ class ViewDetailsRecipe extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                HtmlWidget(
-                  serveFood,
-                  textStyle: TextStyle(color: theme.onPrimary),
-                ),
+                _isValidJson(serveFood)
+                    ? QuillEditor.basic(
+                      controller: QuillController(
+                        document: Document.fromDelta(
+                          Delta.fromJson(jsonDecode(serveFood)),
+                        ),
+                        selection: const TextSelection.collapsed(offset: 0),
+                      ),
+                      config: QuillEditorConfig(
+                        enableScribble: false,
+                        enableInteractiveSelection: false,
+                        padding: EdgeInsets.zero,
+                        customStyles: DefaultStyles(
+                          paragraph: DefaultTextBlockStyle(
+                            TextStyle(color: theme.onPrimary),
+                            HorizontalSpacing.zero,
+                            VerticalSpacing.zero,
+                            VerticalSpacing.zero,
+                            null,
+                          ),
+                        ),
+                      ),
+                    )
+                    : HtmlWidget(
+                      serveFood,
+                      textStyle: TextStyle(color: theme.onPrimary),
+                    ),
               ],
             ),
           ),

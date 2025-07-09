@@ -35,4 +35,15 @@ class IngredientRecipeDtoMapper {
       unit: dto.unit,
     );
   }
+
+  IngredientRecipeDto toDto(IngredientRecipeEntity entity) {
+    return IngredientRecipeDto(
+      id: '',
+      ingredientId: entity.ingredient.id,
+      recipeId: '',
+      quantity: entity.quantity,
+      unit: entity.unit,
+      ingredientName: entity.ingredient.name,
+    );
+  }
 }

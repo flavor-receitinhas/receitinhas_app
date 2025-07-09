@@ -48,6 +48,7 @@ enum ImagesEnum {
   avatar('assets/images/avatar.png'),
   home('assets/images/home.png'),
   logo('assets/images/logo.png'),
+  eggImageNotFound('assets/images/ovo_image_not_found.png'),
   google('assets/images/google_logo.png');
 
   final String path;

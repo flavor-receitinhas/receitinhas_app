@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_snack_bar.dart';
 import 'package:app_receitas/src/features/home/presenter/ui/pages/custom_bottom_bar.dart';
@@ -5,6 +7,7 @@ import 'package:app_receitas/src/features/recipes/presenter/controller/create_re
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/leave_recipe_sheet.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/select_image_recipe.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/carousel_select_images_recipe.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
@@ -16,16 +19,10 @@ class IntroduceCreatePage extends StatefulWidget {
   State<IntroduceCreatePage> createState() => _IntroduceCreatePageState();
 }
 
-class _IntroduceCreatePageState extends State<IntroduceCreatePage > {
+class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
   CreateRecipeController get ct => widget.ct;
   final formKey = GlobalKey<FormState>();
-  final _carouselController = CarouselController();
-
-  @override
-  void dispose() {
-    _carouselController.dispose();
-    super.dispose();
-  }
+  final _carouselController = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,22 +32,9 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage > {
           label: AppLocalizations.of(context)!.recipeDifficultyNext,
           margin: const EdgeInsets.only(left: 16, bottom: 10, right: 16),
           onPressed: () {
-            if (formKey.currentState!.validate() &&
-                ct.listImagesRecipe.isNotEmpty) {
-              ct.pageController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
-              );
-            }
             if (ct.listImagesRecipe.isEmpty) {
               CookieSnackBar(
                 text: AppLocalizations.of(context)!.recipeAddImage,
-              ).show(context);
-              return;
-            }
-            if (ct.thumbImage == null) {
-              CookieSnackBar(
-                text: AppLocalizations.of(context)!.recipeAddCoverImage,
               ).show(context);
               return;
             }
@@ -59,6 +43,13 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage > {
                 text: AppLocalizations.of(context)!.recipeFillAllFields,
               ).show(context);
               return;
+            }
+            if (formKey.currentState!.validate() &&
+                ct.listImagesRecipe.isNotEmpty) {
+              ct.pageController.nextPage(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
             }
           },
         ),
@@ -128,7 +119,15 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage > {
                         child: Center(
                           child:
                               ct.thumbImage != null
-                                  ? Image.file(ct.thumbImage!, height: 250)
+                                  ? ct.validateStringIsUrl(ct.thumbImage!)
+                                      ? Image.network(
+                                        ct.thumbImage!,
+                                        height: 250,
+                                      )
+                                      : Image.file(
+                                        File(ct.thumbImage!),
+                                        height: 250,
+                                      )
                                   : const SizedBox.shrink(),
                         ),
                       ),

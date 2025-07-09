@@ -33,32 +33,36 @@ class _ForgetPasswordPageState
       body: Form(
         key: formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          children: [
-            Spacer(),
-            Image.asset(ImagesEnum.eggForget.path),
-            Spacer(),
-            CookieText(
-              text: AppLocalizations.of(context)!.forgetPasswordTitle,
-              typography: CookieTypography.title,
-            ),
-            const SizedBox(height: 10),
-            CookieText(text: AppLocalizations.of(context)!.forgetPasswordBody),
-            const SizedBox(height: 20),
-            CookieTextField(
-              hintText: AppLocalizations.of(context)!.forgetPasswordHintFild,
-              controller: ct.emailController,
-              prefixIcon: const Icon(Icons.person),
-              validator: (value) {
-                if (value != null && !EmailValidator.validate(value)) {
-                  return AppLocalizations.of(
-                    context,
-                  )!.forgetPasswordValidatorEmail;
-                }
-                return null;
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Image.asset(ImagesEnum.eggForget.path),
+              const SizedBox(height: 24),
+              CookieText(
+                text: AppLocalizations.of(context)!.forgetPasswordTitle,
+                typography: CookieTypography.title,
+              ),
+              const SizedBox(height: 10),
+              CookieText(
+                text: AppLocalizations.of(context)!.forgetPasswordBody,
+              ),
+              const SizedBox(height: 20),
+              CookieTextField(
+                hintText: AppLocalizations.of(context)!.forgetPasswordHintFild,
+                controller: ct.emailController,
+                prefixIcon: const Icon(Icons.person),
+                validator: (value) {
+                  if (value != null && !EmailValidator.validate(value)) {
+                    return AppLocalizations.of(
+                      context,
+                    )!.forgetPasswordValidatorEmail;
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
         ),
       ),
       bottomBar: [

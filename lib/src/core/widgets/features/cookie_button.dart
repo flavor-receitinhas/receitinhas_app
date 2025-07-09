@@ -54,8 +54,8 @@ class CookieButton extends StatelessWidget {
     this.height = 50,
     this.width,
     this.isLoading = false,
-  })  : border = false,
-        borderColor = Colors.transparent;
+  }) : border = false,
+       borderColor = Colors.transparent;
 
   const CookieButton.outline({
     super.key,
@@ -73,6 +73,23 @@ class CookieButton extends StatelessWidget {
     this.isLoading = false,
   }) : border = true;
 
+  const CookieButton.icon({
+    super.key,
+    required this.prefix,
+    this.label = '',
+    this.labelColor,
+    this.backgroundColor,
+    this.onPressed,
+    this.margin,
+    this.isSelect = false,
+    this.borderColor,
+    this.borderRadius,
+    this.height = 50,
+    this.width,
+    this.isLoading = false,
+    this.border = false,
+  });
+
   /// CookieButton com Navigator.pop(context)
   ///
   /// Criado para ser usado como um [BackButton]
@@ -80,20 +97,20 @@ class CookieButton extends StatelessWidget {
   ///
   /// `USO: para voltar para página anterior`
   Widget back(BuildContext context) => Row(
-        children: [
-          CookieButton(
-            label: label,
-            onPressed: onPressed ?? () => Navigator.pop(context),
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            prefix: const Icon(Icons.chevron_left, size: 28),
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-            labelColor: Theme.of(context).colorScheme.onPrimary,
-          ),
-        ],
-      );
+    children: [
+      CookieButton(
+        label: label,
+        onPressed: onPressed ?? () => Navigator.pop(context),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        prefix: const Icon(Icons.chevron_left, size: 28),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
+        labelColor: Theme.of(context).colorScheme.onPrimary,
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -108,28 +125,30 @@ class CookieButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
           borderRadius: borderRadius ?? BorderRadius.circular(14),
-          border: border
-              ? Border.all(
-                  width: 2,
-                  color: borderColor ?? Theme.of(context).colorScheme.primary,
-                )
-              : const Border(),
+          border:
+              border
+                  ? Border.all(
+                    width: 2,
+                    color: borderColor ?? Theme.of(context).colorScheme.primary,
+                  )
+                  : const Border(),
         ),
         child: Row(
-          mainAxisAlignment: prefix != null
-              ? MainAxisAlignment.start
-              : MainAxisAlignment.center,
+          mainAxisAlignment:
+              prefix != null
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.center,
           children: [
             isSelect
                 ? Container(
-                    height: 25,
-                    width: 25,
-                    margin: const EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  )
+                  height: 25,
+                  width: 25,
+                  margin: const EdgeInsets.only(right: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                )
                 : const SizedBox.shrink(),
             prefix ?? const SizedBox.shrink(),
             prefix != null
@@ -137,16 +156,16 @@ class CookieButton extends StatelessWidget {
                 : const SizedBox.shrink(),
             isLoading
                 ? CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.onSecondary,
-                    ),
-                  )
-                : CookieText(
-                    text: label,
-                    typography: CookieTypography.button,
-                    color:
-                        labelColor ?? Theme.of(context).colorScheme.onSecondary,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.onSecondary,
                   ),
+                )
+                : CookieText(
+                  text: label,
+                  typography: CookieTypography.button,
+                  color:
+                      labelColor ?? Theme.of(context).colorScheme.onSecondary,
+                ),
           ],
         ),
       ),

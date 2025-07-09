@@ -1,47 +1,72 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/entities/recipe_entity.dart';
 import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
+import 'package:flutter_quill_delta_from_html/parser/html_to_delta.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_manager/export_manager.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
 class CreateRecipeController extends ManagerStore {
   final RecipeRepository _repository;
-
-  CreateRecipeController(
-    this._repository,
-  );
+  CreateRecipeController(this._repository);
 
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   TextEditingController portionController = TextEditingController();
-  List<IngredientEntity> listIngredient = [];
+
   PageController pageController = PageController();
   PageController containerController = PageController();
+
   int currentPage = 0;
   Duration timePreparedRecipe = const Duration(hours: 0, minutes: 0);
   DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
   int portion = 0;
-  final quillInstructionController = QuillController.basic();
+
+  QuillController quillInstructionController = QuillController.basic();
   final quillServerController = QuillController.basic();
-  File? thumbImage;
+  String? thumbImage;
   bool isWriteTime = false;
   final hourController = TextEditingController();
   final minuteController = TextEditingController();
+
+  List<IngredientEntity> listIngredient = [];
   List<IngredientRecipeEntity> listIngredientSelect = [];
-  List<File> listImagesRecipe = [];
+  List<String> listImagesRecipe = [];
+  List<ImageEntity> listImageRecipeEntity = [];
+
+  RecipeEntity? recipe;
+  Map<String, dynamic> argumentsMap = {};
 
   @override
-  void init(Map<String, dynamic> arguments) {
+  void init(Map<String, dynamic> arguments) => handleTry(
+    call: () async {
+      argumentsMap = arguments;
+      await _initialize(arguments);
+    },
+  );
+
+  Future<void> _initialize(Map<String, dynamic> arguments) async {
+    if (arguments['recipe'] != null) {
+      recipe = arguments['recipe'] as RecipeEntity;
+      if (recipe?.id != null) {
+        await _initializeWithRecipe(recipe!);
+      }
+    }
+
     pageController = PageController(initialPage: 0);
     containerController = PageController(initialPage: 0);
   }
+
+  bool get isEditRecipe => recipe != null;
 
   void onChangedPage(int value) {
     currentPage = value;
@@ -49,10 +74,11 @@ class CreateRecipeController extends ManagerStore {
   }
 
   Future<void> pickThumb() async {
-    final XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final XFile? image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     if (image != null) {
-      thumbImage = File(image.path);
+      thumbImage = image.path;
     }
     notifyListeners();
   }
@@ -74,7 +100,7 @@ class CreateRecipeController extends ManagerStore {
         listImagesRecipe.isNotEmpty;
   }
 
-  void removeImage(File image) {
+  void removeImage(String image) {
     listImagesRecipe.removeWhere((e) => e == image);
     notifyListeners();
   }
@@ -104,13 +130,14 @@ class CreateRecipeController extends ManagerStore {
           title: titleController.text,
           subTitle: subTitleController.text,
           details: detailsController.text,
-          serveFood: QuillDeltaToHtmlConverter(
+          serveFood: jsonEncode(
             quillServerController.document.toDelta().toJson(),
-          ).convert(),
+          ),
+
           difficultyRecipe: DifficultyRecipe.easy,
-          instruction: QuillDeltaToHtmlConverter(
+          instruction: jsonEncode(
             quillInstructionController.document.toDelta().toJson(),
-          ).convert(),
+          ),
           portion: portion,
           timePrepared: timePreparedRecipe.inMinutes,
           //TODO Ver sobre os status depois
@@ -121,7 +148,7 @@ class CreateRecipeController extends ManagerStore {
         for (var image in listImagesRecipe) {
           await _repository.createImages(
             recipeId: result.id!,
-            filePath: image.path,
+            filePath: File(image).path,
           );
         }
 
@@ -135,11 +162,55 @@ class CreateRecipeController extends ManagerStore {
         if (thumbImage != null) {
           await _repository.createThumb(
             recipeId: result.id!,
-            filePath: thumbImage!.path,
+            filePath: File(thumbImage!).path,
           );
         }
       },
     );
+  }
+
+  Future<void> updateRecipe() async {
+    final updatedRecipe = RecipeEntity(
+      id: recipe!.id,
+      title: titleController.text,
+      subTitle: subTitleController.text,
+      details: detailsController.text,
+      serveFood:
+          QuillDeltaToHtmlConverter(
+            quillServerController.document.toDelta().toJson(),
+          ).convert(),
+      difficultyRecipe: difficultyRecipe,
+      instruction: jsonEncode(
+        quillInstructionController.document.toDelta().toJson(),
+      ),
+      portion: portion,
+      timePrepared: timePreparedRecipe.inMinutes,
+      userId: recipe!.userId,
+      status: recipe!.status,
+      createdAt: recipe!.createdAt,
+      updatedAt: recipe!.updatedAt,
+    );
+    recipe = updatedRecipe;
+
+    await _repository.updateRecipe(updatedRecipe);
+
+    for (var image in listImagesRecipe) {
+      if (!validateStringIsUrl(image)) {
+        await _repository.createImages(
+          recipeId: recipe!.id!,
+          filePath: File(image).path,
+        );
+      } else {
+        listImageRecipeEntity.any((e) => e.link == image)
+            ? null
+            : await _repository.deleteImages(
+              recipe!.id!,
+              listImageRecipeEntity.firstWhere((e) => e.link == image).id,
+            );
+      }
+    }
+
+    notifyListeners();
   }
 
   String get durationRecipeString {
@@ -166,5 +237,79 @@ class CreateRecipeController extends ManagerStore {
   void deleteIngredientSelect(IngredientRecipeEntity ingredient) {
     listIngredientSelect.remove(ingredient);
     notifyListeners();
+  }
+
+  bool _isValidJson(String str) {
+    if (str.isEmpty) return false;
+    try {
+      jsonDecode(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Document _createDocumentFromContent(String content) {
+    if (_isValidJson(content)) {
+      final delta = jsonDecode(content);
+      return Document.fromDelta(Delta.fromJson(delta));
+    } else {
+      final deltaFromHtml = HtmlToDelta().convert(content);
+      return Document.fromDelta(deltaFromHtml);
+    }
+  }
+
+  Future<void> _initializeWithRecipe(RecipeEntity r) async {
+    listImageRecipeEntity = await _getImages(r.id!);
+
+    titleController.text = r.title;
+    subTitleController.text = r.subTitle ?? '';
+    detailsController.text = r.details ?? '';
+    portion = r.portion;
+
+    listImagesRecipe =
+        (listImageRecipeEntity.where((e) => !e.thumb).toList())
+            .map((e) => e.link)
+            .toList();
+    thumbImage =
+        listImageRecipeEntity.any((e) => e.thumb)
+            ? listImageRecipeEntity.firstWhere((e) => e.thumb).link
+            : null;
+    timePreparedRecipe = Duration(minutes: r.timePrepared);
+    difficultyRecipe = r.difficultyRecipe;
+    portionController.text = r.portion.toString();
+    listIngredientSelect = await _getIngredient(r.id!);
+    quillInstructionController.document = _createDocumentFromContent(
+      r.instruction,
+    );
+
+    // Inicializar serveFood
+    if (r.serveFood != null && r.serveFood!.isNotEmpty) {
+      quillServerController.document = _createDocumentFromContent(r.serveFood!);
+    }
+
+    notifyListeners();
+  }
+
+  Future<List<ImageEntity>> _getImages(String recipeId) async {
+    final images = await _repository.getImages(recipeId);
+    return images;
+  }
+
+  Future<void> deleteImage(String recipeId, int index) async {
+    // await _repository.deleteImages(
+    //   recipeId,
+    //   listImagesRecipeSelected[index].id,
+    // );
+  }
+
+  Future<List<IngredientRecipeEntity>> _getIngredient(String id) async {
+    return await _repository.getIngredientsRecipe(id);
+  }
+
+  bool validateStringIsUrl(String path) {
+    final uri = Uri.tryParse(path);
+    if (uri == null) return false;
+    return uri.isAbsolute && (uri.scheme == 'http' || uri.scheme == 'https');
   }
 }
