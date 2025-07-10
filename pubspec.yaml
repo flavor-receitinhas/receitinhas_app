@@ -80,11 +80,11 @@ flutter:
     - assets/icons/
 
 flutter_native_splash:
-  image: "assets/images/logo.png"
+  image: "assets/images/egg_splash.png"
   android: true
   color: "#FFFFFF"
   android_12:
-    image: "assets/images/logo.png"
+    image: "assets/images/egg_splash.png"
     icon_background_color: "#FFFFFF"
 
 icons_launcher:
