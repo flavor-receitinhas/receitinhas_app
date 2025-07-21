@@ -42,7 +42,7 @@ dependencies:
   #     ref: 1.0.0
   flutter_quill: ^11.4.1
   vsc_quill_delta_to_html: ^1.0.5
-  flutter_widget_from_html_core: ^0.16.0
+  flutter_widget_from_html_core: ^0.17.0
   dotted_border: ^3.0.1
   page_manager:
     git:
