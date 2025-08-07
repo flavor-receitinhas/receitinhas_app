@@ -39,6 +39,7 @@ enum IconsSvgEnum {
 }
 
 enum ImagesEnum {
+  ovo('assets/images/ovo.png'),
   eggCooking('assets/images/egg_cooking.png'),
   eggDuvida('assets/images/egg_duvida.png'),
   eggEspadachim('assets/images/egg_espadachim.png'),

@@ -49,11 +49,12 @@ class _SplashPageState extends State<SplashPage> {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 radius: 110,
-                child: Image.asset(ImagesEnum.logo.path, scale: 3),
+                child: Image.asset(ImagesEnum.ovo.path, scale: 3),
               ),
             ),
             Spacer(),
             CookieText(text: AppLocalizations.of(context)!.splashLoading),
+            SizedBox(height: 20),
           ],
         ),
       ),
