@@ -2,7 +2,7 @@ enum KeyPreferences {
   ///Escolher qual o tema
   isThemeLight(defaultValue: true),
   ///Escolher idioma
-  language(defaultValue:'pt');
+  language(defaultValue:'');
 
   final dynamic defaultValue;
 

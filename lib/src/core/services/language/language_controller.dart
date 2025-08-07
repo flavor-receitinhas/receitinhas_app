@@ -1,6 +1,7 @@
 import 'dart:developer';
-
+import 'dart:ui' as ui;
 import 'package:app_receitas/src/core/global/global_variables.dart';
+import 'package:app_receitas/src/core/l10n/l10n.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/key_preference.dart';
 import 'package:app_receitas/src/core/services/preference/user_preference/preference_service.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,12 @@ class LanguageController extends ChangeNotifier {
     final String? lang = await _preference.get<String?>(
       keyPreferences: KeyPreferences.language,
     );
-    _currentLanguage = lang;
-    Global.language = lang ?? 'pt';
-    log('LanguageController: $lang');
+    if (lang == null || lang.isEmpty) {
+      _currentLanguage = _getDeviceLanguage();
+    } else {
+      _currentLanguage = lang;
+    }
+    Global.language = _currentLanguage ?? 'pt';
     notifyListeners();
   }
 
@@ -35,6 +39,22 @@ class LanguageController extends ChangeNotifier {
     }
   }
 
+  String _getDeviceLanguage() {
+    final deviceLocale = ui.PlatformDispatcher.instance.locale;
+    final deviceLanguageCode = deviceLocale.languageCode;
+
+    log('Device language code: $deviceLanguageCode');
+
+    final supportedLanguages =
+        L10n.all.map((locale) => locale.languageCode).toList();
+
+    if (supportedLanguages.contains(deviceLanguageCode)) {
+      return deviceLanguageCode;
+    }
+
+    return 'en';
+  }
+
   Future<void> saveLanguagePref(String lang) async {
     _currentLanguage = lang;
     await _preference.put(value: lang, keyPreferences: KeyPreferences.language);
@@ -43,7 +63,7 @@ class LanguageController extends ChangeNotifier {
   }
 
   Locale get currentLocale {
-    final languageLocaleMap = { 
+    final languageLocaleMap = {
       'en': Locale('en', 'US'),
       'es': Locale('es', 'ES'),
       'pt': Locale('pt', 'PT'),

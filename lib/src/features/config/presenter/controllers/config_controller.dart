@@ -46,8 +46,8 @@ class ConfigController extends ManagerStore {
   Future<void> saveLanguagePref({required Locale locale}) async {
     String lang = locale.languageCode;
 
-    if (locale.languageCode == 'pt' && locale.countryCode == 'BR') {
-      lang = 'pt_BR';
+    if (locale.languageCode == 'pt' && locale.countryCode == '') {
+      lang = 'pt';
     }
     await _languageController.saveLanguagePref(lang);
     notifyListeners();
