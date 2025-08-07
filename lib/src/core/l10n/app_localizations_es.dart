@@ -682,6 +682,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get recipeIntroduceBy => 'Por';
 
   @override
+  String get recipeIntroduceFavorite => 'Favorito';
+
+  @override
   String get searchRecipeSearchHint => 'Busca algo para cocinar';
 
   @override

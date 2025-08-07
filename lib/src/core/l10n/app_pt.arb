@@ -200,6 +200,7 @@
   "recipeFinalConsideration": "Escreva um consideração final dando alguma dica ou informação útil para quem estiver concluindo ou concluir a receita.",
   "recipeServeDetailsPlaceholder": "Escreva em detalhes como servir o prato...",
   "recipeIntroduceBy": "Por",
+  "recipeIntroduceFavorite": "Favoritar",
   "searchRecipeSearchHint": "Procure algo para cozinhar",
   "searchRecipeClearFilters": "Limpar filtros",
   "searchRecipeSearchResults": "Resultados da pesquisa",

@@ -200,6 +200,7 @@
   "recipeFinalConsideration": "Write a final consideration giving some tip or useful information for those who are completing or will complete the recipe.",
   "recipeServeDetailsPlaceholder": "Write in detail how to serve the dish...",
   "recipeIntroduceBy": "By",
+  "recipeIntroduceFavorite": "Favorite",
   "searchRecipeSearchHint": "Search for something to cook",
   "searchRecipeClearFilters": "Clear filters",
   "searchRecipeSearchResults": "Search results",

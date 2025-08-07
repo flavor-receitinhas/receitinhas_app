@@ -1306,6 +1306,12 @@ abstract class AppLocalizations {
   /// **'Por'**
   String get recipeIntroduceBy;
 
+  /// No description provided for @recipeIntroduceFavorite.
+  ///
+  /// In pt, this message translates to:
+  /// **'Favoritar'**
+  String get recipeIntroduceFavorite;
+
   /// No description provided for @searchRecipeSearchHint.
   ///
   /// In pt, this message translates to:
