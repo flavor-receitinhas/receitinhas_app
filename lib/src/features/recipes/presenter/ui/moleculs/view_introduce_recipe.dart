@@ -112,8 +112,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
               child: InkWell(
                 onTap: onPressedFavorite,
                 child: Container(
-                  width: 80,
-                  padding: const EdgeInsets.all(28),
+                  height: 77,
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondary,
                     borderRadius: const BorderRadius.only(
@@ -123,12 +123,29 @@ class ViewIntroduceRecipe extends StatelessWidget {
                       bottomRight: Radius.circular(10),
                     ),
                   ),
-                  child: CookieSvg(
-                    svg: IconsSvgEnum.heart,
-                    color:
-                        isFavorite
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onPrimary,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CookieSvg(
+                        svg: IconsSvgEnum.heart,
+                        height: 20,
+                        color:
+                            isFavorite
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      const SizedBox(height: 5),
+                      CookieText(
+                        text:
+                            AppLocalizations.of(
+                              context,
+                            )!.recipeIntroduceFavorite,
+                        color:
+                            isFavorite
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -28,10 +28,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageSpanish => 'Spanish';
 
   @override
-  String get languagePortuguesePortugal => 'Portuguese-Portugal';
-
-  @override
-  String get languagePortugueseBrazil => 'Portuguese-Brazilian';
+  String get languagePortuguese => 'Portuguese';
 
   @override
   String get welcomeBody =>
@@ -676,6 +673,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recipeIntroduceBy => 'By';
+
+  @override
+  String get recipeIntroduceFavorite => 'Favorite';
 
   @override
   String get searchRecipeSearchHint => 'Search for something to cook';

@@ -77,8 +77,10 @@ class ViewDetailsRecipe extends StatelessWidget {
           typography: CookieTypography.title,
         ),
         const SizedBox(height: 20),
-        CookieText(text: details),
-        const SizedBox(height: 20),
+        if (details.isNotEmpty) ...[
+          CookieText(text: details),
+          const SizedBox(height: 20),
+        ],
         CustomContainer(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
