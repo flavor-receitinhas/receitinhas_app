@@ -52,7 +52,7 @@ class LanguageController extends ChangeNotifier {
       return deviceLanguageCode;
     }
 
-    return 'en';
+    return 'pt';
   }
 
   Future<void> saveLanguagePref(String lang) async {
