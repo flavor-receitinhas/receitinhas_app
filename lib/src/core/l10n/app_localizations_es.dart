@@ -28,10 +28,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get languageSpanish => 'Español';
 
   @override
-  String get languagePortuguesePortugal => 'Portugués-Portugal';
-
-  @override
-  String get languagePortugueseBrazil => 'Portugués-Brasil';
+  String get languagePortuguese => 'Portugués';
 
   @override
   String get welcomeBody =>

@@ -17,7 +17,7 @@ class LanguageController extends ChangeNotifier {
       keyPreferences: KeyPreferences.language,
     );
     _currentLanguage = lang;
-    Global.language = lang ?? 'pt_BR';
+    Global.language = lang ?? 'pt';
     log('LanguageController: $lang');
     notifyListeners();
   }
@@ -28,33 +28,27 @@ class LanguageController extends ChangeNotifier {
         return AppLocalizations.of(context)!.languageEnglish;
       case 'es':
         return AppLocalizations.of(context)!.languageSpanish;
-      case 'pt_BR':
-        return AppLocalizations.of(context)!.languagePortugueseBrazil;
       case 'pt':
-        return AppLocalizations.of(context)!.languagePortuguesePortugal;
+        return AppLocalizations.of(context)!.languagePortuguese;
       default:
-        return AppLocalizations.of(context)!.languagePortugueseBrazil;
+        return AppLocalizations.of(context)!.languagePortuguese;
     }
   }
 
   Future<void> saveLanguagePref(String lang) async {
     _currentLanguage = lang;
-    await _preference.put(
-      value: lang,
-      keyPreferences: KeyPreferences.language,
-    );
+    await _preference.put(value: lang, keyPreferences: KeyPreferences.language);
     Global.language = lang;
     notifyListeners();
   }
 
   Locale get currentLocale {
-    final languageLocaleMap = {
-      'pt_BR': Locale('pt', 'BR'),
+    final languageLocaleMap = { 
       'en': Locale('en', 'US'),
       'es': Locale('es', 'ES'),
       'pt': Locale('pt', 'PT'),
     };
     notifyListeners();
-    return languageLocaleMap[_currentLanguage] ?? Locale('pt', 'BR');
+    return languageLocaleMap[_currentLanguage] ?? Locale('pt', '');
   }
 }

@@ -28,10 +28,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageSpanish => 'Spanish';
 
   @override
-  String get languagePortuguesePortugal => 'Portuguese-Portugal';
-
-  @override
-  String get languagePortugueseBrazil => 'Portuguese-Brazilian';
+  String get languagePortuguese => 'Portuguese';
 
   @override
   String get welcomeBody =>
