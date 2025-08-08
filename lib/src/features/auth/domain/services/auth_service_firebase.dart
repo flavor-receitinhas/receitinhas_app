@@ -107,7 +107,9 @@ class AuthServiceFirebase implements AuthService {
       await _googleSignIn.initialize();
       _isGoogleSignInInitialized = true;
     } catch (e) {
-      print('Failed to initialize Google Sign-In: $e');
+      throw Exception(
+        getErrorMessageFirebase(AuthErrorMessageEnum.unexpectedError),
+      );
     }
   }
 
