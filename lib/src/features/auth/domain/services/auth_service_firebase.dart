@@ -9,6 +9,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthServiceFirebase implements AuthService {
   final _firebaseInstance = FirebaseAuth.instance;
+  final _googleSignIn = GoogleSignIn.instance;
+  bool _isGoogleSignInInitialized = false;
 
   @override
   Future<void> logout() async {
@@ -29,10 +31,7 @@ class AuthServiceFirebase implements AuthService {
         email: email,
         password: password,
       );
-      final user = UserEntity(
-        id: credential.user!.uid,
-        email: email,
-      );
+      final user = UserEntity(id: credential.user!.uid, email: email);
       Global.token = await credential.user!.getIdToken() ?? '';
       Global.user = user;
       return user;
@@ -52,10 +51,7 @@ class AuthServiceFirebase implements AuthService {
         email: email,
         password: password,
       );
-      final user = UserEntity(
-        id: credential.user!.uid,
-        email: email,
-      );
+      final user = UserEntity(id: credential.user!.uid, email: email);
       Global.token = await credential.user!.getIdToken() ?? '';
       Global.user = user;
       return user;
@@ -106,29 +102,43 @@ class AuthServiceFirebase implements AuthService {
     }
   }
 
+  Future<void> _initializeGoogleSignIn() async {
+    try {
+      await _googleSignIn.initialize();
+      _isGoogleSignInInitialized = true;
+    } catch (e) {
+      print('Failed to initialize Google Sign-In: $e');
+    }
+  }
+
+  Future<void> _ensureGoogleSignInInitialized() async {
+    if (!_isGoogleSignInInitialized) {
+      await _initializeGoogleSignIn();
+    }
+  }
+
   @override
   Future<UserEntity> signInGoogle() async {
     try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      await _ensureGoogleSignInInitialized();
 
-      if (googleUser == null) {
-        throw FirebaseAuthException(
-          code: 'ERROR_ABORTED_BY_USER',
-          message: 'Sign-in aborted by user',
-        );
-      }
+      final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final OAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+      final authClient = _googleSignIn.authorizationClient;
+      final authorization = await authClient.authorizationForScopes(['email']);
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: authorization?.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential result =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-      final User? userResult = result.user;
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+
+      final User? userResult = userCredential.user;
 
       if (userResult == null) {
         throw FirebaseAuthException(
@@ -187,7 +197,8 @@ class AuthServiceFirebase implements AuthService {
         case 'account-exists-with-different-credential':
           throw Exception(
             getErrorMessageFirebase(
-                AuthErrorMessageEnum.accountExistsWithDifferentCredential),
+              AuthErrorMessageEnum.accountExistsWithDifferentCredential,
+            ),
           );
         case 'invalid-credential':
           throw Exception(
@@ -196,7 +207,8 @@ class AuthServiceFirebase implements AuthService {
         case 'invalid-verification-code':
           throw Exception(
             getErrorMessageFirebase(
-                AuthErrorMessageEnum.invalidVerificationCode),
+              AuthErrorMessageEnum.invalidVerificationCode,
+            ),
           );
         case 'invalid-verification-id':
           throw Exception(
@@ -213,7 +225,8 @@ class AuthServiceFirebase implements AuthService {
         case 'credential-already-in-use':
           throw Exception(
             getErrorMessageFirebase(
-                AuthErrorMessageEnum.credentialAlreadyInUse),
+              AuthErrorMessageEnum.credentialAlreadyInUse,
+            ),
           );
         case 'network-request-failed':
           throw Exception(

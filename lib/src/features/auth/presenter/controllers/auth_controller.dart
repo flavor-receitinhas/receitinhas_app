@@ -60,5 +60,6 @@ class AuthController extends ManagerStore {
       await _authService.signInGoogle();
       emitNavigation(CustomBottomBar.route);
     },
+    showDialogError: true,
   );
 }
