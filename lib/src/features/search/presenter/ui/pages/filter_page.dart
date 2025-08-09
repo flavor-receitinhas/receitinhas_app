@@ -1,9 +1,9 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:app_receitas/src/features/search/domain/enum/order_by_filter.dart';
 import 'package:app_receitas/src/features/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/features/search/presenter/ui/atomic/container_filter.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_slide.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:page_manager/entities/state_manager.dart';
@@ -208,7 +208,7 @@ class _FilterPageState extends State<FilterPage> {
                     itemBuilder: (context, index) {
                       final order = DifficultyRecipe.values[index];
                       return ContainerFilter(
-                        text: order.titleDescription(context),
+                        text: widget.ct.difficultyRecipeTitle(order, context),
                         isSelect:
                             selectDifficulty?.contains(order.name) ?? false,
                         onTap: () {

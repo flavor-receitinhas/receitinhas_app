@@ -1,9 +1,9 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/features/profile/domain/dtos/profile_dto.dart';
-import 'package:app_receitas/src/features/profile/domain/entities/profile_entity.dart';
-import 'package:app_receitas/src/features/profile/domain/repositories/profile_repository.dart';
-import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_dto.dart';
-import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
+import 'package:domain_receitinhas/features/profile/domain/dtos/profile_dto.dart';
+import 'package:domain_receitinhas/features/profile/domain/entities/profile_entity.dart';
+import 'package:domain_receitinhas/features/profile/domain/repositories/profile_repository.dart';
+import 'package:domain_receitinhas/features/recipes/domain/dtos/recipe_dto.dart';
+import 'package:domain_receitinhas/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 

@@ -1,11 +1,10 @@
 import 'dart:io';
-
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/features/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/create_recipe_controller.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
+import 'package:domain_receitinhas/features/recipes/domain/mappers/ingredient_recipe_dto_mapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:page_manager/entities/state_manager.dart';

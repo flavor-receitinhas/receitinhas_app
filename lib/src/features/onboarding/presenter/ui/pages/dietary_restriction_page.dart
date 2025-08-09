@@ -1,10 +1,10 @@
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/ui/image_context.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/validator_onboarding.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 

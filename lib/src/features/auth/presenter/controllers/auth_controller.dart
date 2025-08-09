@@ -1,5 +1,5 @@
-import 'package:app_receitas/src/features/auth/domain/services/auth_serivce.dart';
 import 'package:app_receitas/src/features/home/presenter/ui/pages/custom_bottom_bar.dart';
+import 'package:domain_receitinhas/features/auth/domain/services/auth_serivce.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 

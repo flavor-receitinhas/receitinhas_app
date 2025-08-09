@@ -1,6 +1,6 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/container_ingredient_delete.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_recipe_entity.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';

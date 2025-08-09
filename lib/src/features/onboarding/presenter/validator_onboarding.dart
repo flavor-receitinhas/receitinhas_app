@@ -1,6 +1,6 @@
-import 'package:app_receitas/src/features/onboarding/domain/enums/dietary_restriction_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/proteins_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/dietary_restriction_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/proteins_enum.dart';
 
 class ValidatorOnboarding {
   static String? validateName(String? value) {

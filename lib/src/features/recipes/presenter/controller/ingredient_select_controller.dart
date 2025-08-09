@@ -1,7 +1,7 @@
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/enum/unit_enum.dart';
-import 'package:app_receitas/src/features/recipes/domain/repositories/ingredient_repository.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/enum/unit_enum.dart';
+import 'package:domain_receitinhas/features/recipes/domain/repositories/ingredient_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 

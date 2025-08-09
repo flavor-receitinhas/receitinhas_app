@@ -1,8 +1,8 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_text.dart'; 
+import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:app_receitas/src/features/search/presenter/controller/research_controller.dart';
 import 'package:app_receitas/src/features/search/presenter/ui/moleculs/recipe_search_container.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
@@ -17,9 +17,7 @@ class ResultRecipes extends StatelessWidget {
       builder: (context, child) {
         if (ct.recipes.isEmpty && ct.isLoading) {
           return const SliverToBoxAdapter(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
+            child: Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -49,8 +47,11 @@ class ResultRecipes extends StatelessWidget {
               if (index < ct.recipes.length) {
                 final recipe = ct.recipes[index];
                 return Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 10, left: 16, right: 16),
+                  padding: const EdgeInsets.only(
+                    bottom: 10,
+                    left: 16,
+                    right: 16,
+                  ),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -76,8 +77,10 @@ class ResultRecipes extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: CookieText(
-                      text: AppLocalizations.of(context)!
-                          .favoritePageErrorLoading,
+                      text:
+                          AppLocalizations.of(
+                            context,
+                          )!.favoritePageErrorLoading,
                     ),
                   ),
                 );

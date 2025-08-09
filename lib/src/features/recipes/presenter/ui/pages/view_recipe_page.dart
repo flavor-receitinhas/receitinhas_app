@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_images.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_page.dart';
@@ -8,6 +7,7 @@ import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/edit_or_de
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_details_recipe.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/moleculs/view_introduce_recipe.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/create_and_edit_recipe_page.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:page_manager/export_manager.dart';
