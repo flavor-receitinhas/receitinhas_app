@@ -1,4 +1,3 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/global/image_profile_enum.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_page.dart';
@@ -8,6 +7,7 @@ import 'package:app_receitas/src/features/profile/presenter/controller/profile_c
 import 'package:app_receitas/src/features/profile/presenter/ui/atomic/appbar_profile.dart';
 import 'package:app_receitas/src/features/profile/presenter/ui/pages/edit_profile_page.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe_page.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:page_manager/export_manager.dart';

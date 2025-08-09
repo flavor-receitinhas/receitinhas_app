@@ -1,7 +1,7 @@
-import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_dto.dart';
-import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_user_dto.dart';
-import 'package:app_receitas/src/features/favorite/domain/entities/order_enum.dart';
-import 'package:app_receitas/src/features/favorite/domain/repositories/favorite_repository.dart';
+import 'package:domain_receitinhas/features/favorite/domain/dtos/favorite_dto.dart';
+import 'package:domain_receitinhas/features/favorite/domain/dtos/favorite_user_dto.dart';
+import 'package:domain_receitinhas/features/favorite/domain/entities/order_enum.dart';
+import 'package:domain_receitinhas/features/favorite/domain/repositories/favorite_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 

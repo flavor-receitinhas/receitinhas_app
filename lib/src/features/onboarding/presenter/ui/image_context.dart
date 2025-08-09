@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/dietary_restriction_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/proteins_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/dietary_restriction_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/proteins_enum.dart';
 
 class ImageContext {
   IconsSvgEnum svgIconProtein(Proteins name) {

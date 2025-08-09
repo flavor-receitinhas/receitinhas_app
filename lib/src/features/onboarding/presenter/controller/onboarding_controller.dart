@@ -1,10 +1,10 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/features/onboarding/data/mappers/validate_user_entity.dart';
-import 'package:app_receitas/src/features/onboarding/domain/entities/user_food_pref_entity.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/dietary_restriction_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/enums/proteins_enum.dart';
-import 'package:app_receitas/src/features/onboarding/domain/repositories/user_onboarding_repository.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
+import 'package:domain_receitinhas/features/onboarding/data/mappers/validate_user_entity.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/entities/user_food_pref_entity.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/dietary_restriction_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/proteins_enum.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/repositories/user_onboarding_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/entities/state_manager.dart';
 

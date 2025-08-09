@@ -1,8 +1,8 @@
 import 'package:app_receitas/src/core/widgets/features/cookie_button.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/enum/unit_enum.dart';
 import 'package:app_receitas/src/features/recipes/presenter/controller/ingredient_select_controller.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/enum/unit_enum.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,9 +1,12 @@
 import 'package:api_manager/api/handler/api_error.dart';
-import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_dto.dart';
-import 'package:app_receitas/src/features/recipes/domain/enum/order_recipe_enum.dart';
-import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:domain_receitinhas/features/recipes/domain/dtos/recipe_dto.dart';
+import 'package:domain_receitinhas/features/recipes/domain/enum/order_recipe_enum.dart';
+import 'package:domain_receitinhas/features/recipes/domain/repositories/recipe_repository.dart'; 
 import 'package:flutter/material.dart';
 import 'package:page_manager/entities/state_manager.dart';
+ 
 
 class ResearchController extends ChangeNotifier {
   final RecipeRepository _recipeRepository;
@@ -140,5 +143,20 @@ class ResearchController extends ChangeNotifier {
     portionFrom = null;
     difficultyRecipe = null;
     refreshPage();
+  }
+
+  String difficultyRecipeTitle(
+    DifficultyRecipe difficulty,
+    BuildContext context,
+  ) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (difficulty) {
+      case DifficultyRecipe.easy:
+        return localizations.searchRecipeOrderDifficultyEasy;
+      case DifficultyRecipe.medium:
+        return localizations.searchRecipeOrderDifficultyMedium;
+      case DifficultyRecipe.hard:
+        return localizations.searchRecipeOrderDifficultyHard;
+    }
   }
 }

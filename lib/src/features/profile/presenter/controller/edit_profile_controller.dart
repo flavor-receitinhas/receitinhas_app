@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:api_manager/api/handler/api_error.dart';
-import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/features/onboarding/data/mappers/validate_user_entity.dart';
-import 'package:app_receitas/src/features/onboarding/domain/repositories/user_onboarding_repository.dart';
-import 'package:app_receitas/src/features/profile/domain/dtos/profile_dto.dart';
-import 'package:app_receitas/src/features/profile/domain/entities/profile_entity.dart';
-import 'package:app_receitas/src/features/profile/domain/repositories/profile_repository.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
+import 'package:domain_receitinhas/features/onboarding/data/mappers/validate_user_entity.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/repositories/user_onboarding_repository.dart';
+import 'package:domain_receitinhas/features/profile/domain/dtos/profile_dto.dart';
+import 'package:domain_receitinhas/features/profile/domain/entities/profile_entity.dart';
+import 'package:domain_receitinhas/features/profile/domain/repositories/profile_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_manager/export_manager.dart';
