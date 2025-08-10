@@ -1,13 +1,13 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_dto.dart';
-import 'package:app_receitas/src/features/favorite/domain/dtos/favorite_recipe_dto.dart';
-import 'package:app_receitas/src/features/favorite/domain/repositories/favorite_repository.dart';
-import 'package:app_receitas/src/features/recipes/domain/dtos/ingredient_recipe_dto.dart';
-import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_get_dto.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/recipe_detail_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
+import 'package:domain_receitinhas/features/favorite/domain/dtos/favorite_dto.dart';
+import 'package:domain_receitinhas/features/favorite/domain/dtos/favorite_recipe_dto.dart';
+import 'package:domain_receitinhas/features/favorite/domain/repositories/favorite_repository.dart';
+import 'package:domain_receitinhas/features/recipes/domain/dtos/ingredient_recipe_dto.dart';
+import 'package:domain_receitinhas/features/recipes/domain/dtos/recipe_get_dto.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/image_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/recipe_detail_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:page_manager/export_manager.dart';
 
 class ViewRecipeController extends ManagerStore {

@@ -1,6 +1,6 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/features/profile/presenter/controller/edit_profile_controller.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:page_manager/entities/state_manager.dart';

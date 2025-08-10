@@ -2,7 +2,7 @@ import 'package:app_receitas/src/core/services/language/language_controller.dart
 import 'package:app_receitas/src/core/services/preference/sembast/sembast_database.dart';
 import 'package:app_receitas/src/core/services/preference/sembast/store_sembast_enum.dart';
 import 'package:app_receitas/src/core/themes/theme.dart';
-import 'package:app_receitas/src/features/auth/domain/services/auth_serivce.dart';
+import 'package:domain_receitinhas/features/auth/domain/services/auth_serivce.dart'; 
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:page_manager/manager_store.dart';

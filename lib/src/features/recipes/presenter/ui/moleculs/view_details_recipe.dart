@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
-import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
-import 'package:app_receitas/src/features/recipes/domain/dtos/ingredient_recipe_dto.dart';
+import 'package:app_receitas/src/core/widgets/features/cookie_text.dart'; 
 import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/custom_container.dart';
+import 'package:domain_receitinhas/features/recipes/domain/dtos/ingredient_recipe_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';

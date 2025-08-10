@@ -1,13 +1,13 @@
 import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/core/global/register_module.dart';
-import 'package:app_receitas/src/features/auth/domain/services/auth_serivce.dart';
-import 'package:app_receitas/src/features/auth/domain/services/auth_service_firebase.dart';
+import 'package:app_receitas/src/core/global/register_module.dart'; 
 import 'package:app_receitas/src/features/auth/presenter/controllers/auth_controller.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/choose_auth_page.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/forget_password_page.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/login_page.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/register_page.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/welcome_page.dart';
+import 'package:domain_receitinhas/features/auth/domain/services/auth_serivce.dart';
+import 'package:domain_receitinhas/features/auth/domain/services/auth_service_firebase.dart';
 import 'package:flutter/material.dart';
 
 class AuthModule extends RegisterModule {

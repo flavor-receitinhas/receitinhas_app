@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:app_receitas/src/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/image_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/ingredient_recipe_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/entities/recipe_entity.dart';
-import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/image_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_recipe_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/entities/recipe_entity.dart';
+import 'package:domain_receitinhas/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';

@@ -1,10 +1,10 @@
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/features/favorite/domain/entities/order_enum.dart';
 import 'package:app_receitas/src/features/favorite/presenter/controllers/favorite_controller.dart';
 import 'package:app_receitas/src/features/favorite/presenter/ui/moleculs/container_recipe.dart';
 import 'package:app_receitas/src/features/favorite/presenter/ui/moleculs/organize_recipes.dart';
 import 'package:app_receitas/src/features/profile/presenter/ui/atomic/container_profile_image.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe_page.dart';
+import 'package:domain_receitinhas/features/favorite/domain/entities/order_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:page_manager/manager_page.dart';

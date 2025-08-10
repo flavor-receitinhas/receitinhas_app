@@ -1,8 +1,8 @@
-import 'package:app_receitas/src/core/global/global_variables.dart';
-import 'package:app_receitas/src/features/onboarding/domain/repositories/user_onboarding_repository.dart';
-import 'package:app_receitas/src/features/profile/domain/repositories/profile_repository.dart';
-import 'package:app_receitas/src/features/recipes/domain/dtos/recipe_dto.dart';
-import 'package:app_receitas/src/features/recipes/domain/repositories/recipe_repository.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
+import 'package:domain_receitinhas/features/onboarding/domain/repositories/user_onboarding_repository.dart';
+import 'package:domain_receitinhas/features/profile/domain/repositories/profile_repository.dart';
+import 'package:domain_receitinhas/features/recipes/domain/dtos/recipe_dto.dart';
+import 'package:domain_receitinhas/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
 

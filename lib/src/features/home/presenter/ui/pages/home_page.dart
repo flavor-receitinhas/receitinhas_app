@@ -1,5 +1,4 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
-import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_page.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
@@ -10,6 +9,7 @@ import 'package:app_receitas/src/features/profile/presenter/ui/atomic/container_
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/create_and_edit_recipe_page.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:app_receitas/src/features/search/presenter/ui/pages/search_page.dart';
+import 'package:domain_receitinhas/core/global/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
