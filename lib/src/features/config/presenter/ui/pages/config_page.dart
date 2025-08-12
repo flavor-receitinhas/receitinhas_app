@@ -95,21 +95,6 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                CookieText(
-                  text: AppLocalizations.of(context)!.configCustomization,
-                  typography: CookieTypography.button,
-                  color: theme.onPrimary,
-                ),
-                const SizedBox(height: 10),
-                ContainerConfig(
-                  icon: IconsSvgEnum.eye,
-                  text: AppLocalizations.of(context)!.configPrivacyPolicy,
-                  action: const Icon(Icons.chevron_right),
-                  onTap: () {
-                    Navigator.pushNamed(context, PrivacyPolicyPage.route);
-                  },
-                ),
                 const SizedBox(height: 10),
                 ContainerConfig(
                   icon: IconsSvgEnum.changeLannguage,
@@ -144,7 +129,23 @@ class _ConfigPageState extends ManagerPage<ConfigController, ConfigPage> {
                     ).show(context);
                   },
                 ),
+                const SizedBox(height: 20),
+                CookieText(
+                  text: AppLocalizations.of(context)!.configMoreInformation,
+                  typography: CookieTypography.button,
+                  color: theme.onPrimary,
+                ),
                 const SizedBox(height: 10),
+                ContainerConfig(
+                  icon: IconsSvgEnum.eye,
+                  text: AppLocalizations.of(context)!.configPrivacyPolicy,
+                  action: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.pushNamed(context, PrivacyPolicyPage.route);
+                  },
+                ),
+                const SizedBox(height: 10),
+
                 ContainerConfig(
                   icon: IconsSvgEnum.document,
                   text: AppLocalizations.of(context)!.configTermsConditions,

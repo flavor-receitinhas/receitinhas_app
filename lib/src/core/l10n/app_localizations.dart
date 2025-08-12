@@ -580,6 +580,12 @@ abstract class AppLocalizations {
   /// **'Versão do Aplicativo'**
   String get configAppVersion;
 
+  /// No description provided for @configMoreInformation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mais informações'**
+  String get configMoreInformation;
+
   /// No description provided for @configName.
   ///
   /// In pt, this message translates to:

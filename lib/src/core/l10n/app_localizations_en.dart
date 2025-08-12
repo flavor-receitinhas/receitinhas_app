@@ -287,6 +287,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get configAppVersion => 'App Version';
 
   @override
+  String get configMoreInformation => 'More information';
+
+  @override
   String get configName => 'Name';
 
   @override

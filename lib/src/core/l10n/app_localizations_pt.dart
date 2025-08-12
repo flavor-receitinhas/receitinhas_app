@@ -286,6 +286,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get configAppVersion => 'Versão do Aplicativo';
 
   @override
+  String get configMoreInformation => 'Mais informações';
+
+  @override
   String get configName => 'Nome';
 
   @override
