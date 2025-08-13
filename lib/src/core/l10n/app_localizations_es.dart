@@ -755,4 +755,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get errorPageReload => 'Recargar';
+
+  @override
+  String get deleteRecipeTitle => 'Eliminar receta';
+
+  @override
+  String get deleteRecipeContent =>
+      '¿Estás seguro de que quieres eliminar esta receta?';
+
+  @override
+  String get deleteButton => 'Eliminar';
 }

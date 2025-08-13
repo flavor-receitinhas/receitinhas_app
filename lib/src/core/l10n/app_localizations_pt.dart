@@ -751,4 +751,14 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get errorPageReload => 'Recarregar';
+
+  @override
+  String get deleteRecipeTitle => 'Apagar receita';
+
+  @override
+  String get deleteRecipeContent =>
+      'Você tem certeza que deseja apagar essa receita?';
+
+  @override
+  String get deleteButton => 'Apagar';
 }

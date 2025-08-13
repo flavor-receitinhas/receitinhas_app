@@ -224,5 +224,8 @@
   "dialogOk": "Ok",
   "dialogYes": "Sim",
   "dialogNo": "Não",
-  "errorPageReload": "Recarregar"
+  "errorPageReload": "Recarregar",
+  "deleteRecipeTitle": "Apagar receita",
+  "deleteRecipeContent": "Você tem certeza que deseja apagar essa receita?",
+  "deleteButton": "Apagar"
 }

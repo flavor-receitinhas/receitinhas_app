@@ -1,6 +1,7 @@
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/features/home/presenter/ui/pages/custom_bottom_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 
 class EditOrDeleteButton extends StatelessWidget {
   final bool ownsTheRecipe;
@@ -16,6 +17,8 @@ class EditOrDeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return ownsTheRecipe
         ? PopupMenuButton<String>(
           icon: const Icon(Icons.more_vert),
@@ -29,11 +32,8 @@ class EditOrDeleteButton extends StatelessWidget {
                 break;
               case 'delete':
                 CookieDialog(
-                  title: const CookieText(text: 'Apagar receita'),
-                  content: const CookieText(
-                    text: 'Você tem certeza que deseja apagar essa receita?',
-                  ),
-                  // TODO: Mudar texto para multi-idiomas.
+                  title: CookieText(text: l10n.deleteRecipeTitle),
+                  content: CookieText(text: l10n.deleteRecipeContent),
                   onPressedConfirm: () {
                     onDelete?.call();
                     Navigator.pushNamed(context, CustomBottomBar.route);
@@ -57,10 +57,10 @@ class EditOrDeleteButton extends StatelessWidget {
                 PopupMenuItem(
                   value: 'delete',
                   child: Row(
-                    children: const [
-                      Icon(Icons.delete_outline, size: 18),
-                      SizedBox(width: 8),
-                      CookieText(text: 'Apagar'),
+                    children: [
+                      const Icon(Icons.delete_outline, size: 18),
+                      const SizedBox(width: 8),
+                      CookieText(text: l10n.deleteButton),
                     ],
                   ),
                 ),

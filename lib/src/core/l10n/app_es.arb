@@ -224,5 +224,8 @@
   "dialogOk": "Ok",
   "dialogYes": "Sí",
   "dialogNo": "No",
-  "errorPageReload": "Recargar"
+  "errorPageReload": "Recargar",
+  "deleteRecipeTitle": "Eliminar receta",
+  "deleteRecipeContent": "¿Estás seguro de que quieres eliminar esta receta?",
+  "deleteButton": "Eliminar"
 }

@@ -1455,6 +1455,24 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Recarregar'**
   String get errorPageReload;
+
+  /// No description provided for @deleteRecipeTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar receita'**
+  String get deleteRecipeTitle;
+
+  /// No description provided for @deleteRecipeContent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você tem certeza que deseja apagar essa receita?'**
+  String get deleteRecipeContent;
+
+  /// No description provided for @deleteButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar'**
+  String get deleteButton;
 }
 
 class _AppLocalizationsDelegate

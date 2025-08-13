@@ -748,4 +748,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorPageReload => 'Reload';
+
+  @override
+  String get deleteRecipeTitle => 'Delete recipe';
+
+  @override
+  String get deleteRecipeContent =>
+      'Are you sure you want to delete this recipe?';
+
+  @override
+  String get deleteButton => 'Delete';
 }
