@@ -227,5 +227,6 @@
   "errorPageReload": "Recargar",
   "deleteRecipeTitle": "Eliminar receta",
   "deleteRecipeContent": "¿Estás seguro de que quieres eliminar esta receta?",
-  "deleteButton": "Eliminar"
+  "deleteButton": "Eliminar",
+  "screenNotFound": "Pantalla no encontrada"
 }

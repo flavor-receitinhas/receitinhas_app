@@ -227,5 +227,6 @@
   "errorPageReload": "Recarregar",
   "deleteRecipeTitle": "Apagar receita",
   "deleteRecipeContent": "Você tem certeza que deseja apagar essa receita?",
-  "deleteButton": "Apagar"
+  "deleteButton": "Apagar",
+  "screenNotFound": "Tela não encontrada"
 }

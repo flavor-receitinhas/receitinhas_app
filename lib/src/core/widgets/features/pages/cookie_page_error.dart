@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class CookiePageError extends StatelessWidget {
   final String errorMessage;
-  final void Function() onReload;
+  final void Function()? onReload;
   const CookiePageError({
     super.key,
     required this.errorMessage,
@@ -27,11 +27,13 @@ class CookiePageError extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               CookieText(text: errorMessage),
-              const SizedBox(height: 10),
-              CookieButton(
-                label: AppLocalizations.of(context)!.errorPageReload,
-                onPressed: onReload,
-              ),
+              if (onReload != null) ...[
+                const SizedBox(height: 10),
+                CookieButton(
+                  label: AppLocalizations.of(context)!.errorPageReload,
+                  onPressed: onReload,
+                ),
+              ],
               const Spacer(),
             ],
           ),

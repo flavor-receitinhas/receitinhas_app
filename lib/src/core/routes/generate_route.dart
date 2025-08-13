@@ -1,4 +1,6 @@
 import 'package:app_receitas/src/core/global/register_module.dart';
+import 'package:app_receitas/src/core/l10n/app_localizations.dart';
+import 'package:app_receitas/src/core/widgets/features/pages/cookie_page_error.dart';
 import 'package:app_receitas/src/features/auth/auth_module.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/choose_auth_page.dart';
 import 'package:app_receitas/src/features/auth/presenter/ui/pages/login_page.dart';
@@ -37,8 +39,11 @@ class GenerateRoute {
     for (var module in routes) {
       if (module.routers.containsKey(settings.name)) {
         var widgetModule = module.routers[settings.name];
-        if ([ChooseAuthPage.route, LoginPage.route, RegisterPage.route]
-            .contains(settings.name)) {
+        if (const [
+          ChooseAuthPage.route,
+          LoginPage.route,
+          RegisterPage.route,
+        ].contains(settings.name)) {
           return routeWithAnimated(widgetModule!);
         }
         return MaterialPageRoute(
@@ -48,7 +53,13 @@ class GenerateRoute {
       }
     }
     return MaterialPageRoute(
-      builder: (context) => const Text('ERRO'),
+      builder: (context) {
+        final l10n = AppLocalizations.of(context)!;
+        return CookiePageError(
+          errorMessage: l10n.screenNotFound,
+          onReload: null,
+        );
+      },
       settings: settings,
     );
   }
@@ -60,13 +71,11 @@ class GenerateRoute {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
-        var tween = Tween(begin: begin, end: end).chain(
-          CurveTween(curve: curve),
-        );
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
+        var tween = Tween(
+          begin: begin,
+          end: end,
+        ).chain(CurveTween(curve: curve));
+        return SlideTransition(position: animation.drive(tween), child: child);
       },
     );
   }

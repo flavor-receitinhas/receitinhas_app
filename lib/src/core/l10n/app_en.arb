@@ -227,5 +227,6 @@
   "errorPageReload": "Reload",
   "deleteRecipeTitle": "Delete recipe",
   "deleteRecipeContent": "Are you sure you want to delete this recipe?",
-  "deleteButton": "Delete"
+  "deleteButton": "Delete",
+  "screenNotFound": "Screen not found"
 }
