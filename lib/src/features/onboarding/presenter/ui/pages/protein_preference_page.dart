@@ -38,7 +38,7 @@ class _ProteinPreferencePageState extends State<ProteinPreferencePage> {
             children: [
               CookieText(
                 text: AppLocalizations.of(context)!.proteinPreferenceTitle,
-                typography: CookieTypography.title,
+                typography: CookieTypography.giga,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
