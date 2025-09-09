@@ -761,4 +761,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get deleteButton => 'Apagar';
+
+  @override
+  String get screenNotFound => 'Tela não encontrada';
 }

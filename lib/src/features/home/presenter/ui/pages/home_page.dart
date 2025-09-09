@@ -26,7 +26,7 @@ class _HomePageState extends ManagerPage<HomeController, HomePage> {
   @override
   void initState() {
     ct.verifyOnboading().then((value) {
-      if (value && mounted) {
+      if (!value && mounted) {
         Navigator.pushNamed(context, OnBoardingPage.route);
       }
     });

@@ -17,9 +17,7 @@ class ChangedPasswordPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primary,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: const CookieSvg(svg: IconsSvgEnum.save),
         onPressed: () {},
@@ -43,7 +41,7 @@ class ChangedPasswordPage extends StatelessWidget {
                     typography: CookieTypography.button,
                   ),
                   const SizedBox(height: 10),
-                  CookieTextField.outline(
+                  CookieTextField(
                     hintText:
                         AppLocalizations.of(context)!.configOldPasswordHint,
                     obscureText: true,
@@ -55,7 +53,7 @@ class ChangedPasswordPage extends StatelessWidget {
                     typography: CookieTypography.button,
                   ),
                   const SizedBox(height: 10),
-                  CookieTextField.outline(
+                  CookieTextField(
                     hintText:
                         AppLocalizations.of(context)!.configNewPasswordHint,
                     maxLines: 1,
@@ -68,22 +66,25 @@ class ChangedPasswordPage extends StatelessWidget {
                     typography: CookieTypography.button,
                   ),
                   const SizedBox(height: 10),
-                  CookieTextField.outline(
-                    hintText: AppLocalizations.of(context)!
-                        .configConfirmNewPasswordHint,
+                  CookieTextField(
+                    hintText:
+                        AppLocalizations.of(
+                          context,
+                        )!.configConfirmNewPasswordHint,
                     maxLines: 1,
                     obscureText: true,
                   ),
                   const SizedBox(height: 30),
                   Center(
                     child: CookieText(
-                      text: AppLocalizations.of(context)!
-                          .configPasswordChangeNotification,
+                      text:
+                          AppLocalizations.of(
+                            context,
+                          )!.configPasswordChangeNotification,
                       textAlign: TextAlign.center,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withOpacity(0.5),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onPrimary.withOpacity(0.5),
                     ),
                   ),
                 ],

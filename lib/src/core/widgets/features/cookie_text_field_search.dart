@@ -30,16 +30,20 @@ class CookieTextFieldSearch extends StatelessWidget {
       validator: validator,
       onEditingComplete: onEditingComplete,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
+        color: Theme.of(context).colorScheme.onSecondary,
+      ),
       decoration: InputDecoration(
         hintText: hintText,
-        fillColor: Theme.of(context).colorScheme.onPrimary.withOpacity(0.85),
+        fillColor: Theme.of(
+          context,
+        ).colorScheme.onPrimary.withValues(alpha: 0.85),
         filled: true,
         contentPadding: const EdgeInsets.all(16),
         hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.5),
-            ),
+          color: Theme.of(
+            context,
+          ).colorScheme.onSecondary.withValues(alpha: 0.5),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,

@@ -132,7 +132,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      CookieTextField.outline(
+                      CookieTextField(
                         hintText: AppLocalizations.of(context)!.recipeTitleHint,
                         borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(16),
@@ -153,7 +153,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         },
                       ),
                       const SizedBox(height: 10),
-                      CookieTextField.outline(
+                      CookieTextField(
                         hintText:
                             AppLocalizations.of(context)!.recipeSubtitleHint,
                         controller: ct.subTitleController,
@@ -172,7 +172,7 @@ class _IntroduceCreatePageState extends State<IntroduceCreatePage> {
                         typography: CookieTypography.title,
                       ),
                       const SizedBox(height: 20),
-                      CookieTextField.outline(
+                      CookieTextField(
                         hintText: AppLocalizations.of(context)!.recipeAboutHint,
                         controller: ct.detailsController,
                         minLines: 5,

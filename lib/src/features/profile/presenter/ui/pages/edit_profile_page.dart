@@ -232,7 +232,7 @@ class _EditProfilePageState
                         typography: CookieTypography.button,
                       ),
                       const SizedBox(height: 10),
-                      CookieTextField.outline(
+                      CookieTextField(
                         hintText: AppLocalizations.of(context)!.configNameHint,
                         controller: ct.userNameController,
                         validator: ValidatorOnboarding.validateName,
@@ -285,7 +285,7 @@ class _EditProfilePageState
                             )!.profileEditProfilePageAboutMe,
                       ),
                       const SizedBox(height: 10),
-                      CookieTextField.outline(
+                      CookieTextField(
                         hintText:
                             AppLocalizations.of(
                               context,

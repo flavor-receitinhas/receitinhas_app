@@ -69,7 +69,7 @@ class ListAllIngredients extends StatelessWidget {
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             const SizedBox(height: 10),
-                            CookieTextField.outline(
+                            CookieTextField(
                               hintText:
                                   AppLocalizations.of(
                                     context,

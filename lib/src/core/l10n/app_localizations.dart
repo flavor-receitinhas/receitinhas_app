@@ -1473,6 +1473,12 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Apagar'**
   String get deleteButton;
+
+  /// No description provided for @screenNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tela não encontrada'**
+  String get screenNotFound;
 }
 
 class _AppLocalizationsDelegate

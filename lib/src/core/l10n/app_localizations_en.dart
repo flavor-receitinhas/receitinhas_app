@@ -758,4 +758,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteButton => 'Delete';
+
+  @override
+  String get screenNotFound => 'Screen not found';
 }
