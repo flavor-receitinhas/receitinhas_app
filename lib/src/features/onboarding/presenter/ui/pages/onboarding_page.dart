@@ -31,6 +31,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
     return PageView(
+      physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (value) async {
         await ct.onChangedPage(value);
       },

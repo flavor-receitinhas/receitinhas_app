@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/controller/onboarding_controller.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/ui/image_context.dart';
+import 'package:app_receitas/src/features/onboarding/presenter/ui/moleculs/back_button_onboarding.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/validator_onboarding.dart';
 import 'package:domain_receitinhas/features/onboarding/domain/enums/dietary_restriction_enum.dart';
 import 'package:flutter/material.dart';
@@ -37,20 +38,10 @@ class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                onPressed: () {
-                  ct.pageController.animateToPage(
-                    0,
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.ease,
-                  );
-                },
-                icon: const Icon(Icons.arrow_back_ios_new),
-              ),
               const Spacer(),
               CookieText(
                 text: AppLocalizations.of(context)!.dietaryRestrictionTitle,
-                typography: CookieTypography.title,
+                typography: CookieTypography.giga,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
@@ -88,28 +79,47 @@ class _DietaryRestricionPageState extends State<DietaryRestricionPage> {
                         .toList(),
               ),
               const SizedBox(height: 20),
-              CookieButton(
-                label: AppLocalizations.of(context)!.dietaryRestrictionConfirm,
-                onPressed: () {
-                  if (ct.dietaryRestriction.isNotEmpty) {
-                    widget.ct.pageController.animateToPage(
-                      2,
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.ease,
-                    );
-                  } else {
-                    final snackBar = SnackBar(
-                      content: CookieText(
-                        text:
-                            AppLocalizations.of(
-                              context,
-                            )!.dietaryRestrictionSnackBar,
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                },
+              Row(
+                children: [
+                  BackButtonOnboarding(
+                    onTap: () {
+                      ct.pageController.animateToPage(
+                        0,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.ease,
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: CookieButton(
+                      label:
+                          AppLocalizations.of(
+                            context,
+                          )!.dietaryRestrictionConfirm,
+                      onPressed: () {
+                        if (ct.dietaryRestriction.isNotEmpty) {
+                          widget.ct.pageController.animateToPage(
+                            2,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.ease,
+                          );
+                        } else {
+                          final snackBar = SnackBar(
+                            content: CookieText(
+                              text:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.dietaryRestrictionSnackBar,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

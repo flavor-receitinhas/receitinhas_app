@@ -3,6 +3,7 @@ import 'package:app_receitas/src/core/widgets/features/cookie_text.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_text_field.dart';
 import 'package:app_receitas/src/features/home/presenter/ui/pages/custom_bottom_bar.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/controller/onboarding_controller.dart';
+import 'package:app_receitas/src/features/onboarding/presenter/ui/moleculs/back_button_onboarding.dart';
 import 'package:app_receitas/src/features/onboarding/presenter/validator_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
@@ -32,19 +33,9 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                onPressed: () {
-                  widget.ct.pageController.animateToPage(
-                    2,
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.ease,
-                  );
-                },
-                icon: const Icon(Icons.arrow_back_ios_new),
-              ),
               Form(
                 key: formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -53,7 +44,7 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                   children: [
                     CookieText(
                       text: AppLocalizations.of(context)!.chooseNameTitle,
-                      typography: CookieTypography.title,
+                      typography: CookieTypography.giga,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 10),
@@ -67,7 +58,6 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                           AppLocalizations.of(context)!.chooseNameHintText,
                       controller: widget.ct.userNameController,
                       validator: ValidatorOnboarding.validateName,
-                      
                     ),
                     if (widget.ct.validateUserEntity != null &&
                         !widget.ct.validateUserEntity!.valid) ...[
@@ -79,25 +69,41 @@ class _ChooseNamePageState extends State<ChooseNamePage> {
                       ),
                     ],
                     const SizedBox(height: 20),
-                    CookieButton(
-                      label:
-                          AppLocalizations.of(
-                            context,
-                          )!.difficultyRecipesConfirm,
-                      onPressed: () async {
-                        if (!formKey.currentState!.validate()) {
-                          return;
-                        }
-                        await widget.ct.updateFoodPref();
-                        await widget.ct.updateNameProfile();
-                        if (context.mounted) {
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            CustomBottomBar.route,
-                            (route) => false,
-                          );
-                        }
-                      },
+                    Row(
+                      children: [
+                        BackButtonOnboarding(
+                          onTap: () {
+                            widget.ct.pageController.animateToPage(
+                              2,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.ease,
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: CookieButton(
+                            label:
+                                AppLocalizations.of(
+                                  context,
+                                )!.difficultyRecipesConfirm,
+                            onPressed: () async {
+                              if (!formKey.currentState!.validate()) {
+                                return;
+                              }
+                              await widget.ct.updateFoodPref();
+                              await widget.ct.updateNameProfile();
+                              if (context.mounted) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  CustomBottomBar.route,
+                                  (route) => false,
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
