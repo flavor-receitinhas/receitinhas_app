@@ -357,9 +357,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homePageSearchHint => 'Search for something to cook';
 
   @override
-  String get homePageLatestRecipesTitle => 'Latest posted recipes';
-
-  @override
   String get profileBackSheetConfirmExit =>
       'Are you sure you want to exit without saving changes?';
 
@@ -562,6 +559,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recipeIntroduceTimePrepared => 'min';
+
+  @override
+  String get recipeIntroduceTimeDays => 'd';
+
+  @override
+  String get recipeIntroduceTimeHours => 'h';
 
   @override
   String get recipeLoadIngredientsError => 'Error loading ingredients';
