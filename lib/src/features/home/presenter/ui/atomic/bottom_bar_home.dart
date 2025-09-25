@@ -27,21 +27,18 @@ class BottomBarHome extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
               label: '',
-              activeIcon: const CookieSvg(
-                svg: IconsSvgEnum.home,
-              ),
+              activeIcon: const CookieSvg(svg: IconsSvgEnum.home),
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
             BottomNavigationBarItem(
               icon: CookieSvg(
-                svg: IconsSvgEnum.favorite,
+                svg: IconsSvgEnum.heart,
                 color: Theme.of(context).colorScheme.onSecondary,
+                height: 24,
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: const CookieSvg(
-                svg: IconsSvgEnum.favorite,
-              ),
+              activeIcon: const CookieSvg(svg: IconsSvgEnum.heart, height: 24),
             ),
             BottomNavigationBarItem(
               icon: CookieSvg(
@@ -50,9 +47,7 @@ class BottomBarHome extends StatelessWidget {
               ),
               backgroundColor: Theme.of(context).colorScheme.primary,
               label: '',
-              activeIcon: const CookieSvg(
-                svg: IconsSvgEnum.settings,
-              ),
+              activeIcon: const CookieSvg(svg: IconsSvgEnum.settings),
             ),
           ],
         ),
