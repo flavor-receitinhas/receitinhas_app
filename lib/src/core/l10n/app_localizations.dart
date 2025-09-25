@@ -718,12 +718,6 @@ abstract class AppLocalizations {
   /// **'Procure algo para cozinhar'**
   String get homePageSearchHint;
 
-  /// No description provided for @homePageLatestRecipesTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Últimas receitas postadas'**
-  String get homePageLatestRecipesTitle;
-
   /// No description provided for @profileBackSheetConfirmExit.
   ///
   /// In pt, this message translates to:
@@ -1095,6 +1089,18 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'min'**
   String get recipeIntroduceTimePrepared;
+
+  /// No description provided for @recipeIntroduceTimeDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'d'**
+  String get recipeIntroduceTimeDays;
+
+  /// No description provided for @recipeIntroduceTimeHours.
+  ///
+  /// In pt, this message translates to:
+  /// **'h'**
+  String get recipeIntroduceTimeHours;
 
   /// No description provided for @recipeLoadIngredientsError.
   ///
