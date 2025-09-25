@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:domain_receitinhas/features/onboarding/domain/enums/difficulty_recipe_enum.dart';
 import 'package:domain_receitinhas/features/recipes/domain/entities/image_entity.dart';
@@ -7,12 +6,8 @@ import 'package:domain_receitinhas/features/recipes/domain/entities/ingredient_r
 import 'package:domain_receitinhas/features/recipes/domain/entities/recipe_entity.dart';
 import 'package:domain_receitinhas/features/recipes/domain/repositories/recipe_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_quill/quill_delta.dart';
-import 'package:flutter_quill_delta_from_html/parser/html_to_delta.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_manager/export_manager.dart';
-import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 
 class CreateRecipeController extends ManagerStore {
   final RecipeRepository _repository;
@@ -31,8 +26,9 @@ class CreateRecipeController extends ManagerStore {
   DifficultyRecipe difficultyRecipe = DifficultyRecipe.easy;
   int portion = 0;
 
-  QuillController quillInstructionController = QuillController.basic();
-  final quillServerController = QuillController.basic();
+  final serverController = TextEditingController();
+  final instructionController = TextEditingController();
+
   String? thumbImage;
   bool isWriteTime = false;
   final hourController = TextEditingController();
@@ -130,14 +126,10 @@ class CreateRecipeController extends ManagerStore {
           title: titleController.text,
           subTitle: subTitleController.text,
           details: detailsController.text,
-          serveFood: jsonEncode(
-            quillServerController.document.toDelta().toJson(),
-          ),
+          serveFood: serverController.text,
 
           difficultyRecipe: DifficultyRecipe.easy,
-          instruction: jsonEncode(
-            quillInstructionController.document.toDelta().toJson(),
-          ),
+          instruction: instructionController.text,
           portion: portion,
           timePrepared: timePreparedRecipe.inMinutes,
           //TODO Ver sobre os status depois
@@ -175,14 +167,9 @@ class CreateRecipeController extends ManagerStore {
       title: titleController.text,
       subTitle: subTitleController.text,
       details: detailsController.text,
-      serveFood:
-          QuillDeltaToHtmlConverter(
-            quillServerController.document.toDelta().toJson(),
-          ).convert(),
+      serveFood: serverController.text,
       difficultyRecipe: difficultyRecipe,
-      instruction: jsonEncode(
-        quillInstructionController.document.toDelta().toJson(),
-      ),
+      instruction: instructionController.text,
       portion: portion,
       timePrepared: timePreparedRecipe.inMinutes,
       userId: recipe!.userId,
@@ -239,26 +226,6 @@ class CreateRecipeController extends ManagerStore {
     notifyListeners();
   }
 
-  bool _isValidJson(String str) {
-    if (str.isEmpty) return false;
-    try {
-      jsonDecode(str);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  Document _createDocumentFromContent(String content) {
-    if (_isValidJson(content)) {
-      final delta = jsonDecode(content);
-      return Document.fromDelta(Delta.fromJson(delta));
-    } else {
-      final deltaFromHtml = HtmlToDelta().convert(content);
-      return Document.fromDelta(deltaFromHtml);
-    }
-  }
-
   Future<void> _initializeWithRecipe(RecipeEntity r) async {
     listImageRecipeEntity = await _getImages(r.id!);
 
@@ -279,13 +246,10 @@ class CreateRecipeController extends ManagerStore {
     difficultyRecipe = r.difficultyRecipe;
     portionController.text = r.portion.toString();
     listIngredientSelect = await _getIngredient(r.id!);
-    quillInstructionController.document = _createDocumentFromContent(
-      r.instruction,
-    );
+    instructionController.text = r.instruction;
 
-    // Inicializar serveFood
     if (r.serveFood != null && r.serveFood!.isNotEmpty) {
-      quillServerController.document = _createDocumentFromContent(r.serveFood!);
+      serverController.text = r.serveFood!;
     }
 
     notifyListeners();

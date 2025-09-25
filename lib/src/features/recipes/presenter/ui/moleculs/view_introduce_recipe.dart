@@ -1,7 +1,8 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
+import 'package:app_receitas/src/core/global/global_variables.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
+import 'package:app_receitas/src/core/widgets/features/cookie_recipe_badge.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
-import 'package:app_receitas/src/features/recipes/presenter/ui/atomic/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
@@ -38,11 +39,8 @@ class ViewIntroduceRecipe extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            CookieText(text: title, typography: CookieTypography.title),
-          ],
-        ),
+        CookieText(text: title, typography: CookieTypography.title),
+        const SizedBox(height: 16),
         InkWell(
           onTap: onPressedUser,
           child: RichText(
@@ -60,7 +58,7 @@ class ViewIntroduceRecipe extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 16),
         subTitle!.isNotEmpty && subTitle != null
             ? CookieText(text: subTitle!)
             : const SizedBox.shrink(),
@@ -69,84 +67,49 @@ class ViewIntroduceRecipe extends StatelessWidget {
             : const SizedBox.shrink(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
           children: [
-            CustomContainer(
-              child: Row(
-                children: [
-                  Column(
-                    children: [
-                      const CookieSvg(svg: IconsSvgEnum.clock, height: 20),
-                      const SizedBox(height: 5),
-                      CookieText(
-                        text:
-                            '$timePrepared ${AppLocalizations.of(context)!.recipeIntroduceTimePrepared}',
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
-                    children: [
-                      const CookieSvg(svg: IconsSvgEnum.fire, height: 20),
-                      const SizedBox(height: 5),
-                      CookieText(text: difficultyRecipe),
-                    ],
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
-                    children: [
-                      const CookieSvg(svg: IconsSvgEnum.pot, height: 20),
-                      const SizedBox(height: 5),
-                      CookieText(
-                        text:
-                            portion != 1
-                                ? '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionPlural}'
-                                : '$portion ${AppLocalizations.of(context)!.recipeIntroducePortionSingular}',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                CookieRecipeBadge(
+                  icon: IconsSvgEnum.clock,
+                  label: formatarTime(context, timePrepared),
+                ),
+                const SizedBox(width: 10),
+                CookieRecipeBadge(
+                  icon: IconsSvgEnum.fire,
+                  label: difficultyRecipe,
+                ),
+                const SizedBox(width: 10),
+                CookieRecipeBadge(icon: IconsSvgEnum.pot, label: '$portion'),
+                const SizedBox(width: 10),
+              ],
             ),
             Visibility(
               visible: !isCreate,
               child: InkWell(
                 onTap: onPressedFavorite,
-                child: Container(
-                  height: 77,
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      topLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CookieSvg(
+                      svg: IconsSvgEnum.heart,
+                      height: 20,
+                      color:
+                          isFavorite
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onPrimary,
                     ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CookieSvg(
-                        svg: IconsSvgEnum.heart,
-                        height: 20,
-                        color:
-                            isFavorite
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onPrimary,
-                      ),
-                      const SizedBox(height: 5),
-                      CookieText(
-                        text:
-                            AppLocalizations.of(
-                              context,
-                            )!.recipeIntroduceFavorite,
-                        color:
-                            isFavorite
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ],
-                  ),
+                    const SizedBox(height: 5),
+                    CookieText(
+                      text:
+                          AppLocalizations.of(context)!.recipeIntroduceFavorite,
+                      color:
+                          isFavorite
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ],
                 ),
               ),
             ),

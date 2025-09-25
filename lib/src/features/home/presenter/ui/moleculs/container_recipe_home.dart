@@ -1,7 +1,7 @@
 import 'package:app_receitas/src/core/global/assets_enum.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 import 'package:app_receitas/src/core/widgets/cookie_export.dart';
-import 'package:app_receitas/src/features/home/presenter/ui/moleculs/card_info_recipe.dart';
+import 'package:app_receitas/src/core/widgets/features/cookie_recipe_badge.dart';
 import 'package:app_receitas/src/features/recipes/presenter/ui/pages/view_recipe_page.dart';
 import 'package:domain_receitinhas/core/global/global_variables.dart';
 import 'package:domain_receitinhas/features/recipes/domain/dtos/recipe_dto.dart';
@@ -107,7 +107,7 @@ class ContainerRecipeHome extends StatelessWidget {
 
                   Row(
                     children: [
-                      CardInfoRecipe(
+                      CookieRecipeBadge(
                         icon: IconsSvgEnum.clock,
                         label:
                             '${recipe.timePrepared} ${AppLocalizations.of(context)!.recipeIntroduceTimePrepared}',

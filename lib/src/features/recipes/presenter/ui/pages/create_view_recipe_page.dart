@@ -8,7 +8,6 @@ import 'package:domain_receitinhas/features/recipes/domain/mappers/ingredient_re
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:page_manager/entities/state_manager.dart';
-import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 import 'package:app_receitas/src/core/l10n/app_localizations.dart';
 
 class CreateViewRecipePage extends StatelessWidget {
@@ -104,23 +103,8 @@ class CreateViewRecipePage extends StatelessWidget {
                                   (e) => IngredientRecipeDtoMapper().toDto(e),
                                 )
                                 .toList(),
-                        instruction:
-                            QuillDeltaToHtmlConverter(
-                              ct.quillInstructionController.document
-                                  .toDelta()
-                                  .toJson(),
-                            ).convert(),
-                        serveFood:
-                            ct.quillServerController.document
-                                    .toPlainText()
-                                    .trim()
-                                    .isEmpty
-                                ? ''
-                                : QuillDeltaToHtmlConverter(
-                                  ct.quillServerController.document
-                                      .toDelta()
-                                      .toJson(),
-                                ).convert(),
+                        instruction: ct.instructionController.text,
+                        serveFood: ct.serverController.text,
                       ),
                       const SizedBox(height: 20),
                     ],

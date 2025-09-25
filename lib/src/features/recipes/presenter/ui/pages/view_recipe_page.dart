@@ -63,21 +63,24 @@ class _ViewRecipesPageState
               padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
                 const SizedBox(height: 10),
-                FlutterCarousel(
-                  options: FlutterCarouselOptions(
-                    height: 250,
-                    showIndicator: true,
-                    autoPlay: true,
-                    viewportFraction: 1,
-                    autoPlayAnimationDuration: const Duration(
-                      milliseconds: 500,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: FlutterCarousel(
+                    options: FlutterCarouselOptions(
+                      height: 400,
+                      showIndicator: true,
+                      autoPlay: true,
+                      viewportFraction: 1,
+                      autoPlayAnimationDuration: const Duration(
+                        milliseconds: 500,
+                      ),
+                      padEnds: false,
                     ),
-                    padEnds: false,
+                    items:
+                        ct.images
+                            .map((e) => CookieImages(image: e.link))
+                            .toList(),
                   ),
-                  items:
-                      ct.images
-                          .map((e) => CookieImages(image: e.link))
-                          .toList(),
                 ),
                 const SizedBox(height: 10),
                 ViewIntroduceRecipe(

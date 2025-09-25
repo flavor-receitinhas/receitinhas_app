@@ -3,10 +3,10 @@ import 'package:app_receitas/src/core/widgets/cookie_export.dart';
 import 'package:app_receitas/src/core/widgets/features/cookie_svg.dart';
 import 'package:flutter/material.dart';
 
-class CardInfoRecipe extends StatelessWidget {
+class CookieRecipeBadge extends StatelessWidget {
   final IconsSvgEnum icon;
   final String label;
-  const CardInfoRecipe({super.key, required this.icon, required this.label});
+  const CookieRecipeBadge({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {

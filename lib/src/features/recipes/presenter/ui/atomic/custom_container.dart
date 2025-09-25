@@ -5,12 +5,15 @@ class CustomContainer extends StatelessWidget {
   final Color? colorContainer;
   final Color? colorBorder;
   final double? topRight;
-  const CustomContainer(
-      {super.key,
-      required this.child,
-      this.colorContainer,
-      this.colorBorder,
-      this.topRight});
+  final double? width;
+  const CustomContainer({
+    super.key,
+    required this.child,
+    this.colorContainer,
+    this.colorBorder,
+    this.topRight,
+    this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +25,10 @@ class CustomContainer extends StatelessWidget {
         bottomRight: const Radius.circular(10),
       ),
       child: Container(
+        width: width,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: colorContainer ?? Theme.of(context).colorScheme.secondary,
-          border: Border(
-            left: BorderSide(
-              color: colorBorder ?? Theme.of(context).colorScheme.primary,
-              width: 20,
-            ),
-          ),
         ),
         child: child,
       ),

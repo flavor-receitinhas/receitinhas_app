@@ -36,12 +36,6 @@
 @import firebase_crashlytics;
 #endif
 
-#if __has_include(<flutter_keyboard_visibility_temp_fork/FlutterKeyboardVisibilityTempForkPlugin.h>)
-#import <flutter_keyboard_visibility_temp_fork/FlutterKeyboardVisibilityTempForkPlugin.h>
-#else
-@import flutter_keyboard_visibility_temp_fork;
-#endif
-
 #if __has_include(<flutter_native_splash/FlutterNativeSplashPlugin.h>)
 #import <flutter_native_splash/FlutterNativeSplashPlugin.h>
 #else
@@ -72,22 +66,10 @@
 @import path_provider_foundation;
 #endif
 
-#if __has_include(<quill_native_bridge_ios/QuillNativeBridgePlugin.h>)
-#import <quill_native_bridge_ios/QuillNativeBridgePlugin.h>
-#else
-@import quill_native_bridge_ios;
-#endif
-
 #if __has_include(<sqflite_darwin/SqflitePlugin.h>)
 #import <sqflite_darwin/SqflitePlugin.h>
 #else
 @import sqflite_darwin;
-#endif
-
-#if __has_include(<url_launcher_ios/URLLauncherPlugin.h>)
-#import <url_launcher_ios/URLLauncherPlugin.h>
-#else
-@import url_launcher_ios;
 #endif
 
 @implementation GeneratedPluginRegistrant
@@ -98,15 +80,12 @@
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseCrashlyticsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCrashlyticsPlugin"]];
-  [FlutterKeyboardVisibilityTempForkPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterKeyboardVisibilityTempForkPlugin"]];
   [FlutterNativeSplashPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterNativeSplashPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [FPPPackageInfoPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FPPPackageInfoPlusPlugin"]];
   [PathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"PathProviderPlugin"]];
-  [QuillNativeBridgePlugin registerWithRegistrar:[registry registrarForPlugin:@"QuillNativeBridgePlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
-  [URLLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"URLLauncherPlugin"]];
 }
 
 @end
